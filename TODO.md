@@ -40,8 +40,8 @@ Items marked ~~like this~~ were fixed in the initial implementation pass.
 ## HIGH – Security
 
 - [x] ~~**Enable minification/obfuscation for release builds**~~ – `app/build.gradle.kts`: `isMinifyEnabled = true` + `isShrinkResources = true` enabled for release.
-- [ ] **Use `EncryptedSharedPreferences` for health data** – `DigestionRepository.kt`: weight, sex, and alcohol tolerance are stored plain. Use `androidx.security:security-crypto` for sensitive health data.
-- [ ] **Review `allowBackup`** – `AndroidManifest.xml`: `android:allowBackup="true"`. Consider `android:allowBackup="false"` or a `fullBackupContent` XML to exclude SharedPreferences.
+- [x] ~~**Use `EncryptedSharedPreferences` for health data**~~ – All three repositories (`DigestionRepository`, `DriveLawRepository`, `MainRepository`) now use `EncryptedSharedPreferences` (AES256-GCM) via `androidx.security:security-crypto:1.1.0-alpha06`.
+- [x] ~~**Review `allowBackup`**~~ – Added `android:fullBackupContent="@xml/backup_rules"` (API 23–30) and `android:dataExtractionRules="@xml/data_extraction_rules"` (API 31+) to exclude SharedPreferences from cloud backup while keeping the Room database backed up.
 
 ---
 

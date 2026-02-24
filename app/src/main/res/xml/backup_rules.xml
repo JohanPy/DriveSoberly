@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Auto-Backup rules (Android 6.0–11, API 23–30).
+    We exclude SharedPreferences from cloud backup because the EncryptedSharedPreferences
+    encryption key is stored in the Android Keystore, which is NOT backed up.
+    Restoring encrypted prefs on another device would make the data unreadable.
+    The Room database (drink history) is still included in the backup.
+-->
+<full-backup-content>
+    <exclude domain="sharedpref" path="USER_PREFS.xml" />
+</full-backup-content>

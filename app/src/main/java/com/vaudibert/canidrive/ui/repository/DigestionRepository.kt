@@ -3,6 +3,8 @@ package com.vaudibert.canidrive.ui.repository
 import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.security.crypto.EncryptedSharedPreferences
+import androidx.security.crypto.MasterKey
 import com.vaudibert.canidrive.R
 import com.vaudibert.canidrive.domain.digestion.DigestionService
 import com.vaudibert.canidrive.domain.digestion.PhysicalBody
@@ -41,7 +43,16 @@ class DigestionRepository(context: Context, drinkProvider: IIngestedDrinkProvide
             get() = _liveDrinker
 
     init {
-        val sharedPref = context.getSharedPreferences(context.getString(R.string.user_preferences), Context.MODE_PRIVATE)
+        val masterKey = MasterKey.Builder(context)
+            .setKeyScheme(MasterKey.KeyScheme.AES256_GCM)
+            .build()
+        val sharedPref = EncryptedSharedPreferences.create(
+            context,
+            context.getString(R.string.user_preferences),
+            masterKey,
+            EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV,
+            EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM
+        )
 
         val weight = sharedPref.getFloat(context.getString(R.string.user_weight), 70F).toDouble()
         val sex = Sex.fromString(

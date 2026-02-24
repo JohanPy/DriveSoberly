@@ -88,6 +88,9 @@ dependencies {
     implementation("androidx.room:room-runtime:$roomVersion")
     ksp("androidx.room:room-compiler:$roomVersion")
     implementation("androidx.room:room-ktx:$roomVersion")
+
+    // Security – encrypted SharedPreferences
+    implementation("androidx.security:security-crypto:1.1.0-alpha06")
 }
 
 tasks.withType<Test> {

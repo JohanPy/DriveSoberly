@@ -2,6 +2,8 @@ package com.vaudibert.canidrive.ui.repository
 
 import android.content.Context
 import androidx.room.Room
+import androidx.security.crypto.EncryptedSharedPreferences
+import androidx.security.crypto.MasterKey
 import androidx.room.migration.Migration
 import androidx.sqlite.db.SupportSQLiteDatabase
 import com.vaudibert.canidrive.R
@@ -50,7 +52,13 @@ class MainRepository(private val context: Context) {
         driveLawRepository.driveLawService
     )
 
-    private val sharedPref = context.getSharedPreferences(context.getString(R.string.user_preferences), Context.MODE_PRIVATE)
+    private val sharedPref = EncryptedSharedPreferences.create(
+        context,
+        context.getString(R.string.user_preferences),
+        MasterKey.Builder(context).setKeyScheme(MasterKey.KeyScheme.AES256_GCM).build(),
+        EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV,
+        EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM
+    )
 
 
     // Flag for initialization, saved when set.
