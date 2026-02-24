@@ -15,7 +15,7 @@ Items marked ~~like this~~ were fixed in the initial implementation pass.
 
 ## HIGH – Data Integrity
 
-- [ ] **Fix destructive database migration** – `MainRepository.kt`: `fallbackToDestructiveMigration()` silently wipes all user data on schema changes. Implement proper Room `Migration` objects. The commented-out `migration_1_2` should be completed and uncommented.
+- [x] ~~**Fix destructive database migration**~~ – `MainRepository.kt`: migration `1→2` fixed and re-enabled. Added `NOT NULL DEFAULT ''` on `name` column, preserved the table rename, and added the missing `PresetDrinkEntity` table creation. `fallbackToDestructiveMigration()` removed.
 - [ ] **Fix unit inconsistency for US drive laws** – `DriveLaws.kt`: USA is `0.8` while Canada is `0.08`. Verify all ~60 country entries against official sources and standardize to g/L.
 - [ ] **Validate all country BAC limits** – Add a unit test that asserts expected BAC limit per country against a reference table to prevent accidental data corruption.
 
