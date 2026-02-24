@@ -45,4 +45,14 @@
     <string name="preset_soft_cider">Sidra suave</string>
     <string name="preset_martini">Martini</string>
     <string name="preset_whisky">Whisky</string>
+
+    <string name="disclaimer_title">Aviso importante</string>
+    <string name="disclaimer_message">Esta aplicación proporciona una ESTIMACIÓN del nivel de alcohol en sangre (TAS) basada en fórmulas generales. NO sustituye a un alcoholímetro certificado y NUNCA debe usarse como referencia legal para conducir.\n\nEl TAS real varía en función de muchos factores no contemplados por esta aplicación (medicamentos, ingesta de alimentos, estado de salud, etc.).\n\nEn caso de duda, NO CONDUZCA.\n\nAl usar esta aplicación, usted reconoce que los desarrolladores no aceptan responsabilidad alguna por las consecuencias derivadas de su uso.</string>
+    <string name="disclaimer_accept">Entendido</string>
+
+    <string name="content_desc_drink_icon">Icono de bebida</string>
+    <string name="content_desc_delete_drink">Eliminar bebida</string>
+    <string name="content_desc_add_drink">Añadir una bebida</string>
+    <string name="content_desc_profile">Ajustes de perfil</string>
+    <string name="content_desc_validate">Validar</string>
 </resources>

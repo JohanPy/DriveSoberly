@@ -107,7 +107,7 @@ class DriveFragment : Fragment() {
             binding.linearAlcoholRate.visibility = LinearLayout.VISIBLE
             binding.linearWaitToSober.visibility = LinearLayout.VISIBLE
             binding.textViewAlcoholRate.text =
-                "${drinkerStatus.alcoholRate.toString().substring(0, 4)} g/L"
+                String.format("%.2f g/L", drinkerStatus.alcoholRate)
 
             binding.textViewTimeToSober.text = DateFormat
                 .getTimeInstance(DateFormat.SHORT)

@@ -1,6 +1,6 @@
 package com.vaudibert.canidrive.domain.drink
 
-import org.junit.Test
+import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.Assertions.*
 import java.util.*
 

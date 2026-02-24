@@ -2,6 +2,7 @@ package com.vaudibert.canidrive.domain
 
 import com.vaudibert.canidrive.domain.digestion.DigestionService
 import com.vaudibert.canidrive.domain.digestion.PhysicalBody
+import com.vaudibert.canidrive.domain.digestion.Sex
 import com.vaudibert.canidrive.domain.drink.IngestedDrink
 import com.vaudibert.canidrive.domain.drink.IngestionService
 import com.vaudibert.canidrive.domain.drink.PresetDrink
@@ -33,7 +34,7 @@ internal class DigestionServiceTest {
     @BeforeEach
     fun before() {
         body = PhysicalBody()
-        body.sex = "MALE"
+        body.sex = Sex.MALE
         body.weight = 100.0
         ingestionService = IngestionService {
                 preset: PresetDrink, ingestionTime: Date -> IngestedDrink(preset.name, preset.volume, preset.degree, ingestionTime)

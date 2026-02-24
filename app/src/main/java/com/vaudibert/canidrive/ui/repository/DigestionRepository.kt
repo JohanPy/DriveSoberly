@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import com.vaudibert.canidrive.R
 import com.vaudibert.canidrive.domain.digestion.DigestionService
 import com.vaudibert.canidrive.domain.digestion.PhysicalBody
+import com.vaudibert.canidrive.domain.digestion.Sex
 import com.vaudibert.canidrive.domain.drink.IIngestedDrinkProvider
 
 /**
@@ -43,17 +44,19 @@ class DigestionRepository(context: Context, drinkProvider: IIngestedDrinkProvide
         val sharedPref = context.getSharedPreferences(context.getString(R.string.user_preferences), Context.MODE_PRIVATE)
 
         val weight = sharedPref.getFloat(context.getString(R.string.user_weight), 70F).toDouble()
-        val sex = sharedPref.getString(context.getString(R.string.user_sex), "NONE") ?: "NONE"
+        val sex = Sex.fromString(
+            sharedPref.getString(context.getString(R.string.user_sex), "OTHER") ?: "OTHER"
+        )
         val tolerance = sharedPref.getFloat(context.getString(R.string.user_tolerance), 0.0F).toDouble()
 
         body.sex = sex
         body.weight = weight
         body.alcoholTolerance = tolerance
 
-        body.onUpdate = { updatedSex: String, updatedWeight: Double, updatedTolerance:Double -> run {
+        body.onUpdate = { updatedSex: Sex, updatedWeight: Double, updatedTolerance:Double -> run {
             sharedPref
                 .edit()
-                .putString(context.getString(R.string.user_sex), updatedSex)
+                .putString(context.getString(R.string.user_sex), updatedSex.name)
                 .putFloat(context.getString(R.string.user_weight), updatedWeight.toFloat())
                 .putFloat("USER_TOLERANCE", updatedTolerance.toFloat())
                 .apply()

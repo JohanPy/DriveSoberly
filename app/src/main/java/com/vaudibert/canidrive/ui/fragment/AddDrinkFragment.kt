@@ -13,7 +13,7 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.h6ah4i.android.widget.verticalseekbar.VerticalSeekBar
-import com.vaudibert.canidrive.KeyboardUtils
+import com.vaudibert.canidrive.ui.util.KeyboardUtils
 import com.vaudibert.canidrive.R
 import com.vaudibert.canidrive.databinding.FragmentAddDrinkBinding
 import com.vaudibert.canidrive.ui.CanIDrive
@@ -28,8 +28,6 @@ class AddDrinkFragment : Fragment() {
     private var _binding: FragmentAddDrinkBinding? = null
     private val binding get() = _binding!!
 
-    private var volume = 0.0
-    private var degree = 0.0
     private var delay: Long = 0
 
     // Views from included layouts

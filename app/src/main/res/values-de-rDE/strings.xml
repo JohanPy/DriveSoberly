@@ -45,4 +45,14 @@
     <string name="preset_soft_cider">Leichter Apfelwein</string>
     <string name="preset_martini">Martini</string>
     <string name="preset_whisky">Whisky</string>
+
+    <string name="disclaimer_title">Wichtiger Hinweis</string>
+    <string name="disclaimer_message">Diese App liefert eine SCHÄTZUNG des Blutalkoholgehalts (BAK) auf Basis allgemeiner Formeln. Sie ist KEIN Ersatz für ein zertifiziertes Atemalkoholmessgerät und darf NIEMALS als rechtliche Referenz für das Fahren verwendet werden.\n\nDer tatsächliche BAK hängt von vielen Faktoren ab, die diese App nicht berücksichtigt (Medikamente, Nahrungsaufnahme, Gesundheitszustand usw.).\n\nIm Zweifel: NICHT FAHREN.\n\nMit der Nutzung dieser App erkennen Sie an, dass die Entwickler keine Haftung für Folgen aus der Nutzung übernehmen.</string>
+    <string name="disclaimer_accept">Verstanden</string>
+
+    <string name="content_desc_drink_icon">Getränk-Symbol</string>
+    <string name="content_desc_delete_drink">Getränk löschen</string>
+    <string name="content_desc_add_drink">Getränk hinzufügen</string>
+    <string name="content_desc_profile">Profileinstellungen</string>
+    <string name="content_desc_validate">Bestätigen</string>
 </resources>

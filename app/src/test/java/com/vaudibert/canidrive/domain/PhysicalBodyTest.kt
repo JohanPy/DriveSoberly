@@ -1,6 +1,7 @@
 package com.vaudibert.canidrive.domain
 
 import com.vaudibert.canidrive.domain.digestion.PhysicalBody
+import com.vaudibert.canidrive.domain.digestion.Sex
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 
@@ -9,7 +10,7 @@ internal class PhysicalBodyTest {
     @Test
     fun `A 100kg male drinker shall have eff-weight 70, decrease 0,1`() {
         val male = PhysicalBody()
-        male.sex = "MALE"
+        male.sex = Sex.MALE
         male.weight = 100.0
 
         assertEquals(70.0, male.effectiveWeight)
@@ -19,7 +20,7 @@ internal class PhysicalBodyTest {
     @Test
     fun `A 50kg female drinker shall have eff-weight 30, decrease 0,085`() {
         val female = PhysicalBody()
-        female.sex = "FEMALE"
+        female.sex = Sex.FEMALE
         female.weight = 50.0
 
         assertEquals(30.0, female.effectiveWeight)
@@ -29,15 +30,15 @@ internal class PhysicalBodyTest {
     @Test
     fun `Changing sex impacts effectiveWeight and decreaseFactor`() {
         val changer = PhysicalBody()
-        changer.sex = "MALE"
+        changer.sex = Sex.MALE
         changer.weight = 100.0
 
-        changer.sex="FEMALE"
+        changer.sex = Sex.FEMALE
 
         assertEquals(60.0, changer.effectiveWeight)
         assertEquals(0.085, changer.decreaseFactor)
 
-        changer.sex="MALE"
+        changer.sex = Sex.MALE
 
         assertEquals(70.0, changer.effectiveWeight)
         assertEquals(0.1, changer.decreaseFactor)
@@ -58,11 +59,11 @@ internal class PhysicalBodyTest {
     @Test
     fun `Tolerance impacts only decreaseFactor for a given sex`() {
         val female = PhysicalBody()
-        female.sex = "FEMALE"
+        female.sex = Sex.FEMALE
         female.weight = 50.0
 
         val male = PhysicalBody()
-        male.sex = "MALE"
+        male.sex = Sex.MALE
         male.weight = 100.0
 
         assertEquals(0.085, female.decreaseFactor)

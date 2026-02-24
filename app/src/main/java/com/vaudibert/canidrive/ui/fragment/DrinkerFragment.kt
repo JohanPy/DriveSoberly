@@ -19,7 +19,7 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
-import com.vaudibert.canidrive.KeyboardUtils
+import com.vaudibert.canidrive.ui.util.KeyboardUtils
 import com.vaudibert.canidrive.R
 import com.vaudibert.canidrive.databinding.FragmentDrinkerBinding
 import com.vaudibert.canidrive.domain.drivelaw.DriveLaw
@@ -39,7 +39,7 @@ class DrinkerFragment : Fragment() {
     private val binding get() = _binding!!
 
     private var weight = 0.0
-    private var sex = "NONE"
+    private var sex = Sex.OTHER
 
     private lateinit var mainRepository: MainRepository
     private lateinit var digestionRepository: DigestionRepository
@@ -171,9 +171,9 @@ class DrinkerFragment : Fragment() {
         binding.buttonValidateDrinker.setOnClickListener {
 
             digestionRepository.body.sex = when {
-                radioMale.isChecked -> "MALE"
-                radioFemale.isChecked -> "FEMALE"
-                else -> "OTHER"
+                radioMale.isChecked -> Sex.MALE
+                radioFemale.isChecked -> Sex.FEMALE
+                else -> Sex.OTHER
             }
 
             val levelCount = (digestionRepository.toleranceLevels.size - 1).coerceAtLeast(1)
@@ -182,7 +182,7 @@ class DrinkerFragment : Fragment() {
                 seekBarAlcoholTolerance.progress.toDouble() /
                         levelCount.toDouble()
 
-            driveLawService.customCountryLimit = editTextCurrentLimit.text.toString().toDouble()
+            driveLawService.customCountryLimit = editTextCurrentLimit.text.toString().toDoubleOrNull() ?: driveLawService.customCountryLimit
 
             var navOptions: NavOptions? = null
 
@@ -214,12 +214,12 @@ class DrinkerFragment : Fragment() {
         }
     }
 
-    private fun setupSexPicker(recordedSex: String) {
+    private fun setupSexPicker(recordedSex: Sex) {
         sex = recordedSex
 
         when (sex) {
-            "MALE" -> radioMale.isChecked = true
-            "FEMALE" -> radioFemale.isChecked = true
+            Sex.MALE -> radioMale.isChecked = true
+            Sex.FEMALE -> radioFemale.isChecked = true
             else -> radioSexOther.isChecked = true
         }
     }
@@ -278,7 +278,9 @@ class DrinkerFragment : Fragment() {
         editTextCurrentLimit.addTextChangedListener(object : TextWatcher {
 
             override fun afterTextChanged(s: Editable) {
-                driveLawService.customCountryLimit = s.toString().toDouble()
+                s.toString().toDoubleOrNull()?.let {
+                    driveLawService.customCountryLimit = it
+                }
             }
 
             override fun beforeTextChanged(

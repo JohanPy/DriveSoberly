@@ -101,7 +101,7 @@ class DriveLawService(
             return twoCharString
         }
 
-        val countryCodeCaps = twoCharString.toUpperCase() // upper case is important because we are calculating offset
+        val countryCodeCaps = twoCharString.uppercase(java.util.Locale.ROOT) // upper case is important because we are calculating offset
         val firstLetter = Character.codePointAt(countryCodeCaps, 0) - 0x41 + 0x1F1E6
         val secondLetter = Character.codePointAt(countryCodeCaps, 1) - 0x41 + 0x1F1E6
 

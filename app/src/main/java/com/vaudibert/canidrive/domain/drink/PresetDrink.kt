@@ -18,7 +18,6 @@ open class PresetDrink(
         var result = name.hashCode()
         result = 31 * result + volume.hashCode()
         result = 31 * result + degree.hashCode()
-        result = 31 * result + count
         return result
     }
 }

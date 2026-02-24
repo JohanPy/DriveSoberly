@@ -44,8 +44,7 @@
         android:layout_gravity="center"
         android:padding="5dp"
         android:src="@drawable/wine_glass"
-        android:contentDescription="drink icon"
-        tools:ignore="HardcodedText"
+        android:contentDescription="@string/content_desc_drink_icon"
         app:layout_constraintStart_toEndOf="@+id/linearPastDrinkTime"
         app:layout_constraintTop_toTopOf="parent"
         />
@@ -85,7 +84,7 @@
         android:layout_margin="5dp"
         android:padding="5dp"
         android:src="@drawable/ic_delete_white_24dp"
-        android:contentDescription="Delete drink button"
+        android:contentDescription="@string/content_desc_delete_drink"
         tools:ignore="HardcodedText"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"

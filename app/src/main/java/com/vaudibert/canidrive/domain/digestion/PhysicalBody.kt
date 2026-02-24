@@ -6,20 +6,20 @@ package com.vaudibert.canidrive.domain.digestion
  */
 
 class PhysicalBody {
-    // TODO : find a more kotlin way to declare these constants
-    private val MALE = "MALE"
-    private val MALE_SEX_FACTOR = 0.7
-    private val MALE_MIN_DECREASE = 0.1
-    private val MALE_MAX_DECREASE = 0.15
+    companion object {
+        private const val MALE_SEX_FACTOR = 0.7
+        private const val MALE_MIN_DECREASE = 0.1
+        private const val MALE_MAX_DECREASE = 0.15
 
-    private val FEMALE_SEX_FACTOR = 0.6
-    private val FEMALE_MIN_DECREASE = 0.085
-    private val FEMALE_MAX_DECREASE = 0.1
+        private const val FEMALE_SEX_FACTOR = 0.6
+        private const val FEMALE_MIN_DECREASE = 0.085
+        private const val FEMALE_MAX_DECREASE = 0.1
+    }
 
-    var sex = "NONE"
+    var sex: Sex = Sex.OTHER
         set(value) {
             field = value
-            effectiveWeight = weight * (if (sex == MALE) MALE_SEX_FACTOR else FEMALE_SEX_FACTOR)
+            effectiveWeight = weight * (if (sex == Sex.MALE) MALE_SEX_FACTOR else FEMALE_SEX_FACTOR)
             decreaseFactor = decreaseFactorWith(value, alcoholTolerance)
             onUpdate(sex, weight, alcoholTolerance)
         }
@@ -27,7 +27,7 @@ class PhysicalBody {
     var weight = 80.0
         set(value) {
             field = value
-            effectiveWeight = weight * (if (sex == MALE) MALE_SEX_FACTOR else FEMALE_SEX_FACTOR)
+            effectiveWeight = weight * (if (sex == Sex.MALE) MALE_SEX_FACTOR else FEMALE_SEX_FACTOR)
             onUpdate(sex, weight, alcoholTolerance)
         }
 
@@ -40,14 +40,14 @@ class PhysicalBody {
             }
         }
 
-    private fun decreaseFactorWith(sex: String, tolerance: Double): Double {
-        return if (sex == "MALE")
+    private fun decreaseFactorWith(sex: Sex, tolerance: Double): Double {
+        return if (sex == Sex.MALE)
             tolerance * MALE_MAX_DECREASE + (1-tolerance) * MALE_MIN_DECREASE
         else
             tolerance * FEMALE_MAX_DECREASE + (1-tolerance) * FEMALE_MIN_DECREASE
     }
 
-    var onUpdate = { _ : String, _ : Double, _ : Double -> }
+    var onUpdate = { _ : Sex, _ : Double, _ : Double -> }
 
     var decreaseFactor: Double = FEMALE_MIN_DECREASE
 

@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import android.widget.NumberPicker
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import com.vaudibert.canidrive.KeyboardUtils
+import com.vaudibert.canidrive.ui.util.KeyboardUtils
 import com.vaudibert.canidrive.R
 import com.vaudibert.canidrive.databinding.FragmentAddPresetBinding
 import com.vaudibert.canidrive.domain.drink.IngestedDrink

@@ -68,4 +68,15 @@
     <string name="preset_soft_cider">Soft cider</string>
     <string name="preset_martini">Martini</string>
     <string name="preset_whisky">Whisky</string>
+
+    <string name="disclaimer_title">Important Disclaimer</string>
+    <string name="disclaimer_message">This app provides an ESTIMATE of blood alcohol content (BAC) based on general formulas. It is NOT a substitute for a certified breathalyzer and should NEVER be used as a legal reference for driving.\n\nActual BAC varies based on many factors not accounted for by this app (medication, food intake, health conditions, etc.).\n\nWhen in doubt, DO NOT DRIVE.\n\nBy using this app, you acknowledge that the developers accept no liability for any consequences resulting from its use.</string>
+    <string name="disclaimer_accept">I understand</string>
+    <string name="disclaimer_pref_key" translatable="false">DISCLAIMER_ACCEPTED</string>
+
+    <string name="content_desc_drink_icon">Drink icon</string>
+    <string name="content_desc_delete_drink">Delete drink</string>
+    <string name="content_desc_add_drink">Add a drink</string>
+    <string name="content_desc_profile">Profile settings</string>
+    <string name="content_desc_validate">Validate</string>
 </resources>

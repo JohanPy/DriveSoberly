@@ -94,11 +94,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         style="@style/TextViewLabel"
-        android:text="average"
+        android:text="@string/alcohol_tolerance_medium"
         app:layout_constraintTop_toBottomOf="@id/linearPickerWeight"
         app:layout_constraintStart_toEndOf="@id/textViewAlcoholToleranceLabel"
         app:layout_constraintEnd_toEndOf="parent"
-        tools:ignore="HardcodedText" />
+        />
 
 
 

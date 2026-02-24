@@ -1,15 +1,5 @@
 <resources>
-    <string name="app_name" translatable="false">CanIDrive</string>
     <string name="action_settings">Impostazioni</string>
-
-    <string name="user_preferences" translatable="false">USER_PREFS</string>
-    <string name="user_weight" translatable="false">WEIGHT</string>
-    <string name="user_sex" translatable="false">SEX</string>
-    <string name="user_young_driver" translatable="false">YOUNG_DRIVER</string>
-    <string name="user_professional_driver" translatable="false">PROFESSIONAL_DRIVER</string>
-
-    <string name="user_initialized" translatable="false">INITIALIZED</string>
-
 
     <string name="volume">Volume</string>
     <string name="degree">Gradi</string>
@@ -21,19 +11,11 @@
     <string name="other">ALTRO</string>
     <string name="about_you">Il tuo profilo</string>
     <string name="can_i_drive_question">Posso guidare?</string>
-    <string name="version" translatable="false">version</string>
     <string name="select_a_drink">Seleziona una bevanda</string>
     <string name="now">adesso</string>
-    <string name="car_colored_with_status" translatable="false">car colored with status</string>
-    <string name="drive_status_symbol" translatable="false">drive status symbol</string>
-    <string name="time_to_wait" translatable="false">time to wait</string>
     <string name="young_driver">Neopatentato</string>
     <string name="professional_driver">Autista professionista</string>
     <string name="country">Paese</string>
-    <string name="countryCode" translatable="false">COUNTRY_CODE</string>
-    <string name="alcohol_blood_rate" translatable="false">alcohol blood rate</string>
-    <string name="dev_alcohol_rate_example_text" translatable="false">0.6 g/L</string>
-    <string name="dev_time_example_text" translatable="false">12:34</string>
 
     <string name="less_two_years_driving">Patente da meno di 2 anni</string>
     <string name="twenty_one_young_or_less_three_years_driving">Meno di 21 anni di età o patente da meno di 3 anni</string>
@@ -45,9 +27,6 @@
     <string name="motor_cycle_or_young_drivers">Motocicli o neopatentato</string>
     <string name="twenty_one_young">Meno di 21 anni di età</string>
     <string name="new_driver_or_twenty_four">Neopatentato o meno di 24 anni di età</string>
-    <string name="forbidden_symbol" translatable="false">forbidden symbol</string>
-    <string name="drop_symbol" translatable="false">drop symbol</string>
-    <string name="customCountryLimit" translatable="false">CUSTOM_COUNTRY_LIMIT</string>
     <string name="customCountryLabel">Altro</string>
     <string name="day_unit">g</string>
     <string name="drink_history">Storico bevande</string>
@@ -58,7 +37,6 @@
     <string name="alcohol_tolerance_low">bassa</string>
     <string name="alcohol_tolerance_medium">media</string>
     <string name="alcohol_tolerance_high">buona</string>
-    <string name="user_tolerance" translatable="false">USER_TOLERANCE</string>
     <string name="presets">Predefiniti</string>
     <string name="add_preset_description">Definisci una nuova bevanda</string>
     <string name="preset_name_title">Nome della bevanda</string>
@@ -68,4 +46,14 @@
     <string name="preset_soft_cider">Birra Radler</string>
     <string name="preset_martini">Martini</string>
     <string name="preset_whisky">Whisky</string>
+
+    <string name="disclaimer_title">Avviso importante</string>
+    <string name="disclaimer_message">Questa app fornisce una STIMA del tasso alcolemico (BAC) basata su formule generali. NON sostituisce un etilometro certificato e NON deve MAI essere utilizzata come riferimento legale per la guida.\n\nIl tasso alcolemico reale varia in base a molti fattori non considerati da questa app (farmaci, assunzione di cibo, condizioni di salute, ecc.).\n\nIn caso di dubbio, NON GUIDARE.\n\nUtilizzando questa app, l\'utente riconosce che gli sviluppatori non si assumono alcuna responsabilità per le conseguenze derivanti dal suo utilizzo.</string>
+    <string name="disclaimer_accept">Ho capito</string>
+
+    <string name="content_desc_drink_icon">Icona della bevanda</string>
+    <string name="content_desc_delete_drink">Elimina bevanda</string>
+    <string name="content_desc_add_drink">Aggiungi una bevanda</string>
+    <string name="content_desc_profile">Impostazioni profilo</string>
+    <string name="content_desc_validate">Conferma</string>
 </resources>

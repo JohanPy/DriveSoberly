@@ -21,7 +21,7 @@ class IngestedDrinksAdapter(
 
     private var ingestedDrinkList : List<IngestedDrinkEntity> = emptyList()
 
-    private val DAY_IN_MILLIS = 3600*1000*24
+    private val DAY_IN_MILLIS = 3600L * 1000 * 24
 
     private val dateFormat = DateFormat.getTimeInstance(DateFormat.SHORT)
 

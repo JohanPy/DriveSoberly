@@ -31,9 +31,15 @@ class PresetDrinksAdapter(
 
     private var presetDrinks: List<PresetDrinkEntity> = emptyList()
 
+    private var selectedPreset: PresetDrinkEntity? = null
+
     init {
         drinkRepository.livePresetDrinks.observe(lifecycleOwner, Observer {
             presetDrinks = it
+            notifyDataSetChanged()
+        })
+        drinkRepository.liveSelectedPreset.observe(lifecycleOwner, Observer {
+            selectedPreset = it
             notifyDataSetChanged()
         })
     }
@@ -61,9 +67,7 @@ class PresetDrinksAdapter(
         descriptionText.text = presetDrink.name
         glassImage.setImageResource(R.drawable.wine_glass)
 
-        drinkRepository.liveSelectedPreset.observe(lifecycleOwner, Observer {
-            updatePresetColor(presetDrink, drinkView, deleteButton, it)
-        })
+        updatePresetColor(presetDrink, drinkView, deleteButton, selectedPreset)
 
         val clickListener = { _: View ->
             presetService.selectedPreset =

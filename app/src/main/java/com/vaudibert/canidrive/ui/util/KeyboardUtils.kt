@@ -1,4 +1,4 @@
-package com.vaudibert.canidrive
+package com.vaudibert.canidrive.ui.util
 
 import android.R
 import android.app.Activity

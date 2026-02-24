@@ -45,4 +45,14 @@
     <string name="preset_soft_cider">Cidre doux</string>
     <string name="preset_martini">Martini</string>
     <string name="preset_whisky">Whisky</string>
+
+    <string name="disclaimer_title">Avertissement important</string>
+    <string name="disclaimer_message">Cette application fournit une ESTIMATION du taux d\'alcoolémie basée sur des formules générales. Elle ne remplace PAS un éthylotest certifié et ne doit JAMAIS être utilisée comme référence légale pour la conduite.\n\nLe taux réel varie en fonction de nombreux facteurs non pris en compte par cette application (médicaments, alimentation, état de santé, etc.).\n\nEn cas de doute, NE CONDUISEZ PAS.\n\nEn utilisant cette application, vous reconnaissez que les développeurs déclinent toute responsabilité quant aux conséquences de son utilisation.</string>
+    <string name="disclaimer_accept">J\'ai compris</string>
+
+    <string name="content_desc_drink_icon">Icône de boisson</string>
+    <string name="content_desc_delete_drink">Supprimer la boisson</string>
+    <string name="content_desc_add_drink">Ajouter une boisson</string>
+    <string name="content_desc_profile">Paramètres du profil</string>
+    <string name="content_desc_validate">Valider</string>
 </resources>

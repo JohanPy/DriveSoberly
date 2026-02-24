@@ -1,15 +1,18 @@
 package com.vaudibert.canidrive.ui.fragment
 
 
+import android.content.Context
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.vaudibert.canidrive.BuildConfig
+import com.vaudibert.canidrive.R
 import com.vaudibert.canidrive.databinding.FragmentSplashBinding
 import com.vaudibert.canidrive.ui.CanIDrive
 
@@ -39,16 +42,52 @@ class SplashFragment : Fragment() {
 
         val mainHandler = Handler(Looper.getMainLooper())
         mainHandler.postDelayed({
+            if (!isAdded) return@postDelayed
 
-            val init = CanIDrive.instance.mainRepository.init
+            val sharedPref = requireContext().getSharedPreferences(
+                getString(R.string.user_preferences), Context.MODE_PRIVATE
+            )
+            val disclaimerAccepted = sharedPref.getBoolean(
+                getString(R.string.disclaimer_pref_key), false
+            )
 
-            val action = if (init)
-                SplashFragmentDirections.actionSplashFragmentToDriveFragment()
-            else
-                SplashFragmentDirections.actionSplashFragmentToDrinkerFragment()
-
-            findNavController().navigate(action)
+            if (!disclaimerAccepted) {
+                showDisclaimerDialog()
+            } else {
+                navigateToNext()
+            }
         }, 1000)
+    }
+
+    private fun showDisclaimerDialog() {
+        if (!isAdded) return
+        AlertDialog.Builder(requireContext())
+            .setTitle(R.string.disclaimer_title)
+            .setMessage(R.string.disclaimer_message)
+            .setCancelable(false)
+            .setPositiveButton(R.string.disclaimer_accept) { dialog, _ ->
+                val sharedPref = requireContext().getSharedPreferences(
+                    getString(R.string.user_preferences), Context.MODE_PRIVATE
+                )
+                sharedPref.edit()
+                    .putBoolean(getString(R.string.disclaimer_pref_key), true)
+                    .apply()
+                dialog.dismiss()
+                navigateToNext()
+            }
+            .show()
+    }
+
+    private fun navigateToNext() {
+        if (!isAdded) return
+        val init = CanIDrive.instance.mainRepository.init
+
+        val action = if (init)
+            SplashFragmentDirections.actionSplashFragmentToDriveFragment()
+        else
+            SplashFragmentDirections.actionSplashFragmentToDrinkerFragment()
+
+        findNavController().navigate(action)
     }
 
     override fun onDestroyView() {
