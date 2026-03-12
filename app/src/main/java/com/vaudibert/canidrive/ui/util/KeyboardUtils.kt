@@ -32,7 +32,7 @@ object KeyboardUtils {
 
     fun addKeyboardVisibilityListener(
         rootLayout: View,
-        onKeyboardVisibiltyListener: OnKeyboardVisibiltyListener
+        onKeyboardVisibiltyListener: OnKeyboardVisibiltyListener,
     ) {
         rootLayout.viewTreeObserver.addOnGlobalLayoutListener {
             val r = Rect()

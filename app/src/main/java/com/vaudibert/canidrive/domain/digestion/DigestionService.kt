@@ -18,9 +18,8 @@ import kotlin.math.max
  */
 class DigestionService(
     private var body: PhysicalBody,
-    private val drinkProvider: IIngestedDrinkProvider
+    private val drinkProvider: IIngestedDrinkProvider,
 ) {
-
     // TODO : extract a time service to avoid java.util dependency ?
     fun alcoholRateAt(date: Date): Double {
         val drinks = drinkProvider.getDrinks()
@@ -32,30 +31,34 @@ class DigestionService(
 
         drinks.forEach {
             lastRate = newRate(lastRate, lastIngestion, it.ingestionTime) +
-                    (it.alcoholMass() / body.effectiveWeight + (body.decreaseFactor/2))
+                (it.alcoholMass() / body.effectiveWeight + (body.decreaseFactor / 2))
             lastIngestion = it.ingestionTime
         }
 
         return newRate(lastRate, lastIngestion, date)
     }
 
-    fun timeToReachLimit(limit: Double) : Date {
+    fun timeToReachLimit(limit: Double): Date {
         val now = Date()
         val rate = alcoholRateAt(now)
         if (rate < limit) return now
 
         return Date(
-            now.time + ((rate-limit) / body.decreaseFactor* 3_600_000).toLong()
+            now.time + ((rate - limit) / body.decreaseFactor * 3_600_000).toLong(),
         )
     }
 
     /**
      * Computes the alcohol rate since the last ingestion.
      */
-    private fun newRate(lastRate: Double, lastIngestion: Date, now: Date) : Double {
-        val timeLapse = ((now.time - lastIngestion.time).toDouble() / (3600*1000))
+    private fun newRate(
+        lastRate: Double,
+        lastIngestion: Date,
+        now: Date,
+    ): Double {
+        val timeLapse = ((now.time - lastIngestion.time).toDouble() / (3600 * 1000))
 
-        val newRate = lastRate - (body.decreaseFactor* timeLapse)
+        val newRate = lastRate - (body.decreaseFactor * timeLapse)
         return max(0.0, newRate)
     }
 }

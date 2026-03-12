@@ -13,7 +13,6 @@ import org.junit.jupiter.api.Test
 import java.util.*
 
 internal class DigestionServiceTest {
-
     private val precision = 0.0001
 
     private lateinit var body: PhysicalBody
@@ -25,9 +24,9 @@ internal class DigestionServiceTest {
             PresetDrink(
                 "beer",
                 500.0,
-                5.0
+                5.0,
             ),
-            now
+            now,
         )
     }
 
@@ -36,9 +35,11 @@ internal class DigestionServiceTest {
         body = PhysicalBody()
         body.sex = Sex.MALE
         body.weight = 100.0
-        ingestionService = IngestionService {
-                preset: PresetDrink, ingestionTime: Date -> IngestedDrink(preset.name, preset.volume, preset.degree, ingestionTime)
-        }
+        ingestionService =
+            IngestionService {
+                    preset: PresetDrink, ingestionTime: Date ->
+                IngestedDrink(preset.name, preset.volume, preset.degree, ingestionTime)
+            }
         digestionService = DigestionService(body, ingestionService)
     }
 
@@ -78,5 +79,4 @@ internal class DigestionServiceTest {
 
         assertEquals(body.decreaseFactor, instantRate - laterRate, precision)
     }
-
 }

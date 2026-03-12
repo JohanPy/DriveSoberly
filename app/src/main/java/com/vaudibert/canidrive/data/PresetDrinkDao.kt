@@ -6,7 +6,7 @@ import com.vaudibert.canidrive.domain.drink.PresetDrink
 @Dao
 interface PresetDrinkDao {
     @Insert(entity = PresetDrinkEntity::class)
-    suspend fun insert(presetDrink: PresetDrink) : Long
+    suspend fun insert(presetDrink: PresetDrink): Long
 
     @Query("SELECT COUNT(uid) from presetdrinkentity ORDER BY count DESC")
     suspend fun count(): Int

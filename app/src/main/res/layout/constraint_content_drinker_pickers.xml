@@ -25,10 +25,15 @@
             android:layout_height="wrap_content"
             android:text="@string/weight" />
 
-        <NumberPicker
-            android:id="@+id/numberPickerWeight"
+        <EditText
+            android:id="@+id/editTextWeight"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:inputType="numberDecimal"
+            android:minEms="4"
+            android:textAlignment="center"
+            android:importantForAccessibility="yes"
+            android:hint="@string/weight" />
 
 
     </LinearLayout>

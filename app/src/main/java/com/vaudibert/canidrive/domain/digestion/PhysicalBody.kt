@@ -49,15 +49,18 @@ class PhysicalBody {
             }
         }
 
-    private fun decreaseFactorWith(sex: Sex, tolerance: Double): Double {
-        return if (sex == Sex.MALE)
-            tolerance * MALE_MAX_DECREASE + (1-tolerance) * MALE_MIN_DECREASE
-        else
-            tolerance * FEMALE_MAX_DECREASE + (1-tolerance) * FEMALE_MIN_DECREASE
+    private fun decreaseFactorWith(
+        sex: Sex,
+        tolerance: Double,
+    ): Double {
+        return if (sex == Sex.MALE) {
+            tolerance * MALE_MAX_DECREASE + (1 - tolerance) * MALE_MIN_DECREASE
+        } else {
+            tolerance * FEMALE_MAX_DECREASE + (1 - tolerance) * FEMALE_MIN_DECREASE
+        }
     }
 
     var decreaseFactor: Double = FEMALE_MIN_DECREASE
 
-    var effectiveWeight:Double = weight * FEMALE_SEX_FACTOR
-
+    var effectiveWeight: Double = weight * FEMALE_SEX_FACTOR
 }

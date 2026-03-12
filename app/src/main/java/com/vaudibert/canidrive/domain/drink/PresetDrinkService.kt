@@ -9,7 +9,7 @@ import kotlinx.coroutines.flow.asStateFlow
 import java.util.*
 
 class PresetDrinkService<Preset : IPresetDrink>(
-    private val presetMaker : (name: String, volume:Double, degree: Double) -> Preset
+    private val presetMaker: (name: String, volume: Double, degree: Double) -> Preset,
 ) {
     private val _presetRemovedFlow = MutableSharedFlow<Preset>(extraBufferCapacity = 10)
     val presetRemovedFlow: SharedFlow<Preset> = _presetRemovedFlow.asSharedFlow()
@@ -26,22 +26,26 @@ class PresetDrinkService<Preset : IPresetDrink>(
     private val _selectedPresetFlow = MutableStateFlow<Preset?>(null)
     val selectedPresetFlow: StateFlow<Preset?> = _selectedPresetFlow.asStateFlow()
 
-    var ingestionService : IIngestCapable<Preset>? = null
+    var ingestionService: IIngestCapable<Preset>? = null
 
-    var selectedPreset : Preset?
+    var selectedPreset: Preset?
         get() = _selectedPresetFlow.value
         set(value) {
             _selectedPresetFlow.value = value
         }
 
-    private var presetDrinks : MutableList<Preset> = mutableListOf()
+    private var presetDrinks: MutableList<Preset> = mutableListOf()
 
-    fun populate(presets : List<Preset>) {
+    fun populate(presets: List<Preset>) {
         presetDrinks.addAll(presets)
         sortAndCallbackPresets()
     }
 
-    fun addNewPreset(name: String, volume: Double, degree: Double) {
+    fun addNewPreset(
+        name: String,
+        volume: Double,
+        degree: Double,
+    ) {
         val newPreset = presetMaker(name, volume, degree)
         presetDrinks.add(newPreset)
         selectedPreset = newPreset
@@ -66,11 +70,15 @@ class PresetDrinkService<Preset : IPresetDrink>(
         sortAndCallbackPresets()
     }
 
-    fun updateSelectedPreset(name: String, volume: Double, degree: Double) {
+    fun updateSelectedPreset(
+        name: String,
+        volume: Double,
+        degree: Double,
+    ) {
         val currentSelected = selectedPreset
-        if (currentSelected == null)
+        if (currentSelected == null) {
             addNewPreset(name, volume, degree)
-        else {
+        } else {
             currentSelected.name = name
             currentSelected.volume = volume
             currentSelected.degree = degree
@@ -90,5 +98,4 @@ class PresetDrinkService<Preset : IPresetDrink>(
             ingester.ingest(preset, ingestionTime)
         }
     }
-
 }

@@ -5,7 +5,6 @@ import org.junit.jupiter.api.Test
 import java.util.*
 
 class ConvertersTest {
-
     @Test
     fun `fromTimestamp converts timestamp to correct Date`() {
         val timestamp = 1678615200000L // 2023-03-12 10:00:00 UTC

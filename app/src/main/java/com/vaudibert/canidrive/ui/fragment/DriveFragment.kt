@@ -1,6 +1,5 @@
 package com.vaudibert.canidrive.ui.fragment
 
-
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -8,21 +7,19 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
-import androidx.recyclerview.widget.RecyclerView
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.RecyclerView
 import com.vaudibert.canidrive.R
-import com.vaudibert.canidrive.databinding.FragmentDriveStatusBinding
-import com.vaudibert.canidrive.domain.DrinkerStatusService
-import com.vaudibert.canidrive.ui.CanIDrive
-import com.vaudibert.canidrive.ui.adapter.IngestedDrinksAdapter
 import com.vaudibert.canidrive.data.repository.DigestionRepository
 import com.vaudibert.canidrive.data.repository.DrinkRepository
-import java.text.DateFormat
-
+import com.vaudibert.canidrive.databinding.FragmentDriveStatusBinding
+import com.vaudibert.canidrive.domain.DrinkerStatusService
+import com.vaudibert.canidrive.ui.adapter.IngestedDrinksAdapter
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import java.text.DateFormat
 
 /**
  * The drive fragment that displays the drive status :
@@ -31,7 +28,6 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
  *  - what were the past drinks ?
  */
 class DriveFragment : Fragment() {
-
     private val viewModel: DriveViewModel by viewModel()
 
     private var _binding: FragmentDriveStatusBinding? = null
@@ -50,14 +46,18 @@ class DriveFragment : Fragment() {
     private lateinit var listViewPastDrinks: RecyclerView
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?,
     ): View {
         _binding = FragmentDriveStatusBinding.inflate(inflater, container, false)
         return binding.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    override fun onViewCreated(
+        view: View,
+        savedInstanceState: Bundle?,
+    ) {
         super.onViewCreated(view, savedInstanceState)
 
         // Initialize views from included layouts
@@ -82,20 +82,21 @@ class DriveFragment : Fragment() {
 
         binding.buttonToDrinker.setOnClickListener {
             findNavController().navigate(
-                DriveFragmentDirections.actionDriveFragmentToDrinkerFragment()
+                DriveFragmentDirections.actionDriveFragmentToDrinkerFragment(),
             )
         }
 
         binding.buttonAddDrink.setOnClickListener {
             findNavController().navigate(
-                DriveFragmentDirections.actionDriveFragmentToAddDrinkFragment()
+                DriveFragmentDirections.actionDriveFragmentToAddDrinkFragment(),
             )
         }
-
     }
 
     private fun updateDriveStatus() {
         val drinkerStatus = drinkerStatusService.status()
+
+        val label = binding.root.findViewById<TextView>(R.id.textViewDriveStatusLabel)
 
         if (drinkerStatus.alcoholRate < 0.01) {
             binding.linearAlcoholRate.visibility = LinearLayout.GONE
@@ -106,18 +107,21 @@ class DriveFragment : Fragment() {
             binding.imageDriveStatus.setColorFilter(ContextCompat.getColor(requireContext(), R.color.driveGreen))
             binding.linearWaitToDrive.visibility = LinearLayout.GONE
 
+            label.text = getString(R.string.safe_to_drive)
+            label.setTextColor(ContextCompat.getColor(requireContext(), R.color.driveGreen))
         } else {
             binding.linearAlcoholRate.visibility = LinearLayout.VISIBLE
             binding.linearWaitToSober.visibility = LinearLayout.VISIBLE
-            
+
             val numberFormat = java.text.NumberFormat.getInstance()
             numberFormat.maximumFractionDigits = 2
             numberFormat.minimumFractionDigits = 2
             binding.textViewAlcoholRate.text = "${numberFormat.format(drinkerStatus.alcoholRate)} ${getString(R.string.bac_unit_gl)}"
 
-            binding.textViewTimeToSober.text = DateFormat
-                .getTimeInstance(DateFormat.SHORT)
-                .format(drinkerStatus.soberDate)
+            binding.textViewTimeToSober.text =
+                DateFormat
+                    .getTimeInstance(DateFormat.SHORT)
+                    .format(drinkerStatus.soberDate)
 
             if (drinkerStatus.canDrive) {
                 // Set status icons to drive-able
@@ -126,10 +130,14 @@ class DriveFragment : Fragment() {
                 binding.imageDriveStatus.setColorFilter(ContextCompat.getColor(requireContext(), R.color.driveAmber))
                 binding.linearWaitToDrive.visibility = LinearLayout.GONE
                 binding.textViewAlcoholRate.setTextColor(ContextCompat.getColor(requireContext(), R.color.driveAmber))
+
+                label.text = getString(R.string.safe_to_drive)
+                label.setTextColor(ContextCompat.getColor(requireContext(), R.color.driveAmber))
             } else {
-                binding.textViewTimeToDrive.text = DateFormat
-                    .getTimeInstance(DateFormat.SHORT)
-                    .format(drinkerStatus.canDriveDate)
+                binding.textViewTimeToDrive.text =
+                    DateFormat
+                        .getTimeInstance(DateFormat.SHORT)
+                        .format(drinkerStatus.canDriveDate)
 
                 // Set status icons to NOT drive-able
                 binding.imageCar.setColorFilter(ContextCompat.getColor(requireContext(), R.color.driveRed))
@@ -138,7 +146,6 @@ class DriveFragment : Fragment() {
                 binding.linearWaitToDrive.visibility = LinearLayout.VISIBLE
                 binding.textViewAlcoholRate.setTextColor(ContextCompat.getColor(requireContext(), R.color.driveRed))
             }
-
         }
         ingestedDrinksAdapter.notifyDataSetChanged()
     }
@@ -146,12 +153,13 @@ class DriveFragment : Fragment() {
     /**
      * Helper task to update the drive status while app is running.
      */
-    private val updateDriveStatusTask = object : Runnable {
-        override fun run() {
-            updateDriveStatus()
-            mainHandler.postDelayed(this, 1000*60)
+    private val updateDriveStatusTask =
+        object : Runnable {
+            override fun run() {
+                updateDriveStatus()
+                mainHandler.postDelayed(this, 1000 * 60)
+            }
         }
-    }
 
     override fun onPause() {
         super.onPause()

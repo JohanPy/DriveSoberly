@@ -77,4 +77,6 @@
     <string name="delay_12h">12 h</string>
     <string name="delay_18h">18 h</string>
     <string name="delay_24h">24 h</string>
+    <string name="safe_to_drive">Apte à conduire</string>
+    <string name="do_not_drive">NE CONDUISEZ PAS</string>
 </resources>

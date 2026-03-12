@@ -19,13 +19,13 @@ class PresetDrinksAdapter(
     val context: Context,
     private val lifecycleOwner: LifecycleOwner,
     private val goToAddPreset: () -> Unit,
-    private val drinkRepository: DrinkRepository
+    private val drinkRepository: DrinkRepository,
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-
     private val presetService = drinkRepository.presetService
-    private val doubleFormat = java.text.NumberFormat.getInstance().apply {
-        maximumFractionDigits = 1
-    }
+    private val doubleFormat =
+        java.text.NumberFormat.getInstance().apply {
+            maximumFractionDigits = 1
+        }
 
     private var presetDrinks: List<PresetDrinkEntity> = emptyList()
     private var selectedPreset: PresetDrinkEntity? = null
@@ -36,21 +36,30 @@ class PresetDrinksAdapter(
     }
 
     init {
-        drinkRepository.livePresetDrinks.observe(lifecycleOwner, Observer {
-            presetDrinks = it
-            notifyDataSetChanged()
-        })
-        drinkRepository.liveSelectedPreset.observe(lifecycleOwner, Observer {
-            selectedPreset = it
-            notifyDataSetChanged()
-        })
+        drinkRepository.livePresetDrinks.observe(
+            lifecycleOwner,
+            Observer {
+                presetDrinks = it
+                notifyDataSetChanged()
+            },
+        )
+        drinkRepository.liveSelectedPreset.observe(
+            lifecycleOwner,
+            Observer {
+                selectedPreset = it
+                notifyDataSetChanged()
+            },
+        )
     }
 
     override fun getItemViewType(position: Int): Int {
         return if (position == 0) TYPE_ADD_PRESET else TYPE_PRESET_ITEM
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        viewType: Int,
+    ): RecyclerView.ViewHolder {
         val inflater = LayoutInflater.from(context)
         if (viewType == TYPE_ADD_PRESET) {
             val view = inflater.inflate(R.layout.item_add_preset, parent, false)
@@ -61,7 +70,10 @@ class PresetDrinksAdapter(
         }
     }
 
-    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+    override fun onBindViewHolder(
+        holder: RecyclerView.ViewHolder,
+        position: Int,
+    ) {
         if (holder is AddPresetViewHolder) {
             holder.addDescriptionText.text = context.getString(R.string.add_preset_description)
             holder.itemView.setOnClickListener {
@@ -79,16 +91,18 @@ class PresetDrinksAdapter(
 
             val clickListener = { _: View ->
                 presetService.selectedPreset =
-                    if (presetDrink == drinkRepository.liveSelectedPreset.value)
+                    if (presetDrink == drinkRepository.liveSelectedPreset.value) {
                         null
-                    else
+                    } else {
                         presetDrink
+                    }
             }
-            val longClickListener = View.OnLongClickListener {
-                presetService.selectedPreset = presetDrink
-                goToAddPreset()
-                true
-            }
+            val longClickListener =
+                View.OnLongClickListener {
+                    presetService.selectedPreset = presetDrink
+                    goToAddPreset()
+                    true
+                }
 
             holder.propertiesText.setOnClickListener(clickListener)
             holder.propertiesText.setOnLongClickListener(longClickListener)
@@ -105,7 +119,7 @@ class PresetDrinksAdapter(
                 com.google.android.material.snackbar.Snackbar.make(
                     holder.itemView,
                     R.string.snackbar_drink_deleted,
-                    com.google.android.material.snackbar.Snackbar.LENGTH_LONG
+                    com.google.android.material.snackbar.Snackbar.LENGTH_LONG,
                 ).setAction(R.string.snackbar_undo) {
                     presetService.addPreset(presetDrink)
                 }.show()
@@ -119,7 +133,7 @@ class PresetDrinksAdapter(
         drink: PresetDrinkEntity,
         drinkView: View,
         deleteButton: ImageButton,
-        selected: PresetDrinkEntity?
+        selected: PresetDrinkEntity?,
     ) {
         if (selected != null && drink == selected) {
             drinkView.setBackgroundResource(R.drawable.background_color_primary)

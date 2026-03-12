@@ -8,17 +8,14 @@ import android.view.ViewGroup
 import android.widget.NumberPicker
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import com.vaudibert.canidrive.ui.util.KeyboardUtils
 import com.vaudibert.canidrive.R
 import com.vaudibert.canidrive.databinding.FragmentAddPresetBinding
 import com.vaudibert.canidrive.domain.drink.IngestedDrink
-import com.vaudibert.canidrive.ui.CanIDrive
+import com.vaudibert.canidrive.ui.util.KeyboardUtils
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.text.DecimalFormat
 
-import org.koin.androidx.viewmodel.ext.android.viewModel
-
 class EditPresetFragment : Fragment() {
-
     private val viewModel: EditPresetViewModel by viewModel()
 
     private var _binding: FragmentAddPresetBinding? = null
@@ -34,14 +31,18 @@ class EditPresetFragment : Fragment() {
     private lateinit var numberPickerDegree: NumberPicker
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?,
     ): View {
         _binding = FragmentAddPresetBinding.inflate(inflater, container, false)
         return binding.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    override fun onViewCreated(
+        view: View,
+        savedInstanceState: Bundle?,
+    ) {
         super.onViewCreated(view, savedInstanceState)
 
         // Initialize views from included layouts
@@ -64,42 +65,43 @@ class EditPresetFragment : Fragment() {
                 presetService.updateSelectedPreset(
                     binding.editTextNewPresetName.text.toString(),
                     volume,
-                    degree
+                    degree,
                 )
             } else {
                 presetService.addNewPreset(
                     binding.editTextNewPresetName.text.toString(),
                     volume,
-                    degree
+                    degree,
                 )
             }
 
             KeyboardUtils.hideKeyboard(this.activity as Activity)
 
             findNavController().navigate(
-                EditPresetFragmentDirections.actionAddPresetFragmentToAddDrinkFragment()
+                EditPresetFragmentDirections.actionAddPresetFragmentToAddDrinkFragment(),
             )
         }
 
         setVolumePicker()
 
         setDegreePicker()
-
     }
 
-
     private fun setDegreePicker() {
-        val degreeLabels = IngestedDrink.degrees.map { deg ->
-            "${doubleFormat.format(deg)} %"
-        }.toTypedArray()
+        val degreeLabels =
+            IngestedDrink.degrees.map { deg ->
+                "${doubleFormat.format(deg)} %"
+            }.toTypedArray()
         numberPickerDegree.minValue = 0
         numberPickerDegree.maxValue = degreeLabels.size - 1
         numberPickerDegree.displayedValues = degreeLabels
         val indexOfDegree = IngestedDrink.degrees.toList().indexOf(degree)
-        val startDegree = if (indexOfDegree < 0)
-            degreeLabels.size / 2
-        else
-            indexOfDegree
+        val startDegree =
+            if (indexOfDegree < 0) {
+                degreeLabels.size / 2
+            } else {
+                indexOfDegree
+            }
         degree = IngestedDrink.degrees[startDegree]
         numberPickerDegree.value = startDegree
         numberPickerDegree.setOnValueChangedListener { _, _, newVal ->
@@ -108,20 +110,24 @@ class EditPresetFragment : Fragment() {
     }
 
     private fun setVolumePicker() {
-        val volumeLabels = IngestedDrink.volumes.map { vol ->
-            if (vol < 1000.0)
-                "${doubleFormat.format(vol)} mL"
-            else
-                "${doubleFormat.format(vol / 1000.0)} L"
-        }.toTypedArray()
+        val volumeLabels =
+            IngestedDrink.volumes.map { vol ->
+                if (vol < 1000.0) {
+                    "${doubleFormat.format(vol)} mL"
+                } else {
+                    "${doubleFormat.format(vol / 1000.0)} L"
+                }
+            }.toTypedArray()
         numberPickerVolume.minValue = 0
         numberPickerVolume.maxValue = volumeLabels.size - 1
         numberPickerVolume.displayedValues = volumeLabels
         val indexOfVolume = IngestedDrink.volumes.toList().indexOf(volume)
-        val startVolume = if (indexOfVolume < 0)
-            volumeLabels.size / 2
-        else
-            indexOfVolume
+        val startVolume =
+            if (indexOfVolume < 0) {
+                volumeLabels.size / 2
+            } else {
+                indexOfVolume
+            }
         numberPickerVolume.value = startVolume
         volume = IngestedDrink.volumes[startVolume]
         numberPickerVolume.setOnValueChangedListener { _, _, newVal ->

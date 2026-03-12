@@ -1,26 +1,26 @@
 package com.vaudibert.canidrive.domain.drink
 
-import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.Assertions.*
+import org.junit.jupiter.api.Test
 import java.util.*
 
 internal class PresetDrinkServiceTest {
-
     private lateinit var presetService: PresetDrinkService<PresetDrink>
     private val exportPreset: List<PresetDrink> get() = presetService.presetsFlow.value
     private lateinit var testIIngestor: TestIIngestCapable
 
     private val presetA = PresetDrink("A", 10.0, 10.0, 1)
-    private val presetB = PresetDrink("B", 20.0, 20.0,2)
+    private val presetB = PresetDrink("B", 20.0, 20.0, 2)
     private val presetC = PresetDrink("C", 30.0, 30.0, 3)
 
     private var presetPopulation = listOf(presetA, presetB, presetC)
 
     private fun setupBasic() {
-        presetService = PresetDrinkService {
-                name: String, volume: Double, degree: Double ->
-            PresetDrink(name, volume, degree)
-        }
+        presetService =
+            PresetDrinkService {
+                    name: String, volume: Double, degree: Double ->
+                PresetDrink(name, volume, degree)
+            }
 
         testIIngestor = TestIIngestCapable()
         presetService.ingestionService = testIIngestor

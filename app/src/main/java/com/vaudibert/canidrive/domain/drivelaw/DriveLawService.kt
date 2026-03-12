@@ -9,7 +9,7 @@ class DriveLawService(
     private val countryNamer: (countryCode: String) -> String,
     private val defaultName: String,
     countryList: List<DriveLaw>,
-    private val defaultDriveLaw: DriveLaw
+    private val defaultDriveLaw: DriveLaw,
 ) {
     val defaultLimit = 0.0
 
@@ -40,8 +40,9 @@ class DriveLawService(
             _isProfessionalFlow.value = value
         }
 
-    private val countryLaws = countryList
-        .sortedBy { law -> countryNamer(law.countryCode) }
+    private val countryLaws =
+        countryList
+            .sortedBy { law -> countryNamer(law.countryCode) }
 
     private val _driveLawFlow = MutableStateFlow(defaultDriveLaw)
     val driveLawFlow: StateFlow<DriveLaw> = _driveLawFlow.asStateFlow()
@@ -54,44 +55,52 @@ class DriveLawService(
 
     fun getListOfCountriesWithFlags(): List<String> {
         return countryLaws.map { law ->
-            if (law.countryCode == "")
+            if (law.countryCode == "") {
                 defaultName
-            else
+            } else {
                 stringToFlagEmoji(law.countryCode) + " " + countryNamer(law.countryCode)
+            }
         }
     }
 
-
-    fun getIndexOfCurrent() = countryLaws
-        .indexOfFirst {
-                law -> law.countryCode == driveLaw.countryCode
-        }.coerceAtLeast(0)
+    fun getIndexOfCurrent() =
+        countryLaws
+            .indexOfFirst {
+                    law ->
+                law.countryCode == driveLaw.countryCode
+            }.coerceAtLeast(0)
 
     fun select(countryCode: String) {
         driveLaw = countryLaws.find { law -> law.countryCode == countryCode } ?: defaultDriveLaw
     }
 
     fun select(position: Int) {
-        driveLaw = if (position !in countryLaws.indices)
-            defaultDriveLaw
-        else
-            countryLaws[position]
+        driveLaw =
+            if (position !in countryLaws.indices) {
+                defaultDriveLaw
+            } else {
+                countryLaws[position]
+            }
     }
 
-    fun driveLimit() : Double {
+    fun driveLimit(): Double {
         if (driveLaw == defaultDriveLaw) return customCountryLimit
 
         val regularLimit = driveLaw.limit
 
-        val youngLimit = if (isYoung)
-            driveLaw.youngLimit?.limit ?: regularLimit
-        else
-            regularLimit
+        val youngLimit =
+            if (isYoung) {
+                driveLaw.youngLimit?.limit ?: regularLimit
+            } else {
+                regularLimit
+            }
 
-        val professionalLimit = if (isProfessional)
-            driveLaw.professionalLimit?.limit ?: regularLimit
-        else
-            regularLimit
+        val professionalLimit =
+            if (isProfessional) {
+                driveLaw.professionalLimit?.limit ?: regularLimit
+            } else {
+                regularLimit
+            }
 
         return min(youngLimit, professionalLimit)
     }

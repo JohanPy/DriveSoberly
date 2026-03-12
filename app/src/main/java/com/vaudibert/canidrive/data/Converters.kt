@@ -7,7 +7,6 @@ import java.util.*
  * Static object required for room automatic conversion.
  */
 object Converters {
-
     @TypeConverter
     @JvmStatic
     fun fromTimestamp(value: Long): Date {
@@ -19,5 +18,4 @@ object Converters {
     fun dateToTimestamp(date: Date): Long {
         return date.time
     }
-
 }

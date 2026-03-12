@@ -7,5 +7,6 @@ interface IIngestedDrink {
     val volume: Double
     val degree: Double
     val ingestionTime: Date
+
     fun alcoholMass(): Double
 }

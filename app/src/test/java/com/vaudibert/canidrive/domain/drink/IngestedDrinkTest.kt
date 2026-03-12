@@ -5,11 +5,10 @@ import org.junit.jupiter.api.Test
 import java.util.*
 
 class IngestedDrinkTest {
-
     @Test
     fun `alcoholMass is correctly calculated`() {
         // formula: degree/100 * volume * ALCOHOL_DENSITY(0.8)
-        
+
         // 500ml of 5% beer -> 0.05 * 500 * 0.8 = 20g
         val beer = IngestedDrink("Beer", 500.0, 5.0, Date())
         assertEquals(20.0, beer.alcoholMass(), 0.01)

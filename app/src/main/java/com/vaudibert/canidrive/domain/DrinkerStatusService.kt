@@ -6,16 +6,16 @@ import java.util.*
 
 class DrinkerStatusService(
     private val digestionService: DigestionService,
-    private val driveLawService: DriveLawService
+    private val driveLawService: DriveLawService,
 ) {
-    fun status() : DrinkerStatus {
+    fun status(): DrinkerStatus {
         val driveLimit = driveLawService.driveLimit()
         val ratePresent = digestionService.alcoholRateAt(Date())
         return DrinkerStatus(
             ratePresent <= driveLimit,
             ratePresent,
             digestionService.timeToReachLimit(driveLimit),
-            digestionService.timeToReachLimit(driveLawService.defaultLimit)
+            digestionService.timeToReachLimit(driveLawService.defaultLimit),
         )
     }
 }

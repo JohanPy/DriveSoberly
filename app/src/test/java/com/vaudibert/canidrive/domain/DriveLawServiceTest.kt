@@ -10,18 +10,19 @@ import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 
 internal class DriveLawServiceTest {
-
-    private var defaultNamer = { s:String -> s}
+    private var defaultNamer = { s: String -> s }
 
     private var countryList: List<DriveLaw> = emptyList()
 
     private val defaultDriveLaw =
         DriveLaw("")
-    private val aDriveLaw = DriveLaw(
-        "A-first", 0.7,
-        YoungLimit(0.15, "testExplanation"),
-        ProfessionalLimit(0.23)
-    )
+    private val aDriveLaw =
+        DriveLaw(
+            "A-first",
+            0.7,
+            YoungLimit(0.15, "testExplanation"),
+            ProfessionalLimit(0.23),
+        )
     private val zDriveLaw =
         DriveLaw("Z-last")
 
@@ -35,7 +36,7 @@ internal class DriveLawServiceTest {
                 defaultNamer,
                 "other",
                 countryList,
-                defaultDriveLaw
+                defaultDriveLaw,
             )
     }
 
@@ -43,7 +44,6 @@ internal class DriveLawServiceTest {
     fun `Default is selected at first time`() {
         assertEquals(defaultDriveLaw, driveLawService.driveLaw)
     }
-
 
     @Test
     fun `Drive laws are sorted by country name (with given namer)`() {
@@ -78,7 +78,7 @@ internal class DriveLawServiceTest {
         assertEquals(aDriveLaw, a)
         assertEquals(defaultDriveLaw, default)
     }
-    
+
     @Test
     fun `Drive limit is regular one by default`() {
         driveLawService.select("A-first")
@@ -101,5 +101,4 @@ internal class DriveLawServiceTest {
 
         assertEquals(0.23, driveLawService.driveLimit())
     }
-
 }

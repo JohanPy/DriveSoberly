@@ -4,14 +4,14 @@ open class PresetDrink(
     override var name: String,
     override var volume: Double,
     override var degree: Double,
-    override var count: Int = 0
+    override var count: Int = 0,
 ) : IPresetDrink {
     override fun equals(other: Any?): Boolean {
         if (other !is PresetDrink) return false
 
         return this.name == other.name &&
-                this.volume == other.volume &&
-                this.degree == other.degree
+            this.volume == other.volume &&
+            this.degree == other.degree
     }
 
     override fun hashCode(): Int {

@@ -16,11 +16,10 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
-import java.util.*
 import java.io.Closeable
+import java.util.*
 
 class DrinkRepository(context: Context, drinkDatabase: DrinkDatabase) : Closeable {
-
     private val _livePastDrinks = MutableLiveData<List<IngestedDrinkEntity>>()
     val livePastDrinks: LiveData<List<IngestedDrinkEntity>>
         get() = _livePastDrinks
@@ -39,68 +38,67 @@ class DrinkRepository(context: Context, drinkDatabase: DrinkDatabase) : Closeabl
     private val daoJob = Job()
     private val uiScope = CoroutineScope(Dispatchers.Main + daoJob)
 
-
     private val presetMaker: (String, Double, Double) -> PresetDrinkEntity = {
-            name:String, volume:Double, degree:Double ->
-                val newPreset = PresetDrink(name, volume, degree)
-                val newPresetEntity = PresetDrinkEntity(-1, newPreset)
-                uiScope.launch {
-                    newPresetEntity.uid = presetDrinkDao.insert(newPreset)
-                }
-                newPresetEntity
+            name: String, volume: Double, degree: Double ->
+        val newPreset = PresetDrink(name, volume, degree)
+        val newPresetEntity = PresetDrinkEntity(-1, newPreset)
+        uiScope.launch {
+            newPresetEntity.uid = presetDrinkDao.insert(newPreset)
+        }
+        newPresetEntity
     }
 
     val presetService = PresetDrinkService(presetMaker)
 
     private val ingestor: (PresetDrinkEntity, Date) -> IngestedDrinkEntity = {
-        preset : PresetDrinkEntity, ingestionTime : Date ->
-            val newIngested = IngestedDrink(preset.name, preset.volume, preset.degree, ingestionTime)
-            val newIngestedEntity = IngestedDrinkEntity(-1, newIngested)
-            uiScope.launch { newIngestedEntity.uid = ingestedDrinkDao.insert(newIngested) }
-            newIngestedEntity
+            preset: PresetDrinkEntity, ingestionTime: Date ->
+        val newIngested = IngestedDrink(preset.name, preset.volume, preset.degree, ingestionTime)
+        val newIngestedEntity = IngestedDrinkEntity(-1, newIngested)
+        uiScope.launch { newIngestedEntity.uid = ingestedDrinkDao.insert(newIngested) }
+        newIngestedEntity
     }
 
     val ingestionService = IngestionService(ingestor)
 
     // TODO : move this default data in the database init ?
-    private val defaultPresetDrink = mutableListOf(
-        PresetDrink(
-            context.getString(R.string.preset_red_wine),
-            130.0,
-            13.0
-        ),
-        PresetDrink(
-            context.getString(R.string.preset_light_beer),
-            250.0,
-            4.5
-        ),
-        PresetDrink(
-            context.getString(R.string.preset_light_beer),
-            500.0,
-            4.5
-        ),
-        PresetDrink(
-            context.getString(R.string.preset_triple_beer),
-            330.0,
-            9.0
-        ),
-        PresetDrink(
-            context.getString(R.string.preset_soft_cider),
-            250.0,
-            2.5
-        ),
-        PresetDrink(
-            context.getString(R.string.preset_martini),
-            80.0,
-            17.0
-        ),
-        PresetDrink(
-            context.getString(R.string.preset_whisky),
-            80.0,
-            30.0
+    private val defaultPresetDrink =
+        mutableListOf(
+            PresetDrink(
+                context.getString(R.string.preset_red_wine),
+                130.0,
+                13.0,
+            ),
+            PresetDrink(
+                context.getString(R.string.preset_light_beer),
+                250.0,
+                4.5,
+            ),
+            PresetDrink(
+                context.getString(R.string.preset_light_beer),
+                500.0,
+                4.5,
+            ),
+            PresetDrink(
+                context.getString(R.string.preset_triple_beer),
+                330.0,
+                9.0,
+            ),
+            PresetDrink(
+                context.getString(R.string.preset_soft_cider),
+                250.0,
+                2.5,
+            ),
+            PresetDrink(
+                context.getString(R.string.preset_martini),
+                80.0,
+                17.0,
+            ),
+            PresetDrink(
+                context.getString(R.string.preset_whisky),
+                80.0,
+                30.0,
+            ),
         )
-    )
-
 
     init {
 
@@ -133,7 +131,7 @@ class DrinkRepository(context: Context, drinkDatabase: DrinkDatabase) : Closeabl
             }
             presetService.populate(presetDrinkDao.getAll())
         }
-        
+
         uiScope.launch {
             presetService.presetsFlow.collect {
                 _livePresetDrinks.postValue(it)

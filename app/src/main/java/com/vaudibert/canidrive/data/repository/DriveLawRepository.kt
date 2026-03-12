@@ -15,13 +15,12 @@ import kotlinx.coroutines.launch
 import java.util.*
 
 class DriveLawRepository(private val context: Context) {
-
     val driveLawService =
         DriveLawService(
             { code: String -> Locale("", code).displayCountry },
             context.getString(R.string.other),
             DriveLaws.loadLaws(context),
-            DriveLaws.default
+            DriveLaws.default,
         )
 
     private val _liveDriveLaw = MutableLiveData<DriveLaw>()
@@ -29,36 +28,37 @@ class DriveLawRepository(private val context: Context) {
     private val _liveIsProfessional = MutableLiveData<Boolean>()
     private val _liveCustomCountryLimit = MutableLiveData<Double>()
 
-
     val liveDriveLaw: LiveData<DriveLaw>
-            get() = _liveDriveLaw
+        get() = _liveDriveLaw
     val liveIsYoung: LiveData<Boolean>
-            get() = _liveIsYoung
+        get() = _liveIsYoung
     val liveIsProfessional: LiveData<Boolean>
-            get() = _liveIsProfessional
+        get() = _liveIsProfessional
     val liveCustomCountryLimit: LiveData<Double>
-            get() = _liveCustomCountryLimit
+        get() = _liveCustomCountryLimit
 
     init {
-        val masterKey = MasterKey.Builder(context)
-            .setKeyScheme(MasterKey.KeyScheme.AES256_GCM)
-            .build()
-        val sharedPref = EncryptedSharedPreferences.create(
-            context,
-            context.getString(R.string.user_preferences),
-            masterKey,
-            EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV,
-            EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM
-        )
+        val masterKey =
+            MasterKey.Builder(context)
+                .setKeyScheme(MasterKey.KeyScheme.AES256_GCM)
+                .build()
+        val sharedPref =
+            EncryptedSharedPreferences.create(
+                context,
+                context.getString(R.string.user_preferences),
+                masterKey,
+                EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV,
+                EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM,
+            )
 
         // Initiate drive law service
         driveLawService.isYoung = sharedPref.getBoolean(context.getString(R.string.user_young_driver), false)
         driveLawService.isProfessional = sharedPref.getBoolean(context.getString(R.string.user_professional_driver), false)
 
         driveLawService.select(
-            sharedPref.getString(context.getString(R.string.countryCode), "") ?: ""
+            sharedPref.getString(context.getString(R.string.countryCode), "") ?: "",
         )
-        driveLawService.customCountryLimit= sharedPref.getFloat(context.getString(R.string.customCountryLimit), 0.0F).toDouble()
+        driveLawService.customCountryLimit = sharedPref.getFloat(context.getString(R.string.customCountryLimit), 0.0F).toDouble()
 
         // Set collectors once drive law service initialized
         CoroutineScope(Dispatchers.IO).launch {
@@ -107,5 +107,4 @@ class DriveLawRepository(private val context: Context) {
         _liveIsProfessional.value = driveLawService.isProfessional
         _liveCustomCountryLimit.value = driveLawService.customCountryLimit
     }
-
 }

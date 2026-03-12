@@ -8,18 +8,17 @@ import java.util.*
 
 @Entity
 class IngestedDrinkEntity(
-    @PrimaryKey(autoGenerate = true) var uid : Long,
-    ingestionTime : Date,
-    volume : Double,
-    name : String,
-    degree: Double
-    ) : IIngestedDrink, IngestedDrink(name, volume, degree, ingestionTime) {
-
-    constructor(uid: Long, ingested : IngestedDrink) : this(
+    @PrimaryKey(autoGenerate = true) var uid: Long,
+    ingestionTime: Date,
+    volume: Double,
+    name: String,
+    degree: Double,
+) : IIngestedDrink, IngestedDrink(name, volume, degree, ingestionTime) {
+    constructor(uid: Long, ingested: IngestedDrink) : this(
         uid,
         ingested.ingestionTime,
         ingested.volume,
         ingested.name,
-        ingested.degree)
-
+        ingested.degree,
+    )
 }

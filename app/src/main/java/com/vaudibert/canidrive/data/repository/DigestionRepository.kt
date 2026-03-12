@@ -29,38 +29,41 @@ import kotlinx.coroutines.launch
  *  - drinkDao for past consumed drinks.
  */
 class DigestionRepository(context: Context, drinkProvider: IIngestedDrinkProvider) {
-
     // Main instance to link
     val body = PhysicalBody()
 
     val digestionService = DigestionService(body, drinkProvider)
 
-    val toleranceLevels = listOf(
-        context.getString(R.string.alcohol_tolerance_low),
-        context.getString(R.string.alcohol_tolerance_medium),
-        context.getString(R.string.alcohol_tolerance_high)
-    )
+    val toleranceLevels =
+        listOf(
+            context.getString(R.string.alcohol_tolerance_low),
+            context.getString(R.string.alcohol_tolerance_medium),
+            context.getString(R.string.alcohol_tolerance_high),
+        )
 
     private val _liveDrinker = MutableLiveData<PhysicalBody>()
-    val liveDrinker:LiveData<PhysicalBody>
-            get() = _liveDrinker
+    val liveDrinker: LiveData<PhysicalBody>
+        get() = _liveDrinker
 
     init {
-        val masterKey = MasterKey.Builder(context)
-            .setKeyScheme(MasterKey.KeyScheme.AES256_GCM)
-            .build()
-        val sharedPref = EncryptedSharedPreferences.create(
-            context,
-            context.getString(R.string.user_preferences),
-            masterKey,
-            EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV,
-            EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM
-        )
+        val masterKey =
+            MasterKey.Builder(context)
+                .setKeyScheme(MasterKey.KeyScheme.AES256_GCM)
+                .build()
+        val sharedPref =
+            EncryptedSharedPreferences.create(
+                context,
+                context.getString(R.string.user_preferences),
+                masterKey,
+                EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV,
+                EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM,
+            )
 
         val weight = sharedPref.getFloat(context.getString(R.string.user_weight), 70F).toDouble()
-        val sex = Sex.fromString(
-            sharedPref.getString(context.getString(R.string.user_sex), "OTHER") ?: "OTHER"
-        )
+        val sex =
+            Sex.fromString(
+                sharedPref.getString(context.getString(R.string.user_sex), "OTHER") ?: "OTHER",
+            )
         val tolerance = sharedPref.getFloat(context.getString(R.string.user_tolerance), 0.0F).toDouble()
 
         body.sex = sex
@@ -81,6 +84,4 @@ class DigestionRepository(context: Context, drinkProvider: IIngestedDrinkProvide
 
         _liveDrinker.value = body
     }
-
-
 }

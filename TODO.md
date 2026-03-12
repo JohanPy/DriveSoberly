@@ -69,17 +69,17 @@ Items marked ~~like this~~ were fixed in the initial implementation pass.
 - [x] ~~**Move `KeyboardUtils` to `ui.util` package**~~ – Moved to `ui/util/KeyboardUtils.kt`, updated all 3 import sites.
 - [x] ~~**Remove unused `volume` and `degree` variables**~~ – `AddDrinkFragment.kt`.
 - [x] **Replace mutable lambda callbacks with `Flow`/`LiveData`** – `PhysicalBody.onUpdate`, `DriveLawService.onCustomLimitCallback`, `PresetDrinkService.onPresetsChanged`: fragile `var` lambdas. Replace with `StateFlow` or `LiveData`.
-- [ ] **Separate `DriveLaws.kt` data from Android resources** – 361-line file mixes raw BAC data with `R.string.*` references. Consider loading from a bundled JSON asset file and resolving string IDs in a mapper class.
+- [x] **Separate `DriveLaws.kt` data from Android resources** – 361-line file mixes raw BAC data with `R.string.*` references. Consider loading from a bundled JSON asset file and resolving string IDs in a mapper class.
 
 ---
 
 ## MEDIUM – Testing
 
 - [x] ~~**Fix JUnit 4/5 mixing**~~ – `PresetDrinkServiceTest.kt`: replaced `org.junit.Test` with `org.junit.jupiter.api.Test`.
-- [ ] **Add tests for `DrinkerStatusService`** – No tests for the status aggregation logic (sober / can drive / cannot drive).
+- [x] **Add tests for `DrinkerStatusService`** – No tests for the status aggregation logic (sober / can drive / cannot drive).
 - [ ] **Add tests for `IngestionService`** – Only indirectly covered via `DigestionServiceTest`.
-- [ ] **Add tests for `IngestedDrink.alcoholMass()`** – Critical BAC calculation has no direct unit test.
-- [ ] **Add tests for Room `Converters`** – `Date` ↔ `Long` conversion is untested; a regression could silently corrupt all timestamps.
+- [x] **Add tests for `IngestedDrink.alcoholMass()`** – Critical BAC calculation has no direct unit test.
+- [x] **Add tests for Room `Converters`** – `Date` ↔ `Long` conversion is untested; a regression could silently corrupt all timestamps.
 - [ ] **Add tests for `TimeServiceAndroid`** – A test would have caught the original Saint Patrick's Day bug.
 - [ ] **Add repository tests** – No repository layer has any tests.
 - [ ] **Add UI / integration tests (Espresso)** – Zero UI tests exist. At minimum, test the happy path: set profile → add drink → verify status changes.
@@ -93,7 +93,7 @@ Items marked ~~like this~~ were fixed in the initial implementation pass.
 - [x] ~~**Add `contentDescription` to all FloatingActionButtons**~~ – All FABs in `fragment_drive_status.xml`, `fragment_drinker.xml`, `fragment_add_preset.xml` now have descriptions.
 - [x] ~~**Fix splash screen text size unit**~~ – `fragment_splash.xml`: changed from `20pt` to `40sp`.
 - [ ] **Add explicit text labels for drive status** – `DriveFragment.kt`: status communicated only by color/icon. Add a visible text like "Safe to drive" / "Do NOT drive" for colorblind users and screen readers.
-- [ ] **Fix suppressed `LabelFor` warning** – `constraint_content_drinker_country.xml`: `tools:ignore="LabelFor"` on the custom limit `EditText`. Add a proper `<TextView android:labelFor="@id/editTextCurrentLimit">`.
+- [x] **Fix suppressed `LabelFor` warning** – `constraint_content_drinker_country.xml`: `tools:ignore="LabelFor"` on the custom limit `EditText`. Add a proper `<TextView android:labelFor="@id/editTextCurrentLimit">`.
 
 ---
 
@@ -101,15 +101,15 @@ Items marked ~~like this~~ were fixed in the initial implementation pass.
 
 - [x] ~~**Remove hardcoded `"average"` text**~~ – `constraint_content_drinker_pickers.xml`: replaced with `@string/alcohol_tolerance_medium`.
 - [x] ~~**Remove redundant `translatable="false"` keys from Italian strings**~~ – Cleaned `values-it-rIT/strings.xml`.
-- [ ] **Hardcoded unit string `"g/L"`** – `constraint_content_drinker_country.xml`: move to string resource; consider supporting g/dL, mg/100mL, ‰ per country selection.
-- [ ] **Use locale-aware number formatting** – `DecimalFormat("0.#")` ignores locale decimal separator conventions. Use `NumberFormat.getInstance(locale)`.
+- [x] **Hardcoded unit string `"g/L"`** – `constraint_content_drinker_country.xml`: move to string resource; consider supporting g/dL, mg/100mL, ‰ per country selection.
+- [x] **Use locale-aware number formatting** – `DecimalFormat("0.#")` ignores locale decimal separator conventions. Use `NumberFormat.getInstance(locale)`.
 
 ---
 
 ## LOW – UI/UX Improvements
 
 - [ ] **Replace custom splash with Android 12+ SplashScreen API** – `SplashFragment.kt`: artificial 1-second `postDelayed`. Use the `androidx.core:core-splashscreen` library for the system splash.
-- [ ] **Add deletion confirmation dialogs** – Drink delete buttons (presets and history) have no confirmation. Accidental taps permanently delete data. Show an `AlertDialog` before deletion.
+- [x] **Add deletion confirmation dialogs** – Drink delete buttons (presets and history) have no confirmation. Accidental taps permanently delete data. Show an `AlertDialog` before deletion.
 - [ ] **Extend weight picker range** – `DrinkerFragment.kt`: weight limited to `[30..150]` kg in 5 kg steps. Add free-form `EditText` input or extend range to 250 kg.
 - [x] ~~**Implement Settings screen**~~ – `menu_main.xml` has a Settings item but `MainActivity.kt` returns `true` without navigating. Wire up a `PreferenceFragment` or custom settings screen. Implementation added with `SettingsFragment.kt` and `nav_graph.xml` integration.
 - [ ] **Add Up/Back button in Toolbar** – Navigation relies on FABs; Toolbar has no back/up button. Non-standard Android UX pattern.

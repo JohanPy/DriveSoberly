@@ -48,6 +48,17 @@
             android:src="@drawable/ic_forbidden_white_24dp"
             app:tint="@color/driveRed" />
 
+        <TextView
+            android:id="@+id/textViewDriveStatusLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="10dp"
+            android:text="@string/do_not_drive"
+            android:textColor="@color/driveRed"
+            android:textStyle="bold"
+            android:textSize="20sp" />
+
         <LinearLayout
             android:id="@+id/linearStatusDatas"
             android:layout_width="wrap_content"

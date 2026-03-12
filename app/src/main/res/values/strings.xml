@@ -86,4 +86,10 @@
     <string name="content_desc_add_drink">Add a drink</string>
     <string name="content_desc_profile">Profile settings</string>
     <string name="content_desc_validate">Validate</string>
+    <string name="safe_to_drive">Safe to drive</string>
+    <string name="do_not_drive">DO NOT DRIVE</string>
+    <string name="bac_unit_gl" translatable="false">g/L</string>
+    <string name="delay_12h" translatable="false">12h</string>
+    <string name="delay_18h" translatable="false">18h</string>
+    <string name="delay_24h" translatable="false">24h</string>
 </resources>

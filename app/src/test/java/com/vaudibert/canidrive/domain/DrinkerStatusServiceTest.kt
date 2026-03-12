@@ -8,7 +8,6 @@ import org.mockito.Mockito.*
 import java.util.*
 
 class DrinkerStatusServiceTest {
-
     @Test
     fun `status returns can drive when alcohol rate is below limit`() {
         val digestionService = mock(DigestionService::class.java)

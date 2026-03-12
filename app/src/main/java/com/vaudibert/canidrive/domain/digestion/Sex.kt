@@ -7,7 +7,8 @@ package com.vaudibert.canidrive.domain.digestion
 enum class Sex {
     MALE,
     FEMALE,
-    OTHER;
+    OTHER,
+    ;
 
     companion object {
         fun fromString(value: String): Sex {

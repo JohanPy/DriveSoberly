@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModel
 import com.vaudibert.canidrive.data.repository.MainRepository
 
 class DriveViewModel(
-    val mainRepository: MainRepository
+    val mainRepository: MainRepository,
 ) : ViewModel() {
     val digestionRepository = mainRepository.digestionRepository
     val drinkRepository = mainRepository.drinkRepository

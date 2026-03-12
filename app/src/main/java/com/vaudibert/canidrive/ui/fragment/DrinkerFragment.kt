@@ -1,6 +1,5 @@
 package com.vaudibert.canidrive.ui.fragment
 
-
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -11,7 +10,6 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.CheckBox
 import android.widget.EditText
-import android.widget.NumberPicker
 import android.widget.RadioButton
 import android.widget.SeekBar
 import android.widget.Spinner
@@ -19,25 +17,22 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
-import com.vaudibert.canidrive.ui.util.KeyboardUtils
 import com.vaudibert.canidrive.R
-import com.vaudibert.canidrive.databinding.FragmentDrinkerBinding
-import com.vaudibert.canidrive.domain.drivelaw.DriveLaw
-import com.vaudibert.canidrive.domain.drivelaw.DriveLawService
-import com.vaudibert.canidrive.ui.CanIDrive
 import com.vaudibert.canidrive.data.repository.DigestionRepository
 import com.vaudibert.canidrive.data.repository.MainRepository
+import com.vaudibert.canidrive.databinding.FragmentDrinkerBinding
 import com.vaudibert.canidrive.domain.digestion.Sex
-import kotlin.math.roundToInt
-
+import com.vaudibert.canidrive.domain.drivelaw.DriveLaw
+import com.vaudibert.canidrive.domain.drivelaw.DriveLawService
+import com.vaudibert.canidrive.ui.util.KeyboardUtils
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import kotlin.math.roundToInt
 
 /**
  * The drinker fragment to enter its details.
  */
 // TODO : split into 2 fragments : body and drive law ?
 class DrinkerFragment : Fragment() {
-
     private val viewModel: DrinkerViewModel by viewModel()
 
     private var _binding: FragmentDrinkerBinding? = null
@@ -51,7 +46,7 @@ class DrinkerFragment : Fragment() {
     private lateinit var driveLawService: DriveLawService
 
     // Views from included layouts (constraint_content_drinker_pickers.xml)
-    private lateinit var numberPickerWeight: NumberPicker
+    private lateinit var editTextWeight: EditText
     private lateinit var radioMale: RadioButton
     private lateinit var radioFemale: RadioButton
     private lateinit var radioSexOther: RadioButton
@@ -66,18 +61,22 @@ class DrinkerFragment : Fragment() {
     private lateinit var checkboxProfessionalDriver: CheckBox
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?,
     ): View {
         _binding = FragmentDrinkerBinding.inflate(inflater, container, false)
         return binding.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    override fun onViewCreated(
+        view: View,
+        savedInstanceState: Bundle?,
+    ) {
         super.onViewCreated(view, savedInstanceState)
 
         // Initialize views from included layouts
-        numberPickerWeight = view.findViewById(R.id.numberPickerWeight)
+        editTextWeight = view.findViewById(R.id.editTextWeight)
         radioMale = view.findViewById(R.id.radioMale)
         radioFemale = view.findViewById(R.id.radioFemale)
         radioSexOther = view.findViewById(R.id.radioSexOther)
@@ -98,13 +97,12 @@ class DrinkerFragment : Fragment() {
 
         setupSpinnerCountry(
             driveLawService
-                .getListOfCountriesWithFlags()
+                .getListOfCountriesWithFlags(),
         )
 
         setupWeightPicker()
 
         setupSexPicker(digestionRepository.body.sex)
-
 
         setupValidationButton(digestionRepository)
 
@@ -165,32 +163,39 @@ class DrinkerFragment : Fragment() {
         val levelCount = digestionRepository.toleranceLevels.size - 1
         seekBarAlcoholTolerance.max = levelCount
 
-        seekBarAlcoholTolerance.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
-            override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
-                textViewAlcoholToleranceTextValue.text = digestionRepository.toleranceLevels[progress]
-            }
+        seekBarAlcoholTolerance.setOnSeekBarChangeListener(
+            object : SeekBar.OnSeekBarChangeListener {
+                override fun onProgressChanged(
+                    seekBar: SeekBar?,
+                    progress: Int,
+                    fromUser: Boolean,
+                ) {
+                    textViewAlcoholToleranceTextValue.text = digestionRepository.toleranceLevels[progress]
+                }
 
-            override fun onStartTrackingTouch(seekBar: SeekBar?) {}
-            override fun onStopTrackingTouch(seekBar: SeekBar?) {}
-        })
+                override fun onStartTrackingTouch(seekBar: SeekBar?) {}
+
+                override fun onStopTrackingTouch(seekBar: SeekBar?) {}
+            },
+        )
         seekBarAlcoholTolerance.progress = (digestionRepository.body.alcoholTolerance * levelCount).roundToInt()
         textViewAlcoholToleranceTextValue.text = digestionRepository.toleranceLevels[seekBarAlcoholTolerance.progress]
     }
 
     private fun setupValidationButton(digestionRepository: DigestionRepository) {
         binding.buttonValidateDrinker.setOnClickListener {
-
-            digestionRepository.body.sex = when {
-                radioMale.isChecked -> Sex.MALE
-                radioFemale.isChecked -> Sex.FEMALE
-                else -> Sex.OTHER
-            }
+            digestionRepository.body.sex =
+                when {
+                    radioMale.isChecked -> Sex.MALE
+                    radioFemale.isChecked -> Sex.FEMALE
+                    else -> Sex.OTHER
+                }
 
             val levelCount = (digestionRepository.toleranceLevels.size - 1).coerceAtLeast(1)
 
             digestionRepository.body.alcoholTolerance =
                 seekBarAlcoholTolerance.progress.toDouble() /
-                        levelCount.toDouble()
+                levelCount.toDouble()
 
             driveLawService.customCountryLimit = editTextCurrentLimit.text.toString().toDoubleOrNull() ?: driveLawService.customCountryLimit
 
@@ -201,16 +206,17 @@ class DrinkerFragment : Fragment() {
 
                 // Specific option needed for the init of the app, the drinker is the first fragment
                 // and needs to be cleared (take over nav_graph definition).
-                navOptions = NavOptions.Builder()
-                    .setPopUpTo(
-                        R.id.drinkerFragment,
-                        true
-                    ).build()
+                navOptions =
+                    NavOptions.Builder()
+                        .setPopUpTo(
+                            R.id.drinkerFragment,
+                            true,
+                        ).build()
             }
 
             findNavController().navigate(
                 DrinkerFragmentDirections.actionDrinkerFragmentToDriveFragment(),
-                navOptions
+                navOptions,
             )
         }
     }
@@ -235,81 +241,104 @@ class DrinkerFragment : Fragment() {
     }
 
     private fun setupWeightPicker() {
-        val weights = intArrayOf(
-            30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 85, 90, 95,
-            100, 110, 120, 130, 140, 150
-        )
-        val weightLabels = weights.map { i -> i.toString() + "kg" }.toTypedArray()
-        numberPickerWeight.minValue = 0
-        numberPickerWeight.maxValue = weights.size - 1
-        numberPickerWeight.displayedValues = weightLabels
+        val currentWeight = digestionRepository.body.weight
 
-        numberPickerWeight.value = weights
-            .indexOf(digestionRepository.body.weight.toInt())
-            .coerceAtLeast(0)
-
-        numberPickerWeight.setOnValueChangedListener { _, _, newVal ->
-            digestionRepository.body.weight = weights[newVal].toDouble()
+        // Show as integer if it's a whole number, else decimal
+        if (currentWeight == currentWeight.toInt().toDouble()) {
+            editTextWeight.setText(currentWeight.toInt().toString())
+        } else {
+            editTextWeight.setText(currentWeight.toString())
         }
+
+        editTextWeight.addTextChangedListener(
+            object : TextWatcher {
+                override fun afterTextChanged(s: Editable) {
+                    var newVal = s.toString().toDoubleOrNull()
+                    if (newVal != null) {
+                        // Prevent completely absurd weights if necessary, or just let it pass
+                        if (newVal < 10.0) newVal = 10.0
+                        if (newVal > 500.0) newVal = 500.0
+                        digestionRepository.body.weight = newVal
+                    }
+                }
+
+                override fun beforeTextChanged(
+                    s: CharSequence,
+                    start: Int,
+                    count: Int,
+                    after: Int,
+                ) {}
+
+                override fun onTextChanged(
+                    s: CharSequence,
+                    start: Int,
+                    before: Int,
+                    count: Int,
+                ) {}
+            },
+        )
     }
 
-    private fun setupSpinnerCountry(
-        countries: List<String>
-    ) {
-        spinnerCountry.adapter = ArrayAdapter(
-            requireContext(),
-            R.layout.item_country_spinner,
-            countries
-        )
+    private fun setupSpinnerCountry(countries: List<String>) {
+        spinnerCountry.adapter =
+            ArrayAdapter(
+                requireContext(),
+                R.layout.item_country_spinner,
+                countries,
+            )
         val initialPosition = driveLawService.getIndexOfCurrent()
         spinnerCountry.setSelection(initialPosition)
 
-        spinnerCountry.onItemSelectedListener = object :
-            AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(
-                parent: AdapterView<*>,
-                view: View?,
-                position: Int,
-                id: Long
-            ) {
-                if (position == 0) {
-                    // handle the other country case
-                    val customLimit = driveLawService.customCountryLimit
-                    updateCustomLimit(customLimit)
-
+        spinnerCountry.onItemSelectedListener =
+            object :
+                AdapterView.OnItemSelectedListener {
+                override fun onItemSelected(
+                    parent: AdapterView<*>,
+                    view: View?,
+                    position: Int,
+                    id: Long,
+                ) {
+                    if (position == 0) {
+                        // handle the other country case
+                        val customLimit = driveLawService.customCountryLimit
+                        updateCustomLimit(customLimit)
+                    }
+                    driveLawService.select(position)
                 }
-                driveLawService.select(position)
 
+                override fun onNothingSelected(parent: AdapterView<*>?) {}
             }
 
-            override fun onNothingSelected(parent: AdapterView<*>?) {}
-        }
-
-        editTextCurrentLimit.addTextChangedListener(object : TextWatcher {
-
-            override fun afterTextChanged(s: Editable) {
-                s.toString().toDoubleOrNull()?.let {
-                    driveLawService.customCountryLimit = it
+        editTextCurrentLimit.addTextChangedListener(
+            object : TextWatcher {
+                override fun afterTextChanged(s: Editable) {
+                    s.toString().toDoubleOrNull()?.let {
+                        driveLawService.customCountryLimit = it
+                    }
                 }
-            }
 
-            override fun beforeTextChanged(
-                s: CharSequence, start: Int,
-                count: Int, after: Int
-            ) {
-            }
+                override fun beforeTextChanged(
+                    s: CharSequence,
+                    start: Int,
+                    count: Int,
+                    after: Int,
+                ) {
+                }
 
-            override fun onTextChanged(
-                s: CharSequence, start: Int,
-                before: Int, count: Int
-            ) {
-            }
-        })
+                override fun onTextChanged(
+                    s: CharSequence,
+                    start: Int,
+                    before: Int,
+                    count: Int,
+                ) {
+                }
+            },
+        )
     }
 
     private fun updateCustomLimit(customLimit: Double) {
         editTextCurrentLimit.setText(
-            ((customLimit * 100.0).roundToInt() / 100.0).toString()
+            ((customLimit * 100.0).roundToInt() / 100.0).toString(),
         )
     }
 

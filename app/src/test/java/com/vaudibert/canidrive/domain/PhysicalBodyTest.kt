@@ -6,7 +6,6 @@ import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 
 internal class PhysicalBodyTest {
-
     @Test
     fun `A 100kg male drinker shall have eff-weight 70, decrease 0,1`() {
         val male = PhysicalBody()
@@ -73,7 +72,5 @@ internal class PhysicalBodyTest {
         assertEquals(0.1, male.decreaseFactor)
         male.alcoholTolerance = 1.0
         assertEquals(0.15, male.decreaseFactor)
-
     }
-
 }
