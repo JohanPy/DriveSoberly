@@ -7,7 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.ListView
+import androidx.recyclerview.widget.RecyclerView
 import android.widget.SeekBar
 import android.widget.TextView
 import androidx.fragment.app.Fragment
@@ -35,7 +35,7 @@ class AddDrinkFragment : Fragment() {
     private var delay: Long = 0
 
     // Views from included layouts
-    private lateinit var listViewPresetDrinks: ListView
+    private lateinit var listViewPresetDrinks: RecyclerView
     private lateinit var textViewWhenText: TextView
     private lateinit var seekBarIngestionDelay: VerticalSeekBar
     private lateinit var buttonValidateNewDrink: com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -102,17 +102,17 @@ class AddDrinkFragment : Fragment() {
         val delays = longArrayOf(0, 20, 40, 60, 90, 120, 180, 300, 480, 720, 1080, 1440)
         val delayLabels = arrayOf(
             getString(R.string.now),
-            "20min",
-            "40min",
-            "1h",
-            "1h30",
-            "2h",
-            "3h",
-            "5h",
-            "8h",
-            "12h",
-            "18h",
-            "24h"
+            getString(R.string.delay_20min),
+            getString(R.string.delay_40min),
+            getString(R.string.delay_1h),
+            getString(R.string.delay_1h30),
+            getString(R.string.delay_2h),
+            getString(R.string.delay_3h),
+            getString(R.string.delay_5h),
+            getString(R.string.delay_8h),
+            getString(R.string.delay_12h),
+            getString(R.string.delay_18h),
+            getString(R.string.delay_24h)
         )
 
         val levelCount = delays.size - 1

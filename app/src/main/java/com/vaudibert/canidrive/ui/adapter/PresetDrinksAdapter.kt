@@ -4,34 +4,36 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.BaseAdapter
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.RecyclerView
 import com.vaudibert.canidrive.R
 import com.vaudibert.canidrive.data.PresetDrinkEntity
 import com.vaudibert.canidrive.data.repository.DrinkRepository
-import java.text.DecimalFormat
+import java.text.NumberFormat
 
 class PresetDrinksAdapter(
     val context: Context,
     private val lifecycleOwner: LifecycleOwner,
     private val goToAddPreset: () -> Unit,
     private val drinkRepository: DrinkRepository
-) : BaseAdapter() {
-
-    private val inflater: LayoutInflater =
-        context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private val presetService = drinkRepository.presetService
-
-    private val doubleFormat : DecimalFormat = DecimalFormat("0.#")
+    private val doubleFormat = java.text.NumberFormat.getInstance().apply {
+        maximumFractionDigits = 1
+    }
 
     private var presetDrinks: List<PresetDrinkEntity> = emptyList()
-
     private var selectedPreset: PresetDrinkEntity? = null
+
+    companion object {
+        const val TYPE_ADD_PRESET = 0
+        const val TYPE_PRESET_ITEM = 1
+    }
 
     init {
         drinkRepository.livePresetDrinks.observe(lifecycleOwner, Observer {
@@ -44,82 +46,74 @@ class PresetDrinksAdapter(
         })
     }
 
+    override fun getItemViewType(position: Int): Int {
+        return if (position == 0) TYPE_ADD_PRESET else TYPE_PRESET_ITEM
+    }
 
-    override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
-        return if (position == 0) {
-            getAddPresetView(parent)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+        val inflater = LayoutInflater.from(context)
+        if (viewType == TYPE_ADD_PRESET) {
+            val view = inflater.inflate(R.layout.item_add_preset, parent, false)
+            return AddPresetViewHolder(view)
         } else {
-            getPresetView(parent, position)
+            val view = inflater.inflate(R.layout.item_preset_drink, parent, false)
+            return PresetViewHolder(view)
         }
     }
 
-    private fun getPresetView(parent: ViewGroup?, position: Int): View {
-        val drinkView = inflater.inflate(R.layout.item_preset_drink, parent, false)
-        val presetDrink = getItem(position)
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+        if (holder is AddPresetViewHolder) {
+            holder.addDescriptionText.text = context.getString(R.string.add_preset_description)
+            holder.itemView.setOnClickListener {
+                presetService.selectedPreset = null
+                goToAddPreset()
+            }
+        } else if (holder is PresetViewHolder) {
+            val presetDrink = presetDrinks[position - 1]
 
-        val propertiesText = drinkView.findViewById(R.id.textViewPresetDrinkProperties) as TextView
-        val descriptionText =
-            drinkView.findViewById(R.id.textViewPresetDrinkDescription) as TextView
-        val glassImage = drinkView.findViewById(R.id.imageViewPresetDrinkIcon) as ImageView
-        val deleteButton = drinkView.findViewById(R.id.buttonRemovePresetDrink) as ImageButton
+            holder.propertiesText.text = "${doubleFormat.format(presetDrink.volume)} ml - ${presetDrink.degree} %"
+            holder.descriptionText.text = presetDrink.name
+            holder.glassImage.setImageResource(R.drawable.wine_glass)
 
-        propertiesText.text = "${doubleFormat.format(presetDrink.volume)} ml - ${presetDrink.degree} %"
-        descriptionText.text = presetDrink.name
-        glassImage.setImageResource(R.drawable.wine_glass)
+            updatePresetColor(presetDrink, holder.itemView, holder.deleteButton, selectedPreset)
 
-        updatePresetColor(presetDrink, drinkView, deleteButton, selectedPreset)
+            val clickListener = { _: View ->
+                presetService.selectedPreset =
+                    if (presetDrink == drinkRepository.liveSelectedPreset.value)
+                        null
+                    else
+                        presetDrink
+            }
+            val longClickListener = View.OnLongClickListener {
+                presetService.selectedPreset = presetDrink
+                goToAddPreset()
+                true
+            }
 
-        val clickListener = { _: View ->
-            presetService.selectedPreset =
-                if (presetDrink == drinkRepository.liveSelectedPreset.value)
-                    null
-                else
-                    presetDrink
+            holder.propertiesText.setOnClickListener(clickListener)
+            holder.propertiesText.setOnLongClickListener(longClickListener)
+
+            holder.descriptionText.setOnClickListener(clickListener)
+            holder.descriptionText.setOnLongClickListener(longClickListener)
+
+            holder.glassImage.setOnClickListener(clickListener)
+            holder.glassImage.setOnLongClickListener(longClickListener)
+
+            holder.deleteButton.setOnClickListener {
+                if (presetDrink != drinkRepository.liveSelectedPreset.value) return@setOnClickListener
+                presetService.removePreset(presetDrink)
+                com.google.android.material.snackbar.Snackbar.make(
+                    holder.itemView,
+                    R.string.snackbar_drink_deleted,
+                    com.google.android.material.snackbar.Snackbar.LENGTH_LONG
+                ).setAction(R.string.snackbar_undo) {
+                    presetService.addPreset(presetDrink)
+                }.show()
+            }
         }
-        val longClickListener = View.OnLongClickListener {
-            presetService.selectedPreset = presetDrink
-            goToAddPreset()
-            true
-        }
-        propertiesText.setOnClickListener(clickListener)
-        propertiesText.setOnLongClickListener(longClickListener)
-
-        descriptionText.setOnClickListener(clickListener)
-        descriptionText.setOnLongClickListener(longClickListener)
-
-        glassImage.setOnClickListener(clickListener)
-        glassImage.setOnLongClickListener(longClickListener)
-
-        deleteButton.setOnClickListener {
-            if (presetDrink != drinkRepository.liveSelectedPreset.value) return@setOnClickListener
-
-            presetService.removePreset(presetDrink)
-        }
-
-        return drinkView
     }
 
-    private fun getAddPresetView(parent: ViewGroup?): View {
-        val addPresetView = inflater.inflate(
-            R.layout.item_add_preset,
-            parent,
-            false
-        )
-
-        val addDescriptionText = addPresetView.findViewById(
-            R.id.textViewAddPresetDescription
-        ) as TextView
-
-        addDescriptionText.text = context.getString(R.string.add_preset_description)
-
-        addPresetView.setOnClickListener {
-            //selectedPreset.postValue(null)
-            presetService.selectedPreset = null
-            goToAddPreset()
-        }
-
-        return addPresetView
-    }
+    override fun getItemCount(): Int = presetDrinks.size + 1
 
     private fun updatePresetColor(
         drink: PresetDrinkEntity,
@@ -136,10 +130,14 @@ class PresetDrinksAdapter(
         }
     }
 
-    override fun getItem(position: Int): PresetDrinkEntity = presetDrinks[position-1]
+    inner class AddPresetViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+        val addDescriptionText: TextView = view.findViewById(R.id.textViewAddPresetDescription)
+    }
 
-    override fun getItemId(position: Int): Long = position.toLong()
-
-    override fun getCount(): Int = presetDrinks.size + 1
-
+    inner class PresetViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+        val propertiesText: TextView = view.findViewById(R.id.textViewPresetDrinkProperties)
+        val descriptionText: TextView = view.findViewById(R.id.textViewPresetDrinkDescription)
+        val glassImage: ImageView = view.findViewById(R.id.imageViewPresetDrinkIcon)
+        val deleteButton: ImageButton = view.findViewById(R.id.buttonRemovePresetDrink)
+    }
 }

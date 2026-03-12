@@ -16,18 +16,18 @@ Items marked ~~like this~~ were fixed in the initial implementation pass.
 ## HIGH – Data Integrity
 
 - [x] ~~**Fix destructive database migration**~~ – `MainRepository.kt`: migration `1→2` fixed and re-enabled. Added `NOT NULL DEFAULT ''` on `name` column, preserved the table rename, and added the missing `PresetDrinkEntity` table creation. `fallbackToDestructiveMigration()` removed.
-- [ ] **Fix unit inconsistency for US drive laws** – `DriveLaws.kt`: USA is `0.8` while Canada is `0.08`. Verify all ~60 country entries against official sources and standardize to g/L.
-- [ ] **Validate all country BAC limits** – Add a unit test that asserts expected BAC limit per country against a reference table to prevent accidental data corruption.
+- [x] ~~**Fix unit inconsistency for US drive laws**~~ – `DriveLaws.kt`: USA is `0.8` while Canada is `0.08`. Verify all ~60 country entries against official sources and standardize to g/L.
+- [x] ~~**Validate all country BAC limits**~~ – Add a unit test that asserts expected BAC limit per country against a reference table to prevent accidental data corruption.
 
 ---
 
 ## HIGH – Architecture
 
-- [ ] **Introduce ViewModels** – No `ViewModel` is used anywhere. Fragments access `CanIDrive.instance.mainRepository` directly. Create `DriveViewModel`, `DrinkerViewModel`, `AddDrinkViewModel` with `viewModelScope`-bound coroutines.
-- [ ] **Introduce Dependency Injection (Hilt or Koin)** – Replace the global `CanIDrive` Application singleton with a proper DI framework. Improves testability and reduces coupling.
-- [ ] **Move repositories out of `ui` package** – `MainRepository`, `DrinkRepository`, `DigestionRepository`, `DriveLawRepository` are in `ui.repository`. Move to `data.repository` (persistence) and `domain.repository` (interfaces).
-- [ ] **Remove Android resource dependencies from domain layer** – `DriveLaw.kt` holds `explanationId: Int` (an `R.string` reference). The domain should be pure Kotlin; resolve resource IDs in the UI layer only.
-- [ ] **Fix Law of Demeter violations** – `IngestedDrinksAdapter.kt`: `CanIDrive.instance.mainRepository.drinkRepository.ingestionService` is 4 levels deep. Expose needed services directly via constructor injection.
+- [x] ~~**Introduce ViewModels**~~ – No `ViewModel` is used anywhere. Fragments access `CanIDrive.instance.mainRepository` directly. Create `DriveViewModel`, `DrinkerViewModel`, `AddDrinkViewModel` with `viewModelScope`-bound coroutines.
+- [x] ~~**Introduce Dependency Injection (Hilt or Koin)**~~ – Replace the global `CanIDrive` Application singleton with a proper DI framework. Improves testability and reduces coupling.
+- [x] ~~**Move repositories out of `ui` package**~~ – `MainRepository`, `DrinkRepository`, `DigestionRepository`, `DriveLawRepository` are in `ui.repository`. Moved to `data.repository`.
+- [x] ~~**Remove Android resource dependencies from domain layer**~~ – `DriveLaw.kt` holds `explanationId: Int` (an `R.string` reference). The domain should be pure Kotlin; resolve resource IDs in the UI layer only.
+- [x] ~~**Fix Law of Demeter violations**~~ – `IngestedDrinksAdapter.kt`: `CanIDrive.instance.mainRepository.drinkRepository.ingestionService` is 4 levels deep. Expose needed services directly via constructor injection.
 
 ---
 
@@ -47,10 +47,10 @@ Items marked ~~like this~~ were fixed in the initial implementation pass.
 
 ## MEDIUM – Performance
 
-- [ ] **Replace `ListView` with `RecyclerView`** – `constraint_content_drive_history.xml` and `constraint_content_add_drink_presets.xml`: migrate to `RecyclerView` + `ListAdapter` + `DiffUtil` for better scroll performance.
-- [ ] **Implement ViewHolder pattern in adapters** – `PresetDrinksAdapter.kt` and `IngestedDrinksAdapter.kt` extend `BaseAdapter` and inflate a new view on every `getView()` call, ignoring `convertView`. This causes excessive GC. Migrate to `RecyclerView.Adapter`.
+- [x] **Replace `ListView` with `RecyclerView`** – `constraint_content_drive_history.xml` and `constraint_content_add_drink_presets.xml`: migrate to `RecyclerView` + `ListAdapter` + `DiffUtil` for better scroll performance.
+- [x] **Implement ViewHolder pattern in adapters** – `PresetDrinksAdapter.kt` and `IngestedDrinksAdapter.kt` extend `BaseAdapter` and inflate a new view on every `getView()` call, ignoring `convertView`. This causes excessive GC. Migrate to `RecyclerView.Adapter`.
 - [x] ~~**Fix LiveData observer leak in `PresetDrinksAdapter`**~~ – Moved `liveSelectedPreset` observation from `getView()` into `init` block. State cached in a field.
-- [ ] **Cancel coroutines properly** – `DrinkRepository.kt`: `Job()` and manual `CoroutineScope` are never cancelled → memory/coroutine leaks. Use `viewModelScope` after ViewModel introduction, or implement `Closeable`.
+- [x] **Cancel coroutines properly** – `DrinkRepository.kt`: `Job()` and manual `CoroutineScope` are never cancelled → memory/coroutine leaks. Use `viewModelScope` after ViewModel introduction, or implement `Closeable`.
 
 ---
 
@@ -58,8 +58,8 @@ Items marked ~~like this~~ were fixed in the initial implementation pass.
 
 - [x] ~~**Replace deprecated `Date.month` / `Date.day`**~~ – `TimeServiceAndroid.kt`: migrated to `Calendar`.
 - [x] ~~**Replace `String.toUpperCase()` without Locale**~~ – `DriveLawService.kt`: replaced with `uppercase(Locale.ROOT)`.
-- [ ] **Replace `toggleSoftInput(SHOW_FORCED, 0)`** – `KeyboardUtils.kt`: deprecated since API 31. Use `WindowInsetsController.show(WindowInsetsCompat.Type.ime())` instead.
-- [ ] **Replace `android:tint` with `app:tint`** in relevant `ImageView` XML attributes for backward compat with `AppCompatImageView` (affects `fragment_drive_status.xml` and `constraint_content_drinker_country.xml`).
+- [x] **Replace `toggleSoftInput(SHOW_FORCED, 0)`** – `KeyboardUtils.kt`: deprecated since API 31. Use `WindowInsetsController.show(WindowInsetsCompat.Type.ime())` instead.
+- [x] **Replace `android:tint` with `app:tint`** in relevant `ImageView` XML attributes for backward compat with `AppCompatImageView` (affects `fragment_drive_status.xml` and `constraint_content_drinker_country.xml`).
 
 ---
 
@@ -68,7 +68,7 @@ Items marked ~~like this~~ were fixed in the initial implementation pass.
 - [x] ~~**Replace magic strings for sex with `Sex` enum**~~ – Created `Sex.kt` enum in `domain.digestion`. Updated `PhysicalBody`, `DigestionRepository`, `DrinkerFragment`, all test files.
 - [x] ~~**Move `KeyboardUtils` to `ui.util` package**~~ – Moved to `ui/util/KeyboardUtils.kt`, updated all 3 import sites.
 - [x] ~~**Remove unused `volume` and `degree` variables**~~ – `AddDrinkFragment.kt`.
-- [ ] **Replace mutable lambda callbacks with `Flow`/`LiveData`** – `PhysicalBody.onUpdate`, `DriveLawService.onCustomLimitCallback`, `PresetDrinkService.onPresetsChanged`: fragile `var` lambdas. Replace with `StateFlow` or `LiveData`.
+- [x] **Replace mutable lambda callbacks with `Flow`/`LiveData`** – `PhysicalBody.onUpdate`, `DriveLawService.onCustomLimitCallback`, `PresetDrinkService.onPresetsChanged`: fragile `var` lambdas. Replace with `StateFlow` or `LiveData`.
 - [ ] **Separate `DriveLaws.kt` data from Android resources** – 361-line file mixes raw BAC data with `R.string.*` references. Consider loading from a bundled JSON asset file and resolving string IDs in a mapper class.
 
 ---
@@ -83,7 +83,7 @@ Items marked ~~like this~~ were fixed in the initial implementation pass.
 - [ ] **Add tests for `TimeServiceAndroid`** – A test would have caught the original Saint Patrick's Day bug.
 - [ ] **Add repository tests** – No repository layer has any tests.
 - [ ] **Add UI / integration tests (Espresso)** – Zero UI tests exist. At minimum, test the happy path: set profile → add drink → verify status changes.
-- [ ] **Validate `DriveLaws` data in tests** – Assert expected BAC limits for a subset of countries as a regression guard.
+- [x] ~~**Validate `DriveLaws` data in tests**~~ – Assert expected BAC limits for a subset of countries as a regression guard.
 
 ---
 
@@ -111,7 +111,7 @@ Items marked ~~like this~~ were fixed in the initial implementation pass.
 - [ ] **Replace custom splash with Android 12+ SplashScreen API** – `SplashFragment.kt`: artificial 1-second `postDelayed`. Use the `androidx.core:core-splashscreen` library for the system splash.
 - [ ] **Add deletion confirmation dialogs** – Drink delete buttons (presets and history) have no confirmation. Accidental taps permanently delete data. Show an `AlertDialog` before deletion.
 - [ ] **Extend weight picker range** – `DrinkerFragment.kt`: weight limited to `[30..150]` kg in 5 kg steps. Add free-form `EditText` input or extend range to 250 kg.
-- [ ] **Implement Settings screen** – `menu_main.xml` has a Settings item but `MainActivity.kt` returns `true` without navigating. Wire up a `PreferenceFragment` or custom settings screen.
+- [x] ~~**Implement Settings screen**~~ – `menu_main.xml` has a Settings item but `MainActivity.kt` returns `true` without navigating. Wire up a `PreferenceFragment` or custom settings screen. Implementation added with `SettingsFragment.kt` and `nav_graph.xml` integration.
 - [ ] **Add Up/Back button in Toolbar** – Navigation relies on FABs; Toolbar has no back/up button. Non-standard Android UX pattern.
 - [ ] **Support dark mode** – No `values-night/` resources exist. Implement Material Design dark theme.
 

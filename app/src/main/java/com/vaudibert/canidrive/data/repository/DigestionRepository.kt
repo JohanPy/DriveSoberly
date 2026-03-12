@@ -10,6 +10,9 @@ import com.vaudibert.canidrive.domain.digestion.DigestionService
 import com.vaudibert.canidrive.domain.digestion.PhysicalBody
 import com.vaudibert.canidrive.domain.digestion.Sex
 import com.vaudibert.canidrive.domain.drink.IIngestedDrinkProvider
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 /**
  * Repository holding the drinker and driveLaw instances.
@@ -64,15 +67,17 @@ class DigestionRepository(context: Context, drinkProvider: IIngestedDrinkProvide
         body.weight = weight
         body.alcoholTolerance = tolerance
 
-        body.onUpdate = { updatedSex: Sex, updatedWeight: Double, updatedTolerance:Double -> run {
-            sharedPref
-                .edit()
-                .putString(context.getString(R.string.user_sex), updatedSex.name)
-                .putFloat(context.getString(R.string.user_weight), updatedWeight.toFloat())
-                .putFloat("USER_TOLERANCE", updatedTolerance.toFloat())
-                .apply()
-            _liveDrinker.value = body
-        } }
+        CoroutineScope(Dispatchers.IO).launch {
+            body.bodyState.collect { state ->
+                sharedPref
+                    .edit()
+                    .putString(context.getString(R.string.user_sex), state.sex.name)
+                    .putFloat(context.getString(R.string.user_weight), state.weight.toFloat())
+                    .putFloat("USER_TOLERANCE", state.alcoholTolerance.toFloat())
+                    .apply()
+                _liveDrinker.postValue(body)
+            }
+        }
 
         _liveDrinker.value = body
     }

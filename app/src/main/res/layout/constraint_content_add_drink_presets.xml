@@ -14,13 +14,12 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ListView
+    <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/listViewPresetDrinks"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginStart="5dp"
-        android:orientation="vertical"
-        android:divider="@color/WHITE"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintTop_toBottomOf="@id/textViewPresetDrinks"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

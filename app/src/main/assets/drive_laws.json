@@ -1,0 +1,14 @@
+[
+  {
+    "countryCode": "AL",
+    "limit": 0.1,
+    "youngLimit": null,
+    "professionalLimit": null
+  },
+  {
+    "countryCode": "AT",
+    "limit": 0.5,
+    "youngLimit": null,
+    "professionalLimit": null
+  }
+]

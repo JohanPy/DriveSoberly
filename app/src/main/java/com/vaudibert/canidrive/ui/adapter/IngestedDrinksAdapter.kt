@@ -4,81 +4,80 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.BaseAdapter
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.recyclerview.widget.RecyclerView
 import com.vaudibert.canidrive.R
 import com.vaudibert.canidrive.data.IngestedDrinkEntity
-import com.vaudibert.canidrive.ui.CanIDrive
 import java.text.DateFormat
-import java.text.DecimalFormat
+import java.text.NumberFormat
 import java.util.*
 
 import com.vaudibert.canidrive.domain.drink.IngestionService
 
 class IngestedDrinksAdapter(
     val context: Context,
-    private val ingestionService: IngestionService
-    ) : BaseAdapter() {
+    private val ingestionService: IngestionService<com.vaudibert.canidrive.data.PresetDrinkEntity, IngestedDrinkEntity>
+) : RecyclerView.Adapter<IngestedDrinksAdapter.DrinkViewHolder>() {
 
-    private var ingestedDrinkList : List<IngestedDrinkEntity> = emptyList()
+    private var ingestedDrinkList: List<IngestedDrinkEntity> = emptyList()
 
     private val DAY_IN_MILLIS = 3600L * 1000 * 24
-
     private val dateFormat = DateFormat.getTimeInstance(DateFormat.SHORT)
+    private val doubleFormat = java.text.NumberFormat.getInstance().apply {
+        maximumFractionDigits = 1
+    }
 
-    private val doubleFormat : DecimalFormat = DecimalFormat("0.#")
+    inner class DrinkViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+        val propertiesText: TextView = view.findViewById(R.id.textViewPresetDrinkProperties)
+        val descriptionText: TextView = view.findViewById(R.id.textViewPresetDrinkDescription)
+        val glassImage: ImageView = view.findViewById(R.id.imageViewPresetDrinkIcon)
+        val deleteButton: ImageButton = view.findViewById(R.id.buttonRemovePastDrink)
+        val timeText: TextView = view.findViewById(R.id.textViewPastDrinkTime)
+        val daysText: TextView = view.findViewById(R.id.textViewPastDays)
+    }
 
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DrinkViewHolder {
+        val inflater = LayoutInflater.from(context)
+        val view = inflater.inflate(R.layout.item_past_drink, parent, false)
+        return DrinkViewHolder(view)
+    }
 
-    private val inflater: LayoutInflater =
-        context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+    override fun onBindViewHolder(holder: DrinkViewHolder, position: Int) {
+        val drink = ingestedDrinkList[position]
 
-    override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
+        holder.propertiesText.text = "${doubleFormat.format(drink.volume)} ml - ${drink.degree} %"
+        holder.descriptionText.text = drink.name
+        holder.glassImage.setImageResource(R.drawable.wine_glass)
 
-        val drinkView = inflater.inflate(R.layout.item_past_drink, parent, false)
-        val drink = getItem(position)
-
-        val propertiesText = drinkView.findViewById(R.id.textViewPresetDrinkProperties) as TextView
-        val descriptionText = drinkView.findViewById(R.id.textViewPresetDrinkDescription) as TextView
-        val glassImage = drinkView.findViewById(R.id.imageViewPresetDrinkIcon) as ImageView
-        val deleteButton = drinkView.findViewById(R.id.buttonRemovePastDrink) as ImageButton
-        val timeText = drinkView.findViewById(R.id.textViewPastDrinkTime) as TextView
-        val daysText = drinkView.findViewById(R.id.textViewPastDays) as TextView
-
-        propertiesText.text = "${doubleFormat.format(drink.volume)} ml - ${drink.degree} %"
-        descriptionText.text = drink.name
-        glassImage.setImageResource(R.drawable.wine_glass)
         val days: Long = (drink.ingestionTime.time / DAY_IN_MILLIS) - (Date().time / DAY_IN_MILLIS)
         if (days == 0L)
-            daysText.visibility = TextView.GONE
+            holder.daysText.visibility = View.GONE
         else {
-            daysText.visibility = TextView.VISIBLE
-            daysText.text = "$days${context.getString(R.string.day_unit)} "
+            holder.daysText.visibility = View.VISIBLE
+            holder.daysText.text = "$days${context.getString(R.string.day_unit)} "
         }
 
-        timeText.text = dateFormat.format(drink.ingestionTime)
+        holder.timeText.text = dateFormat.format(drink.ingestionTime)
 
-        deleteButton.setOnClickListener {
+        holder.deleteButton.setOnClickListener {
             ingestionService.remove(drink)
+            com.google.android.material.snackbar.Snackbar.make(
+                holder.itemView,
+                R.string.snackbar_drink_deleted,
+                com.google.android.material.snackbar.Snackbar.LENGTH_LONG
+            ).setAction(R.string.snackbar_undo) {
+                ingestionService.add(drink)
+            }.show()
         }
-
-        return drinkView
     }
 
-    override fun getItem(position: Int): IngestedDrinkEntity {
-        return ingestedDrinkList[position]
-    }
-
-    override fun getItemId(position: Int): Long {
-        return position.toLong()
-    }
-
-    override fun getCount(): Int {
+    override fun getItemCount(): Int {
         return ingestedDrinkList.size
     }
 
-    fun setDrinkList(ingestedDrinks : List<IngestedDrinkEntity>) {
+    fun setDrinkList(ingestedDrinks: List<IngestedDrinkEntity>) {
         ingestedDrinkList = ingestedDrinks
         notifyDataSetChanged()
     }

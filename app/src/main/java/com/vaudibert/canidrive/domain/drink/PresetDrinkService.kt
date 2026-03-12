@@ -1,22 +1,37 @@
 package com.vaudibert.canidrive.domain.drink
 
+import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharedFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asSharedFlow
+import kotlinx.coroutines.flow.asStateFlow
 import java.util.*
 
 class PresetDrinkService<Preset : IPresetDrink>(
     private val presetMaker : (name: String, volume:Double, degree: Double) -> Preset
 ) {
-    var onPresetRemoved = { _:Preset -> }
-    var onPresetsChanged = { _: List<Preset> -> }
-    var onPresetUpdated = { _:Preset -> }
+    private val _presetRemovedFlow = MutableSharedFlow<Preset>(extraBufferCapacity = 10)
+    val presetRemovedFlow: SharedFlow<Preset> = _presetRemovedFlow.asSharedFlow()
 
-    var onSelectUpdated = { _:Preset? -> }
+    private val _presetAddedFlow = MutableSharedFlow<Preset>(extraBufferCapacity = 10)
+    val presetAddedFlow: SharedFlow<Preset> = _presetAddedFlow.asSharedFlow()
+
+    private val _presetUpdatedFlow = MutableSharedFlow<Preset>(extraBufferCapacity = 10)
+    val presetUpdatedFlow: SharedFlow<Preset> = _presetUpdatedFlow.asSharedFlow()
+
+    private val _presetsFlow = MutableStateFlow<List<Preset>>(emptyList())
+    val presetsFlow: StateFlow<List<Preset>> = _presetsFlow.asStateFlow()
+
+    private val _selectedPresetFlow = MutableStateFlow<Preset?>(null)
+    val selectedPresetFlow: StateFlow<Preset?> = _selectedPresetFlow.asStateFlow()
 
     var ingestionService : IIngestCapable<Preset>? = null
 
-    var selectedPreset : Preset? = null
+    var selectedPreset : Preset?
+        get() = _selectedPresetFlow.value
         set(value) {
-            field = value
-            onSelectUpdated(field)
+            _selectedPresetFlow.value = value
         }
 
     private var presetDrinks : MutableList<Preset> = mutableListOf()
@@ -35,13 +50,19 @@ class PresetDrinkService<Preset : IPresetDrink>(
 
     private fun sortAndCallbackPresets() {
         presetDrinks.sortByDescending { it.count }
-        onPresetsChanged(presetDrinks)
+        _presetsFlow.value = presetDrinks.toList()
     }
 
     fun removePreset(presetDrink: Preset) {
         presetDrinks.remove(presetDrink)
         if (selectedPreset == presetDrink) selectedPreset = null
-        onPresetRemoved(presetDrink)
+        _presetRemovedFlow.tryEmit(presetDrink)
+        sortAndCallbackPresets()
+    }
+
+    fun addPreset(presetDrink: Preset) {
+        presetDrinks.add(presetDrink)
+        _presetAddedFlow.tryEmit(presetDrink)
         sortAndCallbackPresets()
     }
 
@@ -54,7 +75,7 @@ class PresetDrinkService<Preset : IPresetDrink>(
             currentSelected.volume = volume
             currentSelected.degree = degree
             selectedPreset = currentSelected
-            onPresetUpdated(currentSelected)
+            _presetUpdatedFlow.tryEmit(currentSelected)
             sortAndCallbackPresets()
         }
     }
@@ -64,7 +85,7 @@ class PresetDrinkService<Preset : IPresetDrink>(
         val preset = selectedPreset
         if (ingester != null && preset != null) {
             preset.count++
-            onPresetUpdated(preset)
+            _presetUpdatedFlow.tryEmit(preset)
             sortAndCallbackPresets()
             ingester.ingest(preset, ingestionTime)
         }

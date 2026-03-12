@@ -8,7 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
-import android.widget.ListView
+import androidx.recyclerview.widget.RecyclerView
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
@@ -47,7 +47,7 @@ class DriveFragment : Fragment() {
 
     // Views from included layout (constraint_content_drive_history.xml)
     private lateinit var textViewPastDrinks: TextView
-    private lateinit var listViewPastDrinks: ListView
+    private lateinit var listViewPastDrinks: RecyclerView
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -109,8 +109,11 @@ class DriveFragment : Fragment() {
         } else {
             binding.linearAlcoholRate.visibility = LinearLayout.VISIBLE
             binding.linearWaitToSober.visibility = LinearLayout.VISIBLE
-            binding.textViewAlcoholRate.text =
-                String.format("%.2f g/L", drinkerStatus.alcoholRate)
+            
+            val numberFormat = java.text.NumberFormat.getInstance()
+            numberFormat.maximumFractionDigits = 2
+            numberFormat.minimumFractionDigits = 2
+            binding.textViewAlcoholRate.text = "${numberFormat.format(drinkerStatus.alcoholRate)} ${getString(R.string.bac_unit_gl)}"
 
             binding.textViewTimeToSober.text = DateFormat
                 .getTimeInstance(DateFormat.SHORT)

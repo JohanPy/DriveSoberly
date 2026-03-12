@@ -1,5 +1,9 @@
 package com.vaudibert.canidrive.domain.digestion
 
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
+
 /**
  * Represents the person drinking.
  * The parameters such as weight and sex may change as the user adjusts the inputs.
@@ -16,19 +20,24 @@ class PhysicalBody {
         private const val FEMALE_MAX_DECREASE = 0.1
     }
 
+    data class BodyState(val sex: Sex, val weight: Double, val alcoholTolerance: Double)
+
+    private val _bodyState = MutableStateFlow(BodyState(Sex.OTHER, 80.0, 0.0))
+    val bodyState: StateFlow<BodyState> = _bodyState.asStateFlow()
+
     var sex: Sex = Sex.OTHER
         set(value) {
             field = value
             effectiveWeight = weight * (if (sex == Sex.MALE) MALE_SEX_FACTOR else FEMALE_SEX_FACTOR)
             decreaseFactor = decreaseFactorWith(value, alcoholTolerance)
-            onUpdate(sex, weight, alcoholTolerance)
+            _bodyState.value = BodyState(sex, weight, alcoholTolerance)
         }
 
     var weight = 80.0
         set(value) {
             field = value
             effectiveWeight = weight * (if (sex == Sex.MALE) MALE_SEX_FACTOR else FEMALE_SEX_FACTOR)
-            onUpdate(sex, weight, alcoholTolerance)
+            _bodyState.value = BodyState(sex, weight, alcoholTolerance)
         }
 
     var alcoholTolerance = 0.0
@@ -36,7 +45,7 @@ class PhysicalBody {
             if (value in 0.0..1.0) {
                 field = value
                 decreaseFactor = decreaseFactorWith(sex, value)
-                onUpdate(sex, weight, alcoholTolerance)
+                _bodyState.value = BodyState(sex, weight, alcoholTolerance)
             }
         }
 
@@ -46,8 +55,6 @@ class PhysicalBody {
         else
             tolerance * FEMALE_MAX_DECREASE + (1-tolerance) * FEMALE_MIN_DECREASE
     }
-
-    var onUpdate = { _ : Sex, _ : Double, _ : Double -> }
 
     var decreaseFactor: Double = FEMALE_MIN_DECREASE
 

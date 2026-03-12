@@ -17,8 +17,9 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import java.util.*
+import java.io.Closeable
 
-class DrinkRepository(context: Context, drinkDatabase: DrinkDatabase) {
+class DrinkRepository(context: Context, drinkDatabase: DrinkDatabase) : Closeable {
 
     private val _livePastDrinks = MutableLiveData<List<IngestedDrinkEntity>>()
     val livePastDrinks: LiveData<List<IngestedDrinkEntity>>
@@ -118,12 +119,10 @@ class DrinkRepository(context: Context, drinkDatabase: DrinkDatabase) {
             }
         }
 
-        presetService.onPresetsChanged = {
-            _livePresetDrinks.postValue(it)
-        }
-
-        presetService.onSelectUpdated = {
-            _liveSelectedPreset.postValue(it)
+        ingestionService.onAdded = {
+            uiScope.launch {
+                ingestedDrinkDao.insert(it)
+            }
         }
 
         // Get all preset drinks
@@ -134,15 +133,33 @@ class DrinkRepository(context: Context, drinkDatabase: DrinkDatabase) {
             }
             presetService.populate(presetDrinkDao.getAll())
         }
+        
+        uiScope.launch {
+            presetService.presetsFlow.collect {
+                _livePresetDrinks.postValue(it)
+            }
+        }
 
-        presetService.onPresetRemoved = {
-            uiScope.launch {
+        uiScope.launch {
+            presetService.selectedPresetFlow.collect {
+                _liveSelectedPreset.postValue(it)
+            }
+        }
+
+        uiScope.launch {
+            presetService.presetRemovedFlow.collect {
                 presetDrinkDao.remove(it)
             }
         }
 
-        presetService.onPresetUpdated = {
-            uiScope.launch {
+        uiScope.launch {
+            presetService.presetAddedFlow.collect {
+                presetDrinkDao.insert(it)
+            }
+        }
+
+        uiScope.launch {
+            presetService.presetUpdatedFlow.collect {
                 presetDrinkDao.update(it)
             }
         }
@@ -151,4 +168,7 @@ class DrinkRepository(context: Context, drinkDatabase: DrinkDatabase) {
         presetService.ingestionService = ingestionService
     }
 
+    override fun close() {
+        daoJob.cancel()
+    }
 }

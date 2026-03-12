@@ -65,6 +65,7 @@ dependencies {
     // Kotlin needs for testing
     testImplementation(kotlin("reflect"))
     testImplementation(kotlin("test"))
+    testImplementation("org.mockito:mockito-core:5.11.0")
 
     // Navigation (Kotlin)
     val navigationVersion = "2.8.5"

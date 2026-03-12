@@ -8,6 +8,10 @@ import androidx.security.crypto.MasterKey
 import com.vaudibert.canidrive.R
 import com.vaudibert.canidrive.domain.drivelaw.DriveLaw
 import com.vaudibert.canidrive.domain.drivelaw.DriveLawService
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.drop
+import kotlinx.coroutines.launch
 import java.util.*
 
 class DriveLawRepository(private val context: Context) {
@@ -16,7 +20,7 @@ class DriveLawRepository(private val context: Context) {
         DriveLawService(
             { code: String -> Locale("", code).displayCountry },
             context.getString(R.string.other),
-            DriveLaws.list,
+            DriveLaws.loadLaws(context),
             DriveLaws.default
         )
 
@@ -56,42 +60,48 @@ class DriveLawRepository(private val context: Context) {
         )
         driveLawService.customCountryLimit= sharedPref.getFloat(context.getString(R.string.customCountryLimit), 0.0F).toDouble()
 
-        // Set callbacks once drive law service initialized
-        driveLawService.onSelectCallback = {
-                countryCode:String ->
-            sharedPref.edit()
-                .putString(context.getString(R.string.countryCode), countryCode)
-                .apply()
-            _liveDriveLaw.value = driveLawService.driveLaw
+        // Set collectors once drive law service initialized
+        CoroutineScope(Dispatchers.IO).launch {
+            launch {
+                driveLawService.driveLawFlow.drop(1).collect { law ->
+                    sharedPref.edit()
+                        .putString(context.getString(R.string.countryCode), law.countryCode)
+                        .apply()
+                    _liveDriveLaw.postValue(law)
+                }
+            }
+
+            launch {
+                driveLawService.isYoungFlow.drop(1).collect { isYoung ->
+                    sharedPref.edit()
+                        .putBoolean(context.getString(R.string.user_young_driver), isYoung)
+                        .apply()
+                    _liveIsYoung.postValue(isYoung)
+                    _liveDriveLaw.postValue(driveLawService.driveLaw)
+                }
+            }
+
+            launch {
+                driveLawService.isProfessionalFlow.drop(1).collect { isProfessional ->
+                    sharedPref.edit()
+                        .putBoolean(context.getString(R.string.user_professional_driver), isProfessional)
+                        .apply()
+                    _liveIsProfessional.postValue(isProfessional)
+                    _liveDriveLaw.postValue(driveLawService.driveLaw)
+                }
+            }
+
+            launch {
+                driveLawService.customCountryLimitFlow.drop(1).collect { newLimit ->
+                    sharedPref.edit()
+                        .putFloat(context.getString(R.string.customCountryLimit), newLimit.toFloat())
+                        .apply()
+                    _liveCustomCountryLimit.postValue(newLimit)
+                }
+            }
         }
 
-        driveLawService.onYoungCallback = {
-                isYoung: Boolean ->
-            sharedPref.edit()
-                .putBoolean(context.getString(R.string.user_young_driver), isYoung)
-                .apply()
-            _liveIsYoung.value = driveLawService.isYoung
-            _liveDriveLaw.value = driveLawService.driveLaw
-        }
-
-        driveLawService.onProfessionalCallback = {
-                isProfessional: Boolean ->
-            sharedPref.edit()
-                .putBoolean(context.getString(R.string.user_professional_driver), isProfessional)
-                .apply()
-            _liveIsProfessional.value = driveLawService.isProfessional
-            _liveDriveLaw.value = driveLawService.driveLaw
-        }
-
-        driveLawService.onCustomLimitCallback = {
-                newLimit:Double ->
-            sharedPref.edit()
-                .putFloat(context.getString(R.string.customCountryLimit), newLimit.toFloat())
-                .apply()
-            _liveCustomCountryLimit.value = driveLawService.customCountryLimit
-        }
-
-        // Initialize live datas
+        // Initialize live datas with initial state from flows
         _liveDriveLaw.value = driveLawService.driveLaw
         _liveIsYoung.value = driveLawService.isYoung
         _liveIsProfessional.value = driveLawService.isProfessional

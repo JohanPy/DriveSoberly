@@ -22,12 +22,12 @@ object KeyboardUtils {
     }
 
     fun showKeyboard(activity: Activity) {
-        val inputMethodManager =
-            activity.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-        inputMethodManager.toggleSoftInput(
-            InputMethodManager.SHOW_FORCED,
-            0
-        )
+        val view = activity.currentFocus ?: activity.findViewById<View>(android.R.id.content)
+        if (view != null) {
+            val windowInsetsController =
+                androidx.core.view.WindowCompat.getInsetsController(activity.window, view)
+            windowInsetsController.show(androidx.core.view.WindowInsetsCompat.Type.ime())
+        }
     }
 
     fun addKeyboardVisibilityListener(

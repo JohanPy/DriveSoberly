@@ -7,7 +7,7 @@ import java.util.*
 internal class PresetDrinkServiceTest {
 
     private lateinit var presetService: PresetDrinkService<PresetDrink>
-    private lateinit var exportPreset: List<PresetDrink>
+    private val exportPreset: List<PresetDrink> get() = presetService.presetsFlow.value
     private lateinit var testIIngestor: TestIIngestCapable
 
     private val presetA = PresetDrink("A", 10.0, 10.0, 1)
@@ -21,9 +21,7 @@ internal class PresetDrinkServiceTest {
                 name: String, volume: Double, degree: Double ->
             PresetDrink(name, volume, degree)
         }
-        presetService.onPresetsChanged = {
-            exportPreset = it
-        }
+
         testIIngestor = TestIIngestCapable()
         presetService.ingestionService = testIIngestor
     }

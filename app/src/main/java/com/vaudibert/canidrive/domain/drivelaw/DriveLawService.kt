@@ -1,5 +1,8 @@
 package com.vaudibert.canidrive.domain.drivelaw
 
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlin.math.min
 
 class DriveLawService(
@@ -10,34 +13,44 @@ class DriveLawService(
 ) {
     val defaultLimit = 0.0
 
-    var onCustomLimitCallback = { _:Double -> }
+    private val _customCountryLimitFlow = MutableStateFlow(0.0)
+    val customCountryLimitFlow: StateFlow<Double> = _customCountryLimitFlow.asStateFlow()
 
-    var customCountryLimit = 0.0
+    var customCountryLimit: Double
+        get() = _customCountryLimitFlow.value
         set(value) {
-            field = value
-            onCustomLimitCallback(value)
+            _customCountryLimitFlow.value = value
         }
 
-    var onYoungCallback = { _:Boolean -> }
+    private val _isYoungFlow = MutableStateFlow(false)
+    val isYoungFlow: StateFlow<Boolean> = _isYoungFlow.asStateFlow()
 
-    var isYoung: Boolean = false
+    var isYoung: Boolean
+        get() = _isYoungFlow.value
         set(value) {
-            field = value
-            onYoungCallback(value)
+            _isYoungFlow.value = value
         }
 
-    var onProfessionalCallback = { _:Boolean -> }
+    private val _isProfessionalFlow = MutableStateFlow(false)
+    val isProfessionalFlow: StateFlow<Boolean> = _isProfessionalFlow.asStateFlow()
 
-    var isProfessional: Boolean = false
+    var isProfessional: Boolean
+        get() = _isProfessionalFlow.value
         set(value) {
-            field = value
-            onProfessionalCallback(value)
+            _isProfessionalFlow.value = value
         }
 
     private val countryLaws = countryList
         .sortedBy { law -> countryNamer(law.countryCode) }
 
-    var driveLaw = defaultDriveLaw
+    private val _driveLawFlow = MutableStateFlow(defaultDriveLaw)
+    val driveLawFlow: StateFlow<DriveLaw> = _driveLawFlow.asStateFlow()
+
+    var driveLaw: DriveLaw
+        get() = _driveLawFlow.value
+        private set(value) {
+            _driveLawFlow.value = value
+        }
 
     fun getListOfCountriesWithFlags(): List<String> {
         return countryLaws.map { law ->
@@ -54,11 +67,8 @@ class DriveLawService(
                 law -> law.countryCode == driveLaw.countryCode
         }.coerceAtLeast(0)
 
-    var onSelectCallback = { _:String -> }
-
     fun select(countryCode: String) {
         driveLaw = countryLaws.find { law -> law.countryCode == countryCode } ?: defaultDriveLaw
-        onSelectCallback(countryCode)
     }
 
     fun select(position: Int) {
@@ -66,7 +76,6 @@ class DriveLawService(
             defaultDriveLaw
         else
             countryLaws[position]
-        onSelectCallback(driveLaw.countryCode)
     }
 
     fun driveLimit() : Double {

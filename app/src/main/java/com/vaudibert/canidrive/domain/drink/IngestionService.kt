@@ -9,6 +9,7 @@ class IngestionService<Preset : IPresetDrink, Ingested : IIngestedDrink>(
     private val ingestedDrinks : MutableList<Ingested> = mutableListOf()
 
     var onRemoved = { _ : Ingested -> }
+    var onAdded = { _ : Ingested -> }
     var onIngestedChanged = { _: List<Ingested> -> }
 
     override fun ingest(preset : Preset, ingestionTime : Date) {
@@ -22,6 +23,12 @@ class IngestionService<Preset : IPresetDrink, Ingested : IIngestedDrink>(
     fun remove(ingested : Ingested) {
         ingestedDrinks.remove(ingested)
         onRemoved(ingested)
+        sortAndListCallBack()
+    }
+
+    fun add(ingested: Ingested) {
+        ingestedDrinks.add(ingested)
+        onAdded(ingested)
         sortAndListCallBack()
     }
 

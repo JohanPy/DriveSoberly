@@ -9,8 +9,6 @@ class DriveViewModel(
     val digestionRepository = mainRepository.digestionRepository
     val drinkRepository = mainRepository.drinkRepository
     val driveLawRepository = mainRepository.driveLawRepository
-    
-    val timeLimitService = drinkRepository.timeLimitService
     val driveLawService = driveLawRepository.driveLawService
     val isInit = mainRepository.init
 }

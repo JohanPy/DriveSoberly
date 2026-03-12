@@ -62,4 +62,19 @@
     <string name="content_desc_add_drink">Ajouter une boisson</string>
     <string name="content_desc_profile">Paramètres du profil</string>
     <string name="content_desc_validate">Valider</string>
+    <string name="bac_unit_gl">g/L</string>
+    <string name="snackbar_drink_deleted">Boisson supprimée</string>
+    <string name="snackbar_undo">ANNULER</string>
+
+    <string name="delay_20min">20 min</string>
+    <string name="delay_40min">40 min</string>
+    <string name="delay_1h">1 h</string>
+    <string name="delay_1h30">1h30</string>
+    <string name="delay_2h">2 h</string>
+    <string name="delay_3h">3 h</string>
+    <string name="delay_5h">5 h</string>
+    <string name="delay_8h">8 h</string>
+    <string name="delay_12h">12 h</string>
+    <string name="delay_18h">18 h</string>
+    <string name="delay_24h">24 h</string>
 </resources>
