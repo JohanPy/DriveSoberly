@@ -1,4 +1,4 @@
-# CanIDrive
+# DriveSoberly
 Alcohol blood rate computer for driving
 
 > **Fork notice** — This project is a fork of [VincentAudibert/CanIDrive](https://github.com/VincentAudibert/CanIDrive), originally created by Vincent Audibert. The upstream project appears to be no longer maintained. This fork started by updating dependencies to resolve Android installation warnings, then evolved into a significant rewrite with new features, architecture improvements, and a more accurate BAC model. All original work is credited to Vincent Audibert under the original license.
@@ -13,9 +13,9 @@ Alcohol blood rate computer for driving
      height="80">](https://play.google.com/store/apps/details?id=com.vaudibert.canidrive)
 
 ## 👋 About
-CanIDrive is an Android app letting you evaluate whether you can drive or not.
+DriveSoberly is an Android app letting you evaluate whether you can drive or not.
 
-This fork is a personal project aimed at keeping the app functional on modern Android versions and improving its accuracy and usability.
+This project is a fork of [CanIDrive](https://github.com/VincentAudibert/CanIDrive), aimed at keeping the app functional on modern Android versions and improving its accuracy and usability.
 
 ## ✨ Features
 Can I Drive allows you to track your recent alcohol consumption, to assess if you can drive or not.
@@ -38,7 +38,7 @@ If the chosen country is not available, you can select OTHER to override the thr
 
 ## 🧮 How the BAC is calculated
 
-CanIDrive uses a **two-compartment pharmacokinetic model** to estimate Blood Alcohol Concentration (BAC) over time. This is more realistic than the classic Widmark formula, which assumes alcohol is absorbed instantly.
+DriveSoberly uses a **two-compartment pharmacokinetic model** to estimate Blood Alcohol Concentration (BAC) over time. This is more realistic than the classic Widmark formula, which assumes alcohol is absorbed instantly.
 
 ### Widmark body distribution
 
