@@ -7,6 +7,7 @@ import androidx.security.crypto.EncryptedSharedPreferences
 import androidx.security.crypto.MasterKey
 import com.vaudibert.canidrive.R
 import com.vaudibert.canidrive.domain.digestion.DigestionService
+import com.vaudibert.canidrive.domain.digestion.FoodState
 import com.vaudibert.canidrive.domain.digestion.PhysicalBody
 import com.vaudibert.canidrive.domain.digestion.Sex
 import com.vaudibert.canidrive.domain.drink.IIngestedDrinkProvider
@@ -65,10 +66,15 @@ class DigestionRepository(context: Context, drinkProvider: IIngestedDrinkProvide
                 sharedPref.getString(context.getString(R.string.user_sex), "OTHER") ?: "OTHER",
             )
         val tolerance = sharedPref.getFloat(context.getString(R.string.user_tolerance), 0.0F).toDouble()
+        val foodState =
+            FoodState.fromString(
+                sharedPref.getString("FOOD_STATE", "EMPTY") ?: "EMPTY",
+            )
 
         body.sex = sex
         body.weight = weight
         body.alcoholTolerance = tolerance
+        body.foodState = foodState
 
         CoroutineScope(Dispatchers.IO).launch {
             body.bodyState.collect { state ->
@@ -77,6 +83,7 @@ class DigestionRepository(context: Context, drinkProvider: IIngestedDrinkProvide
                     .putString(context.getString(R.string.user_sex), state.sex.name)
                     .putFloat(context.getString(R.string.user_weight), state.weight.toFloat())
                     .putFloat("USER_TOLERANCE", state.alcoholTolerance.toFloat())
+                    .putString("FOOD_STATE", state.foodState.name)
                     .apply()
                 _liveDrinker.postValue(body)
             }

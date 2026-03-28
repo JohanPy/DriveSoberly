@@ -76,13 +76,13 @@ Items marked ~~like this~~ were fixed in the initial implementation pass.
 ## MEDIUM – Testing
 
 - [x] ~~**Fix JUnit 4/5 mixing**~~ – `PresetDrinkServiceTest.kt`: replaced `org.junit.Test` with `org.junit.jupiter.api.Test`.
-- [x] **Add tests for `DrinkerStatusService`** – No tests for the status aggregation logic (sober / can drive / cannot drive).
-- [ ] **Add tests for `IngestionService`** – Only indirectly covered via `DigestionServiceTest`.
+- [x] **Add tests for `DrinkerStatusService`** – `DrinkerStatusServiceTest.kt` added.
+- [x] **Add tests for `IngestionService`** – `IngestionServiceTest.kt` added.
 - [x] **Add tests for `IngestedDrink.alcoholMass()`** – Critical BAC calculation has no direct unit test.
 - [x] **Add tests for Room `Converters`** – `Date` ↔ `Long` conversion is untested; a regression could silently corrupt all timestamps.
-- [ ] **Add tests for `TimeServiceAndroid`** – A test would have caught the original Saint Patrick's Day bug.
+- [x] **Add tests for `TimeServiceAndroid`** – `TimeServiceAndroidTest.kt` added.
 - [ ] **Add repository tests** – No repository layer has any tests.
-- [ ] **Add UI / integration tests (Espresso)** – Zero UI tests exist. At minimum, test the happy path: set profile → add drink → verify status changes.
+- [x] **Add UI / integration tests (Espresso)** – `HappyPathUITest.kt` added for the core user flow.
 - [x] ~~**Validate `DriveLaws` data in tests**~~ – Assert expected BAC limits for a subset of countries as a regression guard.
 
 ---
@@ -92,7 +92,7 @@ Items marked ~~like this~~ were fixed in the initial implementation pass.
 - [x] ~~**Move hardcoded `contentDescription` to string resources**~~ – `item_preset_drink.xml`, `item_past_drink.xml` now use `@string/content_desc_*`.
 - [x] ~~**Add `contentDescription` to all FloatingActionButtons**~~ – All FABs in `fragment_drive_status.xml`, `fragment_drinker.xml`, `fragment_add_preset.xml` now have descriptions.
 - [x] ~~**Fix splash screen text size unit**~~ – `fragment_splash.xml`: changed from `20pt` to `40sp`.
-- [ ] **Add explicit text labels for drive status** – `DriveFragment.kt`: status communicated only by color/icon. Add a visible text like "Safe to drive" / "Do NOT drive" for colorblind users and screen readers.
+- [x] **Add explicit text labels for drive status** – `DriveFragment.kt`: added "Safe to drive" / "DO NOT DRIVE" labels.
 - [x] **Fix suppressed `LabelFor` warning** – `constraint_content_drinker_country.xml`: `tools:ignore="LabelFor"` on the custom limit `EditText`. Add a proper `<TextView android:labelFor="@id/editTextCurrentLimit">`.
 
 ---
@@ -108,12 +108,12 @@ Items marked ~~like this~~ were fixed in the initial implementation pass.
 
 ## LOW – UI/UX Improvements
 
-- [ ] **Replace custom splash with Android 12+ SplashScreen API** – `SplashFragment.kt`: artificial 1-second `postDelayed`. Use the `androidx.core:core-splashscreen` library for the system splash.
+- [x] **Replace custom splash with Android 12+ SplashScreen API** – `MainActivity.kt`: migrated to `androidx.core:core-splashscreen`.
 - [x] **Add deletion confirmation dialogs** – Drink delete buttons (presets and history) have no confirmation. Accidental taps permanently delete data. Show an `AlertDialog` before deletion.
-- [ ] **Extend weight picker range** – `DrinkerFragment.kt`: weight limited to `[30..150]` kg in 5 kg steps. Add free-form `EditText` input or extend range to 250 kg.
+- [x] **Extend weight picker range** – `DrinkerFragment.kt`: replaced `NumberPicker` with flexible `EditText` input.
 - [x] ~~**Implement Settings screen**~~ – `menu_main.xml` has a Settings item but `MainActivity.kt` returns `true` without navigating. Wire up a `PreferenceFragment` or custom settings screen. Implementation added with `SettingsFragment.kt` and `nav_graph.xml` integration.
-- [ ] **Add Up/Back button in Toolbar** – Navigation relies on FABs; Toolbar has no back/up button. Non-standard Android UX pattern.
-- [ ] **Support dark mode** – No `values-night/` resources exist. Implement Material Design dark theme.
+- [x] **Add Up/Back button in Toolbar** – `MainActivity.kt`: integrated `setupWithNavController` for standard navigation.
+- [x] **Support dark mode** – `values-night/colors.xml` and `DayNight` theme implemented.
 
 ---
 
@@ -123,8 +123,8 @@ Items marked ~~like this~~ were fixed in the initial implementation pass.
 - [x] ~~**Remove `legacy-support-v4` dependency**~~ – Unnecessary with `minSdk = 21` + AndroidX.
 - [x] ~~**Disable Jetifier**~~ – `gradle.properties`: `android.enableJetifier` commented out; not needed with pure AndroidX deps.
 - [ ] **Update Room to latest stable** – Current: `2.6.1`. Update to `2.7.x+`.
-- [ ] **Add CI/CD pipeline** – No GitHub Actions or CI config. Add automated build, unit test, and lint checks on each push.
-- [ ] **Add `ktlint` or `detekt`** – No static analysis or formatting enforcement configured.
+- [x] **Add CI/CD pipeline** – GitHub Actions workflow `android.yml` configured.
+- [x] **Add `ktlint` or `detekt`** – `ktlint` integrated for formatting and linting.
 
 ---
 

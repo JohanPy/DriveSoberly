@@ -8,6 +8,9 @@ import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.navigateUp
+import androidx.navigation.ui.setupWithNavController
 import androidx.preference.PreferenceManager
 import com.google.android.material.appbar.AppBarLayout
 import com.vaudibert.canidrive.R
@@ -15,6 +18,7 @@ import com.vaudibert.canidrive.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
+    private lateinit var appBarConfiguration: AppBarConfiguration
 
     override fun onCreate(savedInstanceState: Bundle?) {
         installSplashScreen()
@@ -39,24 +43,26 @@ class MainActivity : AppCompatActivity() {
         val navHostFragment =
             supportFragmentManager
                 .findFragmentById(R.id.nav_host_fragment) as NavHostFragment
-        navHostFragment.navController
-            .addOnDestinationChangedListener { _, destination, _ ->
-                binding.appBarDrinker.visibility =
-                    if (destination.id == R.id.splashFragment) {
-                        AppBarLayout.GONE
-                    } else {
-                        AppBarLayout.VISIBLE
-                    }
-                binding.toolbar.title =
-                    when (destination.id) {
-                        R.id.driveFragment -> getString(R.string.can_i_drive_question)
-                        R.id.drinkerFragment -> getString(R.string.about_you)
-                        R.id.addDrinkFragment -> getString(R.string.select_a_drink)
-                        R.id.addPresetFragment -> getString(R.string.add_preset_description)
-                        R.id.settingsFragment -> getString(R.string.action_settings)
-                        else -> ""
-                    }
-            }
+        val navController = navHostFragment.navController
+
+        // Configure AppBar so the Up Button works, but hide it for top-level destinations
+        appBarConfiguration =
+            AppBarConfiguration(
+                setOf(R.id.splashFragment, R.id.driveFragment, R.id.drinkerFragment),
+            )
+
+        // We set the Toolbar as the ActionBar so we can use standard options
+        setSupportActionBar(binding.toolbar)
+        binding.toolbar.setupWithNavController(navController, appBarConfiguration)
+
+        navController.addOnDestinationChangedListener { _, destination, _ ->
+            binding.appBarDrinker.visibility =
+                if (destination.id == R.id.splashFragment) {
+                    AppBarLayout.GONE
+                } else {
+                    AppBarLayout.VISIBLE
+                }
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -76,5 +82,10 @@ class MainActivity : AppCompatActivity() {
             }
             else -> super.onOptionsItemSelected(item)
         }
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        val navController = findNavController(R.id.nav_host_fragment)
+        return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
     }
 }

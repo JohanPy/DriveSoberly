@@ -70,6 +70,8 @@ dependencies {
     testImplementation(kotlin("reflect"))
     testImplementation(kotlin("test"))
     testImplementation("org.mockito:mockito-core:5.11.0")
+    // org.json pure-Java implementation for unit tests (Android's org.json is mocked in JVM tests)
+    testImplementation("org.json:json:20240303")
 
     // Navigation (Kotlin)
     val navigationVersion = "2.8.5"

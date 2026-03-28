@@ -1,9 +1,40 @@
 package com.vaudibert.canidrive.data.repository
 
+import com.vaudibert.canidrive.domain.drivelaw.DriveLaw
+import com.vaudibert.canidrive.domain.drivelaw.ProfessionalLimit
+import com.vaudibert.canidrive.domain.drivelaw.YoungLimit
+import org.json.JSONArray
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
+import java.io.File
 
 class DriveLawsTest {
+
+    /** Reads drive_laws.json from the module's assets folder without Android Context. */
+    private fun loadDriveLawsFromAssets(): List<DriveLaw> {
+        val assetsFile = File("src/main/assets/drive_laws.json")
+        val jsonString = assetsFile.readText()
+        val jsonArray = JSONArray(jsonString)
+        val list = mutableListOf<DriveLaw>()
+        for (i in 0 until jsonArray.length()) {
+            val obj = jsonArray.getJSONObject(i)
+            val code = obj.getString("countryCode")
+            val limit = obj.getDouble("limit")
+            var youngLimit: YoungLimit? = null
+            if (!obj.isNull("youngLimit")) {
+                val yObj = obj.getJSONObject("youngLimit")
+                youngLimit = YoungLimit(yObj.getDouble("limit"), yObj.getString("explanationName"))
+            }
+            var professionalLimit: ProfessionalLimit? = null
+            if (!obj.isNull("professionalLimit")) {
+                val pObj = obj.getJSONObject("professionalLimit")
+                professionalLimit = ProfessionalLimit(pObj.getDouble("limit"))
+            }
+            list.add(DriveLaw(code, limit, youngLimit, professionalLimit))
+        }
+        return list
+    }
+
     @Test
     fun `check drive laws BAC limits`() {
         // These values should all be in g/L.
@@ -23,7 +54,7 @@ class DriveLawsTest {
                 "TR" to 0.5,
             )
 
-        for (law in DriveLaws.list) {
+        for (law in loadDriveLawsFromAssets()) {
             val countryCode = law.countryCode
             if (countryCode.isEmpty()) continue
 

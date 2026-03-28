@@ -12,11 +12,13 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.button.MaterialButtonToggleGroup
 import com.vaudibert.canidrive.R
 import com.vaudibert.canidrive.data.repository.DigestionRepository
 import com.vaudibert.canidrive.data.repository.DrinkRepository
 import com.vaudibert.canidrive.databinding.FragmentDriveStatusBinding
 import com.vaudibert.canidrive.domain.DrinkerStatusService
+import com.vaudibert.canidrive.domain.digestion.FoodState
 import com.vaudibert.canidrive.ui.adapter.IngestedDrinksAdapter
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.text.DateFormat
@@ -45,6 +47,10 @@ class DriveFragment : Fragment() {
     private lateinit var textViewPastDrinks: TextView
     private lateinit var listViewPastDrinks: RecyclerView
 
+    // Views from included layout (include_food_state_selector.xml)
+    private lateinit var toggleGroupFoodState: MaterialButtonToggleGroup
+    private lateinit var textViewFoodStateDesc: TextView
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -63,6 +69,8 @@ class DriveFragment : Fragment() {
         // Initialize views from included layouts
         textViewPastDrinks = view.findViewById(R.id.textViewPastDrinks)
         listViewPastDrinks = view.findViewById(R.id.listViewPastDrinks)
+        toggleGroupFoodState = view.findViewById(R.id.toggleGroupFoodState)
+        textViewFoodStateDesc = view.findViewById(R.id.textViewFoodStateDesc)
 
         drinkerStatusService = viewModel.mainRepository.drinkerStatusService
         drinkRepository = viewModel.drinkRepository
@@ -70,6 +78,21 @@ class DriveFragment : Fragment() {
 
         ingestedDrinksAdapter = IngestedDrinksAdapter(requireContext(), drinkRepository.ingestionService)
         listViewPastDrinks.adapter = ingestedDrinksAdapter
+
+        // Restore the persisted food state selection.
+        updateFoodStateToggle(digestionRepository.body.foodState)
+
+        toggleGroupFoodState.addOnButtonCheckedListener { _, checkedId, isChecked ->
+            if (!isChecked) return@addOnButtonCheckedListener
+            val state = when (checkedId) {
+                R.id.buttonFoodLight -> FoodState.LIGHT_MEAL
+                R.id.buttonFoodFull -> FoodState.FULL_MEAL
+                else -> FoodState.EMPTY
+            }
+            viewModel.updateFoodState(state)
+            textViewFoodStateDesc.text = getString(foodStateDescRes(state))
+            updateDriveStatus()
+        }
 
         drinkRepository.livePastDrinks.observe(viewLifecycleOwner) {
             textViewPastDrinks.visibility = if (it.isEmpty()) TextView.GONE else TextView.VISIBLE
@@ -176,4 +199,23 @@ class DriveFragment : Fragment() {
         super.onDestroyView()
         _binding = null
     }
+
+    // ── Food state helpers ────────────────────────────────────────────────────
+
+    private fun updateFoodStateToggle(state: FoodState) {
+        val buttonId = when (state) {
+            FoodState.LIGHT_MEAL -> R.id.buttonFoodLight
+            FoodState.FULL_MEAL -> R.id.buttonFoodFull
+            FoodState.EMPTY -> R.id.buttonFoodEmpty
+        }
+        toggleGroupFoodState.check(buttonId)
+        textViewFoodStateDesc.text = getString(foodStateDescRes(state))
+    }
+
+    private fun foodStateDescRes(state: FoodState): Int =
+        when (state) {
+            FoodState.EMPTY -> R.string.food_state_empty_desc
+            FoodState.LIGHT_MEAL -> R.string.food_state_light_desc
+            FoodState.FULL_MEAL -> R.string.food_state_full_desc
+        }
 }

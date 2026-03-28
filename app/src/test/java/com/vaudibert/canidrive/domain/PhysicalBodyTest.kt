@@ -1,8 +1,10 @@
 package com.vaudibert.canidrive.domain
 
+import com.vaudibert.canidrive.domain.digestion.FoodState
 import com.vaudibert.canidrive.domain.digestion.PhysicalBody
 import com.vaudibert.canidrive.domain.digestion.Sex
 import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
 
 internal class PhysicalBodyTest {
@@ -72,5 +74,39 @@ internal class PhysicalBodyTest {
         assertEquals(0.1, male.decreaseFactor)
         male.alcoholTolerance = 1.0
         assertEquals(0.15, male.decreaseFactor)
+    }
+
+    // ── FoodState ─────────────────────────────────────────────────────────────
+
+    @Test
+    fun `Default food state is EMPTY`() {
+        assertEquals(FoodState.EMPTY, PhysicalBody().foodState)
+    }
+
+    @Test
+    fun `Food state drives absorptionRate and absorptionDelay`() {
+        val body = PhysicalBody()
+
+        body.foodState = FoodState.EMPTY
+        assertEquals(FoodState.EMPTY.absorptionRate, body.absorptionRate)
+        assertEquals(FoodState.EMPTY.absorptionDelay, body.absorptionDelay)
+
+        body.foodState = FoodState.LIGHT_MEAL
+        assertEquals(FoodState.LIGHT_MEAL.absorptionRate, body.absorptionRate)
+        assertEquals(FoodState.LIGHT_MEAL.absorptionDelay, body.absorptionDelay)
+
+        body.foodState = FoodState.FULL_MEAL
+        assertEquals(FoodState.FULL_MEAL.absorptionRate, body.absorptionRate)
+        assertEquals(FoodState.FULL_MEAL.absorptionDelay, body.absorptionDelay)
+    }
+
+    @Test
+    fun `Full meal has lower absorptionRate than empty stomach`() {
+        assertTrue(FoodState.FULL_MEAL.absorptionRate < FoodState.EMPTY.absorptionRate)
+    }
+
+    @Test
+    fun `Full meal has longer absorptionDelay than empty stomach`() {
+        assertTrue(FoodState.FULL_MEAL.absorptionDelay > FoodState.EMPTY.absorptionDelay)
     }
 }
