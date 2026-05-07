@@ -1,7 +1,7 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.DayNight.NoActionBar">
+    <style name="AppTheme" parent="Theme.Material3.DayNight.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
         <item name="colorPrimary">@color/colorAmberPrimary</item>
@@ -9,7 +9,7 @@
         <item name="colorAccent">@color/colorAmberAccent</item>
     </style>
 
-    <style name="AppThemeSaintPatrick" parent="Theme.AppCompat.DayNight.NoActionBar">
+    <style name="AppThemeSaintPatrick" parent="Theme.Material3.DayNight.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
         <item name="colorPrimary">@color/colorGreenPrimary</item>
@@ -18,7 +18,7 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
     </style>
 
-    <style name="AppTheme.NoActionBar">
+    <style name="AppTheme.NoActionBar" parent="Theme.Material3.DayNight.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
@@ -27,7 +27,7 @@
         <item name="windowSplashScreenBackground">@color/colorPrimaryDark</item>
         <!-- The mipmap launcher icon can be used if it's an adaptive icon, or we fallback to drawable -->
         <item name="windowSplashScreenAnimatedIcon">@mipmap/ic_launcher_beer_round</item>
-        <item name="postSplashScreenTheme">@style/AppTheme.NoActionBar</item>
+        <item name="postSplashScreenTheme">@style/AppTheme</item>
     </style>
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
