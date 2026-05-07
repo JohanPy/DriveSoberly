@@ -5,6 +5,7 @@ import com.vaudibert.canidrive.domain.drivelaw.DriveLaw
 import com.vaudibert.canidrive.domain.drivelaw.ProfessionalLimit
 import com.vaudibert.canidrive.domain.drivelaw.YoungLimit
 import org.json.JSONArray
+import java.util.Locale
 
 object DriveLaws {
     val default = DriveLaw("", 0.0)
@@ -32,6 +33,23 @@ object DriveLaws {
             }
 
             list.add(DriveLaw(code, limit, youngLimit, profLimit))
+        }
+
+        // Defensive fallback: if the bundled JSON is truncated, keep the app usable by
+        // exposing all ISO countries with a conservative default limit.
+        if (list.size <= 2) {
+            val knownByCode = list.associateBy { it.countryCode }
+            val expanded =
+                Locale
+                    .getISOCountries()
+                    .sorted()
+                    .map { countryCode ->
+                        knownByCode[countryCode] ?: DriveLaw(countryCode, default.limit)
+                    }
+                    .toMutableList()
+
+            expanded.add(default)
+            return expanded
         }
 
         return list

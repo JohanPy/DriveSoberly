@@ -4,133 +4,148 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="@layout/fragment_drinker">
 
-    <TextView
-        android:id="@+id/textViewDriverStatusTitle"
-        style="@style/PillTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/drive_law"
-        app:layout_constraintStart_toStartOf="@id/textViewCountryTitle"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/textViewLimitUnit"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="@dimen/spacing_lg"
-        android:layout_marginBottom="@dimen/spacing_sm"
-        android:text="@string/bac_unit_gl"
-        android:textColor="@color/driveRed"
-        android:textSize="22sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/spinnerCountry" />
-
-    <LinearLayout
-        android:id="@+id/linearLimitValue"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/spacing_sm"
-        android:layout_marginEnd="@dimen/spacing_sm"
-        android:orientation="vertical"
-        app:layout_constraintEnd_toStartOf="@+id/textViewLimitUnit"
-        app:layout_constraintTop_toTopOf="@+id/textViewLimitUnit">
-
-        <TextView
-            android:id="@+id/textViewCurrentLimit"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:labelFor="@+id/editTextCurrentLimit"
-            android:text=""
-            android:textColor="@color/driveRed"
-            android:textSize="22sp"
-            tools:text="0.5"
-            app:layout_constraintEnd_toStartOf="@+id/textViewLimitUnit"
-            app:layout_constraintTop_toTopOf="@+id/textViewLimitUnit"
-            />
-
-        <EditText
-            android:id="@+id/editTextCurrentLimit"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="0dp"
-            android:hint="@string/bac_unit_gl"
-            android:inputType="numberDecimal"
-            android:paddingStart="0dp"
-            android:paddingTop="0dp"
-            android:paddingEnd="0dp"
-            android:paddingBottom="@dimen/spacing_xs"
-            android:text="1.23"
-            android:textColor="@color/driveRed"
-            android:textSize="22sp"
-            tools:ignore="Autofill"
-            app:layout_constraintEnd_toStartOf="@+id/textViewLimitUnit"
-            app:layout_constraintTop_toTopOf="@+id/textViewLimitUnit"
-            />
-
-    </LinearLayout>
-
-    <ImageView
-        android:id="@+id/imageForbiddenCurrentLimit"
-        android:layout_width="@dimen/icon_size_md"
-        android:layout_height="@dimen/icon_size_md"
-        android:layout_marginEnd="@dimen/spacing_xs"
-        android:contentDescription="@string/forbidden_symbol"
-        android:src="@drawable/ic_forbidden_white_24dp"
-        app:tint="@color/driveRed"
-        app:layout_constraintEnd_toStartOf="@id/linearLimitValue"
-
-        app:layout_constraintTop_toTopOf="@+id/textViewLimitUnit" />
-
-    <ImageView
-        android:id="@+id/imageDropCurrentLimit"
-        android:layout_width="@dimen/icon_size_md"
-        android:layout_height="@dimen/icon_size_md"
-        android:contentDescription="@string/drop_symbol"
-        android:src="@drawable/ic_blood_drop_plain"
-        app:layout_constraintEnd_toStartOf="@id/imageForbiddenCurrentLimit"
-        app:layout_constraintTop_toTopOf="@+id/textViewLimitUnit" />
-
-    <TextView
-        android:id="@+id/textViewCountryTitle"
-        android:layout_width="wrap_content"
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cardDriveLaw"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/spacing_sm"
-        android:padding="@dimen/spacing_xs"
-        android:text="@string/country"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toStartOf="@+id/spinnerCountry"
-        app:layout_constraintHorizontal_chainStyle="packed"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewDriverStatusTitle" />
-
-    <Spinner
-        android:id="@+id/spinnerCountry"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="@+id/textViewCountryTitle"
+        app:cardBackgroundColor="?attr/colorSurface"
+        app:cardCornerRadius="@dimen/corner_lg"
+        app:cardUseCompatPadding="true"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/textViewCountryTitle"
-        app:layout_constraintTop_toTopOf="@+id/textViewCountryTitle" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:strokeColor="?attr/colorOutline"
+        app:strokeWidth="1dp">
 
-    <CheckBox
-        android:id="@+id/checkboxYoungDriver"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/spacing_xs"
-        android:text="@string/young_driver"
-        app:layout_constraintEnd_toEndOf="@id/spinnerCountry"
-        app:layout_constraintStart_toStartOf="@+id/textViewCountryTitle"
-        app:layout_constraintTop_toBottomOf="@id/textViewCountryTitle" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/spacing_md">
 
-    <CheckBox
-        android:id="@+id/checkboxProfessionalDriver"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/spacing_xs"
-        android:text="@string/professional_driver"
-        app:layout_constraintEnd_toEndOf="@id/spinnerCountry"
-        app:layout_constraintStart_toStartOf="@+id/textViewCountryTitle"
-        app:layout_constraintTop_toBottomOf="@id/checkboxYoungDriver" />
+            <TextView
+                android:id="@+id/textViewDriverStatusTitle"
+                style="@style/PillTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/drive_law"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/textViewCountryTitle"
+                style="@style/TextViewLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_sm"
+                android:layout_marginBottom="@dimen/spacing_xs"
+                android:text="@string/country"
+                app:layout_constraintBottom_toBottomOf="@+id/spinnerCountry"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textViewDriverStatusTitle" />
+
+            <Spinner
+                android:id="@+id/spinnerCountry"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/spacing_sm"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/textViewCountryTitle"
+                app:layout_constraintTop_toTopOf="@+id/textViewCountryTitle" />
+
+            <ImageView
+                android:id="@+id/imageDropCurrentLimit"
+                android:layout_width="@dimen/icon_size_sm"
+                android:layout_height="@dimen/icon_size_sm"
+                android:layout_marginTop="@dimen/spacing_md"
+                android:contentDescription="@string/drop_symbol"
+                android:src="@drawable/ic_blood_drop_plain"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/spinnerCountry" />
+
+            <ImageView
+                android:id="@+id/imageForbiddenCurrentLimit"
+                android:layout_width="@dimen/icon_size_sm"
+                android:layout_height="@dimen/icon_size_sm"
+                android:layout_marginStart="@dimen/spacing_xs"
+                android:contentDescription="@string/forbidden_symbol"
+                android:src="@drawable/ic_forbidden_white_24dp"
+                app:layout_constraintBottom_toBottomOf="@+id/imageDropCurrentLimit"
+                app:layout_constraintStart_toEndOf="@+id/imageDropCurrentLimit"
+                app:layout_constraintTop_toTopOf="@+id/imageDropCurrentLimit"
+                app:tint="?attr/colorError" />
+
+            <LinearLayout
+                android:id="@+id/linearLimitValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/spacing_sm"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                app:layout_constraintBottom_toBottomOf="@+id/imageForbiddenCurrentLimit"
+                app:layout_constraintStart_toEndOf="@+id/imageForbiddenCurrentLimit"
+                app:layout_constraintTop_toTopOf="@+id/imageForbiddenCurrentLimit">
+
+                <TextView
+                    android:id="@+id/textViewCurrentLimit"
+                    style="@style/TextViewLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:labelFor="@+id/editTextCurrentLimit"
+                    android:textColor="?attr/colorError"
+                    android:textSize="22sp"
+                    tools:text="0.5" />
+
+                <EditText
+                    android:id="@+id/editTextCurrentLimit"
+                    android:layout_width="72dp"
+                    android:layout_height="wrap_content"
+                    android:hint="0.00"
+                    android:inputType="numberDecimal"
+                    android:padding="0dp"
+                    android:textColor="?attr/colorError"
+                    android:textSize="22sp"
+                    tools:ignore="Autofill" />
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/textViewLimitUnit"
+                style="@style/TextViewLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/spacing_xs"
+                android:text="@string/bac_unit_gl"
+                android:textColor="?attr/colorError"
+                android:textSize="22sp"
+                app:layout_constraintBottom_toBottomOf="@+id/linearLimitValue"
+                app:layout_constraintStart_toEndOf="@+id/linearLimitValue"
+                app:layout_constraintTop_toTopOf="@+id/linearLimitValue" />
+
+            <CheckBox
+                android:id="@+id/checkboxYoungDriver"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_md"
+                android:text="@string/young_driver"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imageDropCurrentLimit" />
+
+            <CheckBox
+                android:id="@+id/checkboxProfessionalDriver"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_xs"
+                android:layout_marginBottom="@dimen/spacing_xs"
+                android:text="@string/professional_driver"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/checkboxYoungDriver" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.card.MaterialCardView>
 
 
 
