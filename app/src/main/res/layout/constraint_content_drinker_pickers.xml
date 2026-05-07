@@ -4,19 +4,28 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     tools:showIn="@layout/fragment_drinker">
 
+    <androidx.constraintlayout.widget.Barrier
+        android:id="@+id/pickersBottomBarrier"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:barrierDirection="bottom"
+        app:constraint_referenced_ids="linearPickerWeight,linearPickerSex" />
+
     <LinearLayout
         android:id="@+id/linearPickerWeight"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:layout_weight="1"
+        android:layout_marginTop="@dimen/spacing_sm"
+        android:layout_marginStart="@dimen/spacing_sm"
+        android:layout_marginEnd="@dimen/spacing_xs"
         android:gravity="center"
         android:orientation="vertical"
-        android:paddingStart="30dp"
-        android:paddingEnd="30dp"
+        android:paddingStart="@dimen/spacing_lg"
+        android:paddingEnd="@dimen/spacing_lg"
         app:layout_constraintEnd_toStartOf="@+id/linearPickerSex"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_percent="0.5">
 
         <TextView
             android:id="@+id/textViewPickerWeightTitle"
@@ -25,15 +34,25 @@
             android:layout_height="wrap_content"
             android:text="@string/weight" />
 
-        <EditText
-            android:id="@+id/editTextWeight"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/layoutWeightInput"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="numberDecimal"
-            android:minEms="4"
-            android:textAlignment="center"
-            android:importantForAccessibility="yes"
-            android:hint="@string/weight" />
+            android:layout_marginTop="@dimen/spacing_sm"
+            android:hint="@string/weight"
+            app:boxBackgroundMode="outline"
+            app:boxStrokeWidthFocused="2dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/editTextWeight"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:importantForAccessibility="yes"
+                android:inputType="numberDecimal"
+                android:minEms="4"
+                android:textAlignment="center" />
+
+        </com.google.android.material.textfield.TextInputLayout>
 
 
     </LinearLayout>
@@ -42,15 +61,17 @@
         android:id="@+id/linearPickerSex"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:layout_weight="1"
+        android:layout_marginTop="@dimen/spacing_sm"
+        android:layout_marginStart="@dimen/spacing_xs"
+        android:layout_marginEnd="@dimen/spacing_sm"
         android:gravity="center"
         android:orientation="vertical"
-        android:paddingStart="0dp"
-        android:paddingEnd="20dp"
+        android:paddingStart="@dimen/spacing_sm"
+        android:paddingEnd="@dimen/spacing_sm"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/linearPickerWeight"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_percent="0.5">
 
         <TextView
             style="@style/PillTitle"
@@ -61,20 +82,24 @@
         <RadioGroup
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_sm"
             android:orientation="vertical">
-            <RadioButton android:id="@+id/radioMale"
+            <com.google.android.material.radiobutton.MaterialRadioButton
+                android:id="@+id/radioMale"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/male"
 
                 />
-            <RadioButton android:id="@+id/radioSexOther"
+            <com.google.android.material.radiobutton.MaterialRadioButton
+                android:id="@+id/radioSexOther"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/other"
                 android:checked="true"
                 />
-            <RadioButton android:id="@+id/radioFemale"
+            <com.google.android.material.radiobutton.MaterialRadioButton
+                android:id="@+id/radioFemale"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/female"
@@ -90,8 +115,9 @@
         android:layout_height="wrap_content"
         style="@style/PillTitle"
         android:text="@string/user_health"
-        app:layout_constraintTop_toBottomOf="@id/linearPickerWeight"
-        app:layout_constraintStart_toStartOf="@id/linearPickerWeight"
+        android:layout_marginTop="@dimen/spacing_sm"
+        app:layout_constraintTop_toBottomOf="@id/pickersBottomBarrier"
+        app:layout_constraintStart_toStartOf="parent"
         />
 
     <TextView
@@ -100,22 +126,28 @@
         android:layout_height="wrap_content"
         style="@style/TextViewLabel"
         android:text="@string/alcohol_tolerance_medium"
-        app:layout_constraintTop_toBottomOf="@id/linearPickerWeight"
+        app:layout_constraintBottom_toBottomOf="@id/textViewAlcoholToleranceLabel"
+        app:layout_constraintTop_toTopOf="@id/textViewAlcoholToleranceLabel"
         app:layout_constraintStart_toEndOf="@id/textViewAlcoholToleranceLabel"
         app:layout_constraintEnd_toEndOf="parent"
         />
 
 
 
-    <SeekBar
+    <com.google.android.material.slider.Slider
         android:id="@+id/seekBarAlcoholTolerance"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:max="2"
+        android:layout_marginTop="@dimen/spacing_xs"
+        android:layout_marginBottom="@dimen/spacing_sm"
+        android:value="0"
+        android:valueFrom="0"
+        android:valueTo="2"
+        android:stepSize="1"
         app:layout_constraintEnd_toEndOf="@id/textViewAlcoholToleranceTextValue"
-        app:layout_constraintStart_toStartOf="@id/textViewAlcoholToleranceLabel"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/textViewAlcoholToleranceTextValue"
-        android:padding="10dp"
+        android:padding="@dimen/spacing_sm"
         />
 
 

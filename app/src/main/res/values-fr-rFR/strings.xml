@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="action_settings">Options</string>
+    <string name="title_splash">Bienvenue</string>
+    <string name="title_profile">Profil</string>
+    <string name="title_drive_status">Statut conduite</string>
+    <string name="title_add_drink">Ajouter une boisson</string>
+    <string name="title_add_preset">Nouveau preset</string>
+    <string name="title_settings">Options</string>
     <string name="volume">Volume</string>
     <string name="degree">Degré</string>
     <string name="when">Quand</string>
@@ -79,4 +85,11 @@
     <string name="delay_24h">24 h</string>
     <string name="safe_to_drive">Apte à conduire</string>
     <string name="do_not_drive">NE CONDUISEZ PAS</string>
+    <string name="food_state_title">Alimentation</string>
+    <string name="food_state_empty">À jeun</string>
+    <string name="food_state_empty_desc">Estomac vide - absorption rapide</string>
+    <string name="food_state_light">Collation</string>
+    <string name="food_state_light_desc">Chips, fruit, crackers, fromage...</string>
+    <string name="food_state_full">Repas</string>
+    <string name="food_state_full_desc">Pates, riz, pizza, viande, burger...</string>
 </resources>

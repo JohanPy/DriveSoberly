@@ -1,6 +1,12 @@
 <resources>
     <string name="app_name" translatable="false">CanIDrive</string>
     <string name="action_settings">Settings</string>
+    <string name="title_splash">Welcome</string>
+    <string name="title_profile">Profile</string>
+    <string name="title_drive_status">Drive status</string>
+    <string name="title_add_drink">Add drink</string>
+    <string name="title_add_preset">New preset</string>
+    <string name="title_settings">Settings</string>
 
     <string name="user_preferences" translatable="false">USER_PREFS</string>
     <string name="user_weight" translatable="false">WEIGHT</string>

@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/splashFragment"
         android:name="com.vaudibert.canidrive.ui.fragment.SplashFragment"
-        android:label="fragment_splash"
+        android:label="@string/title_splash"
         tools:layout="@layout/fragment_splash" >
         <action
             android:id="@+id/action_splashFragment_to_driveFragment"
@@ -28,7 +28,7 @@
     <fragment
         android:id="@+id/drinkerFragment"
         android:name="com.vaudibert.canidrive.ui.fragment.DrinkerFragment"
-        android:label="fragment_drinker"
+        android:label="@string/title_profile"
         tools:layout="@layout/fragment_drinker" >
         <action
             android:id="@+id/action_drinkerFragment_to_driveFragment"
@@ -43,7 +43,7 @@
     <fragment
         android:id="@+id/driveFragment"
         android:name="com.vaudibert.canidrive.ui.fragment.DriveFragment"
-        android:label="fragment_drive"
+        android:label="@string/title_drive_status"
         tools:layout="@layout/fragment_drive_status" >
         <action
             android:id="@+id/action_driveFragment_to_addDrinkFragment"
@@ -63,7 +63,7 @@
     <fragment
         android:id="@+id/addDrinkFragment"
         android:name="com.vaudibert.canidrive.ui.fragment.AddDrinkFragment"
-        android:label="fragment_add_drink"
+        android:label="@string/title_add_drink"
         tools:layout="@layout/fragment_add_drink" >
         <action
             android:id="@+id/action_addDrinkFragment_to_driveFragment"
@@ -85,7 +85,7 @@
     <fragment
         android:id="@+id/addPresetFragment"
         android:name="com.vaudibert.canidrive.ui.fragment.EditPresetFragment"
-        android:label="fragment_add_preset"
+        android:label="@string/title_add_preset"
         tools:layout="@layout/fragment_add_preset" >
         <action
             android:id="@+id/action_addPresetFragment_to_addDrinkFragment"
@@ -96,5 +96,5 @@
     <fragment
         android:id="@+id/settingsFragment"
         android:name="com.vaudibert.canidrive.ui.fragment.SettingsFragment"
-        android:label="fragment_settings" />
+        android:label="@string/title_settings" />
 </navigation>

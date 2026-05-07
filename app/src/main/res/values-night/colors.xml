@@ -1,9 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- Dark Mode Colors -->
-    <color name="colorAmberPrimary">#E58A7A</color>
+    <!-- Material3 semantic palette (dark) -->
+    <color name="md_theme_primary">#FFB4A5</color>
+    <color name="md_theme_onPrimary">#5F1308</color>
+    <color name="md_theme_primaryContainer">#7F2A1B</color>
+    <color name="md_theme_onPrimaryContainer">#FFDCC9</color>
+    <color name="md_theme_secondary">#F4B8AB</color>
+    <color name="md_theme_onSecondary">#4A2A24</color>
+    <color name="md_theme_surface">#161110</color>
+    <color name="md_theme_onSurface">#EDE0DD</color>
+    <color name="md_theme_surfaceVariant">#534341</color>
+    <color name="md_theme_onSurfaceVariant">#D8C2BD</color>
+    <color name="md_theme_error">#FFB4AB</color>
+    <color name="md_theme_onError">#690005</color>
+
+    <!-- Legacy aliases kept for incremental migration -->
+    <color name="colorAmberPrimary">@color/md_theme_primary</color>
     <color name="colorAmberTransparent">#A6E58A7A</color>
-    <color name="colorAmberAccent">#E58A7A</color>
+    <color name="colorAmberAccent">@color/md_theme_primary</color>
 
     <color name="colorGreenPrimary">#57E45E</color>
     <color name="colorGreenTransparent">#A657E45E</color>
@@ -11,7 +25,6 @@
 
     <color name="colorPrimaryDark">#121212</color>
     <color name="WHITE">#E0E0E0</color>
-    <!-- Let the other standard colors (green, red, amber) unchanged or tweak if needed -->
     <color name="driveGreen">#30CA36</color>
     <color name="driveRed">#FF5252</color>
     <color name="driveAmber">#FFB74D</color>

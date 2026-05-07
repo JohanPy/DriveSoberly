@@ -11,7 +11,6 @@ import android.widget.ArrayAdapter
 import android.widget.CheckBox
 import android.widget.EditText
 import android.widget.RadioButton
-import android.widget.SeekBar
 import android.widget.Spinner
 import android.widget.TextView
 import androidx.fragment.app.Fragment
@@ -25,6 +24,7 @@ import com.vaudibert.canidrive.domain.digestion.Sex
 import com.vaudibert.canidrive.domain.drivelaw.DriveLaw
 import com.vaudibert.canidrive.domain.drivelaw.DriveLawService
 import com.vaudibert.canidrive.ui.util.KeyboardUtils
+import com.google.android.material.slider.Slider
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import kotlin.math.roundToInt
 
@@ -50,7 +50,7 @@ class DrinkerFragment : Fragment() {
     private lateinit var radioMale: RadioButton
     private lateinit var radioFemale: RadioButton
     private lateinit var radioSexOther: RadioButton
-    private lateinit var seekBarAlcoholTolerance: SeekBar
+    private lateinit var seekBarAlcoholTolerance: Slider
     private lateinit var textViewAlcoholToleranceTextValue: TextView
 
     // Views from included layouts (constraint_content_drinker_country.xml)
@@ -161,25 +161,18 @@ class DrinkerFragment : Fragment() {
         if (digestionRepository.toleranceLevels.isEmpty()) return
 
         val levelCount = digestionRepository.toleranceLevels.size - 1
-        seekBarAlcoholTolerance.max = levelCount
+        seekBarAlcoholTolerance.valueFrom = 0f
+        seekBarAlcoholTolerance.valueTo = levelCount.toFloat()
+        seekBarAlcoholTolerance.stepSize = 1f
 
-        seekBarAlcoholTolerance.setOnSeekBarChangeListener(
-            object : SeekBar.OnSeekBarChangeListener {
-                override fun onProgressChanged(
-                    seekBar: SeekBar?,
-                    progress: Int,
-                    fromUser: Boolean,
-                ) {
-                    textViewAlcoholToleranceTextValue.text = digestionRepository.toleranceLevels[progress]
-                }
+        seekBarAlcoholTolerance.addOnChangeListener { _, value, _ ->
+            val position = value.roundToInt().coerceIn(0, levelCount)
+            textViewAlcoholToleranceTextValue.text = digestionRepository.toleranceLevels[position]
+        }
 
-                override fun onStartTrackingTouch(seekBar: SeekBar?) {}
-
-                override fun onStopTrackingTouch(seekBar: SeekBar?) {}
-            },
-        )
-        seekBarAlcoholTolerance.progress = (digestionRepository.body.alcoholTolerance * levelCount).roundToInt()
-        textViewAlcoholToleranceTextValue.text = digestionRepository.toleranceLevels[seekBarAlcoholTolerance.progress]
+        seekBarAlcoholTolerance.value = (digestionRepository.body.alcoholTolerance * levelCount).roundToInt().toFloat()
+        val initialPosition = seekBarAlcoholTolerance.value.roundToInt().coerceIn(0, levelCount)
+        textViewAlcoholToleranceTextValue.text = digestionRepository.toleranceLevels[initialPosition]
     }
 
     private fun setupValidationButton(digestionRepository: DigestionRepository) {
@@ -194,7 +187,7 @@ class DrinkerFragment : Fragment() {
             val levelCount = (digestionRepository.toleranceLevels.size - 1).coerceAtLeast(1)
 
             digestionRepository.body.alcoholTolerance =
-                seekBarAlcoholTolerance.progress.toDouble() /
+                seekBarAlcoholTolerance.value.roundToInt().toDouble() /
                 levelCount.toDouble()
 
             driveLawService.customCountryLimit = editTextCurrentLimit.text.toString().toDoubleOrNull() ?: driveLawService.customCountryLimit

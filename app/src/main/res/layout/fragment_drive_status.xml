@@ -23,6 +23,7 @@
         android:layout_height="wrap_content"
         android:gravity="bottom|top"
         android:orientation="horizontal"
+        android:layout_marginTop="@dimen/spacing_sm"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/textViewDriveStatus">
@@ -41,8 +42,8 @@
             android:id="@+id/imageDriveStatus"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:layout_marginStart="-30dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginStart="@dimen/spacing_sm"
+            android:layout_marginTop="@dimen/spacing_sm"
             android:layout_gravity="top|start"
             android:contentDescription="@string/drive_status_symbol"
             android:src="@drawable/ic_forbidden_white_24dp"
@@ -53,7 +54,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginStart="10dp"
+            android:layout_marginStart="@dimen/spacing_sm"
             android:text="@string/do_not_drive"
             android:textColor="@color/driveRed"
             android:textStyle="bold"
@@ -64,7 +65,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginStart="10dp"
+            android:layout_marginStart="@dimen/spacing_sm"
             android:gravity="center_horizontal"
             android:orientation="vertical"
             >
@@ -75,7 +76,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:layout_margin="4dp"
+                android:layout_margin="@dimen/spacing_xs"
                 tools:ignore="UseCompoundDrawables">
 
                 <ImageView
@@ -99,7 +100,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:layout_margin="4dp"
+                android:layout_margin="@dimen/spacing_xs"
                 tools:ignore="UseCompoundDrawables">
 
                 <ImageView
@@ -123,7 +124,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:layout_margin="4dp"
+                android:layout_margin="@dimen/spacing_xs"
                 tools:ignore="UseCompoundDrawables">
 
                 <ImageView
