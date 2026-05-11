@@ -14,8 +14,8 @@ android {
         applicationId = "com.johanpy.drivesoberly"
         minSdk = 21
         targetSdk = 35
-        versionCode = 1
-        versionName = "1.0.0"
+        versionCode = 2
+        versionName = "1.0.1"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
         ksp {
@@ -101,6 +101,7 @@ dependencies {
 
     // Security – encrypted SharedPreferences
     implementation("androidx.security:security-crypto:1.1.0-alpha06")
+    implementation("com.google.code.findbugs:jsr305:3.0.2")
 
     // Koin for Dependency Injection
     val koinVersion = "3.5.3"
