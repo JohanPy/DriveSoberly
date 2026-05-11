@@ -5,9 +5,11 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/drink_item_background"
     android:orientation="horizontal"
     android:gravity="start"
-    android:padding="5dp">
+    android:layout_marginBottom="8dp"
+    android:padding="10dp">
 
     <LinearLayout
         android:id="@+id/linearPastDrinkTime"
@@ -44,9 +46,10 @@
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_gravity="center"
-        android:padding="5dp"
-        android:src="@drawable/wine_glass"
-        android:tint="?attr/colorOnSurfaceVariant"
+        android:background="@drawable/drink_icon_badge"
+        android:padding="10dp"
+        android:src="@drawable/ic_local_drink_white_24dp"
+        android:tint="?attr/colorOnPrimaryContainer"
         android:contentDescription="@string/content_desc_drink_icon"
         app:layout_constraintStart_toEndOf="@+id/linearPastDrinkTime"
         app:layout_constraintTop_toTopOf="parent"

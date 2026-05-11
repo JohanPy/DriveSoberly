@@ -185,6 +185,9 @@ class DriveFragment : Fragment() {
                 binding.imageDriveStatus.setImageResource(R.drawable.ic_forbidden_white_24dp)
                 binding.imageDriveStatus.setColorFilter(ContextCompat.getColor(requireContext(), R.color.driveRed))
                 binding.textViewAlcoholRate.setTextColor(ContextCompat.getColor(requireContext(), R.color.driveRed))
+
+                label.text = getString(R.string.do_not_drive)
+                label.setTextColor(ContextCompat.getColor(requireContext(), R.color.driveRed))
             }
         }
         ingestedDrinksAdapter.notifyDataSetChanged()

@@ -3,8 +3,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="@drawable/drink_item_background"
     android:orientation="horizontal"
     android:gravity="start|center_vertical"
+    android:layout_marginBottom="8dp"
     android:padding="10dp"
     >
 
@@ -13,9 +15,10 @@
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_gravity="center"
-        android:padding="5dp"
+        android:background="@drawable/drink_icon_badge"
+        android:padding="10dp"
         android:src="@drawable/ic_add_white_24dp"
-        android:tint="?attr/colorPrimary"
+        android:tint="?attr/colorOnPrimaryContainer"
         android:contentDescription="drink icon"
         tools:ignore="HardcodedText" />
 

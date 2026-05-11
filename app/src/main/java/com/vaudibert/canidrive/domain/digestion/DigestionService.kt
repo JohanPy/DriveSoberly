@@ -70,7 +70,8 @@ class DigestionService(
         var peakTime = now
         var seenAboveLimit = currentRate > limit + eps
         var returnBelowLimitTime: Date? = null
-        var soberTime: Date? = if (currentRate <= eps) now else null
+        var hasFutureAlcohol = currentRate > eps
+        var soberTime: Date? = null
 
         var t = now.time + STEP_MS
         while (t <= maxTime) {
@@ -81,6 +82,10 @@ class DigestionService(
                 peakTime = Date(t)
             }
 
+            if (r > eps) {
+                hasFutureAlcohol = true
+            }
+
             if (r > limit + eps) {
                 seenAboveLimit = true
             }
@@ -89,7 +94,7 @@ class DigestionService(
                 returnBelowLimitTime = Date(t)
             }
 
-            if (soberTime == null && r <= eps) {
+            if (hasFutureAlcohol && soberTime == null && r <= eps) {
                 soberTime = Date(t)
                 break
             }
@@ -99,7 +104,7 @@ class DigestionService(
 
         // Fallbacks for edge cases near horizon.
         if (soberTime == null) {
-            soberTime = timeToReachLimit(0.0)
+            soberTime = if (hasFutureAlcohol) timeToReachLimit(0.0) else now
         }
         if (seenAboveLimit && returnBelowLimitTime == null) {
             returnBelowLimitTime = timeToReachLimit(limit)

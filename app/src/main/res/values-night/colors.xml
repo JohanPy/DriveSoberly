@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- Material3 semantic palette (dark) -->
-    <color name="md_theme_primary">#AFC3FF</color>
-    <color name="md_theme_onPrimary">#102A70</color>
-    <color name="md_theme_primaryContainer">#27408E</color>
+    <color name="md_theme_primary">#274AA6</color>
+    <color name="md_theme_onPrimary">#FFFFFF</color>
+    <color name="md_theme_primaryContainer">#1A2C5E</color>
     <color name="md_theme_onPrimaryContainer">#DCE1FF</color>
-    <color name="md_theme_secondary">#A8B8D1</color>
+    <color name="md_theme_secondary">#B2BED6</color>
     <color name="md_theme_onSecondary">#122033</color>
     <color name="md_theme_surface">#0F141F</color>
     <color name="md_theme_onSurface">#E3E8F5</color>
@@ -16,7 +16,7 @@
 
     <!-- Legacy aliases kept for incremental migration -->
     <color name="colorAmberPrimary">@color/md_theme_primary</color>
-    <color name="colorAmberTransparent">#A6AFC3FF</color>
+    <color name="colorAmberTransparent">#A6274AA6</color>
     <color name="colorAmberAccent">@color/md_theme_primary</color>
 
     <color name="colorGreenPrimary">#66C78D</color>

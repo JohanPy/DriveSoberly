@@ -85,7 +85,7 @@ class PresetDrinksAdapter(
 
             holder.propertiesText.text = "${doubleFormat.format(presetDrink.volume)} ml - ${presetDrink.degree} %"
             holder.descriptionText.text = presetDrink.name
-            holder.glassImage.setImageResource(R.drawable.wine_glass)
+            holder.glassImage.setImageResource(R.drawable.ic_local_drink_white_24dp)
 
             updatePresetColor(presetDrink, holder.itemView, holder.deleteButton, selectedPreset)
 

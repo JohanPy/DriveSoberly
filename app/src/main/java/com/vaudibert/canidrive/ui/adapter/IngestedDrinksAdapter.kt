@@ -54,7 +54,7 @@ class IngestedDrinksAdapter(
 
         holder.propertiesText.text = "${doubleFormat.format(drink.volume)} ml - ${drink.degree} %"
         holder.descriptionText.text = drink.name
-        holder.glassImage.setImageResource(R.drawable.wine_glass)
+        holder.glassImage.setImageResource(R.drawable.ic_local_drink_white_24dp)
 
         val days: Long = (drink.ingestionTime.time / DAY_IN_MILLIS) - (Date().time / DAY_IN_MILLIS)
         if (days == 0L) {
