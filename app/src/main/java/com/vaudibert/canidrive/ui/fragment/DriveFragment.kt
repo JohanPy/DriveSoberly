@@ -120,53 +120,70 @@ class DriveFragment : Fragment() {
         val drinkerStatus = drinkerStatusService.status()
 
         val label = binding.root.findViewById<TextView>(R.id.textViewDriveStatusLabel)
+        val numberFormat = java.text.NumberFormat.getInstance()
+        numberFormat.maximumFractionDigits = 2
+        numberFormat.minimumFractionDigits = 2
+        val timeFormat = DateFormat.getTimeInstance(DateFormat.SHORT)
 
-        if (drinkerStatus.alcoholRate < 0.01) {
+        if (drinkerStatus.peakRate < 0.01) {
             binding.linearAlcoholRate.visibility = LinearLayout.GONE
-            binding.linearWaitToSober.visibility = LinearLayout.GONE
+            binding.linearProjectionSober.visibility = LinearLayout.GONE
+            binding.linearProjectedPeak.visibility = LinearLayout.GONE
+            binding.linearProjectionDrive.visibility = LinearLayout.GONE
 
             binding.imageCar.setColorFilter(ContextCompat.getColor(requireContext(), R.color.driveGreen))
             binding.imageDriveStatus.setImageResource(R.drawable.ic_check_white_24dp)
             binding.imageDriveStatus.setColorFilter(ContextCompat.getColor(requireContext(), R.color.driveGreen))
-            binding.linearWaitToDrive.visibility = LinearLayout.GONE
 
             label.text = getString(R.string.safe_to_drive)
             label.setTextColor(ContextCompat.getColor(requireContext(), R.color.driveGreen))
         } else {
             binding.linearAlcoholRate.visibility = LinearLayout.VISIBLE
-            binding.linearWaitToSober.visibility = LinearLayout.VISIBLE
 
-            val numberFormat = java.text.NumberFormat.getInstance()
-            numberFormat.maximumFractionDigits = 2
-            numberFormat.minimumFractionDigits = 2
-            binding.textViewAlcoholRate.text = "${numberFormat.format(drinkerStatus.alcoholRate)} ${getString(R.string.bac_unit_gl)}"
+            val currentRateText = "${numberFormat.format(drinkerStatus.alcoholRate)} ${getString(R.string.bac_unit_gl)}"
+            binding.textViewAlcoholRate.text = getString(R.string.drive_current_rate, currentRateText)
 
-            binding.textViewTimeToSober.text =
-                DateFormat
-                    .getTimeInstance(DateFormat.SHORT)
-                    .format(drinkerStatus.soberDate)
+            binding.linearProjectionSober.visibility = LinearLayout.VISIBLE
+            binding.textViewProjectionSober.text =
+                getString(
+                    R.string.drive_zero_at,
+                    timeFormat.format(drinkerStatus.soberDate),
+                )
 
-            if (drinkerStatus.canDrive) {
+            if (drinkerStatus.peakRate > drinkerStatus.alcoholRate + 0.01) {
+                binding.linearProjectedPeak.visibility = LinearLayout.VISIBLE
+                binding.textViewPeakRate.text =
+                    getString(
+                        R.string.drive_peak_rate,
+                        "${numberFormat.format(drinkerStatus.peakRate)} ${getString(R.string.bac_unit_gl)}",
+                        timeFormat.format(drinkerStatus.peakDate),
+                    )
+            } else {
+                binding.linearProjectedPeak.visibility = LinearLayout.GONE
+            }
+
+            if (!drinkerStatus.exceedsLimitInProjection) {
                 // Set status icons to drive-able
                 binding.imageCar.setColorFilter(ContextCompat.getColor(requireContext(), R.color.driveGreen))
                 binding.imageDriveStatus.setImageResource(R.drawable.ic_warning_white_24dp)
                 binding.imageDriveStatus.setColorFilter(ContextCompat.getColor(requireContext(), R.color.driveAmber))
-                binding.linearWaitToDrive.visibility = LinearLayout.GONE
                 binding.textViewAlcoholRate.setTextColor(ContextCompat.getColor(requireContext(), R.color.driveAmber))
+                binding.linearProjectionDrive.visibility = LinearLayout.GONE
 
                 label.text = getString(R.string.safe_to_drive)
                 label.setTextColor(ContextCompat.getColor(requireContext(), R.color.driveAmber))
             } else {
-                binding.textViewTimeToDrive.text =
-                    DateFormat
-                        .getTimeInstance(DateFormat.SHORT)
-                        .format(drinkerStatus.canDriveDate)
+                binding.linearProjectionDrive.visibility = LinearLayout.VISIBLE
+                binding.textViewProjectionDrive.text =
+                    getString(
+                        R.string.drive_below_limit_at,
+                        timeFormat.format(drinkerStatus.canDriveDate),
+                    )
 
                 // Set status icons to NOT drive-able
                 binding.imageCar.setColorFilter(ContextCompat.getColor(requireContext(), R.color.driveRed))
                 binding.imageDriveStatus.setImageResource(R.drawable.ic_forbidden_white_24dp)
                 binding.imageDriveStatus.setColorFilter(ContextCompat.getColor(requireContext(), R.color.driveRed))
-                binding.linearWaitToDrive.visibility = LinearLayout.VISIBLE
                 binding.textViewAlcoholRate.setTextColor(ContextCompat.getColor(requireContext(), R.color.driveRed))
             }
         }

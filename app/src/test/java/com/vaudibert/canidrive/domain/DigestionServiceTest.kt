@@ -34,7 +34,7 @@ internal class DigestionServiceTest {
         body = PhysicalBody()
         body.sex = Sex.MALE
         body.weight = 100.0
-        // Default food state is EMPTY (absorptionRate=2.0, absorptionDelay=0.0h)
+        // Default food state is EMPTY (absorptionRate=2.0, absorptionDelay=0.25h)
         ingestionService =
             IngestionService { preset: PresetDrink, ingestionTime: Date ->
                 IngestedDrink(preset.name, preset.volume, preset.degree, ingestionTime)
@@ -53,7 +53,7 @@ internal class DigestionServiceTest {
     fun `User that drank is no longer sober after absorption lag`() {
         val now = Date()
         ingestBeer(now)
-        // Check at 30 min: EMPTY has no lag and absorption is well underway.
+        // Check at 30 min: past the 15-min lag of EMPTY stomach, absorption well underway.
         val thirtyMinLater = Date(now.time + 30 * 60_000L)
         assertTrue(digestionService.alcoholRateAt(thirtyMinLater) > 0.0)
     }
@@ -61,19 +61,9 @@ internal class DigestionServiceTest {
     @Test
     fun `BAC is zero during absorption lag`() {
         val now = Date()
-        body.foodState = FoodState.FULL_MEAL
         ingestBeer(now)
-        // 1 second after ingestion: FULL_MEAL has a non-zero lag, so BAC must still be 0.
+        // 1 second after ingestion: still within EMPTY lag window, so BAC is 0.
         assertEquals(0.0, digestionService.alcoholRateAt(Date(now.time + 1_000L)))
-    }
-
-    @Test
-    fun `BAC increases immediately for empty stomach`() {
-        val now = Date()
-        body.foodState = FoodState.EMPTY
-        ingestBeer(now)
-
-        assertTrue(digestionService.alcoholRateAt(Date(now.time + 1_000L)) > 0.0)
     }
 
     // ── Linearity ─────────────────────────────────────────────────────────────

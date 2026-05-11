@@ -43,8 +43,77 @@ class DigestionService(
     /** Holds the two physical compartments at a given instant. */
     private data class CompartmentState(val stomachAlcohol: Double, val bodyAlcohol: Double)
 
+    data class BacProjection(
+        val currentRate: Double,
+        val peakRate: Double,
+        val peakTime: Date,
+        val exceedsLimit: Boolean,
+        val returnBelowLimitTime: Date?,
+        val soberTime: Date,
+    )
+
     /** Returns the BAC (g/L) at the given [date], never negative. */
     fun alcoholRateAt(date: Date): Double = max(0.0, simulateTo(date).second)
+
+    /**
+     * Projects BAC evolution from [now] over the simulation horizon and returns key moments.
+     */
+    fun projectionForLimit(
+        limit: Double,
+        now: Date = Date(),
+    ): BacProjection {
+        val eps = 0.0001
+        val maxTime = now.time + (MAX_SIMULATE_HOURS * 3_600_000).toLong()
+
+        var currentRate = alcoholRateAt(now)
+        var peakRate = currentRate
+        var peakTime = now
+        var seenAboveLimit = currentRate > limit + eps
+        var returnBelowLimitTime: Date? = null
+        var soberTime: Date? = if (currentRate <= eps) now else null
+
+        var t = now.time + STEP_MS
+        while (t <= maxTime) {
+            val r = alcoholRateAt(Date(t))
+
+            if (r > peakRate + eps) {
+                peakRate = r
+                peakTime = Date(t)
+            }
+
+            if (r > limit + eps) {
+                seenAboveLimit = true
+            }
+
+            if (seenAboveLimit && returnBelowLimitTime == null && r <= limit + eps) {
+                returnBelowLimitTime = Date(t)
+            }
+
+            if (soberTime == null && r <= eps) {
+                soberTime = Date(t)
+                break
+            }
+
+            t += STEP_MS
+        }
+
+        // Fallbacks for edge cases near horizon.
+        if (soberTime == null) {
+            soberTime = timeToReachLimit(0.0)
+        }
+        if (seenAboveLimit && returnBelowLimitTime == null) {
+            returnBelowLimitTime = timeToReachLimit(limit)
+        }
+
+        return BacProjection(
+            currentRate = currentRate,
+            peakRate = peakRate,
+            peakTime = peakTime,
+            exceedsLimit = peakRate > limit + eps,
+            returnBelowLimitTime = returnBelowLimitTime,
+            soberTime = soberTime,
+        )
+    }
 
     /**
      * Returns the first future [Date] at which BAC will drop to or below [limit].

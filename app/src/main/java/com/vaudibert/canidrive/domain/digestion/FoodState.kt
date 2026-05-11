@@ -21,7 +21,7 @@ package com.vaudibert.canidrive.domain.digestion
 enum class FoodState(val absorptionRate: Double, val absorptionDelay: Double) {
 
     /** Fasted – empty stomach. Rapid absorption, earlier and higher peak. */
-    EMPTY(absorptionRate = 2.0, absorptionDelay = 0.0),
+    EMPTY(absorptionRate = 2.0, absorptionDelay = 0.25),
 
     /** Light snack: chips, fruit, crackers, cheese, etc. */
     LIGHT_MEAL(absorptionRate = 1.2, absorptionDelay = 0.40),

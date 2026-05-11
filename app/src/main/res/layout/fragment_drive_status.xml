@@ -19,64 +19,69 @@
         />
 
     <LinearLayout android:id="@+id/linearDriveStatus"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="bottom|top"
-        android:orientation="horizontal"
         android:layout_marginTop="@dimen/spacing_sm"
+        android:orientation="vertical"
+        android:paddingHorizontal="@dimen/spacing_sm"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/textViewDriveStatus">
 
-        <ImageView
-            android:id="@+id/imageCar"
-            android:layout_width="140dp"
-            android:layout_height="140dp"
-            android:layout_gravity="center"
-            android:contentDescription="@string/car_colored_with_status"
-            android:paddingBottom="10dp"
-            android:src="@drawable/ic_directions_car_white_24dp"
-            app:tint="@color/driveGreen" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="start|center_vertical"
+            android:orientation="horizontal">
 
-        <ImageView
-            android:id="@+id/imageDriveStatus"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_marginStart="@dimen/spacing_sm"
-            android:layout_marginTop="@dimen/spacing_sm"
-            android:layout_gravity="top|start"
-            android:contentDescription="@string/drive_status_symbol"
-            android:src="@drawable/ic_forbidden_white_24dp"
-            app:tint="@color/driveRed" />
+            <ImageView
+                android:id="@+id/imageCar"
+                android:layout_width="128dp"
+                android:layout_height="128dp"
+                android:contentDescription="@string/car_colored_with_status"
+                android:paddingBottom="10dp"
+                android:src="@drawable/ic_directions_car_white_24dp"
+                app:tint="@color/driveGreen" />
+
+            <ImageView
+                android:id="@+id/imageDriveStatus"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_marginStart="@dimen/spacing_sm"
+                android:layout_marginTop="@dimen/spacing_sm"
+                android:contentDescription="@string/drive_status_symbol"
+                android:src="@drawable/ic_forbidden_white_24dp"
+                app:tint="@color/driveRed" />
+        </LinearLayout>
 
         <TextView
             android:id="@+id/textViewDriveStatusLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/spacing_sm"
             android:layout_marginStart="@dimen/spacing_sm"
             android:text="@string/do_not_drive"
             android:textColor="@color/driveRed"
-            android:textStyle="bold"
-            android:textSize="20sp" />
+            android:textSize="19sp"
+            android:textStyle="bold" />
 
         <LinearLayout
             android:id="@+id/linearStatusDatas"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginStart="@dimen/spacing_sm"
-            android:gravity="center_horizontal"
+            android:layout_marginTop="@dimen/spacing_sm"
+            android:gravity="start"
             android:orientation="vertical"
-            >
+            android:paddingStart="@dimen/spacing_sm">
 
 
             <LinearLayout
                 android:id="@+id/linearAlcoholRate"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:layout_margin="@dimen/spacing_xs"
+                android:gravity="start|center_vertical"
                 tools:ignore="UseCompoundDrawables">
 
                 <ImageView
@@ -87,44 +92,70 @@
 
                 <TextView
                     android:id="@+id/textViewAlcoholRate"
-                    android:layout_width="wrap_content"
+                        android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/dev_alcohol_rate_example_text"
                     android:textColor="@color/driveAmber"
-                    android:textSize="22sp" />
+                        android:textSize="21sp" />
             </LinearLayout>
 
-
             <LinearLayout
-                android:id="@+id/linearWaitToDrive"
-                android:layout_width="wrap_content"
+                android:id="@+id/linearProjectedPeak"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
                 android:layout_margin="@dimen/spacing_xs"
+                android:orientation="horizontal"
+                android:gravity="start|center_vertical"
                 tools:ignore="UseCompoundDrawables">
 
                 <ImageView
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:contentDescription="@string/alcohol_blood_rate"
+                    android:src="@drawable/ic_warning_white_24dp"
+                    app:tint="@color/driveAmber" />
+
+                <TextView
+                    android:id="@+id/textViewPeakRate"
+                        android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/dev_alcohol_rate_example_text"
+                    android:textColor="@color/driveAmber"
+                    android:textSize="16sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linearProjectionDrive"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/spacing_xs"
+                android:orientation="horizontal"
+                android:gravity="start|center_vertical"
+                tools:ignore="UseCompoundDrawables">
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
                     android:contentDescription="@string/time_to_wait"
                     android:src="@drawable/ic_update_white_24dp"
                     app:tint="@color/driveAmber" />
 
                 <TextView
-                    android:id="@+id/textViewTimeToDrive"
-                    android:layout_width="wrap_content"
+                    android:id="@+id/textViewProjectionDrive"
+                        android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/dev_time_example_text"
                     android:textColor="@color/driveAmber"
-                    android:textSize="22sp" />
+                    android:textSize="16sp" />
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/linearWaitToSober"
-                android:layout_width="wrap_content"
+                android:id="@+id/linearProjectionSober"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
                 android:layout_margin="@dimen/spacing_xs"
+                android:orientation="horizontal"
+                android:gravity="start|center_vertical"
                 tools:ignore="UseCompoundDrawables">
 
                 <ImageView
@@ -135,13 +166,14 @@
                     app:tint="@color/driveGreen" />
 
                 <TextView
-                    android:id="@+id/textViewTimeToSober"
+                    android:id="@+id/textViewProjectionSober"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/dev_time_example_text"
                     android:textColor="@color/driveGreen"
-                    android:textSize="18sp" />
+                    android:textSize="16sp" />
             </LinearLayout>
+
 
         </LinearLayout>
 

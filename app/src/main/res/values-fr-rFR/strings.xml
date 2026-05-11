@@ -92,4 +92,8 @@
     <string name="food_state_light_desc">Chips, fruit, crackers, fromage...</string>
     <string name="food_state_full">Repas</string>
     <string name="food_state_full_desc">Pates, riz, pizza, viande, burger...</string>
+    <string name="drive_current_rate">Actuel : %1$s</string>
+    <string name="drive_peak_rate">Pic : %1$s à %2$s</string>
+    <string name="drive_below_limit_at">Sous le seuil légal à %1$s</string>
+    <string name="drive_zero_at">0 g/L à %1$s</string>
 </resources>

@@ -7,7 +7,7 @@
     tools:context=".ui.fragment.DriveFragment">
 
     <LinearLayout android:id="@+id/linearDriveStatus"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         app:layout_constraintHorizontal_weight="1"
         app:layout_constraintHorizontal_chainStyle="packed"
         android:layout_height="wrap_content"
@@ -31,7 +31,7 @@
             />
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             >
@@ -58,11 +58,12 @@
 
             <LinearLayout
                 android:id="@+id/linearStatusDatas"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:layout_gravity="center"
                 android:layout_marginStart="@dimen/spacing_sm"
-                android:gravity="center_horizontal"
+                android:gravity="start"
                 android:orientation="vertical"
                 >
 
@@ -91,35 +92,59 @@
                 </LinearLayout>
 
                 <LinearLayout
-                    android:id="@+id/linearWaitToDrive"
+                    android:id="@+id/linearProjectedPeak"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
                     android:layout_margin="@dimen/spacing_xs"
+                    android:orientation="horizontal"
                     tools:ignore="UseCompoundDrawables">
 
                     <ImageView
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:contentDescription="@string/alcohol_blood_rate"
+                        android:src="@drawable/ic_warning_white_24dp"
+                        android:tint="@color/driveAmber" />
+
+                    <TextView
+                        android:id="@+id/textViewPeakRate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/dev_alcohol_rate_example_text"
+                        android:textColor="@color/driveAmber"
+                        android:textSize="16sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/linearProjectionDrive"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/spacing_xs"
+                    android:orientation="horizontal"
+                    tools:ignore="UseCompoundDrawables">
+
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
                         android:contentDescription="@string/time_to_wait"
                         android:src="@drawable/ic_update_white_24dp"
                         android:tint="@color/driveAmber" />
 
                     <TextView
-                        android:id="@+id/textViewTimeToDrive"
+                        android:id="@+id/textViewProjectionDrive"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/dev_time_example_text"
                         android:textColor="@color/driveAmber"
-                        android:textSize="22sp" />
+                        android:textSize="16sp" />
                 </LinearLayout>
 
                 <LinearLayout
-                    android:id="@+id/linearWaitToSober"
+                    android:id="@+id/linearProjectionSober"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
                     android:layout_margin="@dimen/spacing_xs"
+                    android:orientation="horizontal"
                     tools:ignore="UseCompoundDrawables">
 
                     <ImageView
@@ -130,12 +155,12 @@
                         android:tint="@color/driveGreen" />
 
                     <TextView
-                        android:id="@+id/textViewTimeToSober"
+                        android:id="@+id/textViewProjectionSober"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/dev_time_example_text"
                         android:textColor="@color/driveGreen"
-                        android:textSize="18sp" />
+                        android:textSize="16sp" />
                 </LinearLayout>
 
             </LinearLayout>

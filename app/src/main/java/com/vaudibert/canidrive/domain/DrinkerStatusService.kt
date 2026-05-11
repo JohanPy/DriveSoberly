@@ -10,12 +10,20 @@ class DrinkerStatusService(
 ) {
     fun status(): DrinkerStatus {
         val driveLimit = driveLawService.driveLimit()
-        val ratePresent = digestionService.alcoholRateAt(Date())
+        val projection = digestionService.projectionForLimit(driveLimit)
+        val ratePresent = projection.currentRate
+
+        val exceedsLimitInProjection = projection.exceedsLimit
+        val driveDate = projection.returnBelowLimitTime ?: Date()
+
         return DrinkerStatus(
-            ratePresent <= driveLimit,
+            !exceedsLimitInProjection,
             ratePresent,
-            digestionService.timeToReachLimit(driveLimit),
-            digestionService.timeToReachLimit(driveLawService.defaultLimit),
+            projection.peakRate,
+            projection.peakTime,
+            driveDate,
+            projection.soberTime,
+            exceedsLimitInProjection,
         )
     }
 }
