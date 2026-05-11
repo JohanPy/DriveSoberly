@@ -23,6 +23,12 @@ jobs:
           distribution: 'temurin'
           cache: gradle
 
+      - name: Set up Android SDK tools
+        uses: android-actions/setup-android@v3
+
+      - name: Install Android build tools
+        run: sdkmanager "build-tools;35.0.0" "platform-tools"
+
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
 
@@ -41,24 +47,31 @@ jobs:
           
           # Find the unsigned APK
           UNSIGNED_APK=$(find app/build/outputs/apk/release -name "*.apk" | head -1)
+          ALIGNED_APK="${UNSIGNED_APK%.apk}-aligned.apk"
           SIGNED_APK="${UNSIGNED_APK%.apk}-signed.apk"
+          SDK_ROOT="${ANDROID_HOME:-/usr/local/lib/android/sdk}"
+          ZIPALIGN_BIN=$(find "$SDK_ROOT/build-tools" -name zipalign | sort -V | tail -1)
+          APKSIGNER_BIN=$(find "$SDK_ROOT/build-tools" -name apksigner | sort -V | tail -1)
+
+          if [[ -z "$ZIPALIGN_BIN" || -z "$APKSIGNER_BIN" ]]; then
+            echo "zipalign/apksigner not found in $SDK_ROOT/build-tools"
+            exit 1
+          fi
+
+          # Android R+ requires resources.arsc uncompressed and 4-byte aligned.
+          "$ZIPALIGN_BIN" -f -p 4 "$UNSIGNED_APK" "$ALIGNED_APK"
           
-          # Sign the APK using jarsigner (built into JDK)
-          jarsigner -verbose -sigalg SHA256withRSA -digestalg SHA-256 \
-            -keystore /tmp/release.keystore \
-            -storepass "$KEYSTORE_PASSWORD" \
-            -keypass "$KEY_PASSWORD" \
-            "$UNSIGNED_APK" "$KEY_ALIAS"
+          # Sign aligned APK with apksigner (Android signature scheme v2/v3).
+          "$APKSIGNER_BIN" sign \
+            --ks /tmp/release.keystore \
+            --ks-key-alias "$KEY_ALIAS" \
+            --ks-pass pass:"$KEYSTORE_PASSWORD" \
+            --key-pass pass:"$KEY_PASSWORD" \
+            --out "$SIGNED_APK" \
+            "$ALIGNED_APK"
           
           # Verify signature
-          jarsigner -verify -verbose "$UNSIGNED_APK"
-          
-          # Align the APK (if zipalign is available)
-          if command -v zipalign &> /dev/null; then
-            zipalign -v 4 "$UNSIGNED_APK" "$SIGNED_APK"
-          else
-            cp "$UNSIGNED_APK" "$SIGNED_APK"
-          fi
+          "$APKSIGNER_BIN" verify --verbose "$SIGNED_APK"
           
           # Store signed APK path for later steps
           echo "SIGNED_APK=$SIGNED_APK" >> $GITHUB_ENV

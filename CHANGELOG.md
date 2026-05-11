@@ -4,6 +4,13 @@ All notable changes to this project will be documented in this file.
 
 The format is based on Keep a Changelog and this project follows Semantic Versioning.
 
+## [1.0.7] - 2026-05-11
+
+### Fixed
+
+- Fixed release APK install failure on Android 11+ by enforcing proper `zipalign` and signing with `apksigner` in CI.
+- Removed fallback that copied an unaligned APK, which caused install parse errors (`resources.arsc` alignment).
+
 ## [1.0.6] - 2026-05-11
 
 ### Fixed
