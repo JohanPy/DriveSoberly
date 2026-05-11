@@ -27,24 +27,44 @@ jobs:
       - name: Build release APK (unsigned)
         run: ./gradlew clean assembleRelease --no-daemon
 
-      - name: Sign release APK
-        uses: r0adkll/sign-android-release@v1
-        id: sign_app
-        with:
-          releaseDirectory: app/build/outputs/apk/release
-          signingKeyBase64: ${{ secrets.RELEASE_KEYSTORE_B64 }}
-          alias: ${{ secrets.RELEASE_KEY_ALIAS }}
-          keyStorePassword: ${{ secrets.RELEASE_KEYSTORE_PASSWORD }}
-          keyPassword: ${{ secrets.RELEASE_KEY_PASSWORD }}
+      - name: Sign release APK manually
+        env:
+          KEYSTORE_B64: ${{ secrets.RELEASE_KEYSTORE_B64 }}
+          KEYSTORE_PASSWORD: ${{ secrets.RELEASE_KEYSTORE_PASSWORD }}
+          KEY_ALIAS: ${{ secrets.RELEASE_KEY_ALIAS }}
+          KEY_PASSWORD: ${{ secrets.RELEASE_KEY_PASSWORD }}
+        run: |
+          # Decode keystore from base64
+          echo "$KEYSTORE_B64" | base64 -d > /tmp/release.keystore
+          
+          # Find the unsigned APK
+          UNSIGNED_APK=$(find app/build/outputs/apk/release -name "*.apk" | head -1)
+          SIGNED_APK="${UNSIGNED_APK%.apk}-signed.apk"
+          
+          # Sign the APK using jarsigner (built into JDK)
+          jarsigner -verbose -sigalg SHA256withRSA -digestalg SHA-256 \
+            -keystore /tmp/release.keystore \
+            -storepass "$KEYSTORE_PASSWORD" \
+            -keypass "$KEY_PASSWORD" \
+            "$UNSIGNED_APK" "$KEY_ALIAS"
+          
+          # Verify signature
+          jarsigner -verify -verbose "$UNSIGNED_APK"
+          
+          # Align the APK
+          zipalign -v 4 "$UNSIGNED_APK" "$SIGNED_APK"
+          
+          # Store signed APK path for later steps
+          echo "SIGNED_APK=$SIGNED_APK" >> $GITHUB_ENV
 
       - name: Compute SHA256
-        run: sha256sum "${{ steps.sign_app.outputs.signedReleaseFile }}" > SHA256SUMS.txt
+        run: sha256sum "${{ env.SIGNED_APK }}" > SHA256SUMS.txt
 
       - name: Upload signed APK artifact
         uses: actions/upload-artifact@v4
         with:
           name: signed-release-apk
-          path: ${{ steps.sign_app.outputs.signedReleaseFile }}
+          path: ${{ env.SIGNED_APK }}
 
       - name: Upload SHA256 file
         uses: actions/upload-artifact@v4
@@ -56,6 +76,6 @@ jobs:
         uses: softprops/action-gh-release@v2
         with:
           files: |
-            ${{ steps.sign_app.outputs.signedReleaseFile }}
+            ${{ env.SIGNED_APK }}
             SHA256SUMS.txt
           generate_release_notes: true
