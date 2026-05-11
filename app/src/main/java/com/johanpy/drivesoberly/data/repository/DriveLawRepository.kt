@@ -3,6 +3,7 @@ package com.johanpy.drivesoberly.data.repository
 import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.core.os.ConfigurationCompat
 import androidx.security.crypto.EncryptedSharedPreferences
 import androidx.security.crypto.MasterKey
 import com.johanpy.drivesoberly.R
@@ -55,8 +56,11 @@ class DriveLawRepository(private val context: Context) {
         driveLawService.isYoung = sharedPref.getBoolean(context.getString(R.string.user_young_driver), false)
         driveLawService.isProfessional = sharedPref.getBoolean(context.getString(R.string.user_professional_driver), false)
 
+        val savedCountryCode = sharedPref.getString(context.getString(R.string.countryCode), "")?.trim().orEmpty()
+        val initialCountryCode = if (savedCountryCode.isBlank()) systemCountryCode() else savedCountryCode
+
         driveLawService.select(
-            sharedPref.getString(context.getString(R.string.countryCode), "") ?: "",
+            initialCountryCode,
         )
         driveLawService.customCountryLimit = sharedPref.getFloat(context.getString(R.string.customCountryLimit), 0.0F).toDouble()
 
@@ -106,5 +110,11 @@ class DriveLawRepository(private val context: Context) {
         _liveIsYoung.value = driveLawService.isYoung
         _liveIsProfessional.value = driveLawService.isProfessional
         _liveCustomCountryLimit.value = driveLawService.customCountryLimit
+    }
+
+    private fun systemCountryCode(): String {
+        val localeFromConfig = ConfigurationCompat.getLocales(context.resources.configuration)[0]
+        val countryCode = localeFromConfig?.country.orEmpty().ifBlank { Locale.getDefault().country }
+        return countryCode.uppercase(Locale.ROOT)
     }
 }
