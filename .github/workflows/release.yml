@@ -9,6 +9,8 @@ jobs:
   release:
     name: Build and publish signed APK
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
 
     steps:
       - name: Checkout
@@ -82,4 +84,4 @@ jobs:
           files: |
             ${{ env.SIGNED_APK }}
             SHA256SUMS.txt
-          generate_release_notes: true
+          generate_release_notes: false
