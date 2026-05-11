@@ -1,13 +1,501 @@
 [
   {
+    "countryCode": "AE",
+    "limit": 0.0,
+    "youngLimit": null,
+    "professionalLimit": null
+  },
+  {
     "countryCode": "AL",
     "limit": 0.1,
     "youngLimit": null,
     "professionalLimit": null
   },
   {
+    "countryCode": "AM",
+    "limit": 0.4,
+    "youngLimit": null,
+    "professionalLimit": null
+  },
+  {
     "countryCode": "AT",
     "limit": 0.5,
+    "youngLimit": {
+      "limit": 0.1,
+      "explanationName": "less_two_years_driving"
+    },
+    "professionalLimit": {
+      "limit": 0.2
+    }
+  },
+  {
+    "countryCode": "BA",
+    "limit": 0.3,
+    "youngLimit": {
+      "limit": 0.0,
+      "explanationName": "twenty_one_young_or_less_three_years_driving"
+    },
+    "professionalLimit": {
+      "limit": 0.0
+    }
+  },
+  {
+    "countryCode": "BE",
+    "limit": 0.5,
+    "youngLimit": null,
+    "professionalLimit": {
+      "limit": 0.2
+    }
+  },
+  {
+    "countryCode": "BG",
+    "limit": 0.5,
+    "youngLimit": null,
+    "professionalLimit": null
+  },
+  {
+    "countryCode": "BY",
+    "limit": 0.3,
+    "youngLimit": null,
+    "professionalLimit": null
+  },
+  {
+    "countryCode": "CA",
+    "limit": 0.8,
+    "youngLimit": null,
+    "professionalLimit": null
+  },
+  {
+    "countryCode": "CH",
+    "limit": 0.5,
+    "youngLimit": {
+      "limit": 0.0,
+      "explanationName": "three_years_driving"
+    },
+    "professionalLimit": null
+  },
+  {
+    "countryCode": "CN",
+    "limit": 0.2,
+    "youngLimit": null,
+    "professionalLimit": null
+  },
+  {
+    "countryCode": "CY",
+    "limit": 0.5,
+    "youngLimit": null,
+    "professionalLimit": null
+  },
+  {
+    "countryCode": "CZ",
+    "limit": 0.0,
+    "youngLimit": null,
+    "professionalLimit": null
+  },
+  {
+    "countryCode": "DE",
+    "limit": 0.5,
+    "youngLimit": {
+      "limit": 0.0,
+      "explanationName": "twenty_one_young_or_less_two_years_driving"
+    },
+    "professionalLimit": {
+      "limit": 0.2
+    }
+  },
+  {
+    "countryCode": "DK",
+    "limit": 0.5,
+    "youngLimit": null,
+    "professionalLimit": null
+  },
+  {
+    "countryCode": "EE",
+    "limit": 0.19,
+    "youngLimit": null,
+    "professionalLimit": null
+  },
+  {
+    "countryCode": "ES",
+    "limit": 0.5,
+    "youngLimit": {
+      "limit": 0.3,
+      "explanationName": "less_two_years_driving"
+    },
+    "professionalLimit": {
+      "limit": 0.2
+    }
+  },
+  {
+    "countryCode": "FI",
+    "limit": 0.5,
+    "youngLimit": null,
+    "professionalLimit": null
+  },
+  {
+    "countryCode": "FR",
+    "limit": 0.5,
+    "youngLimit": {
+      "limit": 0.2,
+      "explanationName": "less_two_years_driving"
+    },
+    "professionalLimit": {
+      "limit": 0.2
+    }
+  },
+  {
+    "countryCode": "GB",
+    "limit": 0.8,
+    "youngLimit": null,
+    "professionalLimit": {
+      "limit": 0.8
+    }
+  },
+  {
+    "countryCode": "GE",
+    "limit": 0.2,
+    "youngLimit": null,
+    "professionalLimit": null
+  },
+  {
+    "countryCode": "GI",
+    "limit": 0.5,
+    "youngLimit": null,
+    "professionalLimit": null
+  },
+  {
+    "countryCode": "GR",
+    "limit": 0.5,
+    "youngLimit": {
+      "limit": 0.2,
+      "explanationName": "motor_cycle_or_less_two_years_driving"
+    },
+    "professionalLimit": {
+      "limit": 0.2
+    }
+  },
+  {
+    "countryCode": "HK",
+    "limit": 0.5,
+    "youngLimit": null,
+    "professionalLimit": null
+  },
+  {
+    "countryCode": "HR",
+    "limit": 0.5,
+    "youngLimit": {
+      "limit": 0.0,
+      "explanationName": "sixteen_to_twenty_four_years_old"
+    },
+    "professionalLimit": {
+      "limit": 0.0
+    }
+  },
+  {
+    "countryCode": "HU",
+    "limit": 0.0,
+    "youngLimit": null,
+    "professionalLimit": null
+  },
+  {
+    "countryCode": "ID",
+    "limit": 0.0,
+    "youngLimit": null,
+    "professionalLimit": null
+  },
+  {
+    "countryCode": "IE",
+    "limit": 0.5,
+    "youngLimit": {
+      "limit": 0.2,
+      "explanationName": "motor_cycle_or_less_two_years_driving"
+    },
+    "professionalLimit": {
+      "limit": 0.2
+    }
+  },
+  {
+    "countryCode": "IL",
+    "limit": 0.24,
+    "youngLimit": {
+      "limit": 0.05,
+      "explanationName": "new_driver_or_twenty_four"
+    },
+    "professionalLimit": {
+      "limit": 0.05
+    }
+  },
+  {
+    "countryCode": "IN",
+    "limit": 0.3,
+    "youngLimit": null,
+    "professionalLimit": null
+  },
+  {
+    "countryCode": "IR",
+    "limit": 0.0,
+    "youngLimit": null,
+    "professionalLimit": null
+  },
+  {
+    "countryCode": "IS",
+    "limit": 0.2,
+    "youngLimit": null,
+    "professionalLimit": null
+  },
+  {
+    "countryCode": "IT",
+    "limit": 0.5,
+    "youngLimit": {
+      "limit": 0.01,
+      "explanationName": "three_years_driving"
+    },
+    "professionalLimit": {
+      "limit": 0.01
+    }
+  },
+  {
+    "countryCode": "JO",
+    "limit": 0.5,
+    "youngLimit": null,
+    "professionalLimit": null
+  },
+  {
+    "countryCode": "JP",
+    "limit": 0.3,
+    "youngLimit": null,
+    "professionalLimit": null
+  },
+  {
+    "countryCode": "KR",
+    "limit": 0.3,
+    "youngLimit": null,
+    "professionalLimit": null
+  },
+  {
+    "countryCode": "KW",
+    "limit": 0.0,
+    "youngLimit": null,
+    "professionalLimit": null
+  },
+  {
+    "countryCode": "LA",
+    "limit": 0.8,
+    "youngLimit": null,
+    "professionalLimit": null
+  },
+  {
+    "countryCode": "LK",
+    "limit": 0.6,
+    "youngLimit": null,
+    "professionalLimit": null
+  },
+  {
+    "countryCode": "LT",
+    "limit": 0.4,
+    "youngLimit": {
+      "limit": 0.0,
+      "explanationName": "motor_cycle_or_less_two_years_driving"
+    },
+    "professionalLimit": {
+      "limit": 0.0
+    }
+  },
+  {
+    "countryCode": "LU",
+    "limit": 0.5,
+    "youngLimit": {
+      "limit": 0.2,
+      "explanationName": "less_two_years_driving"
+    },
+    "professionalLimit": {
+      "limit": 0.2
+    }
+  },
+  {
+    "countryCode": "LV",
+    "limit": 0.5,
+    "youngLimit": {
+      "limit": 0.2,
+      "explanationName": "less_two_years_driving"
+    },
+    "professionalLimit": null
+  },
+  {
+    "countryCode": "MD",
+    "limit": 0.3,
+    "youngLimit": null,
+    "professionalLimit": null
+  },
+  {
+    "countryCode": "ME",
+    "limit": 0.3,
+    "youngLimit": null,
+    "professionalLimit": null
+  },
+  {
+    "countryCode": "MT",
+    "limit": 0.8,
+    "youngLimit": null,
+    "professionalLimit": null
+  },
+  {
+    "countryCode": "MY",
+    "limit": 0.8,
+    "youngLimit": null,
+    "professionalLimit": null
+  },
+  {
+    "countryCode": "NL",
+    "limit": 0.5,
+    "youngLimit": {
+      "limit": 0.2,
+      "explanationName": "five_years_driving"
+    },
+    "professionalLimit": null
+  },
+  {
+    "countryCode": "NO",
+    "limit": 0.2,
+    "youngLimit": null,
+    "professionalLimit": null
+  },
+  {
+    "countryCode": "NP",
+    "limit": 0.0,
+    "youngLimit": null,
+    "professionalLimit": null
+  },
+  {
+    "countryCode": "PH",
+    "limit": 0.5,
+    "youngLimit": {
+      "limit": 0.1,
+      "explanationName": "motor_cycle_or_young_drivers"
+    },
+    "professionalLimit": {
+      "limit": 0.1
+    }
+  },
+  {
+    "countryCode": "PK",
+    "limit": 0.0,
+    "youngLimit": null,
+    "professionalLimit": null
+  },
+  {
+    "countryCode": "PL",
+    "limit": 0.2,
+    "youngLimit": null,
+    "professionalLimit": null
+  },
+  {
+    "countryCode": "PT",
+    "limit": 0.5,
+    "youngLimit": {
+      "limit": 0.2,
+      "explanationName": "three_years_driving"
+    },
+    "professionalLimit": null
+  },
+  {
+    "countryCode": "RO",
+    "limit": 0.0,
+    "youngLimit": null,
+    "professionalLimit": null
+  },
+  {
+    "countryCode": "RS",
+    "limit": 0.2,
+    "youngLimit": {
+      "limit": 0.0,
+      "explanationName": "motor_cycle_or_young_drivers"
+    },
+    "professionalLimit": {
+      "limit": 0.0
+    }
+  },
+  {
+    "countryCode": "RU",
+    "limit": 0.356,
+    "youngLimit": null,
+    "professionalLimit": null
+  },
+  {
+    "countryCode": "SA",
+    "limit": 0.0,
+    "youngLimit": null,
+    "professionalLimit": null
+  },
+  {
+    "countryCode": "SE",
+    "limit": 0.2,
+    "youngLimit": null,
+    "professionalLimit": null
+  },
+  {
+    "countryCode": "SG",
+    "limit": 0.8,
+    "youngLimit": null,
+    "professionalLimit": null
+  },
+  {
+    "countryCode": "SI",
+    "limit": 0.5,
+    "youngLimit": {
+      "limit": 0.0,
+      "explanationName": "three_years_driving"
+    },
+    "professionalLimit": {
+      "limit": 0.0
+    }
+  },
+  {
+    "countryCode": "SK",
+    "limit": 0.0,
+    "youngLimit": null,
+    "professionalLimit": null
+  },
+  {
+    "countryCode": "TH",
+    "limit": 0.5,
+    "youngLimit": null,
+    "professionalLimit": {
+      "limit": 0.0
+    }
+  },
+  {
+    "countryCode": "TR",
+    "limit": 0.5,
+    "youngLimit": null,
+    "professionalLimit": {
+      "limit": 0.0
+    }
+  },
+  {
+    "countryCode": "TW",
+    "limit": 0.3,
+    "youngLimit": null,
+    "professionalLimit": null
+  },
+  {
+    "countryCode": "UA",
+    "limit": 0.2,
+    "youngLimit": null,
+    "professionalLimit": null
+  },
+  {
+    "countryCode": "US",
+    "limit": 0.8,
+    "youngLimit": {
+      "limit": 0.0,
+      "explanationName": "twenty_one_young"
+    },
+    "professionalLimit": null
+  },
+  {
+    "countryCode": "VN",
+    "limit": 0.0,
     "youngLimit": null,
     "professionalLimit": null
   }
