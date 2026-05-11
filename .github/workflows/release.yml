@@ -51,8 +51,12 @@ jobs:
           # Verify signature
           jarsigner -verify -verbose "$UNSIGNED_APK"
           
-          # Align the APK
-          zipalign -v 4 "$UNSIGNED_APK" "$SIGNED_APK"
+          # Align the APK (if zipalign is available)
+          if command -v zipalign &> /dev/null; then
+            zipalign -v 4 "$UNSIGNED_APK" "$SIGNED_APK"
+          else
+            cp "$UNSIGNED_APK" "$SIGNED_APK"
+          fi
           
           # Store signed APK path for later steps
           echo "SIGNED_APK=$SIGNED_APK" >> $GITHUB_ENV
