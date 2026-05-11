@@ -7,10 +7,14 @@ Alcohol blood rate computer for driving
 
 [<img src="https://fdroid.gitlab.io/artwork/badge/get-it-on.png"
      alt="Get it on F-Droid"
-     height="80">](https://f-droid.org/packages/com.vaudibert.drivesoberly/)
+     height="80">](https://github.com/JohanPy/DriveSoberly/releases)
 [<img src="https://play.google.com/intl/en_us/badges/images/generic/en-play-badge.png"
      alt="Get it on Google Play"
-     height="80">](https://play.google.com/store/apps/details?id=com.vaudibert.drivesoberly)
+     height="80">](https://github.com/JohanPy/DriveSoberly/releases)
+
+Current public distribution is done via GitHub Releases. F-Droid submission is planned for this fork package: `com.johanpy.drivesoberly`.
+
+See [docs/fdroid-submission.md](docs/fdroid-submission.md) for the release and submission checklist.
 
 ## 👋 About
 DriveSoberly is an Android app letting you evaluate whether you can drive or not.
@@ -105,9 +109,49 @@ Contributions are welcome:
 For any contribution, please [open an issue](https://github.com/JohanPy/DriveSoberly/issues/new/choose), or clone & submit a pull request 🙂.
 
 ## ▶️ Run the project
-* clone the repo
-* open it with Android Studio
-* have fun with it...
+
+### Prerequisites
+- Android Studio Ladybug+ (or equivalent Gradle support)
+- Java 17
+- Android SDK platform 35
+
+### Build debug APK
+1. Clone the repository.
+2. Ensure `local.properties` points to your Android SDK path.
+3. Run:
+
+```bash
+./gradlew clean assembleDebug
+```
+
+### Run tests
+
+```bash
+./gradlew ktlintCheck testDebugUnitTest connectedDebugAndroidTest
+```
+
+### Build release APK
+
+```bash
+./gradlew clean assembleRelease
+```
+
+Release signing is handled in CI for tagged releases.
+
+## 🚀 Release versioning
+
+- Tags follow SemVer: `vMAJOR.MINOR.PATCH` (example: `v1.0.0`)
+- `versionName` follows SemVer
+- `versionCode` is incremented at every public release
+- Main development branch is `master`
+
+## 📦 Release process (GitHub then F-Droid)
+
+1. Merge only when CI is fully green.
+2. Update changelog and bump version metadata.
+3. Create a signed release by pushing a SemVer tag.
+4. Publish APK + SHA256 checksum on GitHub release.
+5. Submit same tagged source to F-Droid with matching metadata.
 
 ---
 

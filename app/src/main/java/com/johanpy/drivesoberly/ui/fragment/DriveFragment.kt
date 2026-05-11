@@ -84,11 +84,12 @@ class DriveFragment : Fragment() {
 
         toggleGroupFoodState.addOnButtonCheckedListener { _, checkedId, isChecked ->
             if (!isChecked) return@addOnButtonCheckedListener
-            val state = when (checkedId) {
-                R.id.buttonFoodLight -> FoodState.LIGHT_MEAL
-                R.id.buttonFoodFull -> FoodState.FULL_MEAL
-                else -> FoodState.EMPTY
-            }
+            val state =
+                when (checkedId) {
+                    R.id.buttonFoodLight -> FoodState.LIGHT_MEAL
+                    R.id.buttonFoodFull -> FoodState.FULL_MEAL
+                    else -> FoodState.EMPTY
+                }
             viewModel.updateFoodState(state)
             textViewFoodStateDesc.text = getString(foodStateDescRes(state))
             updateDriveStatus()
@@ -223,11 +224,12 @@ class DriveFragment : Fragment() {
     // ── Food state helpers ────────────────────────────────────────────────────
 
     private fun updateFoodStateToggle(state: FoodState) {
-        val buttonId = when (state) {
-            FoodState.LIGHT_MEAL -> R.id.buttonFoodLight
-            FoodState.FULL_MEAL -> R.id.buttonFoodFull
-            FoodState.EMPTY -> R.id.buttonFoodEmpty
-        }
+        val buttonId =
+            when (state) {
+                FoodState.LIGHT_MEAL -> R.id.buttonFoodLight
+                FoodState.FULL_MEAL -> R.id.buttonFoodFull
+                FoodState.EMPTY -> R.id.buttonFoodEmpty
+            }
         toggleGroupFoodState.check(buttonId)
         textViewFoodStateDesc.text = getString(foodStateDescRes(state))
     }

@@ -21,4 +21,15 @@ class IngestedDrinkTest {
         val strong = IngestedDrink("Strong", 30.0, 40.0, Date())
         assertEquals(9.6, strong.alcoholMass(), 0.01)
     }
+
+    @Test
+    fun `alcoholMass clamps invalid input values`() {
+        // Negative values are sanitized to zero.
+        val invalidNegative = IngestedDrink("InvalidNegative", -500.0, -5.0, Date())
+        assertEquals(0.0, invalidNegative.alcoholMass(), 0.01)
+
+        // Degrees above 100% are capped to keep physically plausible output.
+        val invalidDegree = IngestedDrink("InvalidDegree", 30.0, 180.0, Date())
+        assertEquals(24.0, invalidDegree.alcoholMass(), 0.01)
+    }
 }

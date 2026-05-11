@@ -171,9 +171,10 @@ class DigestionService(
 
         // Map drinks to absorption-start events, sorted chronologically.
         data class AbsEvent(val startMs: Long, val mass: Double)
-        val events = drinks
-            .map { AbsEvent(it.ingestionTime.time + lagMs, it.alcoholMass()) }
-            .sortedBy { it.startMs }
+        val events =
+            drinks
+                .map { AbsEvent(it.ingestionTime.time + lagMs, it.alcoholMass()) }
+                .sortedBy { it.startMs }
 
         // If the first drink hasn't started absorbing yet, BAC is still zero.
         val simStart = events.first().startMs

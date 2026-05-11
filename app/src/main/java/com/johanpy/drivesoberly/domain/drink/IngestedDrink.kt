@@ -10,7 +10,11 @@ open class IngestedDrink(
     override val degree: Double,
     override val ingestionTime: Date,
 ) : IIngestedDrink {
-    override fun alcoholMass(): Double = degree / 100 * volume * ALCOHOL_DENSITY
+    override fun alcoholMass(): Double {
+        val sanitizedDegree = degree.coerceIn(0.0, 100.0)
+        val sanitizedVolume = volume.coerceAtLeast(0.0)
+        return sanitizedDegree / 100.0 * sanitizedVolume * ALCOHOL_DENSITY
+    }
 
     companion object Data {
         // degrees in % : 2.5 = 2.5%

@@ -6,7 +6,6 @@ import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
 
 internal class FoodStateTest {
-
     @Test
     fun `fromString returns EMPTY for unknown values`() {
         assertEquals(FoodState.EMPTY, FoodState.fromString(""))

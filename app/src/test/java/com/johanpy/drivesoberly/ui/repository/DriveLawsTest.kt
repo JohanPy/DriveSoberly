@@ -9,7 +9,6 @@ import org.junit.jupiter.api.Test
 import java.io.File
 
 class DriveLawsTest {
-
     /** Reads drive_laws.json from the module's assets folder without Android Context. */
     private fun loadDriveLawsFromAssets(): List<DriveLaw> {
         val assetsFile = File("src/main/assets/drive_laws.json")

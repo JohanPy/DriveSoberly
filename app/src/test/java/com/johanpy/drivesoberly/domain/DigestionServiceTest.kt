@@ -27,6 +27,7 @@ internal class DigestionServiceTest {
 
     /** Returns milliseconds offset from epoch as a [Date]. */
     private fun minutesLater(minutes: Long): Date = Date(Date().time + minutes * 60_000L)
+
     private fun hoursLater(hours: Double): Date = Date(Date().time + (hours * 3_600_000).toLong())
 
     @BeforeEach
@@ -123,17 +124,19 @@ internal class DigestionServiceTest {
 
         // Measure approximate peak for EMPTY stomach (around 45 min).
         body.foodState = FoodState.EMPTY
-        val emptyPeak = (15L..180L step 5L)
-            .map { digestionService.alcoholRateAt(Date(now.time + it * 60_000L)) }
-            .max()
+        val emptyPeak =
+            (15L..180L step 5L)
+                .map { digestionService.alcoholRateAt(Date(now.time + it * 60_000L)) }
+                .max()
 
         // Reset with same drink under FULL_MEAL.
         ingestionService.remove(ingestionService.getDrinks().filterIsInstance<IngestedDrink>().first())
         ingestBeer(now)
         body.foodState = FoodState.FULL_MEAL
-        val fullMealPeak = (15L..240L step 5L)
-            .map { digestionService.alcoholRateAt(Date(now.time + it * 60_000L)) }
-            .max()
+        val fullMealPeak =
+            (15L..240L step 5L)
+                .map { digestionService.alcoholRateAt(Date(now.time + it * 60_000L)) }
+                .max()
 
         assertTrue(
             fullMealPeak < emptyPeak,
@@ -147,14 +150,16 @@ internal class DigestionServiceTest {
 
         body.foodState = FoodState.EMPTY
         ingestBeer(now)
-        val emptyPeakTime = (15L..180L step 5L)
-            .maxByOrNull { digestionService.alcoholRateAt(Date(now.time + it * 60_000L)) }!!
+        val emptyPeakTime =
+            (15L..180L step 5L)
+                .maxByOrNull { digestionService.alcoholRateAt(Date(now.time + it * 60_000L)) }!!
 
         ingestionService.remove(ingestionService.getDrinks().filterIsInstance<IngestedDrink>().first())
         body.foodState = FoodState.FULL_MEAL
         ingestBeer(now)
-        val fullMealPeakTime = (15L..300L step 5L)
-            .maxByOrNull { digestionService.alcoholRateAt(Date(now.time + it * 60_000L)) }!!
+        val fullMealPeakTime =
+            (15L..300L step 5L)
+                .maxByOrNull { digestionService.alcoholRateAt(Date(now.time + it * 60_000L)) }!!
 
         assertTrue(
             fullMealPeakTime > emptyPeakTime,

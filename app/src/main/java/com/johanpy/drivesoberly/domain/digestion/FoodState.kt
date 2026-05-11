@@ -19,7 +19,6 @@ package com.johanpy.drivesoberly.domain.digestion
  * @param absorptionDelay Lag time before absorption begins, t_lag (h).
  */
 enum class FoodState(val absorptionRate: Double, val absorptionDelay: Double) {
-
     /** Fasted – empty stomach. Rapid absorption, earlier and higher peak. */
     EMPTY(absorptionRate = 2.0, absorptionDelay = 0.25),
 

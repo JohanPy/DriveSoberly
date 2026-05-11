@@ -7,11 +7,6 @@ import org.junit.jupiter.api.Test
 import org.mockito.Mockito.*
 import java.util.*
 
-/**
- * Kotlin + Mockito fix: `any(Date::class.java)` registers an argument matcher but returns null.
- * The `?: Date(0)` fallback ensures Kotlin's non-null contract is satisfied at call-site,
- * while Mockito still captures the matcher correctly.
- */
 private fun anyDate(): Date = any(Date::class.java) ?: Date(0)
 
 class DrinkerStatusServiceTest {
@@ -19,11 +14,19 @@ class DrinkerStatusServiceTest {
     fun `status returns can drive when alcohol rate is below limit`() {
         val digestionService = mock(DigestionService::class.java)
         val driveLawService = mock(DriveLawService::class.java)
+        val now = Date(1_000L)
+        val projection =
+            DigestionService.BacProjection(
+                currentRate = 0.4,
+                peakRate = 0.4,
+                peakTime = now,
+                exceedsLimit = false,
+                returnBelowLimitTime = null,
+                soberTime = Date(2_000L),
+            )
 
         `when`(driveLawService.driveLimit()).thenReturn(0.5)
-        `when`(driveLawService.defaultLimit).thenReturn(0.0)
-        `when`(digestionService.alcoholRateAt(anyDate())).thenReturn(0.4)
-        `when`(digestionService.timeToReachLimit(anyDouble())).thenReturn(Date(1000L))
+        `when`(digestionService.projectionForLimit(anyDouble(), anyDate())).thenReturn(projection)
 
         val service = DrinkerStatusService(digestionService, driveLawService)
         val status = service.status()
@@ -36,11 +39,19 @@ class DrinkerStatusServiceTest {
     fun `status returns cannot drive when alcohol rate is above limit`() {
         val digestionService = mock(DigestionService::class.java)
         val driveLawService = mock(DriveLawService::class.java)
+        val now = Date(1_000L)
+        val projection =
+            DigestionService.BacProjection(
+                currentRate = 0.8,
+                peakRate = 0.8,
+                peakTime = now,
+                exceedsLimit = true,
+                returnBelowLimitTime = Date(3_000L),
+                soberTime = Date(5_000L),
+            )
 
         `when`(driveLawService.driveLimit()).thenReturn(0.5)
-        `when`(driveLawService.defaultLimit).thenReturn(0.0)
-        `when`(digestionService.alcoholRateAt(anyDate())).thenReturn(0.8)
-        `when`(digestionService.timeToReachLimit(anyDouble())).thenReturn(Date(1000L))
+        `when`(digestionService.projectionForLimit(anyDouble(), anyDate())).thenReturn(projection)
 
         val service = DrinkerStatusService(digestionService, driveLawService)
         val status = service.status()
@@ -53,11 +64,19 @@ class DrinkerStatusServiceTest {
     fun `status returns can drive when alcohol rate equals limit`() {
         val digestionService = mock(DigestionService::class.java)
         val driveLawService = mock(DriveLawService::class.java)
+        val now = Date(1_000L)
+        val projection =
+            DigestionService.BacProjection(
+                currentRate = 0.5,
+                peakRate = 0.5,
+                peakTime = now,
+                exceedsLimit = false,
+                returnBelowLimitTime = null,
+                soberTime = Date(3_000L),
+            )
 
         `when`(driveLawService.driveLimit()).thenReturn(0.5)
-        `when`(driveLawService.defaultLimit).thenReturn(0.0)
-        `when`(digestionService.alcoholRateAt(anyDate())).thenReturn(0.5)
-        `when`(digestionService.timeToReachLimit(anyDouble())).thenReturn(Date(1000L))
+        `when`(digestionService.projectionForLimit(anyDouble(), anyDate())).thenReturn(projection)
 
         val service = DrinkerStatusService(digestionService, driveLawService)
         val status = service.status()

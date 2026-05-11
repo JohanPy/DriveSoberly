@@ -10,8 +10,8 @@ Items marked ~~like this~~ were fixed in the initial implementation pass.
 - [x] ~~**Fix `toDouble()` crash on invalid input**~~ – `DrinkerFragment.kt`: replaced with `toDoubleOrNull()` + fallback.
 - [x] ~~**Fix Saint Patrick's Day logic (wrong month + wrong field)**~~ – `TimeServiceAndroid.kt`: migrated to `Calendar` with `MONTH`/`DAY_OF_MONTH`.
 - [x] ~~**Fix `equals/hashCode` contract violation**~~ – `PresetDrink.kt`: removed `count` from `hashCode()` to match `equals()`.
-- [ ] **Fix Alcohol Mass calculation bug** 
-- [ ] **Fix Country selection** 
+- [x] **Fix Alcohol Mass calculation bug** – `IngestedDrink.kt`: sanitize invalid inputs (`volume >= 0`, `degree in [0,100]`) before mass computation to avoid negative or impossible values.
+- [x] **Fix Country selection** – `DrinkerFragment.kt`: spinner handling now selects law first then checks `driveLaw.isCustom()` (no hard dependency on list index 0).
 
 
 ---

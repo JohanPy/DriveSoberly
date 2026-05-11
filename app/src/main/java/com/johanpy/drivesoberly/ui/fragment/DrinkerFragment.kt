@@ -16,6 +16,7 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
+import com.google.android.material.slider.Slider
 import com.johanpy.drivesoberly.R
 import com.johanpy.drivesoberly.data.repository.DigestionRepository
 import com.johanpy.drivesoberly.data.repository.MainRepository
@@ -24,7 +25,6 @@ import com.johanpy.drivesoberly.domain.digestion.Sex
 import com.johanpy.drivesoberly.domain.drivelaw.DriveLaw
 import com.johanpy.drivesoberly.domain.drivelaw.DriveLawService
 import com.johanpy.drivesoberly.ui.util.KeyboardUtils
-import com.google.android.material.slider.Slider
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import kotlin.math.roundToInt
 
@@ -291,12 +291,11 @@ class DrinkerFragment : Fragment() {
                     position: Int,
                     id: Long,
                 ) {
-                    if (position == 0) {
-                        // handle the other country case
-                        val customLimit = driveLawService.customCountryLimit
-                        updateCustomLimit(customLimit)
-                    }
                     driveLawService.select(position)
+
+                    if (driveLawService.driveLaw.isCustom()) {
+                        updateCustomLimit(driveLawService.customCountryLimit)
+                    }
                 }
 
                 override fun onNothingSelected(parent: AdapterView<*>?) {}
