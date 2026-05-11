@@ -122,12 +122,7 @@ class DrinkerFragment : Fragment() {
             // Update for Young driver checkbox visibility (not value)
             if (driveLaw.youngLimit != null) {
                 checkboxYoungDriver.visibility = CheckBox.VISIBLE
-                val resId = resources.getIdentifier(driveLaw.youngLimit.explanationName, "string", requireActivity().packageName)
-                if (resId != 0) {
-                    checkboxYoungDriver.text = getString(resId)
-                } else {
-                    checkboxYoungDriver.text = driveLaw.youngLimit.explanationName
-                }
+                checkboxYoungDriver.text = resolveYoungDriverExplanation(driveLaw.youngLimit.explanationName)
             } else {
                 checkboxYoungDriver.visibility = CheckBox.GONE
             }
@@ -332,6 +327,29 @@ class DrinkerFragment : Fragment() {
         editTextCurrentLimit.setText(
             ((customLimit * 100.0).roundToInt() / 100.0).toString(),
         )
+    }
+
+    private fun resolveYoungDriverExplanation(explanationName: String): String {
+        val resId =
+            when (explanationName.trim()) {
+                "less_two_years_driving" -> R.string.less_two_years_driving
+                "twenty_one_young_or_less_three_years_driving" -> R.string.twenty_one_young_or_less_three_years_driving
+                "sixteen_to_twenty_four_years_old" -> R.string.sixteen_to_twenty_four_years_old
+                "twenty_one_young_or_less_two_years_driving" -> R.string.twenty_one_young_or_less_two_years_driving
+                "motor_cycle_or_less_two_years_driving" -> R.string.motor_cycle_or_less_two_years_driving
+                "three_years_driving" -> R.string.three_years_driving
+                "five_years_driving" -> R.string.five_years_driving
+                "motor_cycle_or_young_drivers" -> R.string.motor_cycle_or_young_drivers
+                "twenty_one_young" -> R.string.twenty_one_young
+                "new_driver_or_twenty_four" -> R.string.new_driver_or_twenty_four
+                else -> 0
+            }
+
+        return if (resId != 0) {
+            getString(resId)
+        } else {
+            getString(R.string.young_driver)
+        }
     }
 
     override fun onDestroyView() {

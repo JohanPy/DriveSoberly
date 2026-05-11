@@ -36,6 +36,7 @@ jobs:
         run: ./gradlew clean assembleRelease --no-daemon
 
       - name: Sign release APK manually
+        id: sign_apk
         env:
           KEYSTORE_B64: ${{ secrets.RELEASE_KEYSTORE_B64 }}
           KEYSTORE_PASSWORD: ${{ secrets.RELEASE_KEYSTORE_PASSWORD }}
@@ -74,16 +75,25 @@ jobs:
           "$APKSIGNER_BIN" verify --verbose "$SIGNED_APK"
           
           # Store signed APK path for later steps
-          echo "SIGNED_APK=$SIGNED_APK" >> $GITHUB_ENV
+          echo "signed_apk=$SIGNED_APK" >> "$GITHUB_OUTPUT"
+
+      - name: Rename signed APK
+        id: rename_apk
+        run: |
+          TAG_NAME="${GITHUB_REF_NAME}"
+          VERSION="${TAG_NAME#v}"
+          RELEASE_APK="DriveSoberly-v${VERSION}.apk"
+          mv "${{ steps.sign_apk.outputs.signed_apk }}" "$RELEASE_APK"
+          echo "release_apk=$RELEASE_APK" >> "$GITHUB_OUTPUT"
 
       - name: Compute SHA256
-        run: sha256sum "${{ env.SIGNED_APK }}" > SHA256SUMS.txt
+        run: sha256sum "${{ steps.rename_apk.outputs.release_apk }}" > SHA256SUMS.txt
 
       - name: Upload signed APK artifact
         uses: actions/upload-artifact@v4
         with:
           name: signed-release-apk
-          path: ${{ env.SIGNED_APK }}
+          path: ${{ steps.rename_apk.outputs.release_apk }}
 
       - name: Upload SHA256 file
         uses: actions/upload-artifact@v4
@@ -95,6 +105,6 @@ jobs:
         uses: softprops/action-gh-release@v2
         with:
           files: |
-            ${{ env.SIGNED_APK }}
+            ${{ steps.rename_apk.outputs.release_apk }}
             SHA256SUMS.txt
           generate_release_notes: false

@@ -4,6 +4,16 @@ All notable changes to this project will be documented in this file.
 
 The format is based on Keep a Changelog and this project follows Semantic Versioning.
 
+## [1.0.8] - 2026-05-11
+
+### Fixed
+
+- Fixed young-driver label rendering in the profile configuration screen: the app now resolves known legal explanation keys to string resources and avoids displaying raw keys such as less_two_years_driving.
+
+### Changed
+
+- Release APK is now renamed automatically to include app name and version (for example: DriveSoberly-v1.0.8.apk).
+
 ## [1.0.7] - 2026-05-11
 
 ### Fixed
