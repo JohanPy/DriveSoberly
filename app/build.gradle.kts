@@ -7,11 +7,11 @@ plugins {
 }
 
 android {
-    namespace = "com.vaudibert.drivesoberly"
+    namespace = "com.johanpy.drivesoberly"
     compileSdk = 35
 
     defaultConfig {
-        applicationId = "com.vaudibert.drivesoberly"
+        applicationId = "com.johanpy.drivesoberly"
         minSdk = 21
         targetSdk = 35
         versionCode = 23
