@@ -15,4 +15,4 @@ dependencyResolutionManagement {
 }
 
 include(":app")
-rootProject.name = "CanIDrive"
+rootProject.name = "DriveSoberly"

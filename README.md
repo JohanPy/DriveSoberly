@@ -1,21 +1,21 @@
 # DriveSoberly
 Alcohol blood rate computer for driving
 
-> **Fork notice** — This project is a fork of [VincentAudibert/CanIDrive](https://github.com/VincentAudibert/CanIDrive), originally created by Vincent Audibert. The upstream project appears to be no longer maintained. This fork started by updating dependencies to resolve Android installation warnings, then evolved into a significant rewrite with new features, architecture improvements, and a more accurate BAC model. All original work is credited to Vincent Audibert under the original license.
+> **Fork notice** — This project is a fork of [VincentAudibert/DriveSoberly](https://github.com/VincentAudibert/DriveSoberly), originally created by Vincent Audibert. The upstream project appears to be no longer maintained. This fork started by updating dependencies to resolve Android installation warnings, then evolved into a significant rewrite with new features, architecture improvements, and a more accurate BAC model. All original work is credited to Vincent Audibert under the original license.
 
 ## 📲 Get the app
 
 [<img src="https://fdroid.gitlab.io/artwork/badge/get-it-on.png"
      alt="Get it on F-Droid"
-     height="80">](https://f-droid.org/packages/com.vaudibert.canidrive/)
+     height="80">](https://f-droid.org/packages/com.vaudibert.drivesoberly/)
 [<img src="https://play.google.com/intl/en_us/badges/images/generic/en-play-badge.png"
      alt="Get it on Google Play"
-     height="80">](https://play.google.com/store/apps/details?id=com.vaudibert.canidrive)
+     height="80">](https://play.google.com/store/apps/details?id=com.vaudibert.drivesoberly)
 
 ## 👋 About
 DriveSoberly is an Android app letting you evaluate whether you can drive or not.
 
-This project is a fork of [CanIDrive](https://github.com/VincentAudibert/CanIDrive), aimed at keeping the app functional on modern Android versions and improving its accuracy and usability.
+This project is a fork of [DriveSoberly](https://github.com/VincentAudibert/DriveSoberly), aimed at keeping the app functional on modern Android versions and improving its accuracy and usability.
 
 ## ✨ Features
 Can I Drive allows you to track your recent alcohol consumption, to assess if you can drive or not.
@@ -113,7 +113,7 @@ For any contribution, please [open an issue](https://github.com/JohanPy/DriveSob
 
 ## 📋 Changelog
 
-All changes listed here were made in this fork, after the upstream project ([VincentAudibert/CanIDrive](https://github.com/VincentAudibert/CanIDrive)) became inactive.
+All changes listed here were made in this fork, after the upstream project ([VincentAudibert/DriveSoberly](https://github.com/VincentAudibert/DriveSoberly)) became inactive.
 
 ### Bug fixes
 - Fixed crash on small alcohol rates (`substring(0, 4)` → `String.format("%.2f g/L")`)
@@ -128,7 +128,7 @@ All changes listed here were made in this fork, after the upstream project ([Vin
 
 ### Architecture
 - Introduced ViewModels (`DriveViewModel`, `DrinkerViewModel`, `AddDrinkViewModel`) with `viewModelScope`
-- Introduced Koin dependency injection — replaced global `CanIDrive` Application singleton
+- Introduced Koin dependency injection — replaced global `DriveSoberly` Application singleton
 - Moved repositories from `ui.repository` to `data.repository`
 - Removed Android resource (`R.string`) references from the domain layer
 - Fixed Law of Demeter violations in `IngestedDrinksAdapter` (4-level deep chain replaced by constructor injection)

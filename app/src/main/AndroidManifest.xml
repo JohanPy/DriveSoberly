@@ -2,17 +2,17 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
     <application
-        android:name=".ui.CanIDrive"
+        android:name=".ui.DriveSoberlyApp"
         android:allowBackup="true"
         android:fullBackupContent="@xml/backup_rules"
         android:dataExtractionRules="@xml/data_extraction_rules"
-        android:icon="@mipmap/ic_launcher_beer_round"
+        android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_beer_round"
+        android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name="com.vaudibert.canidrive.ui.MainActivity"
+            android:name="com.vaudibert.drivesoberly.ui.MainActivity"
             android:label="@string/app_name"
             android:exported="true"
             android:windowSoftInputMode="adjustResize"

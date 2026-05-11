@@ -7,15 +7,15 @@ plugins {
 }
 
 android {
-    namespace = "com.vaudibert.canidrive"
+    namespace = "com.vaudibert.drivesoberly"
     compileSdk = 35
 
     defaultConfig {
-        applicationId = "com.vaudibert.canidrive"
+        applicationId = "com.vaudibert.drivesoberly"
         minSdk = 21
         targetSdk = 35
         versionCode = 23
-        versionName = "0.3.0"
+        versionName = "1.0"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
         ksp {

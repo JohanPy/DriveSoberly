@@ -1,4 +1,4 @@
-# TODO – CanIDrive
+# TODO – DriveSoberly
 
 Items marked ~~like this~~ were fixed in the initial implementation pass.
 
@@ -26,11 +26,11 @@ Items marked ~~like this~~ were fixed in the initial implementation pass.
 
 ## HIGH – Architecture
 
-- [x] ~~**Introduce ViewModels**~~ – No `ViewModel` is used anywhere. Fragments access `CanIDrive.instance.mainRepository` directly. Create `DriveViewModel`, `DrinkerViewModel`, `AddDrinkViewModel` with `viewModelScope`-bound coroutines.
-- [x] ~~**Introduce Dependency Injection (Hilt or Koin)**~~ – Replace the global `CanIDrive` Application singleton with a proper DI framework. Improves testability and reduces coupling.
+- [x] ~~**Introduce ViewModels**~~ – No `ViewModel` is used anywhere. Fragments access `DriveSoberly.instance.mainRepository` directly. Create `DriveViewModel`, `DrinkerViewModel`, `AddDrinkViewModel` with `viewModelScope`-bound coroutines.
+- [x] ~~**Introduce Dependency Injection (Hilt or Koin)**~~ – Replace the global `DriveSoberly` Application singleton with a proper DI framework. Improves testability and reduces coupling.
 - [x] ~~**Move repositories out of `ui` package**~~ – `MainRepository`, `DrinkRepository`, `DigestionRepository`, `DriveLawRepository` are in `ui.repository`. Moved to `data.repository`.
 - [x] ~~**Remove Android resource dependencies from domain layer**~~ – `DriveLaw.kt` holds `explanationId: Int` (an `R.string` reference). The domain should be pure Kotlin; resolve resource IDs in the UI layer only.
-- [x] ~~**Fix Law of Demeter violations**~~ – `IngestedDrinksAdapter.kt`: `CanIDrive.instance.mainRepository.drinkRepository.ingestionService` is 4 levels deep. Expose needed services directly via constructor injection.
+- [x] ~~**Fix Law of Demeter violations**~~ – `IngestedDrinksAdapter.kt`: `DriveSoberly.instance.mainRepository.drinkRepository.ingestionService` is 4 levels deep. Expose needed services directly via constructor injection.
 
 ---
 
