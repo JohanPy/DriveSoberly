@@ -117,8 +117,8 @@ output.json
 hs_err_pid*
 
 # archive
-docs/archive
-
+docs/archive/
+screenshots/
 ### Kotlin ###
 # Compiled class file
 
