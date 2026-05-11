@@ -1,5 +1,11 @@
 <resources>
     <string name="action_settings">Impostazioni</string>
+    <string name="title_splash">Benvenuto</string>
+    <string name="title_profile">Profilo</string>
+    <string name="title_drive_status">Stato di guida</string>
+    <string name="title_add_drink">Aggiungi bevanda</string>
+    <string name="title_add_preset">Nuovo predefinito</string>
+    <string name="title_settings">Impostazioni</string>
 
     <string name="volume">Volume</string>
     <string name="degree">Gradi</string>
@@ -10,6 +16,12 @@
     <string name="female">FEMMINA</string>
     <string name="other">ALTRO</string>
     <string name="about_you">Il tuo profilo</string>
+    <string name="preferences_display_category">Aspetto</string>
+    <string name="theme_preference_title">Tema</string>
+    <string name="theme_preference_dialog_title">Scegli il tema</string>
+    <string name="theme_light">Chiaro</string>
+    <string name="theme_dark">Scuro</string>
+    <string name="theme_system">Predefinito di sistema</string>
     <string name="can_i_drive_question">Posso guidare?</string>
     <string name="select_a_drink">Seleziona una bevanda</string>
     <string name="now">adesso</string>
@@ -56,4 +68,21 @@
     <string name="content_desc_add_drink">Aggiungi una bevanda</string>
     <string name="content_desc_profile">Impostazioni profilo</string>
     <string name="content_desc_validate">Conferma</string>
+    <string name="safe_to_drive">Idoneo alla guida</string>
+    <string name="do_not_drive">NON GUIDARE</string>
+    <string name="snackbar_drink_deleted">Bevanda eliminata!</string>
+    <string name="snackbar_undo">ANNULLA</string>
+
+    <string name="food_state_title">Assunzione di cibo</string>
+    <string name="food_state_empty">A digiuno</string>
+    <string name="food_state_empty_desc">Stomaco vuoto - assorbimento rapido</string>
+    <string name="food_state_light">Spuntino</string>
+    <string name="food_state_light_desc">Patatine, frutta, cracker, formaggio...</string>
+    <string name="food_state_full">Pasto</string>
+    <string name="food_state_full_desc">Pasta, riso, pizza, carne, hamburger...</string>
+
+    <string name="drive_current_rate">Attuale: %1$s</string>
+    <string name="drive_peak_rate">Picco: %1$s alle %2$s</string>
+    <string name="drive_below_limit_at">Sotto il limite legale alle %1$s</string>
+    <string name="drive_zero_at">0 g/L alle %1$s</string>
 </resources>

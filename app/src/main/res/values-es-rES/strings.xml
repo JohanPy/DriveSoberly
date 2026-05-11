@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="action_settings">Ajustes</string>
+    <string name="title_splash">Bienvenido</string>
+    <string name="title_profile">Perfil</string>
+    <string name="title_drive_status">Estado de conducción</string>
+    <string name="title_add_drink">Añadir bebida</string>
+    <string name="title_add_preset">Nuevo preajuste</string>
+    <string name="title_settings">Ajustes</string>
     <string name="volume">Volumen</string>
     <string name="degree">Grado</string>
     <string name="when">Cuándo</string>
@@ -10,6 +16,12 @@
     <string name="female">MUJER</string>
     <string name="other">OTRO</string>
     <string name="about_you">Sobre ti</string>
+    <string name="preferences_display_category">Pantalla</string>
+    <string name="theme_preference_title">Tema</string>
+    <string name="theme_preference_dialog_title">Elegir tema</string>
+    <string name="theme_light">Claro</string>
+    <string name="theme_dark">Oscuro</string>
+    <string name="theme_system">Predeterminado del sistema</string>
     <string name="can_i_drive_question">¿Puedo conducir?</string>
     <string name="select_a_drink">Selecciona una bebida</string>
     <string name="now">ahora</string>
@@ -55,4 +67,21 @@
     <string name="content_desc_add_drink">Añadir una bebida</string>
     <string name="content_desc_profile">Ajustes de perfil</string>
     <string name="content_desc_validate">Validar</string>
+    <string name="safe_to_drive">Apto para conducir</string>
+    <string name="do_not_drive">NO CONDUZCA</string>
+    <string name="snackbar_drink_deleted">¡Bebida eliminada!</string>
+    <string name="snackbar_undo">DESHACER</string>
+
+    <string name="food_state_title">Ingesta de alimentos</string>
+    <string name="food_state_empty">En ayunas</string>
+    <string name="food_state_empty_desc">Estómago vacío - absorción rápida</string>
+    <string name="food_state_light">Tentempié</string>
+    <string name="food_state_light_desc">Patatas fritas, fruta, galletas saladas, queso...</string>
+    <string name="food_state_full">Comida</string>
+    <string name="food_state_full_desc">Pasta, arroz, pizza, carne, hamburguesa...</string>
+
+    <string name="drive_current_rate">Actual: %1$s</string>
+    <string name="drive_peak_rate">Pico: %1$s a las %2$s</string>
+    <string name="drive_below_limit_at">Por debajo del límite legal a las %1$s</string>
+    <string name="drive_zero_at">0 g/L a las %1$s</string>
 </resources>

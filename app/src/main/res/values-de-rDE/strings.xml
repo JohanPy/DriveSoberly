@@ -8,6 +8,12 @@
     <string name="sex">Geschlecht</string>
     <string name="male">männlich</string>
     <string name="female">weiblich</string>
+    <string name="title_splash">Willkommen</string>
+    <string name="title_profile">Profil</string>
+    <string name="title_drive_status">Fahrstatus</string>
+    <string name="title_add_drink">Getränk hinzufügen</string>
+    <string name="title_add_preset">Neues Preset</string>
+    <string name="title_settings">Einstellungen</string>
     <string name="other">divers</string>
     <string name="about_you">Über dich</string>
     <string name="can_i_drive_question">Kann ich fahren ?</string>
@@ -55,4 +61,27 @@
     <string name="content_desc_add_drink">Getränk hinzufügen</string>
     <string name="content_desc_profile">Profileinstellungen</string>
     <string name="content_desc_validate">Bestätigen</string>
+    <string name="preferences_display_category">Anzeige</string>
+    <string name="theme_preference_title">Design</string>
+    <string name="theme_preference_dialog_title">Design auswählen</string>
+    <string name="theme_light">Hell</string>
+    <string name="theme_dark">Dunkel</string>
+    <string name="theme_system">Systemstandard</string>
+    <string name="safe_to_drive">Fahrtauglich</string>
+    <string name="do_not_drive">NICHT FAHREN</string>
+    <string name="snackbar_drink_deleted">Getränk gelöscht!</string>
+    <string name="snackbar_undo">RÜCKGÄNGIG</string>
+
+    <string name="food_state_title">Nahrungsaufnahme</string>
+    <string name="food_state_empty">Nüchtern</string>
+    <string name="food_state_empty_desc">Leerer Magen - schnelle Aufnahme</string>
+    <string name="food_state_light">Snack</string>
+    <string name="food_state_light_desc">Chips, Obst, Cracker, Käse...</string>
+    <string name="food_state_full">Mahlzeit</string>
+    <string name="food_state_full_desc">Pasta, Reis, Pizza, Fleisch, Burger...</string>
+
+    <string name="drive_current_rate">Aktuell: %1$s</string>
+    <string name="drive_peak_rate">Maximum: %1$s um %2$s</string>
+    <string name="drive_below_limit_at">Unter dem gesetzlichen Grenzwert um %1$s</string>
+    <string name="drive_zero_at">0 g/L um %1$s</string>
 </resources>
