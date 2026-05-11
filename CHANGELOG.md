@@ -10,6 +10,12 @@ The format is based on Keep a Changelog and this project follows Semantic Versio
 
 - Fixed release build failure on R8 minification by adding missing `javax.annotation` classes dependency (`jsr305`) required by security crypto transitive code.
 
+## [1.0.2] - 2026-05-11
+
+### Changed
+
+- Release retrigger after workflow cancellation to produce signed artifacts and publish GitHub Release from the corrected build pipeline.
+
 ## [1.0.0] - 2026-05-11
 
 ### Added
