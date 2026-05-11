@@ -15,7 +15,7 @@
         android:layout_gravity="center"
         android:padding="5dp"
         android:src="@drawable/ic_add_white_24dp"
-        android:tint="?colorPrimary"
+        android:tint="?attr/colorPrimary"
         android:contentDescription="drink icon"
         tools:ignore="HardcodedText" />
 
@@ -31,6 +31,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
             android:textSize="18sp"
+            android:textColor="?attr/colorOnSurface"
             android:text="Add preset"
             tools:ignore="HardcodedText"
             />

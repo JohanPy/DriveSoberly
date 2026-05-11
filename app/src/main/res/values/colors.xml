@@ -1,29 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- Material3 semantic palette (light) -->
-    <color name="md_theme_primary">#D4715E</color>
+    <color name="md_theme_primary">#2F5EE8</color>
     <color name="md_theme_onPrimary">#FFFFFF</color>
-    <color name="md_theme_primaryContainer">#FFDCC9</color>
-    <color name="md_theme_onPrimaryContainer">#3E170D</color>
-    <color name="md_theme_secondary">#7E574F</color>
+    <color name="md_theme_primaryContainer">#DCE1FF</color>
+    <color name="md_theme_onPrimaryContainer">#0B1B3D</color>
+    <color name="md_theme_secondary">#4F678B</color>
     <color name="md_theme_onSecondary">#FFFFFF</color>
-    <color name="md_theme_surface">#FDF8F7</color>
-    <color name="md_theme_onSurface">#211A19</color>
-    <color name="md_theme_surfaceVariant">#F4DED9</color>
-    <color name="md_theme_onSurfaceVariant">#534341</color>
+    <color name="md_theme_surface">#F8FAFF</color>
+    <color name="md_theme_onSurface">#172033</color>
+    <color name="md_theme_surfaceVariant">#DDE3F0</color>
+    <color name="md_theme_onSurfaceVariant">#465066</color>
     <color name="md_theme_error">#BA1A1A</color>
     <color name="md_theme_onError">#FFFFFF</color>
 
     <!-- Legacy aliases kept for incremental migration -->
     <color name="colorAmberPrimary">@color/md_theme_primary</color>
-    <color name="colorAmberTransparent">#A6D4715E</color>
+    <color name="colorAmberTransparent">#A62F5EE8</color>
     <color name="colorAmberAccent">@color/md_theme_primary</color>
 
-    <color name="colorGreenPrimary">#25E42E</color>
-    <color name="colorGreenTransparent">#A661C53E</color>
-    <color name="colorGreenAccent">#98B67A</color>
+    <color name="colorGreenPrimary">#2F8F5B</color>
+    <color name="colorGreenTransparent">#A62F8F5B</color>
+    <color name="colorGreenAccent">#8BC4A1</color>
 
-    <color name="colorPrimaryDark">#3D4759</color>
+    <color name="colorPrimaryDark">#172033</color>
     <color name="WHITE">#FFFFFF</color>
     <color name="driveGreen">#30CA36</color>
     <color name="driveRed">#FF0000</color>
