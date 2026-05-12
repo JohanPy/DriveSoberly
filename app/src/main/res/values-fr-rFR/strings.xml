@@ -18,6 +18,14 @@
     <string name="about_you">À propos de vous</string>
 
     <string name="preferences_display_category">Apparence</string>
+    <string name="language_preference_title">Langue</string>
+    <string name="language_preference_dialog_title">Choisir la langue</string>
+    <string name="language_system">Selon le système</string>
+    <string name="language_english">Anglais</string>
+    <string name="language_french">Français</string>
+    <string name="language_german">Allemand</string>
+    <string name="language_spanish">Espagnol</string>
+    <string name="language_italian">Italien</string>
     <string name="theme_preference_title">Thème</string>
     <string name="theme_preference_dialog_title">Choisir le thème</string>
     <string name="theme_light">Clair</string>

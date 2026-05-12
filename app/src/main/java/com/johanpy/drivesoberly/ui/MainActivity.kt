@@ -5,6 +5,7 @@ import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.core.os.LocaleListCompat
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
@@ -24,6 +25,16 @@ class MainActivity : AppCompatActivity() {
         installSplashScreen()
         val time = (application as DriveSoberlyApp).time
         val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
+
+        val languagePref = sharedPreferences.getString("language_preference", "system") ?: "system"
+        val locales =
+            if (languagePref == "system") {
+                LocaleListCompat.getEmptyLocaleList()
+            } else {
+                LocaleListCompat.forLanguageTags(languagePref)
+            }
+        AppCompatDelegate.setApplicationLocales(locales)
+
         val themeMode =
             when (sharedPreferences.getString("theme_preference", "system")) {
                 "light" -> AppCompatDelegate.MODE_NIGHT_NO

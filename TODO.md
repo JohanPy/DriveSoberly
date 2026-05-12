@@ -131,6 +131,18 @@ Items marked ~~like this~~ were fixed in the initial implementation pass.
 
 ---
 
+## Corrections 
+- supprimer Ancien logo lors du chargement
+- rendre le volant aussi grand que le bouclier dans le logo
+- Ajouter un bouton + sur les boissons déjà ajoutée afin de prendre un autre verre de la même boisson
+- Logo verre remplacé par emojis : 🍺 🍷 🍸 🍹 🥃 🍾 🍶 proposer de choisir l'emoji lors de la définitions d'une boisson
+- Settings doit permettre de choisir la langue
+- Suppression des verres une fois le taux revenu a 0
+- Santé faible fort ? Quelle incidences
+- Le menu de définition de nouvelle boisson doit aussi permettre de masquer celles prédéfinis
+- Ajout d'un disclamer a la fin du Readme sur utilisation d'IA pour coder/réécrire certaines parties du code
+
+
 ## FEATURE IDEAS
 
 - [ ] **Notification / alarm when user can drive again** – Calculate time until BAC drops below legal limit; schedule a `WorkManager` notification.

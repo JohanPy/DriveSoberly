@@ -17,6 +17,14 @@
     <string name="other">OTRO</string>
     <string name="about_you">Sobre ti</string>
     <string name="preferences_display_category">Pantalla</string>
+    <string name="language_preference_title">Idioma</string>
+    <string name="language_preference_dialog_title">Elegir idioma</string>
+    <string name="language_system">Predeterminado del sistema</string>
+    <string name="language_english">Ingles</string>
+    <string name="language_french">Frances</string>
+    <string name="language_german">Aleman</string>
+    <string name="language_spanish">Espanol</string>
+    <string name="language_italian">Italiano</string>
     <string name="theme_preference_title">Tema</string>
     <string name="theme_preference_dialog_title">Elegir tema</string>
     <string name="theme_light">Claro</string>

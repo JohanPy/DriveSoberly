@@ -28,6 +28,14 @@
     <string name="about_you">About you</string>
 
     <string name="preferences_display_category">Display</string>
+    <string name="language_preference_title">Language</string>
+    <string name="language_preference_dialog_title">Choose language</string>
+    <string name="language_system">System default</string>
+    <string name="language_english">English</string>
+    <string name="language_french">French</string>
+    <string name="language_german">German</string>
+    <string name="language_spanish">Spanish</string>
+    <string name="language_italian">Italian</string>
     <string name="theme_preference_title">Theme</string>
     <string name="theme_preference_dialog_title">Choose Theme</string>
     <string name="theme_light">Light</string>

@@ -2,6 +2,7 @@ package com.johanpy.drivesoberly.ui.fragment
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.core.os.LocaleListCompat
 import androidx.preference.ListPreference
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
@@ -24,6 +25,20 @@ class SettingsFragment : PreferenceFragmentCompat() {
                         else -> AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM
                     }
                 AppCompatDelegate.setDefaultNightMode(themeMode)
+                true
+            }
+
+        val languagePreference: ListPreference? = findPreference("language_preference")
+        languagePreference?.onPreferenceChangeListener =
+            Preference.OnPreferenceChangeListener { _, newValue ->
+                val languageTag = newValue as String
+                val locales =
+                    if (languageTag == "system") {
+                        LocaleListCompat.getEmptyLocaleList()
+                    } else {
+                        LocaleListCompat.forLanguageTags(languageTag)
+                    }
+                AppCompatDelegate.setApplicationLocales(locales)
                 true
             }
     }

@@ -4,6 +4,15 @@
     <PreferenceCategory app:title="@string/preferences_display_category">
 
         <ListPreference
+            app:key="language_preference"
+            app:title="@string/language_preference_title"
+            app:dialogTitle="@string/language_preference_dialog_title"
+            app:entries="@array/language_preference_entries"
+            app:entryValues="@array/language_preference_values"
+            app:defaultValue="system"
+            app:useSimpleSummaryProvider="true" />
+
+        <ListPreference
             app:key="theme_preference"
             app:title="@string/theme_preference_title"
             app:dialogTitle="@string/theme_preference_dialog_title"

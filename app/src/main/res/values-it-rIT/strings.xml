@@ -17,6 +17,14 @@
     <string name="other">ALTRO</string>
     <string name="about_you">Il tuo profilo</string>
     <string name="preferences_display_category">Aspetto</string>
+    <string name="language_preference_title">Lingua</string>
+    <string name="language_preference_dialog_title">Scegli la lingua</string>
+    <string name="language_system">Predefinito di sistema</string>
+    <string name="language_english">Inglese</string>
+    <string name="language_french">Francese</string>
+    <string name="language_german">Tedesco</string>
+    <string name="language_spanish">Spagnolo</string>
+    <string name="language_italian">Italiano</string>
     <string name="theme_preference_title">Tema</string>
     <string name="theme_preference_dialog_title">Scegli il tema</string>
     <string name="theme_light">Chiaro</string>
