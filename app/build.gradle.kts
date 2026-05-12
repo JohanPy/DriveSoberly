@@ -14,8 +14,8 @@ android {
         applicationId = "com.johanpy.drivesoberly"
         minSdk = 21
         targetSdk = 35
-        versionCode = 31
-        versionName = "1.0.8"
+        versionCode = 32
+        versionName = "1.1.0"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
         ksp {

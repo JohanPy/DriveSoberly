@@ -4,6 +4,13 @@ All notable changes to this project will be documented in this file.
 
 The format is based on Keep a Changelog and this project follows Semantic Versioning.
 
+## [1.1.0] - 2026-05-12
+
+### Changed
+
+- Minor release to validate and publish through the GitHub Actions release pipeline.
+- Version bump to 1.1.0 (versionCode 32).
+
 ## [1.0.8] - 2026-05-11
 
 ### Fixed
