@@ -4,6 +4,7 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageButton
 import android.widget.TextView
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.Observer
@@ -18,6 +19,7 @@ class PresetDrinksAdapter(
     private val lifecycleOwner: LifecycleOwner,
     private val goToAddPreset: () -> Unit,
     private val drinkRepository: DrinkRepository,
+    private val onDeletePreset: (PresetDrinkEntity) -> Unit,
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     private val presetService = drinkRepository.presetService
     private val doubleFormat =
@@ -101,6 +103,12 @@ class PresetDrinksAdapter(
             holder.propertiesText.text = "${doubleFormat.format(presetDrink.volume / 10.0)} cL - ${presetDrink.degree} %"
             holder.descriptionText.text = presetDrink.name
             holder.emojiText.text = presetDrink.emoji
+            holder.deleteButton.visibility =
+                if (presetDrink == selectedPreset) {
+                    View.VISIBLE
+                } else {
+                    View.GONE
+                }
 
             updatePresetColor(presetDrink, holder.itemView, selectedPreset)
 
@@ -128,6 +136,10 @@ class PresetDrinksAdapter(
             holder.emojiText.setOnClickListener(clickListener)
             holder.emojiText.setOnLongClickListener(longClickListener)
 
+            holder.deleteButton.setOnClickListener {
+                onDeletePreset(presetDrink)
+            }
+
         }
     }
 
@@ -153,5 +165,6 @@ class PresetDrinksAdapter(
         val propertiesText: TextView = view.findViewById(R.id.textViewPresetDrinkProperties)
         val descriptionText: TextView = view.findViewById(R.id.textViewPresetDrinkDescription)
         val emojiText: TextView = view.findViewById(R.id.imageViewPresetDrinkIcon)
+        val deleteButton: ImageButton = view.findViewById(R.id.buttonDeletePresetDrink)
     }
 }

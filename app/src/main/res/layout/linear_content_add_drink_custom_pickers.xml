@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <merge xmlns:tools="http://schemas.android.com/tools"
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:showIn="@layout/fragment_add_preset">
 
     <LinearLayout
@@ -18,12 +19,27 @@
             style="@style/PillTitle"
             android:text="@string/volume" />
 
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:hint="cL"
+            app:boxBackgroundMode="outline">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/editTextVolume"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="numberDecimal"
+                android:textAlignment="center"
+                android:text="20.0" />
+        </com.google.android.material.textfield.TextInputLayout>
+
         <NumberPicker
             android:id="@+id/numberPickerVolume"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="10dp" />
-
 
     </LinearLayout>
 
@@ -41,6 +57,22 @@
             android:layout_height="wrap_content"
             style="@style/PillTitle"
             android:text="@string/degree" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:hint="%"
+            app:boxBackgroundMode="outline">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/editTextDegree"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="numberDecimal"
+                android:textAlignment="center"
+                android:text="5.0" />
+        </com.google.android.material.textfield.TextInputLayout>
 
         <NumberPicker
             android:id="@+id/numberPickerDegree"

@@ -154,13 +154,14 @@ class DrinkerFragment : Fragment() {
     }
 
     private fun setupExplanationsToggle() {
+        val collapsedTitle = "${getString(R.string.profile_explanations_title)} ▾"
+        val expandedTitle = "${getString(R.string.profile_explanations_title)} ▴"
+        textViewProfileExplanationsTitle.text = collapsedTitle
+
         textViewProfileExplanationsTitle.setOnClickListener {
-            textViewProfileExplanationsContent.visibility =
-                if (textViewProfileExplanationsContent.visibility == View.VISIBLE) {
-                    View.GONE
-                } else {
-                    View.VISIBLE
-                }
+            val isVisible = textViewProfileExplanationsContent.visibility == View.VISIBLE
+            textViewProfileExplanationsContent.visibility = if (isVisible) View.GONE else View.VISIBLE
+            textViewProfileExplanationsTitle.text = if (isVisible) collapsedTitle else expandedTitle
         }
     }
 

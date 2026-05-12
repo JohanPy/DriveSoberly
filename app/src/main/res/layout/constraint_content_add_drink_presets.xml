@@ -14,21 +14,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageButton
-        android:id="@+id/buttonDeleteSelectedPreset"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_marginEnd="20dp"
-        android:background="@drawable/background_round_button_small_primary"
-        android:contentDescription="@string/content_desc_delete_drink"
-        android:padding="5dp"
-        android:src="@drawable/ic_delete_white_24dp"
-        android:tint="?attr/colorOnPrimary"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="@id/textViewPresetDrinks"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@id/textViewPresetDrinks" />
-
     <com.google.android.material.checkbox.MaterialCheckBox
         android:id="@+id/checkBoxHideBuiltInPresets"
         android:layout_width="wrap_content"

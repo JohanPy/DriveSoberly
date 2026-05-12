@@ -2,6 +2,8 @@ package com.johanpy.drivesoberly.ui.fragment
 
 import android.app.Activity
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,6 +12,7 @@ import android.widget.Spinner
 import android.widget.ArrayAdapter
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import com.google.android.material.textfield.TextInputEditText
 import com.johanpy.drivesoberly.R
 import com.johanpy.drivesoberly.databinding.FragmentAddPresetBinding
 import com.johanpy.drivesoberly.domain.drink.IngestedDrink
@@ -32,6 +35,8 @@ class EditPresetFragment : Fragment() {
     // Views from included layout (linear_content_add_drink_custom_pickers.xml)
     private lateinit var numberPickerVolume: NumberPicker
     private lateinit var numberPickerDegree: NumberPicker
+    private lateinit var editTextVolume: TextInputEditText
+    private lateinit var editTextDegree: TextInputEditText
     private lateinit var spinnerPresetEmoji: Spinner
 
     override fun onCreateView(
@@ -52,6 +57,8 @@ class EditPresetFragment : Fragment() {
         // Initialize views from included layouts
         numberPickerVolume = view.findViewById(R.id.numberPickerVolume)
         numberPickerDegree = view.findViewById(R.id.numberPickerDegree)
+        editTextVolume = view.findViewById(R.id.editTextVolume)
+        editTextDegree = view.findViewById(R.id.editTextDegree)
         spinnerPresetEmoji = view.findViewById(R.id.spinnerPresetEmoji)
 
         val presetService = viewModel.drinkRepository.presetService
@@ -121,9 +128,27 @@ class EditPresetFragment : Fragment() {
             }
         degree = IngestedDrink.degrees[startDegree]
         numberPickerDegree.value = startDegree
+        editTextDegree.setText(doubleFormat.format(degree))
+
         numberPickerDegree.setOnValueChangedListener { _, _, newVal ->
             degree = IngestedDrink.degrees[newVal]
+            editTextDegree.setText(doubleFormat.format(degree))
         }
+
+        editTextDegree.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+            override fun afterTextChanged(s: Editable?) {
+                s?.toString()?.toDoubleOrNull()?.let { value ->
+                    degree = value.coerceIn(0.0, 100.0)
+                    val closest = IngestedDrink.degrees.minByOrNull { kotlin.math.abs(it - degree) } ?: degree
+                    val index = IngestedDrink.degrees.toList().indexOf(closest)
+                    if (index >= 0) {
+                        numberPickerDegree.value = index
+                    }
+                }
+            }
+        })
     }
 
     private fun setVolumePicker() {
@@ -147,9 +172,28 @@ class EditPresetFragment : Fragment() {
             }
         numberPickerVolume.value = startVolume
         volume = IngestedDrink.volumes[startVolume]
+        editTextVolume.setText(doubleFormat.format(volume / 10.0))
+
         numberPickerVolume.setOnValueChangedListener { _, _, newVal ->
             volume = IngestedDrink.volumes[newVal]
+            editTextVolume.setText(doubleFormat.format(volume / 10.0))
         }
+
+        editTextVolume.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+            override fun afterTextChanged(s: Editable?) {
+                s?.toString()?.toDoubleOrNull()?.let { valueCL ->
+                    volume = valueCL * 10.0
+                    volume = volume.coerceIn(10.0, 1500.0)
+                    val closest = IngestedDrink.volumes.minByOrNull { kotlin.math.abs(it - volume) } ?: volume
+                    val index = IngestedDrink.volumes.toList().indexOf(closest)
+                    if (index >= 0) {
+                        numberPickerVolume.value = index
+                    }
+                }
+            }
+        })
     }
 
     override fun onDestroyView() {

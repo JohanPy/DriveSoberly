@@ -49,7 +49,7 @@
         android:background="@drawable/drink_icon_badge"
         android:gravity="center"
         android:text="🍺"
-        android:textSize="24sp"
+        android:textSize="27sp"
         android:contentDescription="@string/content_desc_drink_icon"
         app:layout_constraintStart_toEndOf="@+id/linearPastDrinkTime"
         app:layout_constraintTop_toTopOf="parent"
