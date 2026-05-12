@@ -34,13 +34,35 @@
         android:inputType="text"
         />
 
+    <TextView
+        android:id="@+id/textViewPresetEmoji"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/preset_emoji_title"
+        style="@style/PillTitle"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/editTextNewPresetName" />
+
+    <Spinner
+        android:id="@+id/spinnerPresetEmoji"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:entries="@array/preset_emoji_choices"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textViewPresetEmoji" />
+
     <LinearLayout
         android:id="@+id/linearPickersAddDrink"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/editTextNewPresetName"
+        app:layout_constraintTop_toBottomOf="@id/spinnerPresetEmoji"
         app:layout_constraintEnd_toEndOf="parent"
         android:baselineAligned="false">
 

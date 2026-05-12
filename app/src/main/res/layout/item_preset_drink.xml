@@ -11,15 +11,15 @@
     android:layout_marginBottom="8dp"
     android:padding="10dp">
 
-    <ImageView
+    <TextView
         android:id="@+id/imageViewPresetDrinkIcon"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_gravity="center"
         android:background="@drawable/drink_icon_badge"
-        android:padding="10dp"
-        android:src="@drawable/ic_local_drink_white_24dp"
-        android:tint="?attr/colorOnPrimaryContainer"
+        android:gravity="center"
+        android:text="🍺"
+        android:textSize="24sp"
         android:contentDescription="@string/content_desc_drink_icon"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"

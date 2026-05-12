@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
-import android.widget.ImageView
 import android.widget.TextView
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.Observer
@@ -28,7 +27,9 @@ class PresetDrinksAdapter(
         }
 
     private var presetDrinks: List<PresetDrinkEntity> = emptyList()
+    private var visiblePresetDrinks: List<PresetDrinkEntity> = emptyList()
     private var selectedPreset: PresetDrinkEntity? = null
+    private var hideBuiltInPresets: Boolean = false
 
     companion object {
         const val TYPE_ADD_PRESET = 0
@@ -40,7 +41,7 @@ class PresetDrinksAdapter(
             lifecycleOwner,
             Observer {
                 presetDrinks = it
-                notifyDataSetChanged()
+                refreshVisiblePresets()
             },
         )
         drinkRepository.liveSelectedPreset.observe(
@@ -50,6 +51,21 @@ class PresetDrinksAdapter(
                 notifyDataSetChanged()
             },
         )
+    }
+
+    fun setHideBuiltInPresets(hide: Boolean) {
+        hideBuiltInPresets = hide
+        refreshVisiblePresets()
+    }
+
+    private fun refreshVisiblePresets() {
+        visiblePresetDrinks =
+            if (hideBuiltInPresets) {
+                presetDrinks.filter { !it.isBuiltIn }
+            } else {
+                presetDrinks
+            }
+        notifyDataSetChanged()
     }
 
     override fun getItemViewType(position: Int): Int {
@@ -81,11 +97,11 @@ class PresetDrinksAdapter(
                 goToAddPreset()
             }
         } else if (holder is PresetViewHolder) {
-            val presetDrink = presetDrinks[position - 1]
+            val presetDrink = visiblePresetDrinks[position - 1]
 
             holder.propertiesText.text = "${doubleFormat.format(presetDrink.volume)} ml - ${presetDrink.degree} %"
             holder.descriptionText.text = presetDrink.name
-            holder.glassImage.setImageResource(R.drawable.ic_local_drink_white_24dp)
+            holder.emojiText.text = presetDrink.emoji
 
             updatePresetColor(presetDrink, holder.itemView, holder.deleteButton, selectedPreset)
 
@@ -110,8 +126,8 @@ class PresetDrinksAdapter(
             holder.descriptionText.setOnClickListener(clickListener)
             holder.descriptionText.setOnLongClickListener(longClickListener)
 
-            holder.glassImage.setOnClickListener(clickListener)
-            holder.glassImage.setOnLongClickListener(longClickListener)
+            holder.emojiText.setOnClickListener(clickListener)
+            holder.emojiText.setOnLongClickListener(longClickListener)
 
             holder.deleteButton.setOnClickListener {
                 if (presetDrink != drinkRepository.liveSelectedPreset.value) return@setOnClickListener
@@ -127,7 +143,7 @@ class PresetDrinksAdapter(
         }
     }
 
-    override fun getItemCount(): Int = presetDrinks.size + 1
+    override fun getItemCount(): Int = visiblePresetDrinks.size + 1
 
     private fun updatePresetColor(
         drink: PresetDrinkEntity,
@@ -151,7 +167,7 @@ class PresetDrinksAdapter(
     inner class PresetViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val propertiesText: TextView = view.findViewById(R.id.textViewPresetDrinkProperties)
         val descriptionText: TextView = view.findViewById(R.id.textViewPresetDrinkDescription)
-        val glassImage: ImageView = view.findViewById(R.id.imageViewPresetDrinkIcon)
+        val emojiText: TextView = view.findViewById(R.id.imageViewPresetDrinkIcon)
         val deleteButton: ImageButton = view.findViewById(R.id.buttonRemovePresetDrink)
     }
 }

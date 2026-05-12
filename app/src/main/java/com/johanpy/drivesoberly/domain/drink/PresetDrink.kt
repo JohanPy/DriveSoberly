@@ -5,6 +5,8 @@ open class PresetDrink(
     override var volume: Double,
     override var degree: Double,
     override var count: Int = 0,
+    override var emoji: String = "🍺",
+    override var isBuiltIn: Boolean = false,
 ) : IPresetDrink {
     override fun equals(other: Any?): Boolean {
         if (other !is PresetDrink) return false

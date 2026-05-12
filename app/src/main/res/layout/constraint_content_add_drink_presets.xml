@@ -14,13 +14,22 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <com.google.android.material.checkbox.MaterialCheckBox
+        android:id="@+id/checkBoxHideBuiltInPresets"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:text="@string/hide_built_in_presets"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textViewPresetDrinks" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/listViewPresetDrinks"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginStart="5dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        app:layout_constraintTop_toBottomOf="@id/textViewPresetDrinks"
+        app:layout_constraintTop_toBottomOf="@id/checkBoxHideBuiltInPresets"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent" />

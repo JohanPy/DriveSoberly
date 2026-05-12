@@ -13,12 +13,14 @@ class IngestedDrinkEntity(
     volume: Double,
     name: String,
     degree: Double,
-) : IIngestedDrink, IngestedDrink(name, volume, degree, ingestionTime) {
+    emoji: String,
+) : IIngestedDrink, IngestedDrink(name, volume, degree, ingestionTime, emoji) {
     constructor(uid: Long, ingested: IngestedDrink) : this(
         uid,
         ingested.ingestionTime,
         ingested.volume,
         ingested.name,
         ingested.degree,
+        ingested.emoji,
     )
 }

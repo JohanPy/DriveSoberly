@@ -9,6 +9,7 @@ open class IngestedDrink(
     override val volume: Double,
     override val degree: Double,
     override val ingestionTime: Date,
+    override val emoji: String = "🍺",
 ) : IIngestedDrink {
     override fun alcoholMass(): Double {
         val sanitizedDegree = degree.coerceIn(0.0, 100.0)

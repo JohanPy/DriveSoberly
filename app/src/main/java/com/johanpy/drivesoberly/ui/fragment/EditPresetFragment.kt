@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.NumberPicker
+import android.widget.Spinner
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.johanpy.drivesoberly.R
@@ -23,12 +24,14 @@ class EditPresetFragment : Fragment() {
 
     private var volume = 0.0
     private var degree = 0.0
+    private var emoji = "🍺"
 
     private val doubleFormat: DecimalFormat = DecimalFormat("0.#")
 
     // Views from included layout (linear_content_add_drink_custom_pickers.xml)
     private lateinit var numberPickerVolume: NumberPicker
     private lateinit var numberPickerDegree: NumberPicker
+    private lateinit var spinnerPresetEmoji: Spinner
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -48,6 +51,7 @@ class EditPresetFragment : Fragment() {
         // Initialize views from included layouts
         numberPickerVolume = view.findViewById(R.id.numberPickerVolume)
         numberPickerDegree = view.findViewById(R.id.numberPickerDegree)
+        spinnerPresetEmoji = view.findViewById(R.id.spinnerPresetEmoji)
 
         val presetService = viewModel.drinkRepository.presetService
         val selectedPreset = presetService.selectedPreset
@@ -55,8 +59,13 @@ class EditPresetFragment : Fragment() {
         if (selectedPreset != null) {
             volume = selectedPreset.volume
             degree = selectedPreset.degree
+            emoji = selectedPreset.emoji
             binding.editTextNewPresetName.setText(selectedPreset.name)
         }
+
+        val emojis = resources.getStringArray(R.array.preset_emoji_choices)
+        val selectedEmojiIndex = emojis.indexOf(emoji).let { if (it >= 0) it else 0 }
+        spinnerPresetEmoji.setSelection(selectedEmojiIndex)
 
         binding.buttonValidateNewPreset.setOnClickListener {
             if (binding.editTextNewPresetName.text.toString().isBlank()) return@setOnClickListener
@@ -66,12 +75,14 @@ class EditPresetFragment : Fragment() {
                     binding.editTextNewPresetName.text.toString(),
                     volume,
                     degree,
+                    emojis[spinnerPresetEmoji.selectedItemPosition],
                 )
             } else {
                 presetService.addNewPreset(
                     binding.editTextNewPresetName.text.toString(),
                     volume,
                     degree,
+                    emojis[spinnerPresetEmoji.selectedItemPosition],
                 )
             }
 

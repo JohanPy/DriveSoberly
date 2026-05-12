@@ -9,7 +9,7 @@ import androidx.room.TypeConverters
         IngestedDrinkEntity::class,
         PresetDrinkEntity::class,
     ],
-    version = 2,
+    version = 3,
     exportSchema = true,
 )
 @TypeConverters(Converters::class)

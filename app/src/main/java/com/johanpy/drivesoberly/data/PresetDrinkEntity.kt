@@ -12,9 +12,19 @@ class PresetDrinkEntity(
     volume: Double,
     degree: Double,
     count: Int,
-) : IPresetDrink, PresetDrink(name, volume, degree, count) {
+    emoji: String,
+    isBuiltIn: Boolean,
+) : IPresetDrink, PresetDrink(name, volume, degree, count, emoji, isBuiltIn) {
     constructor(
         uid: Long,
         presetDrink: PresetDrink,
-    ) : this(uid, presetDrink.name, presetDrink.volume, presetDrink.degree, presetDrink.count)
+    ) : this(
+        uid,
+        presetDrink.name,
+        presetDrink.volume,
+        presetDrink.degree,
+        presetDrink.count,
+        presetDrink.emoji,
+        presetDrink.isBuiltIn,
+    )
 }

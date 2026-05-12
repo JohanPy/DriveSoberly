@@ -27,4 +27,14 @@
         <item>dark</item>
         <item>system</item>
     </string-array>
+
+    <string-array name="preset_emoji_choices" translatable="false">
+        <item>🍺</item>
+        <item>🍷</item>
+        <item>🥃</item>
+        <item>🍸</item>
+        <item>🍹</item>
+        <item>🍾</item>
+        <item>🍶</item>
+    </string-array>
 </resources>

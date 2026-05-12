@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.CheckBox
 import android.widget.SeekBar
 import android.widget.TextView
 import androidx.fragment.app.Fragment
@@ -32,6 +33,7 @@ class AddDrinkFragment : Fragment() {
 
     // Views from included layouts
     private lateinit var listViewPresetDrinks: RecyclerView
+    private lateinit var checkBoxHideBuiltInPresets: CheckBox
     private lateinit var textViewWhenText: TextView
     private lateinit var seekBarIngestionDelay: VerticalSeekBar
     private lateinit var buttonValidateNewDrink: com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -53,6 +55,7 @@ class AddDrinkFragment : Fragment() {
 
         // Initialize views from included layouts
         listViewPresetDrinks = view.findViewById(R.id.listViewPresetDrinks)
+        checkBoxHideBuiltInPresets = view.findViewById(R.id.checkBoxHideBuiltInPresets)
         textViewWhenText = view.findViewById(R.id.textViewWhenText)
         seekBarIngestionDelay = view.findViewById(R.id.seekBarIngestionDelay)
         buttonValidateNewDrink = view.findViewById(R.id.buttonValidateNewDrink)
@@ -74,6 +77,14 @@ class AddDrinkFragment : Fragment() {
                 drinkRepository,
             )
         listViewPresetDrinks.adapter = presetDrinksAdapter
+
+        checkBoxHideBuiltInPresets.setOnCheckedChangeListener { _, isChecked ->
+            presetDrinksAdapter.setHideBuiltInPresets(isChecked)
+            val selected = drinkRepository.liveSelectedPreset.value
+            if (isChecked && selected?.isBuiltIn == true) {
+                presetService.selectedPreset = null
+            }
+        }
 
         drinkRepository.liveSelectedPreset.observe(viewLifecycleOwner) {
             if (it == null) {

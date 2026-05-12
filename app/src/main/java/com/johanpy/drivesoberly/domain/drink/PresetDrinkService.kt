@@ -9,7 +9,7 @@ import kotlinx.coroutines.flow.asStateFlow
 import java.util.*
 
 class PresetDrinkService<Preset : IPresetDrink>(
-    private val presetMaker: (name: String, volume: Double, degree: Double) -> Preset,
+    private val presetMaker: (name: String, volume: Double, degree: Double, emoji: String, isBuiltIn: Boolean) -> Preset,
 ) {
     private val _presetRemovedFlow = MutableSharedFlow<Preset>(extraBufferCapacity = 10)
     val presetRemovedFlow: SharedFlow<Preset> = _presetRemovedFlow.asSharedFlow()
@@ -45,8 +45,9 @@ class PresetDrinkService<Preset : IPresetDrink>(
         name: String,
         volume: Double,
         degree: Double,
+        emoji: String,
     ) {
-        val newPreset = presetMaker(name, volume, degree)
+        val newPreset = presetMaker(name, volume, degree, emoji, false)
         presetDrinks.add(newPreset)
         selectedPreset = newPreset
         sortAndCallbackPresets()
@@ -74,14 +75,16 @@ class PresetDrinkService<Preset : IPresetDrink>(
         name: String,
         volume: Double,
         degree: Double,
+        emoji: String,
     ) {
         val currentSelected = selectedPreset
         if (currentSelected == null) {
-            addNewPreset(name, volume, degree)
+            addNewPreset(name, volume, degree, emoji)
         } else {
             currentSelected.name = name
             currentSelected.volume = volume
             currentSelected.degree = degree
+            currentSelected.emoji = emoji
             selectedPreset = currentSelected
             _presetUpdatedFlow.tryEmit(currentSelected)
             sortAndCallbackPresets()

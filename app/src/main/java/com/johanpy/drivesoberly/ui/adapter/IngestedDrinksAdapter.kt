@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
-import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.johanpy.drivesoberly.R
@@ -32,7 +31,7 @@ class IngestedDrinksAdapter(
     inner class DrinkViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val propertiesText: TextView = view.findViewById(R.id.textViewPresetDrinkProperties)
         val descriptionText: TextView = view.findViewById(R.id.textViewPresetDrinkDescription)
-        val glassImage: ImageView = view.findViewById(R.id.imageViewPresetDrinkIcon)
+        val emojiText: TextView = view.findViewById(R.id.imageViewPresetDrinkIcon)
         val addButton: ImageButton = view.findViewById(R.id.buttonAddPastDrink)
         val deleteButton: ImageButton = view.findViewById(R.id.buttonRemovePastDrink)
         val timeText: TextView = view.findViewById(R.id.textViewPastDrinkTime)
@@ -56,7 +55,7 @@ class IngestedDrinksAdapter(
 
         holder.propertiesText.text = "${doubleFormat.format(drink.volume)} ml - ${drink.degree} %"
         holder.descriptionText.text = drink.name
-        holder.glassImage.setImageResource(R.drawable.ic_local_drink_white_24dp)
+        holder.emojiText.text = drink.emoji
 
         val days: Long = (drink.ingestionTime.time / DAY_IN_MILLIS) - (Date().time / DAY_IN_MILLIS)
         if (days == 0L) {
@@ -72,7 +71,7 @@ class IngestedDrinksAdapter(
             val newDrink =
                 IngestedDrinkEntity(
                     -1,
-                    IngestedDrink(drink.name, drink.volume, drink.degree, Date()),
+                    IngestedDrink(drink.name, drink.volume, drink.degree, Date(), drink.emoji),
                 )
             ingestionService.add(newDrink)
             com.google.android.material.snackbar.Snackbar.make(

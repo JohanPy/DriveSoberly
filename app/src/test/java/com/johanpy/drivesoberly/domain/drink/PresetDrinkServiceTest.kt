@@ -18,8 +18,8 @@ internal class PresetDrinkServiceTest {
     private fun setupBasic() {
         presetService =
             PresetDrinkService {
-                    name: String, volume: Double, degree: Double ->
-                PresetDrink(name, volume, degree)
+                    name: String, volume: Double, degree: Double, emoji: String, isBuiltIn: Boolean ->
+                PresetDrink(name, volume, degree, emoji = emoji, isBuiltIn = isBuiltIn)
             }
 
         testIIngestor = TestIIngestCapable()
@@ -67,7 +67,7 @@ internal class PresetDrinkServiceTest {
     fun `selected preset can be updated`() {
         setupFull()
 
-        presetService.updateSelectedPreset("BB", 22.0, 18.0)
+        presetService.updateSelectedPreset("BB", 22.0, 18.0, "🍸")
 
         assertEquals("BB", presetService.selectedPreset!!.name)
         assertEquals(22.0, presetService.selectedPreset!!.volume)
@@ -88,7 +88,7 @@ internal class PresetDrinkServiceTest {
     fun `An added preset is added with count 0 and selected`() {
         setupFull()
 
-        presetService.addNewPreset("D", 40.0, 40.0)
+        presetService.addNewPreset("D", 40.0, 40.0, "🍹")
         val selected = presetService.selectedPreset
 
         assertEquals(4, exportPreset.size)

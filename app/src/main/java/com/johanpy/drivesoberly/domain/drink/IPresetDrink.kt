@@ -5,4 +5,6 @@ interface IPresetDrink {
     var volume: Double
     var degree: Double
     var count: Int
+    var emoji: String
+    var isBuiltIn: Boolean
 }
