@@ -38,6 +38,10 @@ jobs:
           emulator-boot-timeout: 900
           script: |
             adb wait-for-device
+            adb shell input keyevent KEYCODE_WAKEUP || true
+            adb shell wm dismiss-keyguard || true
+            adb shell svc power stayon true || true
             adb shell settings put global verifier_verify_adb_installs 0 || true
             adb shell settings put global package_verifier_enable 0 || true
+            adb shell settings put secure show_ime_with_hard_keyboard 0 || true
             ./gradlew connectedDebugAndroidTest --no-daemon

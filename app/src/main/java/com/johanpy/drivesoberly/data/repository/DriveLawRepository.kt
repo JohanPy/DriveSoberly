@@ -20,7 +20,7 @@ class DriveLawRepository(private val context: Context) {
         DriveLawService(
             { code: String -> Locale("", code).displayCountry },
             context.getString(R.string.other),
-            DriveLaws.loadLaws(context),
+            DriveLaws.loadLaws(context) + listOf(DriveLaws.default),
             DriveLaws.default,
         )
 
