@@ -32,6 +32,7 @@ class HappyPathUITest {
 
     @Before
     fun prepareDeviceForEspresso() {
+        ensureDeviceInteractive()
         disableSystemAnimations()
     }
 
@@ -150,6 +151,19 @@ class HappyPathUITest {
             "settings put global window_animation_scale 0.0",
             "settings put global transition_animation_scale 0.0",
             "settings put global animator_duration_scale 0.0",
+        ).forEach { command ->
+            uiAutomation.executeShellCommand(command).close()
+        }
+    }
+
+    private fun ensureDeviceInteractive() {
+        val uiAutomation = InstrumentationRegistry.getInstrumentation().uiAutomation
+        listOf(
+            "input keyevent KEYCODE_WAKEUP",
+            "wm dismiss-keyguard",
+            "svc power stayon true",
+            "settings put system screen_off_timeout 2147483647",
+            "input keyevent 82",
         ).forEach { command ->
             uiAutomation.executeShellCommand(command).close()
         }

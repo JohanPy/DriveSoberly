@@ -39,8 +39,14 @@ jobs:
           script: |
             adb wait-for-device
             adb shell input keyevent KEYCODE_WAKEUP || true
+            adb shell input keyevent 82 || true
+            adb shell input touchscreen swipe 500 1800 500 200 || true
             adb shell wm dismiss-keyguard || true
             adb shell svc power stayon true || true
+            adb shell settings put system screen_off_timeout 2147483647 || true
+            adb shell settings put global window_animation_scale 0.0 || true
+            adb shell settings put global transition_animation_scale 0.0 || true
+            adb shell settings put global animator_duration_scale 0.0 || true
             adb shell settings put global verifier_verify_adb_installs 0 || true
             adb shell settings put global package_verifier_enable 0 || true
             adb shell settings put secure show_ime_with_hard_keyboard 0 || true
