@@ -36,7 +36,7 @@
         tools:ignore="HardcodedText"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toEndOf="@id/imageViewPresetDrinkIcon"
-        app:layout_constraintEnd_toStartOf="@id/buttonRemovePresetDrink"
+        app:layout_constraintEnd_toEndOf="parent"
         />
 
     <TextView
@@ -50,22 +50,7 @@
         tools:ignore="HardcodedText"
         app:layout_constraintStart_toEndOf="@id/imageViewPresetDrinkIcon"
         app:layout_constraintTop_toBottomOf="@id/textViewPresetDrinkDescription"
-        app:layout_constraintEnd_toStartOf="@id/buttonRemovePresetDrink"
-        />
-
-    <ImageButton
-        android:id="@+id/buttonRemovePresetDrink"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_gravity="center"
-        android:layout_margin="5dp"
-        android:background="@drawable/background_round_button_small_primary"
-        android:contentDescription="@string/content_desc_delete_drink"
-        android:padding="5dp"
-        android:src="@drawable/ic_delete_white_24dp"
-        android:tint="?attr/colorOnPrimary"
-        android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

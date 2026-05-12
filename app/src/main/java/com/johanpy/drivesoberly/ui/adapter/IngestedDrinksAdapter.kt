@@ -53,7 +53,7 @@ class IngestedDrinksAdapter(
     ) {
         val drink = ingestedDrinkList[position]
 
-        holder.propertiesText.text = "${doubleFormat.format(drink.volume)} ml - ${drink.degree} %"
+        holder.propertiesText.text = "${doubleFormat.format(drink.volume / 10.0)} cL - ${drink.degree} %"
         holder.descriptionText.text = drink.name
         holder.emojiText.text = drink.emoji
 

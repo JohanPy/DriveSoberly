@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.CheckBox
+import android.widget.ImageButton
 import android.widget.SeekBar
 import android.widget.TextView
 import androidx.fragment.app.Fragment
@@ -34,6 +35,7 @@ class AddDrinkFragment : Fragment() {
     // Views from included layouts
     private lateinit var listViewPresetDrinks: RecyclerView
     private lateinit var checkBoxHideBuiltInPresets: CheckBox
+    private lateinit var buttonDeleteSelectedPreset: ImageButton
     private lateinit var textViewWhenText: TextView
     private lateinit var seekBarIngestionDelay: VerticalSeekBar
     private lateinit var buttonValidateNewDrink: com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -56,6 +58,7 @@ class AddDrinkFragment : Fragment() {
         // Initialize views from included layouts
         listViewPresetDrinks = view.findViewById(R.id.listViewPresetDrinks)
         checkBoxHideBuiltInPresets = view.findViewById(R.id.checkBoxHideBuiltInPresets)
+        buttonDeleteSelectedPreset = view.findViewById(R.id.buttonDeleteSelectedPreset)
         textViewWhenText = view.findViewById(R.id.textViewWhenText)
         seekBarIngestionDelay = view.findViewById(R.id.seekBarIngestionDelay)
         buttonValidateNewDrink = view.findViewById(R.id.buttonValidateNewDrink)
@@ -89,9 +92,23 @@ class AddDrinkFragment : Fragment() {
         drinkRepository.liveSelectedPreset.observe(viewLifecycleOwner) {
             if (it == null) {
                 buttonValidateNewDrink.visibility = Button.INVISIBLE
+                buttonDeleteSelectedPreset.visibility = ImageButton.GONE
             } else {
                 buttonValidateNewDrink.visibility = Button.VISIBLE
+                buttonDeleteSelectedPreset.visibility = ImageButton.VISIBLE
             }
+        }
+
+        buttonDeleteSelectedPreset.setOnClickListener {
+            val selectedPreset = drinkRepository.liveSelectedPreset.value ?: return@setOnClickListener
+            presetService.removePreset(selectedPreset)
+            com.google.android.material.snackbar.Snackbar.make(
+                view,
+                R.string.snackbar_drink_deleted,
+                com.google.android.material.snackbar.Snackbar.LENGTH_LONG,
+            ).setAction(R.string.snackbar_undo) {
+                presetService.addPreset(selectedPreset)
+            }.show()
         }
 
         drinkRepository.livePresetDrinks.observe(viewLifecycleOwner) {

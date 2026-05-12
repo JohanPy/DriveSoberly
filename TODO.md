@@ -138,7 +138,7 @@ Items marked ~~like this~~ were fixed in the initial implementation pass.
 - Logo verre remplacé par emojis : 🍺 🍷 🍸 🍹 🥃 🍾 🍶 proposer de choisir l'emoji lors de la définitions d'une boisson
 - Settings doit permettre de choisir la langue
 - Suppression des verres une fois le taux revenu a 0
-- Santé faible fort ? Quelle incidences
+- Santé faible fort ? Quelle incidences ? ca n'est pas clair pour l'utilisateur
 - Le menu de définition de nouvelle boisson doit aussi permettre de masquer celles prédéfinis
 - Ajout d'un disclamer a la fin du Readme sur utilisation d'IA pour coder/réécrire certaines parties du code
 

@@ -4,7 +4,6 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageButton
 import android.widget.TextView
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.Observer
@@ -99,11 +98,11 @@ class PresetDrinksAdapter(
         } else if (holder is PresetViewHolder) {
             val presetDrink = visiblePresetDrinks[position - 1]
 
-            holder.propertiesText.text = "${doubleFormat.format(presetDrink.volume)} ml - ${presetDrink.degree} %"
+            holder.propertiesText.text = "${doubleFormat.format(presetDrink.volume / 10.0)} cL - ${presetDrink.degree} %"
             holder.descriptionText.text = presetDrink.name
             holder.emojiText.text = presetDrink.emoji
 
-            updatePresetColor(presetDrink, holder.itemView, holder.deleteButton, selectedPreset)
+            updatePresetColor(presetDrink, holder.itemView, selectedPreset)
 
             val clickListener = { _: View ->
                 presetService.selectedPreset =
@@ -129,17 +128,6 @@ class PresetDrinksAdapter(
             holder.emojiText.setOnClickListener(clickListener)
             holder.emojiText.setOnLongClickListener(longClickListener)
 
-            holder.deleteButton.setOnClickListener {
-                if (presetDrink != drinkRepository.liveSelectedPreset.value) return@setOnClickListener
-                presetService.removePreset(presetDrink)
-                com.google.android.material.snackbar.Snackbar.make(
-                    holder.itemView,
-                    R.string.snackbar_drink_deleted,
-                    com.google.android.material.snackbar.Snackbar.LENGTH_LONG,
-                ).setAction(R.string.snackbar_undo) {
-                    presetService.addPreset(presetDrink)
-                }.show()
-            }
         }
     }
 
@@ -148,15 +136,12 @@ class PresetDrinksAdapter(
     private fun updatePresetColor(
         drink: PresetDrinkEntity,
         drinkView: View,
-        deleteButton: ImageButton,
         selected: PresetDrinkEntity?,
     ) {
         if (selected != null && drink == selected) {
             drinkView.setBackgroundResource(R.drawable.background_color_primary)
-            deleteButton.visibility = ImageButton.VISIBLE
         } else {
             drinkView.setBackgroundResource(R.drawable.background_color_none)
-            deleteButton.visibility = ImageButton.GONE
         }
     }
 
@@ -168,6 +153,5 @@ class PresetDrinksAdapter(
         val propertiesText: TextView = view.findViewById(R.id.textViewPresetDrinkProperties)
         val descriptionText: TextView = view.findViewById(R.id.textViewPresetDrinkDescription)
         val emojiText: TextView = view.findViewById(R.id.imageViewPresetDrinkIcon)
-        val deleteButton: ImageButton = view.findViewById(R.id.buttonRemovePresetDrink)
     }
 }

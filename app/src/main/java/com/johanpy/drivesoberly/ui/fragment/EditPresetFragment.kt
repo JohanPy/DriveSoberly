@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.NumberPicker
 import android.widget.Spinner
+import android.widget.ArrayAdapter
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.johanpy.drivesoberly.R
@@ -64,6 +65,11 @@ class EditPresetFragment : Fragment() {
         }
 
         val emojis = resources.getStringArray(R.array.preset_emoji_choices)
+        val emojiAdapter =
+            ArrayAdapter(requireContext(), R.layout.spinner_emoji_item, emojis).apply {
+                setDropDownViewResource(R.layout.spinner_emoji_dropdown_item)
+            }
+        spinnerPresetEmoji.adapter = emojiAdapter
         val selectedEmojiIndex = emojis.indexOf(emoji).let { if (it >= 0) it else 0 }
         spinnerPresetEmoji.setSelection(selectedEmojiIndex)
 
@@ -124,9 +130,9 @@ class EditPresetFragment : Fragment() {
         val volumeLabels =
             IngestedDrink.volumes.map { vol ->
                 if (vol < 1000.0) {
-                    "${doubleFormat.format(vol)} mL"
+                    "${doubleFormat.format(vol / 10.0)} cL"
                 } else {
-                    "${doubleFormat.format(vol / 1000.0)} L"
+                    "${doubleFormat.format(vol / 100.0)} cL"
                 }
             }.toTypedArray()
         numberPickerVolume.minValue = 0
