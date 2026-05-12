@@ -10,6 +10,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.johanpy.drivesoberly.R
 import com.johanpy.drivesoberly.data.IngestedDrinkEntity
+import com.johanpy.drivesoberly.domain.drink.IngestedDrink
 import com.johanpy.drivesoberly.domain.drink.IngestionService
 import java.text.DateFormat
 import java.text.NumberFormat
@@ -32,6 +33,7 @@ class IngestedDrinksAdapter(
         val propertiesText: TextView = view.findViewById(R.id.textViewPresetDrinkProperties)
         val descriptionText: TextView = view.findViewById(R.id.textViewPresetDrinkDescription)
         val glassImage: ImageView = view.findViewById(R.id.imageViewPresetDrinkIcon)
+        val addButton: ImageButton = view.findViewById(R.id.buttonAddPastDrink)
         val deleteButton: ImageButton = view.findViewById(R.id.buttonRemovePastDrink)
         val timeText: TextView = view.findViewById(R.id.textViewPastDrinkTime)
         val daysText: TextView = view.findViewById(R.id.textViewPastDays)
@@ -65,6 +67,20 @@ class IngestedDrinksAdapter(
         }
 
         holder.timeText.text = dateFormat.format(drink.ingestionTime)
+
+        holder.addButton.setOnClickListener {
+            val newDrink =
+                IngestedDrinkEntity(
+                    -1,
+                    IngestedDrink(drink.name, drink.volume, drink.degree, Date()),
+                )
+            ingestionService.add(newDrink)
+            com.google.android.material.snackbar.Snackbar.make(
+                holder.itemView,
+                R.string.snackbar_drink_added_again,
+                com.google.android.material.snackbar.Snackbar.LENGTH_SHORT,
+            ).show()
+        }
 
         holder.deleteButton.setOnClickListener {
             ingestionService.remove(drink)

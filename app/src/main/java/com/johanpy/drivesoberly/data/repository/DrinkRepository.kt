@@ -169,4 +169,11 @@ class DrinkRepository(context: Context, drinkDatabase: DrinkDatabase) : Closeabl
     override fun close() {
         daoJob.cancel()
     }
+
+    fun clearPastDrinks() {
+        ingestionService.clear()
+        uiScope.launch {
+            ingestedDrinkDao.deleteAll()
+        }
+    }
 }

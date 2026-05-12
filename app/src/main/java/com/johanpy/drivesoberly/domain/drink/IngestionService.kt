@@ -39,6 +39,11 @@ class IngestionService<Preset : IPresetDrink, Ingested : IIngestedDrink>(
         sortAndListCallBack()
     }
 
+    fun clear() {
+        ingestedDrinks.clear()
+        sortAndListCallBack()
+    }
+
     private fun sortAndListCallBack() {
         ingestedDrinks.sortBy { it.ingestionTime.time }
         onIngestedChanged(ingestedDrinks)

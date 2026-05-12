@@ -73,11 +73,13 @@
 
     <string name="content_desc_drink_icon">Icône de boisson</string>
     <string name="content_desc_delete_drink">Supprimer la boisson</string>
+    <string name="content_desc_add_same_drink">Ajouter à nouveau cette boisson</string>
     <string name="content_desc_add_drink">Ajouter une boisson</string>
     <string name="content_desc_profile">Paramètres du profil</string>
     <string name="content_desc_validate">Valider</string>
     <string name="bac_unit_gl">g/L</string>
     <string name="snackbar_drink_deleted">Boisson supprimée</string>
+    <string name="snackbar_drink_added_again">Boisson ajoutée à nouveau</string>
     <string name="snackbar_undo">ANNULER</string>
 
     <string name="delay_20min">20 min</string>

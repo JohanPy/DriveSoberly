@@ -97,6 +97,7 @@
 
     <string name="content_desc_drink_icon">Drink icon</string>
     <string name="content_desc_delete_drink">Delete drink</string>
+    <string name="content_desc_add_same_drink">Add the same drink again</string>
     <string name="content_desc_add_drink">Add a drink</string>
     <string name="content_desc_profile">Profile settings</string>
     <string name="content_desc_validate">Validate</string>
@@ -104,6 +105,7 @@
     <string name="do_not_drive">DO NOT DRIVE</string>
     <string name="bac_unit_gl" translatable="false">g/L</string>
     <string name="snackbar_drink_deleted">Drink deleted!</string>
+    <string name="snackbar_drink_added_again">Drink added again</string>
     <string name="snackbar_undo">UNDO</string>
     <string name="delay_20min" translatable="false">20 min</string>
     <string name="delay_40min" translatable="false">40 min</string>

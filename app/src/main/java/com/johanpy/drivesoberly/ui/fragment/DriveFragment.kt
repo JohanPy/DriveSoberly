@@ -127,6 +127,10 @@ class DriveFragment : Fragment() {
         val timeFormat = DateFormat.getTimeInstance(DateFormat.SHORT)
 
         if (drinkerStatus.peakRate < 0.01) {
+            if (!drinkRepository.livePastDrinks.value.isNullOrEmpty()) {
+                drinkRepository.clearPastDrinks()
+            }
+
             binding.linearAlcoholRate.visibility = LinearLayout.GONE
             binding.linearProjectionSober.visibility = LinearLayout.GONE
             binding.linearProjectedPeak.visibility = LinearLayout.GONE

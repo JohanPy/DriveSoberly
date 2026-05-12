@@ -11,6 +11,9 @@ interface IngestedDrinkDao {
     @Query("SELECT * from ingesteddrinkentity")
     suspend fun getAll(): List<IngestedDrinkEntity>
 
+    @Query("DELETE FROM ingesteddrinkentity")
+    suspend fun deleteAll()
+
     @Insert(entity = IngestedDrinkEntity::class)
     suspend fun insert(ingestedDrink: IngestedDrink): Long
 
