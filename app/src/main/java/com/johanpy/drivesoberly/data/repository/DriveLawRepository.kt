@@ -1,9 +1,9 @@
 package com.johanpy.drivesoberly.data.repository
 
 import android.content.Context
+import androidx.core.os.ConfigurationCompat
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.core.os.ConfigurationCompat
 import androidx.security.crypto.EncryptedSharedPreferences
 import androidx.security.crypto.MasterKey
 import com.johanpy.drivesoberly.R

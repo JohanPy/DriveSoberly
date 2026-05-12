@@ -139,7 +139,6 @@ class PresetDrinksAdapter(
             holder.deleteButton.setOnClickListener {
                 onDeletePreset(presetDrink)
             }
-
         }
     }
 

@@ -7,9 +7,9 @@ import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
 import android.widget.NumberPicker
 import android.widget.Spinner
-import android.widget.ArrayAdapter
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.textfield.TextInputEditText
@@ -135,20 +135,34 @@ class EditPresetFragment : Fragment() {
             editTextDegree.setText(doubleFormat.format(degree))
         }
 
-        editTextDegree.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
-            override fun afterTextChanged(s: Editable?) {
-                s?.toString()?.toDoubleOrNull()?.let { value ->
-                    degree = value.coerceIn(0.0, 100.0)
-                    val closest = IngestedDrink.degrees.minByOrNull { kotlin.math.abs(it - degree) } ?: degree
-                    val index = IngestedDrink.degrees.toList().indexOf(closest)
-                    if (index >= 0) {
-                        numberPickerDegree.value = index
+        editTextDegree.addTextChangedListener(
+            object : TextWatcher {
+                override fun beforeTextChanged(
+                    s: CharSequence?,
+                    start: Int,
+                    count: Int,
+                    after: Int,
+                ) {}
+
+                override fun onTextChanged(
+                    s: CharSequence?,
+                    start: Int,
+                    before: Int,
+                    count: Int,
+                ) {}
+
+                override fun afterTextChanged(s: Editable?) {
+                    s?.toString()?.toDoubleOrNull()?.let { value ->
+                        degree = value.coerceIn(0.0, 100.0)
+                        val closest = IngestedDrink.degrees.minByOrNull { kotlin.math.abs(it - degree) } ?: degree
+                        val index = IngestedDrink.degrees.toList().indexOf(closest)
+                        if (index >= 0) {
+                            numberPickerDegree.value = index
+                        }
                     }
                 }
-            }
-        })
+            },
+        )
     }
 
     private fun setVolumePicker() {
@@ -179,21 +193,35 @@ class EditPresetFragment : Fragment() {
             editTextVolume.setText(doubleFormat.format(volume / 10.0))
         }
 
-        editTextVolume.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
-            override fun afterTextChanged(s: Editable?) {
-                s?.toString()?.toDoubleOrNull()?.let { valueCL ->
-                    volume = valueCL * 10.0
-                    volume = volume.coerceIn(10.0, 1500.0)
-                    val closest = IngestedDrink.volumes.minByOrNull { kotlin.math.abs(it - volume) } ?: volume
-                    val index = IngestedDrink.volumes.toList().indexOf(closest)
-                    if (index >= 0) {
-                        numberPickerVolume.value = index
+        editTextVolume.addTextChangedListener(
+            object : TextWatcher {
+                override fun beforeTextChanged(
+                    s: CharSequence?,
+                    start: Int,
+                    count: Int,
+                    after: Int,
+                ) {}
+
+                override fun onTextChanged(
+                    s: CharSequence?,
+                    start: Int,
+                    before: Int,
+                    count: Int,
+                ) {}
+
+                override fun afterTextChanged(s: Editable?) {
+                    s?.toString()?.toDoubleOrNull()?.let { valueCL ->
+                        volume = valueCL * 10.0
+                        volume = volume.coerceIn(10.0, 1500.0)
+                        val closest = IngestedDrink.volumes.minByOrNull { kotlin.math.abs(it - volume) } ?: volume
+                        val index = IngestedDrink.volumes.toList().indexOf(closest)
+                        if (index >= 0) {
+                            numberPickerVolume.value = index
+                        }
                     }
                 }
-            }
-        })
+            },
+        )
     }
 
     override fun onDestroyView() {
