@@ -4,6 +4,13 @@ All notable changes to this project will be documented in this file.
 
 The format is based on Keep a Changelog and this project follows Semantic Versioning.
 
+## [1.2.0] - 2026-05-12
+
+### Changed
+
+- New minor release prepared after CI verification.
+- Version bump to 1.2.0 (versionCode 33).
+
 ## [1.1.0] - 2026-05-12
 
 ### Changed
