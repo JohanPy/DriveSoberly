@@ -75,7 +75,7 @@
     <string name="drive_law">Driving law</string>
     <string name="body_data">Body data</string>
     <string name="drive_status">Drive Status</string>
-    <string name="user_health">Health</string>
+    <string name="user_health">Alcohol tolerance</string>
     <string name="alcohol_tolerance_low">low</string>
     <string name="alcohol_tolerance_medium">average</string>
     <string name="alcohol_tolerance_high">good</string>
@@ -134,4 +134,7 @@
     <string name="drive_peak_rate">Peak: %1$s at %2$s</string>
     <string name="drive_below_limit_at">Below legal limit at %1$s</string>
     <string name="drive_zero_at">0 g/L at %1$s</string>
+
+    <string name="profile_explanations_title">Explanations</string>
+    <string name="profile_explanations_body">These profile values change the estimate shown by the app:\n\n- Weight: used to estimate alcohol distribution volume. For the same drink, a lower weight generally gives a higher BAC.\n- Sex: selects body-water distribution coefficients used by the model, which changes BAC level for the same intake.\n- Alcohol tolerance (low / average / good): adjusts the elimination speed used by the simulation. Higher tolerance means faster modeled elimination, so BAC may drop sooner.\n- Country and legal options (young/professional): do not change BAC itself. They change the legal threshold used to decide if you are allowed to drive.\n- Custom legal limit: if you select Other, this value becomes the threshold used for the driving status.\n\nImportant: this remains an estimate based on simplified formulas and cannot replace a certified breathalyzer.</string>
 </resources>

@@ -52,7 +52,7 @@
     <string name="drive_law">Legislación</string>
     <string name="body_data">Fisiología</string>
     <string name="drive_status">Estado de conducción</string>
-    <string name="user_health">Salud</string>
+    <string name="user_health">Tolerancia al alcohol</string>
     <string name="alcohol_tolerance_low">baja</string>
     <string name="alcohol_tolerance_medium">media</string>
     <string name="alcohol_tolerance_high">buena</string>
@@ -92,4 +92,6 @@
     <string name="drive_peak_rate">Pico: %1$s a las %2$s</string>
     <string name="drive_below_limit_at">Por debajo del límite legal a las %1$s</string>
     <string name="drive_zero_at">0 g/L a las %1$s</string>
+    <string name="profile_explanations_title">Explicaciones</string>
+    <string name="profile_explanations_body">Estos valores del perfil cambian la estimación mostrada por la aplicación:\n\n- Peso: se usa para estimar el volumen de distribución del alcohol. Con la misma bebida, un peso menor suele dar una alcoholemia más alta.\n- Sexo: selecciona coeficientes de distribución del modelo y cambia la alcoholemia para una misma ingesta.\n- Tolerancia al alcohol (baja / media / buena): ajusta la velocidad de eliminación usada por la simulación. Una tolerancia más alta implica una eliminación modelada más rápida, por lo que la alcoholemia puede bajar antes.\n- País y opciones legales (novel/profesional): no cambian la alcoholemia en sí. Cambian el límite legal usado para decidir si puedes conducir.\n- Límite legal personalizado: si eliges "Otro", este valor pasa a ser el umbral usado para el estado de conducción.\n\nImportante: sigue siendo una estimación basada en fórmulas simplificadas y no sustituye a un alcoholímetro certificado.</string>
 </resources>

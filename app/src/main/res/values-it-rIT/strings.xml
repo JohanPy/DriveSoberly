@@ -53,7 +53,7 @@
     <string name="drive_law">Normativa</string>
     <string name="body_data">Dati corporei</string>
     <string name="drive_status">Stato di guida</string>
-    <string name="user_health">Tolleranza</string>
+    <string name="user_health">Tolleranza all\'alcol</string>
     <string name="alcohol_tolerance_low">bassa</string>
     <string name="alcohol_tolerance_medium">media</string>
     <string name="alcohol_tolerance_high">buona</string>
@@ -93,4 +93,6 @@
     <string name="drive_peak_rate">Picco: %1$s alle %2$s</string>
     <string name="drive_below_limit_at">Sotto il limite legale alle %1$s</string>
     <string name="drive_zero_at">0 g/L alle %1$s</string>
+    <string name="profile_explanations_title">Spiegazioni</string>
+    <string name="profile_explanations_body">Questi valori del profilo modificano la stima mostrata dall\'app:\n\n- Peso: viene usato per stimare il volume di distribuzione dell\'alcol. A parità di bevanda, un peso minore porta in genere a un tasso alcolemico più alto.\n- Sesso: seleziona coefficienti di distribuzione del modello e modifica il tasso alcolemico a parità di assunzione.\n- Tolleranza all\'alcol (bassa / media / buona): regola la velocità di eliminazione usata dalla simulazione. Una tolleranza più alta implica un\'eliminazione modellata più rapida, quindi il tasso può scendere prima.\n- Paese e opzioni legali (neopatentato/professionista): non cambiano il tasso alcolemico in sé. Cambiano il limite legale usato per decidere se puoi guidare.\n- Limite legale personalizzato: se selezioni "Altro", questo valore diventa la soglia usata per lo stato di guida.\n\nImportante: resta una stima basata su formule semplificate e non sostituisce un etilometro certificato.</string>
 </resources>

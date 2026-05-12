@@ -46,13 +46,49 @@
                 app:layout_constraintTop_toBottomOf="@id/drinkerPickersSection"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
                 tools:context=".ui.fragment.DrinkerFragment"
                 tools:showIn="@layout/fragment_drinker">
 
                 <include layout="@layout/constraint_content_drinker_country" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardProfileExplanations"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_sm"
+                android:layout_marginBottom="@dimen/spacing_sm"
+                app:layout_constraintTop_toBottomOf="@id/drinkerCountrySection"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="@dimen/spacing_md">
+
+                    <TextView
+                        android:id="@+id/textViewProfileExplanationsTitle"
+                        style="@style/PillTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:text="@string/profile_explanations_title" />
+
+                    <TextView
+                        android:id="@+id/textViewProfileExplanationsContent"
+                        style="@style/TextViewLabel"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/spacing_sm"
+                        android:text="@string/profile_explanations_body"
+                        android:visibility="gone" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

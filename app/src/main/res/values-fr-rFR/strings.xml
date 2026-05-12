@@ -53,7 +53,7 @@
     <string name="drive_law">Législation</string>
     <string name="body_data">Physiologie</string>
     <string name="drive_status">Statut conduite</string>
-    <string name="user_health">Santé</string>
+    <string name="user_health">Tolérance à l\'alcool</string>
     <string name="alcohol_tolerance_low">faible</string>
     <string name="alcohol_tolerance_medium">moyenne</string>
     <string name="alcohol_tolerance_high">bonne</string>
@@ -108,4 +108,6 @@
     <string name="drive_peak_rate">Pic : %1$s à %2$s</string>
     <string name="drive_below_limit_at">Sous le seuil légal à %1$s</string>
     <string name="drive_zero_at">0 g/L à %1$s</string>
+    <string name="profile_explanations_title">Explications</string>
+    <string name="profile_explanations_body">Ces valeurs du profil modifient l\'estimation affichée par l\'application :\n\n- Poids : utilisé pour estimer le volume de distribution de l\'alcool. À boisson égale, un poids plus faible donne en général une alcoolémie plus élevée.\n- Sexe : sélectionne des coefficients de distribution hydrique du modèle, ce qui modifie l\'alcoolémie pour une même consommation.\n- Tolérance à l\'alcool (faible / moyenne / bonne) : ajuste la vitesse d\'élimination utilisée par la simulation. Une tolérance plus élevée implique une élimination modélisée plus rapide, donc une baisse potentiellement plus tôt.\n- Pays et options légales (jeune/professionnel) : ne changent pas l\'alcoolémie elle-même. Ils changent le seuil légal utilisé pour déterminer si vous pouvez conduire.\n- Limite légale personnalisée : si vous choisissez Autre, cette valeur devient le seuil utilisé pour le statut de conduite.\n\nImportant : cela reste une estimation basée sur des formules simplifiées et ne remplace pas un éthylotest certifié.</string>
 </resources>

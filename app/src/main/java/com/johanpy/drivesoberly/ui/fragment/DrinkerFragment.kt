@@ -52,6 +52,8 @@ class DrinkerFragment : Fragment() {
     private lateinit var radioSexOther: RadioButton
     private lateinit var seekBarAlcoholTolerance: Slider
     private lateinit var textViewAlcoholToleranceTextValue: TextView
+    private lateinit var textViewProfileExplanationsTitle: TextView
+    private lateinit var textViewProfileExplanationsContent: TextView
 
     // Views from included layouts (constraint_content_drinker_country.xml)
     private lateinit var textViewCurrentLimit: TextView
@@ -82,6 +84,8 @@ class DrinkerFragment : Fragment() {
         radioSexOther = view.findViewById(R.id.radioSexOther)
         seekBarAlcoholTolerance = view.findViewById(R.id.seekBarAlcoholTolerance)
         textViewAlcoholToleranceTextValue = view.findViewById(R.id.textViewAlcoholToleranceTextValue)
+        textViewProfileExplanationsTitle = view.findViewById(R.id.textViewProfileExplanationsTitle)
+        textViewProfileExplanationsContent = view.findViewById(R.id.textViewProfileExplanationsContent)
 
         textViewCurrentLimit = view.findViewById(R.id.textViewCurrentLimit)
         editTextCurrentLimit = view.findViewById(R.id.editTextCurrentLimit)
@@ -145,6 +149,19 @@ class DrinkerFragment : Fragment() {
         setupCheckBoxes()
 
         setupAlcoholTolerance(digestionRepository)
+
+        setupExplanationsToggle()
+    }
+
+    private fun setupExplanationsToggle() {
+        textViewProfileExplanationsTitle.setOnClickListener {
+            textViewProfileExplanationsContent.visibility =
+                if (textViewProfileExplanationsContent.visibility == View.VISIBLE) {
+                    View.GONE
+                } else {
+                    View.VISIBLE
+                }
+        }
     }
 
     override fun onResume() {
