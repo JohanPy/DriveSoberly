@@ -37,8 +37,10 @@ class HappyPathUITest {
         device.wakeUp()
         device.waitForIdle()
 
+        InstrumentationRegistry.getInstrumentation().setInTouchMode(true)
+
         // Wait for activity to be fully ready and focused
-        Thread.sleep(2000)
+        Thread.sleep(3000)
         disableSystemAnimations()
     }
 

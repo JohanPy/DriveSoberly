@@ -29,7 +29,7 @@ jobs:
       - name: Run connected tests on emulator
         uses: reactivecircus/android-emulator-runner@v2
         with:
-          api-level: 34
+          api-level: 31
           target: google_apis
           arch: x86_64
           profile: Nexus 6
@@ -49,6 +49,7 @@ jobs:
             adb shell input keyevent KEYCODE_HOME || true
             adb shell input keyevent 111 || true
             adb shell input keyevent 111 || true
+            adb shell input tap 500 1000 || true
             adb shell svc power stayon true || true
             adb shell settings put system screen_off_timeout 2147483647 || true
             adb shell settings put global window_animation_scale 0.0 || true
