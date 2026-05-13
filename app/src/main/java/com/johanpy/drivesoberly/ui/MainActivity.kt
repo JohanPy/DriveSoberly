@@ -1,6 +1,7 @@
 package com.johanpy.drivesoberly.ui
 
 import android.os.Bundle
+import android.os.SystemProperties
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
@@ -22,7 +23,11 @@ class MainActivity : AppCompatActivity() {
     private lateinit var appBarConfiguration: AppBarConfiguration
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        installSplashScreen()
+        // Skip splash screen during instrumented tests to avoid focus issues
+        val noSplash = android.os.SystemProperties.get("debug.drivesoberly.nosplash", "false") == "true"
+        if (!noSplash) {
+            installSplashScreen()
+        }
         val time = (application as DriveSoberlyApp).time
         val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
 
