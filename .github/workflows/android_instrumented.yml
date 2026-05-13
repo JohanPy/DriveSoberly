@@ -42,10 +42,10 @@ jobs:
             until [ "$(adb shell getprop dev.bootcomplete | tr -d '\r')" = "1" ]; do echo "Waiting for dev.bootcomplete..."; sleep 5; done
             until adb shell pm path android >/dev/null 2>&1; do echo "Waiting for Package Manager service..."; sleep 5; done
             adb shell input keyevent KEYCODE_WAKEUP || true
-            adb shell input keyevent 4 || true
-            adb shell input keyevent 3 || true
+            adb shell locksettings set-disabled true || true
             adb shell input touchscreen swipe 500 1800 500 200 || true
             adb shell wm dismiss-keyguard || true
+            adb shell input keyevent 66 || true
             adb shell svc power stayon true || true
             adb shell settings put system screen_off_timeout 2147483647 || true
             adb shell settings put global window_animation_scale 0.0 || true

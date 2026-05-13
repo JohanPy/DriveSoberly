@@ -32,7 +32,8 @@ class HappyPathUITest {
 
     @Before
     fun prepareDeviceForEspresso() {
-        ensureDeviceInteractive()
+        // Wait for activity to be fully ready and focused
+        Thread.sleep(2000)
         disableSystemAnimations()
     }
 
@@ -155,15 +156,4 @@ class HappyPathUITest {
         }
     }
 
-    private fun ensureDeviceInteractive() {
-        val uiAutomation = InstrumentationRegistry.getInstrumentation().uiAutomation
-        listOf(
-            "input keyevent KEYCODE_WAKEUP",
-            "wm dismiss-keyguard",
-            "svc power stayon true",
-            "settings put system screen_off_timeout 2147483647",
-        ).forEach { command ->
-            uiAutomation.executeShellCommand(command).close()
-        }
-    }
 }
