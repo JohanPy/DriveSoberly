@@ -33,7 +33,10 @@ class MainActivity : AppCompatActivity() {
             } else {
                 LocaleListCompat.forLanguageTags(languagePref)
             }
-        AppCompatDelegate.setApplicationLocales(locales)
+        val currentLocales = AppCompatDelegate.getApplicationLocales()
+        if (currentLocales != locales) {
+            AppCompatDelegate.setApplicationLocales(locales)
+        }
 
         val themeMode =
             when (sharedPreferences.getString("theme_preference", "system")) {
@@ -41,7 +44,9 @@ class MainActivity : AppCompatActivity() {
                 "dark" -> AppCompatDelegate.MODE_NIGHT_YES
                 else -> AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM
             }
-        AppCompatDelegate.setDefaultNightMode(themeMode)
+        if (AppCompatDelegate.getDefaultNightMode() != themeMode) {
+            AppCompatDelegate.setDefaultNightMode(themeMode)
+        }
 
         when {
             time.isSaintPatrick() -> setTheme(R.style.AppThemeSaintPatrick)
