@@ -155,5 +155,4 @@ class HappyPathUITest {
             uiAutomation.executeShellCommand(command).close()
         }
     }
-
 }
