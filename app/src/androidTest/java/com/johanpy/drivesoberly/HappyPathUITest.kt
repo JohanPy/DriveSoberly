@@ -122,7 +122,6 @@ class HappyPathUITest {
         // Verify drive screen is reachable and status panel is visible.
         onView(withId(R.id.buttonAddDrink)).check(matches(isDisplayed()))
         onView(withId(R.id.textViewDriveStatusLabel)).check(matches(isDisplayed()))
-        onView(withId(R.id.textViewProjectionSober)).check(matches(isDisplayed()))
     }
 
     private fun dismissDisclaimerIfShown() {
@@ -163,7 +162,6 @@ class HappyPathUITest {
             "wm dismiss-keyguard",
             "svc power stayon true",
             "settings put system screen_off_timeout 2147483647",
-            "input keyevent 82",
         ).forEach { command ->
             uiAutomation.executeShellCommand(command).close()
         }

@@ -38,18 +38,9 @@ jobs:
           emulator-boot-timeout: 900
           script: |
             adb wait-for-device
-            until [ "$(adb shell getprop sys.boot_completed | tr -d '\r')" = "1" ]; do
-              echo "Waiting for sys.boot_completed..."
-              sleep 5
-            done
-            until [ "$(adb shell getprop dev.bootcomplete | tr -d '\r')" = "1" ]; do
-              echo "Waiting for dev.bootcomplete..."
-              sleep 5
-            done
-            until adb shell pm path android >/dev/null 2>&1; do
-              echo "Waiting for Package Manager service..."
-              sleep 5
-            done
+            until [ "$(adb shell getprop sys.boot_completed | tr -d '\r')" = "1" ]; do echo "Waiting for sys.boot_completed..."; sleep 5; done
+            until [ "$(adb shell getprop dev.bootcomplete | tr -d '\r')" = "1" ]; do echo "Waiting for dev.bootcomplete..."; sleep 5; done
+            until adb shell pm path android >/dev/null 2>&1; do echo "Waiting for Package Manager service..."; sleep 5; done
             adb shell input keyevent KEYCODE_WAKEUP || true
             adb shell input keyevent 82 || true
             adb shell input touchscreen swipe 500 1800 500 200 || true
