@@ -58,7 +58,7 @@ class HappyPathUITest {
 
         // AddDrinkFragment: select the first preset entry (position 1, because 0 is "add preset" button)
         onView(withId(R.id.listViewPresetDrinks)).perform(
-            RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(2, click()),
+            RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(1, click()),
         )
 
         // Wait for potential UI update before validating
