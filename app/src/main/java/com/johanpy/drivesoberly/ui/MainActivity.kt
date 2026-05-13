@@ -1,7 +1,7 @@
 package com.johanpy.drivesoberly.ui
 
 import android.os.Bundle
-import android.os.SystemProperties
+import android.provider.Settings
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
@@ -24,7 +24,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         // Skip splash screen during instrumented tests to avoid focus issues
-        val noSplash = android.os.SystemProperties.get("debug.drivesoberly.nosplash", "false") == "true"
+        val noSplash = Settings.Global.getInt(contentResolver, "drivesoberly_nosplash", 0) == 1
         if (!noSplash) {
             installSplashScreen()
         }
