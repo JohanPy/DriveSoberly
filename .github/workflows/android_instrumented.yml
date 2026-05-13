@@ -42,6 +42,8 @@ jobs:
             until [ "$(adb shell getprop dev.bootcomplete | tr -d '\r')" = "1" ]; do echo "Waiting for dev.bootcomplete..."; sleep 5; done
             until adb shell pm path android >/dev/null 2>&1; do echo "Waiting for Package Manager service..."; sleep 5; done
             adb shell input keyevent KEYCODE_WAKEUP || true
+            adb shell input keyevent 82 || true
+            sleep 1
             adb shell locksettings set-disabled true || true
             adb shell wm dismiss-keyguard || true
             adb shell input keyevent KEYCODE_HOME || true
@@ -57,3 +59,10 @@ jobs:
             adb shell settings put secure show_ime_with_hard_keyboard 0 || true
             sleep 2
             ./gradlew connectedDebugAndroidTest --no-daemon
+
+      - name: Upload test reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: android-test-reports
+          path: app/build/reports/androidTests/connected/

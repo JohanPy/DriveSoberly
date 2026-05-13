@@ -15,6 +15,7 @@ import androidx.test.espresso.matcher.ViewMatchers.withText
 import androidx.test.ext.junit.rules.ActivityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
+import androidx.test.uiautomator.UiDevice
 import com.johanpy.drivesoberly.ui.MainActivity
 import org.hamcrest.CoreMatchers.allOf
 import org.hamcrest.CoreMatchers.containsString
@@ -32,6 +33,10 @@ class HappyPathUITest {
 
     @Before
     fun prepareDeviceForEspresso() {
+        val device = UiDevice.getInstance(InstrumentationRegistry.getInstrumentation())
+        device.wakeUp()
+        device.waitForIdle()
+
         // Wait for activity to be fully ready and focused
         Thread.sleep(2000)
         disableSystemAnimations()

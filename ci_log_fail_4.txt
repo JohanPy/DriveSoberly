@@ -1,0 +1,1010 @@
+Run connected Android tests	Run connected tests on emulator	﻿2026-05-13T13:33:27.8630017Z ##[group]Run reactivecircus/android-emulator-runner@v2
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:33:27.8630451Z with:
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:33:27.8630679Z   api-level: 34
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:33:27.8630907Z   target: google_apis
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:33:27.8631146Z   arch: x86_64
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:33:27.8631365Z   profile: Nexus 6
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:33:27.8631736Z   emulator-options: -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:33:27.8632188Z   disable-animations: true
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:33:27.8632481Z   emulator-boot-timeout: 900
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:33:27.8636966Z   script: adb wait-for-device
+Run connected Android tests	Run connected tests on emulator	until [ "$(adb shell getprop sys.boot_completed | tr -d '\r')" = "1" ]; do echo "Waiting for sys.boot_completed..."; sleep 5; done
+Run connected Android tests	Run connected tests on emulator	until [ "$(adb shell getprop dev.bootcomplete | tr -d '\r')" = "1" ]; do echo "Waiting for dev.bootcomplete..."; sleep 5; done
+Run connected Android tests	Run connected tests on emulator	until adb shell pm path android >/dev/null 2>&1; do echo "Waiting for Package Manager service..."; sleep 5; done
+Run connected Android tests	Run connected tests on emulator	adb shell input keyevent KEYCODE_WAKEUP || true
+Run connected Android tests	Run connected tests on emulator	adb shell locksettings set-disabled true || true
+Run connected Android tests	Run connected tests on emulator	adb shell wm dismiss-keyguard || true
+Run connected Android tests	Run connected tests on emulator	adb shell input keyevent KEYCODE_HOME || true
+Run connected Android tests	Run connected tests on emulator	adb shell input keyevent 111 || true
+Run connected Android tests	Run connected tests on emulator	adb shell input keyevent 111 || true
+Run connected Android tests	Run connected tests on emulator	adb shell svc power stayon true || true
+Run connected Android tests	Run connected tests on emulator	adb shell settings put system screen_off_timeout 2147483647 || true
+Run connected Android tests	Run connected tests on emulator	adb shell settings put global window_animation_scale 0.0 || true
+Run connected Android tests	Run connected tests on emulator	adb shell settings put global transition_animation_scale 0.0 || true
+Run connected Android tests	Run connected tests on emulator	adb shell settings put global animator_duration_scale 0.0 || true
+Run connected Android tests	Run connected tests on emulator	adb shell settings put global verifier_verify_adb_installs 0 || true
+Run connected Android tests	Run connected tests on emulator	adb shell settings put global package_verifier_enable 0 || true
+Run connected Android tests	Run connected tests on emulator	adb shell settings put secure show_ime_with_hard_keyboard 0 || true
+Run connected Android tests	Run connected tests on emulator	sleep 2
+Run connected Android tests	Run connected tests on emulator	./gradlew connectedDebugAndroidTest --no-daemon
+Run connected Android tests	Run connected tests on emulator	
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:33:27.8641464Z   cores: 2
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:33:27.8641681Z   avd-name: test
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:33:27.8641914Z   force-avd-creation: true
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:33:27.8642173Z   emulator-port: 5554
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:33:27.8642432Z   disable-spellchecker: false
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:33:27.8642734Z   disable-linux-hw-accel: auto
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:33:27.8643045Z   enable-hw-keyboard: false
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:33:27.8643304Z   channel: stable
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:33:27.8643526Z env:
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:33:27.8643835Z   JAVA_HOME: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/17.0.18-8/x64
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:33:27.8644345Z   JAVA_HOME_17_X64: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/17.0.18-8/x64
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:33:27.8644743Z ##[endgroup]
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:33:27.9205487Z ##[group]Configure emulator
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:33:27.9209778Z You're running a Linux VM where hardware acceleration is not available. Please consider using a macOS VM instead to take advantage of native hardware acceleration support provided by HAXM.
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:33:27.9211192Z API level: 34
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:33:27.9211797Z System image API level: 34
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:33:27.9212243Z target: google_apis
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:33:27.9212653Z CPU architecture: x86_64
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:33:27.9213098Z Hardware profile: Nexus 6
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:33:27.9213524Z Cores: 2
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:33:27.9213876Z RAM size: 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:33:27.9214274Z Heap size: 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:33:27.9214685Z SD card path or size: 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:33:27.9215485Z Disk size: 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:33:27.9216592Z AVD name: test
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:33:27.9220238Z force avd creation: true
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:33:27.9220758Z Emulator boot timeout: 900
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:33:27.9221199Z emulator port: 5554
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:33:27.9221834Z emulator options: -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:33:27.9222576Z disable animations: true
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:33:27.9223030Z disable spellchecker: false
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:33:27.9223516Z disable Linux hardware acceleration: true
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:33:27.9224042Z enable hardware keyboard: false
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:33:27.9224487Z Channel: 0 (stable)
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:33:27.9224884Z Script:
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:33:27.9225231Z adb wait-for-device
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:33:27.9226192Z until [ "$(adb shell getprop sys.boot_completed | tr -d '\r')" = "1" ]; do echo "Waiting for sys.boot_completed..."; sleep 5; done
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:33:27.9227704Z until [ "$(adb shell getprop dev.bootcomplete | tr -d '\r')" = "1" ]; do echo "Waiting for dev.bootcomplete..."; sleep 5; done
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:33:27.9230412Z until adb shell pm path android >/dev/null 2>&1; do echo "Waiting for Package Manager service..."; sleep 5; done
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:33:27.9231407Z adb shell input keyevent KEYCODE_WAKEUP || true
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:33:27.9232053Z adb shell locksettings set-disabled true || true
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:33:27.9232656Z adb shell wm dismiss-keyguard || true
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:33:27.9233211Z adb shell input keyevent KEYCODE_HOME || true
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:33:27.9233767Z adb shell input keyevent 111 || true
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:33:27.9234269Z adb shell input keyevent 111 || true
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:33:27.9234776Z adb shell svc power stayon true || true
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:33:27.9235507Z adb shell settings put system screen_off_timeout 2147483647 || true
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:33:27.9236617Z adb shell settings put global window_animation_scale 0.0 || true
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:33:27.9237432Z adb shell settings put global transition_animation_scale 0.0 || true
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:33:27.9238250Z adb shell settings put global animator_duration_scale 0.0 || true
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:33:27.9239039Z adb shell settings put global verifier_verify_adb_installs 0 || true
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:33:27.9239831Z adb shell settings put global package_verifier_enable 0 || true
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:33:27.9240623Z adb shell settings put secure show_ime_with_hard_keyboard 0 || true
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:33:27.9241466Z sleep 2
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:33:27.9241916Z ./gradlew connectedDebugAndroidTest --no-daemon
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:33:27.9242502Z Pre emulator launch script:
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:33:27.9243264Z ##[endgroup]
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:33:27.9243902Z ##[group]Install Android SDK
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:33:27.9887960Z [command]/usr/bin/sh -c \yes | sdkmanager --licenses > /dev/null
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:33:35.4312934Z Installing latest build tools, platform tools, and platform.
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:33:35.4326676Z [command]/usr/bin/sh -c \sdkmanager --install 'build-tools;36.0.0' platform-tools 'platforms;android-34'> /dev/null
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:33:37.0151554Z Installing latest emulator.
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:33:37.0168864Z [command]/usr/bin/sh -c \sdkmanager --install emulator --channel=0 > /dev/null
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:33:45.0453124Z Installing system images.
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:33:45.0470550Z [command]/usr/bin/sh -c \sdkmanager --install 'system-images;android-34;google_apis;x86_64' --channel=0 > /dev/null
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:34:10.9527520Z ##[endgroup]
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:34:10.9529117Z ##[group]Create AVD
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:34:10.9530131Z Creating AVD.
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:34:10.9551459Z [command]/usr/bin/sh -c \echo no | avdmanager create avd --force -n test --package 'system-images;android-34;google_apis;x86_64' --device 'Nexus 6'
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:34:11.7913654Z Loading local repository...                                                     
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:34:11.7919875Z [=========                              ] 25% Loading local repository...       
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:34:11.7920883Z [=========                              ] 25% Fetch remote repository...        
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:34:11.7921893Z [=======================================] 100% Fetch remote repository...       
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:34:11.9804706Z Auto-selecting single ABI x86_64
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:34:12.4299957Z [command]/usr/bin/sh -c \printf 'hw.cpu.ncore=2\n' >> /home/runner/.android/avd/test.avd/config.ini
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:34:12.4322394Z ##[endgroup]
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:34:12.4324040Z ##[group]Launch Emulator
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:34:12.4324507Z Disabling Linux hardware acceleration.
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:34:12.4325038Z Starting emulator.
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:34:12.4372919Z [command]/usr/bin/sh -c \/usr/local/lib/android/sdk/emulator/emulator -port 5554 -avd test -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -accel off &
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:34:12.4504193Z INFO         | Android emulator version 36.5.11.0 (build_id 15261927) (CL:N/A)
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:34:12.4504913Z INFO         | Graphics backend: gfxstream
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:34:12.4505762Z INFO         | Found systemPath /usr/local/lib/android/sdk/system-images/android-34/google_apis/x86_64/
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:34:12.6730405Z ProbeKVM: This user doesn't have permissions to use KVM (/dev/kvm).
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:34:12.6731515Z The KVM line in /etc/group is: [kvm:x:993:]
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:34:12.6731846Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:34:12.6732011Z If the current user has KVM permissions,
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:34:12.6732609Z the KVM line in /etc/group should end with ":" followed by your username.
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:34:12.6733073Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:34:12.6733446Z If we see LINE_NOT_FOUND, the kvm group may need to be created along with permissions:
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:34:12.6734170Z     sudo groupadd -r kvm
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:34:12.6734829Z     # Then ensure /lib/udev/rules.d/50-udev-default.rules contains something like:
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:34:12.6735725Z     # KERNEL=="kvm", GROUP="kvm", MODE="0660"
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:34:12.6736444Z     # and then run:
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:34:12.6736781Z     sudo gpasswd -a $USER kvm
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:34:12.6737049Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:34:12.6737434Z If we see kvm:... but no username at the end, running the following command may allow KVM access:
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:34:12.6737884Z     sudo gpasswd -a $USER kvm
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:34:12.6738043Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:34:12.6738198Z You may need to log out and back in for changes to take effect.
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:34:12.6738435Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:34:12.6738539Z INFO         | Increasing RAM size to 3072MB
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:34:12.6738835Z ##############################################################################
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:34:12.6739182Z ##                        WARNING - ACTION REQUIRED                         ##
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:34:12.6739850Z ##  Consider using the '-metrics-collection' flag to help improve the       ##
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:34:12.6740684Z ##  emulator by sending anonymized usage data. Or use the '-no-metrics'     ##
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:34:12.6741536Z ##  flag to bypass this warning and turn off the metrics collection.        ##
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:34:12.6742381Z ##  In a future release this warning will turn into a one-time blocking     ##
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:34:12.6743194Z ##  prompt to ask for explicit user input regarding metrics collection.     ##
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:34:12.6743896Z ##                                                                          ##
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:34:12.6744663Z ##  Please see '-help-metrics-collection' for more details. You can use     ##
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:34:12.6745507Z ##  '-metrics-to-file' or '-metrics-to-console' flags to see what type of   ##
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:34:12.6746689Z ##  data is being collected by emulator as part of usage statistics.        ##
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:34:12.6747374Z ##############################################################################
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:34:12.6747928Z INFO         | Guest GLES Driver: Auto (ext controls)
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:34:12.6748696Z INFO         | emuglConfig_init: vulkan_mode_selected:swiftshader gles_mode_selected:swiftshader
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:34:12.6749433Z INFO         | Checking system compatibility:
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:34:12.6749907Z INFO         |   Checking: hasSufficientDiskSpace
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:34:12.6750479Z INFO         |      Ok: Disk space requirements to run avd: `test` are met
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:34:12.6751044Z INFO         |   Checking: hasSufficientHwGpu
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:34:12.6751598Z INFO         |      Ok: Hardware GPU compatibility checks are not required
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:34:12.6752215Z INFO         |   Checking: hasSufficientSystem
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:34:12.6753025Z INFO         |      Ok: System requirements to run avd: `test` are met
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:34:12.6753958Z WARNING      | x86_64 emulation may not work without hardware acceleration!
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:34:12.9111124Z ERROR        | Unable to connect to adb daemon on port: 5037
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:34:12.9124561Z INFO         | Storing crashdata in: /tmp/android-runner/emu-crash-36.5.11.db, detection is enabled for process: 2628
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:34:12.9125529Z INFO         | Initializing gfxstream backend
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:34:12.9133998Z INFO         | android_startOpenglesRenderer: gpu info
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:34:12.9134720Z INFO         | 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:34:12.9136846Z INFO         | initIcdPaths: ICD set to 'swiftshader', using Swiftshader ICD
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:34:12.9138000Z INFO         | Setting ICD filenames for the loader = /usr/local/lib/android/sdk/emulator/lib64/vulkan/vk_swiftshader_icd.json
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:34:12.9139804Z INFO         | SharedLibrary::open for [/usr/local/lib/android/sdk/emulator/qemu/linux-x86_64/lib64/vulkan/libvulkan.so]
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:34:12.9141189Z INFO         | SharedLibrary::open for [/usr/local/lib/android/sdk/emulator/qemu/linux-x86_64/lib64/vulkan/libvulkan.so.1]
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:34:12.9142493Z INFO         | SharedLibrary::open for [/usr/local/lib/android/sdk/emulator/lib64/vulkan/libvulkan.so]
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:34:12.9143511Z INFO         | Added library: /usr/local/lib/android/sdk/emulator/lib64/vulkan/libvulkan.so
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:34:12.9196817Z INFO         | Selecting Vulkan device: SwiftShader Device (Subzero), Version: 1.3.0
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:34:12.9360061Z INFO         | SharedLibrary::open for [libX11]
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:34:12.9360809Z WARNING      | Could not open libX11.so, try libX11.so.6
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:34:12.9361530Z INFO         | SharedLibrary::open for [libX11.so.6]
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:34:12.9361977Z INFO         | SharedLibrary::open for [libX11-xcb]
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:34:12.9362349Z WARNING      | Could not open libX11-xcb.so, try libX11-xcb.so.1
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:34:12.9362720Z INFO         | SharedLibrary::open for [libX11-xcb.so.1]
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:34:12.9413763Z INFO         | Initializing VkEmulation features:
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:34:12.9414619Z INFO         |     glInteropSupported: false
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:34:12.9415893Z INFO         |     useDeferredCommands: true
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:34:12.9416877Z INFO         |     createResourceWithRequirements: true
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:34:12.9417698Z INFO         |     useVulkanComposition: false
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:34:12.9418459Z INFO         |     useVulkanNativeSwapchain: false
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:34:12.9419090Z INFO         |     enable guestRenderDoc: false
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:34:12.9419643Z INFO         |     ASTC LDR emulation mode: Gpu
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:34:12.9420185Z INFO         |     enable ETC2 emulation: true
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:34:12.9420702Z INFO         |     enable Ycbcr emulation: false
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:34:12.9421252Z INFO         |     guestVulkanOnly: false
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:34:12.9421815Z INFO         |     useDedicatedAllocations: false
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:34:12.9422418Z INFO         |     guestVulkanMaxApiVersion: 1.3.0
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:34:12.9424723Z INFO         | Graphics Adapter Vendor Google (Google Inc.)
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:34:12.9425613Z INFO         | Graphics Adapter Android Emulator OpenGL ES Translator (Google SwiftShader)
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:34:12.9426952Z INFO         | Graphics API Version OpenGL ES 3.0 (OpenGL ES 3.0 SwiftShader 4.0.0.1)
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:34:12.9431107Z INFO         | Graphics API Extensions GL_OES_EGL_sync GL_OES_EGL_image GL_OES_EGL_image_external GL_OES_depth24 GL_OES_depth32 GL_OES_element_index_uint GL_OES_texture_float GL_OES_texture_float_linear GL_OES_compressed_paletted_texture GL_OES_compressed_ETC1_RGB8_texture GL_OES_depth_texture GL_OES_texture_half_float GL_OES_texture_half_float_linear GL_OES_packed_depth_stencil GL_OES_vertex_half_float GL_OES_standard_derivatives GL_OES_texture_npot GL_OES_rgb8_rgba8 GL_EXT_color_buffer_float GL_EXT_color_buffer_half_float GL_EXT_texture_format_BGRA8888 GL_APPLE_texture_format_BGRA8888 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:34:12.9434976Z INFO         | Graphics Device Extensions N/A
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:34:12.9435592Z INFO         | Disabling sparse binding feature support
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:34:12.9496230Z INFO         | Sending adb public key [QAAAAAfHW89JCUOCEfb6OJLU5O6IvW6eeeMua/OzsMe1FFu37fn2rDWnEdNeutxGP+LDy9ArKjO0SEvA0uQUxoWMUzVzYaW22R4nrceh3b1zj94tDWNEZEyJHpfABCVwQtL/iJ3fO5WQeXxvlWR0Dmw2jBqm5pcpzHbhuP1xCGTVf+ToDtMYSYUAVeviBKl7pHX/X3Zzkj+AyC2Z4yfHiEHlk3Vf4TjGaaL4Qm9PkDCZqhfW41LF6ZvJBnsyduEt0pejq2qXV/iB9zEZe3zdtu12RM7bS8Hwwt5j/mF1qGJLy7iDlBELsmwBTzQHH7CrNnaTwjjtQZesZj5xvne/PfBqDtgZCeu5bzRHep2PrKpPPDT/DS8pZS/ym14RMf+56N+iD1Iek6+WYTvgS7HdRtmNos2alwTEhg1jvvERJlAHH6q8zzxkkFcxoLLBnfEnqmlOqEBzk6YGFyEvoaPaexvGVN++Q6VhQmNzD3hhYZS81FRh4SQiw2hmuGXUUA2PYwAj1IIh9R0FLuFgBaexQdHdiuKvyb/G9Y/r8t7+uh64tFexA/UcchJj9iXhWczhMMsjCsHy1o0/QtAtlZcJSCMt3avotcpPF3mnP17LfI79k5HjIA0+7LPpoaI0qbDby8ORBlkjikR3o5/8k4VpBUdeZ7Q6+8AVOA1IOItcj6Czp2yVg26HcAEAAQA= runner@unknown]
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:34:12.9503115Z INFO         | Userspace boot properties:
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:34:12.9503815Z INFO         |   androidboot.boot_devices=pci0000:00/0000:00:03.0 pci0000:00/0000:00:06.0
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:34:12.9504297Z INFO         |   androidboot.dalvik.vm.heapsize=576m
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:34:12.9504639Z INFO         |   androidboot.debug.hwui.renderer=skiagl
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:34:12.9504994Z INFO         |   androidboot.debug.sf.nobootanimation=1
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:34:12.9505315Z INFO         |   androidboot.hardware=ranchu
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:34:12.9505622Z INFO         |   androidboot.hardware.gltransport=pipe
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:34:12.9506184Z INFO         |   androidboot.hardware.vulkan=ranchu
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:34:12.9506514Z INFO         |   androidboot.logcat=*:V
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:34:12.9506807Z INFO         |   androidboot.opengles.version=196608
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:34:12.9507101Z INFO         |   androidboot.qemu=1
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:34:12.9510334Z INFO         |   androidboot.qemu.adb.pubkey=QAAAAAfHW89JCUOCEfb6OJLU5O6IvW6eeeMua/OzsMe1FFu37fn2rDWnEdNeutxGP+LDy9ArKjO0SEvA0uQUxoWMUzVzYaW22R4nrceh3b1zj94tDWNEZEyJHpfABCVwQtL/iJ3fO5WQeXxvlWR0Dmw2jBqm5pcpzHbhuP1xCGTVf+ToDtMYSYUAVeviBKl7pHX/X3Zzkj+AyC2Z4yfHiEHlk3Vf4TjGaaL4Qm9PkDCZqhfW41LF6ZvJBnsyduEt0pejq2qXV/iB9zEZe3zdtu12RM7bS8Hwwt5j/mF1qGJLy7iDlBELsmwBTzQHH7CrNnaTwjjtQZesZj5xvne/PfBqDtgZCeu5bzRHep2PrKpPPDT/DS8pZS/ym14RMf+56N+iD1Iek6+WYTvgS7HdRtmNos2alwTEhg1jvvERJlAHH6q8zzxkkFcxoLLBnfEnqmlOqEBzk6YGFyEvoaPaexvGVN++Q6VhQmNzD3hhYZS81FRh4SQiw2hmuGXUUA2PYwAj1IIh9R0FLuFgBaexQdHdiuKvyb/G9Y/r8t7+uh64tFexA/UcchJj9iXhWczhMMsjCsHy1o0/QtAtlZcJSCMt3avotcpPF3mnP17LfI79k5HjIA0+7LPpoaI0qbDby8ORBlkjikR3o5/8k4VpBUdeZ7Q6+8AVOA1IOItcj6Czp2yVg26HcAEAAQA= runner@unknown
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:34:12.9513764Z INFO         |   androidboot.qemu.avd_name=test
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:34:12.9514099Z INFO         |   androidboot.qemu.camera_hq_edge_processing=0
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:34:12.9514438Z INFO         |   androidboot.qemu.camera_protocol_ver=1
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:34:12.9514777Z INFO         |   androidboot.qemu.cpuvulkan.version=4202496
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:34:12.9515172Z INFO         |   androidboot.qemu.gltransport.drawFlushInterval=800
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:34:12.9515548Z INFO         |   androidboot.qemu.gltransport.name=pipe
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:34:12.9515867Z INFO         |   androidboot.qemu.hwcodec.avcdec=2
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:34:12.9516433Z INFO         |   androidboot.qemu.hwcodec.hevcdec=2
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:34:12.9516750Z INFO         |   androidboot.qemu.hwcodec.vpxdec=2
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:34:12.9517141Z INFO         |   androidboot.qemu.settings.system.screen_off_timeout=2147483647
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:34:12.9517532Z INFO         |   androidboot.qemu.skin=1440x2560
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:34:12.9517827Z INFO         |   androidboot.qemu.virtiowifi=1
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:34:12.9518104Z INFO         |   androidboot.qemu.vsync=60
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:34:12.9518404Z INFO         |   androidboot.serialno=EMULATOR36X5X11X0
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:34:12.9518890Z INFO         |   androidboot.vbmeta.digest=451e57ed688ff746d2c636d52169ade253e2bc5bb30a5c3ff23679ca15d3bcd3
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:34:12.9519398Z INFO         |   androidboot.vbmeta.hash_alg=sha256
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:34:12.9519688Z INFO         |   androidboot.vbmeta.size=6656
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:34:12.9519977Z INFO         |   androidboot.veritymode=enforcing
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:34:12.9678551Z TCG doesn't support requested feature: CPUID.01H:ECX.avx [bit 28]
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:34:12.9679361Z TCG doesn't support requested feature: CPUID.01H:ECX.f16c [bit 29]
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:34:12.9686462Z TCG doesn't support requested feature: CPUID.01H:ECX.avx [bit 28]
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:34:12.9687511Z TCG doesn't support requested feature: CPUID.01H:ECX.f16c [bit 29]
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:34:12.9696445Z WARNING: cannnot unmap ptr 0x7f3fc8601000 as it is in the protected range from 0x7f3f08600000 to 0x7f3fc8800000
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:34:12.9860116Z INFO         | Monitoring duration of emulator setup.
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:34:15.9829353Z INFO         | Activated packet streamer for bluetooth emulation
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:34:15.9877572Z INFO         | Successfully initialized netsim WiFi
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:34:15.9878452Z INFO         | Setting display: 0 configuration to: 1440x2560, dpi: 560x560 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:34:15.9878866Z INFO         | setDisplayActiveConfig: id:0, 1440x2560
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:34:15.9879420Z INFO         | emulatorSetupEnvironment: Setting up screen background view and display layout at env:1440x2560, lcd:1440x2560
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:34:15.9880021Z INFO         | emulatorSetupEnvironment: Environment scene is not required
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:34:15.9933936Z INFO         | Loading snapshot 'default_boot'...
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:34:15.9934685Z WARNING      | Failed to process .ini file /home/runner/.android/emu-update-last-check.ini for reading.
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:34:16.0056831Z WARNING      | Device 'cache' does not have the requested snapshot 'default_boot'
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:34:16.0057369Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:34:16.0057590Z WARNING      | Failed to load snapshot 'default_boot'
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:34:16.0058659Z USER_INFO    | The emulator is performing a cold boot without a saved state because there's no snapshot and you have configured it not to save on exit.
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:34:16.1101618Z WARNING      | Failed to process .ini file /home/runner/.android/emu-update-last-check.ini for reading.
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:34:22.4425086Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:34:22.4457811Z * daemon not running; starting now at tcp:5037
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:34:22.4512334Z * daemon started successfully
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:34:22.4513701Z adb: device offline
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:34:22.4516416Z The process '/usr/local/lib/android/sdk/platform-tools/adb' failed with exit code 1
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:34:24.4550258Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:34:24.4573361Z adb: device offline
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:34:24.4579387Z The process '/usr/local/lib/android/sdk/platform-tools/adb' failed with exit code 1
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:34:26.4600557Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:34:26.4631459Z adb: device offline
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:34:26.4636778Z The process '/usr/local/lib/android/sdk/platform-tools/adb' failed with exit code 1
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:34:28.4653651Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:34:28.4688523Z adb: device offline
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:34:28.4694352Z The process '/usr/local/lib/android/sdk/platform-tools/adb' failed with exit code 1
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:34:30.4726328Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:34:30.4759397Z adb: device offline
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:34:30.4763966Z The process '/usr/local/lib/android/sdk/platform-tools/adb' failed with exit code 1
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:34:32.4801587Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:34:32.4832992Z adb: device offline
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:34:32.4837599Z The process '/usr/local/lib/android/sdk/platform-tools/adb' failed with exit code 1
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:34:34.4879912Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:34:34.4911520Z adb: device offline
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:34:34.4917200Z The process '/usr/local/lib/android/sdk/platform-tools/adb' failed with exit code 1
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:34:36.4939199Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:34:36.4971078Z adb: device offline
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:34:36.4977126Z The process '/usr/local/lib/android/sdk/platform-tools/adb' failed with exit code 1
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:34:38.5018717Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:34:38.5051263Z adb: device offline
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:34:38.5056330Z The process '/usr/local/lib/android/sdk/platform-tools/adb' failed with exit code 1
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:34:40.5093619Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:34:40.5128599Z adb: device offline
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:34:40.5133742Z The process '/usr/local/lib/android/sdk/platform-tools/adb' failed with exit code 1
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:34:42.5155587Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:34:42.5191896Z adb: device offline
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:34:42.5197213Z The process '/usr/local/lib/android/sdk/platform-tools/adb' failed with exit code 1
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:34:44.5242525Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:34:44.5276191Z adb: device offline
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:34:44.5281546Z The process '/usr/local/lib/android/sdk/platform-tools/adb' failed with exit code 1
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:34:46.5327645Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:34:46.5365132Z adb: device offline
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:34:46.5369616Z The process '/usr/local/lib/android/sdk/platform-tools/adb' failed with exit code 1
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:34:48.5412041Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:34:48.5447638Z adb: device offline
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:34:48.5453427Z The process '/usr/local/lib/android/sdk/platform-tools/adb' failed with exit code 1
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:34:50.5484995Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:34:50.5517402Z adb: device offline
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:34:50.5525042Z The process '/usr/local/lib/android/sdk/platform-tools/adb' failed with exit code 1
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:34:52.5557131Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:34:52.5600940Z adb: device offline
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:34:52.5604566Z The process '/usr/local/lib/android/sdk/platform-tools/adb' failed with exit code 1
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:34:54.5648795Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:34:54.5682410Z adb: device offline
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:34:54.5687659Z The process '/usr/local/lib/android/sdk/platform-tools/adb' failed with exit code 1
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:34:56.5722377Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:34:56.5757301Z adb: device offline
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:34:56.5762180Z The process '/usr/local/lib/android/sdk/platform-tools/adb' failed with exit code 1
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:34:58.5798788Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:34:58.5833516Z adb: device offline
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:34:58.5838610Z The process '/usr/local/lib/android/sdk/platform-tools/adb' failed with exit code 1
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:35:00.5882843Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:35:00.5917661Z adb: device offline
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:35:00.5923291Z The process '/usr/local/lib/android/sdk/platform-tools/adb' failed with exit code 1
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:35:02.5968599Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:35:02.6002475Z adb: device offline
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:35:02.6008844Z The process '/usr/local/lib/android/sdk/platform-tools/adb' failed with exit code 1
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:35:04.6042925Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:35:04.6077532Z adb: device offline
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:35:04.6091796Z The process '/usr/local/lib/android/sdk/platform-tools/adb' failed with exit code 1
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:35:06.6109806Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:35:06.6143291Z adb: device offline
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:35:06.6148501Z The process '/usr/local/lib/android/sdk/platform-tools/adb' failed with exit code 1
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:35:08.6189430Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:35:08.6221173Z adb: device offline
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:35:08.6227874Z The process '/usr/local/lib/android/sdk/platform-tools/adb' failed with exit code 1
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:35:10.6265461Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:35:10.6302137Z adb: device offline
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:35:10.6307341Z The process '/usr/local/lib/android/sdk/platform-tools/adb' failed with exit code 1
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:35:12.6334744Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:35:12.6370767Z adb: device offline
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:35:12.6376361Z The process '/usr/local/lib/android/sdk/platform-tools/adb' failed with exit code 1
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:35:14.6394807Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:35:14.6443804Z The process '/usr/local/lib/android/sdk/platform-tools/adb' failed with exit code 1
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:35:14.6444442Z adb: device offline
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:35:16.6463495Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:35:16.6501337Z adb: device offline
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:35:16.6506538Z The process '/usr/local/lib/android/sdk/platform-tools/adb' failed with exit code 1
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:35:18.6545406Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:35:18.6579429Z adb: device offline
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:35:18.6586830Z The process '/usr/local/lib/android/sdk/platform-tools/adb' failed with exit code 1
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:35:20.6624386Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:35:20.6663229Z adb: device offline
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:35:20.6669358Z The process '/usr/local/lib/android/sdk/platform-tools/adb' failed with exit code 1
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:35:22.6693457Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:35:22.6734181Z adb: device offline
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:35:22.6738048Z The process '/usr/local/lib/android/sdk/platform-tools/adb' failed with exit code 1
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:35:24.6764778Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:35:24.6805102Z adb: device offline
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:35:24.6808409Z The process '/usr/local/lib/android/sdk/platform-tools/adb' failed with exit code 1
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:35:26.6846660Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:35:26.6883377Z adb: device offline
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:35:26.6885556Z The process '/usr/local/lib/android/sdk/platform-tools/adb' failed with exit code 1
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:35:28.6927704Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:35:28.6968349Z adb: device offline
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:35:28.6974077Z The process '/usr/local/lib/android/sdk/platform-tools/adb' failed with exit code 1
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:35:30.6998380Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:35:30.7032011Z adb: device offline
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:35:30.7038016Z The process '/usr/local/lib/android/sdk/platform-tools/adb' failed with exit code 1
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:35:32.7079762Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:35:32.7115874Z adb: device offline
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:35:32.7121603Z The process '/usr/local/lib/android/sdk/platform-tools/adb' failed with exit code 1
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:35:34.7147469Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:35:34.7181583Z adb: device offline
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:35:34.7186494Z The process '/usr/local/lib/android/sdk/platform-tools/adb' failed with exit code 1
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:35:36.7213898Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:35:36.7249887Z adb: device offline
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:35:36.7255266Z The process '/usr/local/lib/android/sdk/platform-tools/adb' failed with exit code 1
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:35:38.7276780Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:35:38.7311591Z adb: device offline
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:35:38.7316760Z The process '/usr/local/lib/android/sdk/platform-tools/adb' failed with exit code 1
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:35:40.7342791Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:35:40.7378316Z adb: device offline
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:35:40.7383343Z The process '/usr/local/lib/android/sdk/platform-tools/adb' failed with exit code 1
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:35:42.7406614Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:35:42.7437614Z adb: device offline
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:35:42.7441724Z The process '/usr/local/lib/android/sdk/platform-tools/adb' failed with exit code 1
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:35:44.7477507Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:35:44.7511771Z adb: device offline
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:35:44.7517776Z The process '/usr/local/lib/android/sdk/platform-tools/adb' failed with exit code 1
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:35:46.7540708Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:35:46.7574582Z adb: device offline
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:35:46.7579549Z The process '/usr/local/lib/android/sdk/platform-tools/adb' failed with exit code 1
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:35:48.7608616Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:35:48.7642979Z adb: device offline
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:35:48.7648835Z The process '/usr/local/lib/android/sdk/platform-tools/adb' failed with exit code 1
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:35:50.7690690Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:35:50.7713166Z adb: device offline
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:35:50.7718479Z The process '/usr/local/lib/android/sdk/platform-tools/adb' failed with exit code 1
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:35:52.7761116Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:35:52.7794950Z adb: device offline
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:35:52.7800418Z The process '/usr/local/lib/android/sdk/platform-tools/adb' failed with exit code 1
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:35:54.7829434Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:35:57.6599563Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:35:59.7486462Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:36:04.4715348Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:36:06.4757186Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:36:08.8756570Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:36:10.8788650Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:36:12.4131842Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:36:14.4546606Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:36:15.4956147Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:36:17.5023825Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:36:18.4755595Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:36:20.4944280Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:36:21.9425642Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:36:23.9515594Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:36:24.6578793Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:36:26.6613577Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:36:27.5911629Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:36:29.5944333Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:36:30.1998751Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:36:32.2041022Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:36:32.8256129Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:36:34.8372439Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:36:35.4614664Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:36:37.4740636Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:36:38.4241986Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:36:40.4563946Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:36:41.2651216Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:36:43.2680890Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:36:43.8157164Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:36:45.8199526Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:36:46.4356647Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:36:48.4391830Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:36:49.2618549Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:36:51.2667342Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:36:52.1317715Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:36:54.1358645Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:36:54.8818760Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:36:56.8917488Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:36:57.5860826Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:36:59.5954561Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:37:00.4519690Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:37:02.4550426Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:37:03.0681194Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:37:05.0718586Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:37:05.6601155Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:37:07.6639216Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:37:08.2969920Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:37:10.3070325Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:37:10.9511217Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:37:12.9573952Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:37:13.5768322Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:37:15.5901598Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:37:16.4099408Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:37:18.4189926Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:37:19.1379682Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:37:21.1477249Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:37:21.8123645Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:37:23.8169222Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:37:24.5278288Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:37:26.5434162Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:37:27.2507508Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:37:29.2609743Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:37:29.9398236Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:37:31.9506896Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:37:32.6769689Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:37:34.6790447Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:37:35.3986748Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:37:37.4213823Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:37:38.0918711Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:37:40.0953481Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:37:40.7466647Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:37:42.7508623Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:37:43.4907621Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:37:45.4987728Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:37:46.1637781Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:37:48.1794321Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:37:48.9070334Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:37:50.9155858Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:37:51.6468177Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:37:53.6525137Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:37:54.6350787Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:37:56.6469956Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:37:57.5497422Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:37:59.5594307Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:38:00.2268397Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:38:02.2475768Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:38:02.9215043Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:38:04.9245831Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:38:05.5786288Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:38:07.5990418Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:38:08.2671066Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:38:10.2830125Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:38:10.9438021Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:38:12.9627274Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:38:13.6856258Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:38:15.7071814Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:38:16.3862140Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:38:18.3943830Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:38:19.0974428Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:38:21.1032883Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:38:21.8160626Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:38:23.8316461Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:38:24.5290119Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:38:26.5317398Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:38:27.2060818Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:38:29.2263883Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:38:29.8637425Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:38:31.8753051Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:38:32.5777247Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:38:34.5951831Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:38:35.3313512Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:38:37.3410479Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:38:38.0074846Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:38:40.0169961Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:38:40.6412768Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:38:42.6461001Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:38:43.3542925Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:38:45.3578928Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:38:46.0502600Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:38:48.0624206Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:38:48.7745456Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:38:50.7790953Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:38:51.4807503Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:38:53.4892774Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:38:54.1599853Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:38:56.1629546Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:38:56.8504256Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:38:58.8688525Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:38:59.5611674Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:39:01.5727141Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:39:02.5193177Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:39:04.5415459Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:39:05.2674884Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:39:07.2717127Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:39:07.9335800Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:39:09.9421093Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:39:10.6042795Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:39:12.6092078Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:39:13.2926931Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:39:15.3027307Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:39:15.9685495Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:39:17.9775755Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:39:18.6440980Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:39:20.6469736Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:39:21.3623897Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:39:23.3746990Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:39:24.9917290Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:39:26.9947115Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:39:28.5865308Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:39:30.6057748Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:39:31.1458563Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:39:33.1485124Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:39:33.8408608Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:39:35.8439041Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:39:37.3400971Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:39:39.4169008Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:39:40.8215654Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:39:42.8324140Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:39:43.7509497Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:39:45.7586207Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:39:46.6401728Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:39:48.6577122Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:39:49.5001131Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:39:51.5085412Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:39:52.7530991Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:39:54.7632033Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:39:55.8135628Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:39:57.8165740Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:39:58.9803746Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:40:01.0090521Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:40:02.1626761Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:40:04.1664926Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:40:05.2378860Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:40:07.2639700Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:40:08.4318296Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:40:10.4479985Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:40:11.6655361Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:40:13.6692454Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:40:14.8632721Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:40:16.8706223Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:40:18.1314623Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:40:20.1367258Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:40:21.2122405Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:40:23.2182792Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:40:24.3759482Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:40:26.3889692Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:40:27.5684835Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:40:29.5796152Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:40:30.6992656Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:40:32.7034492Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:40:33.9713510Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:40:35.9821583Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:40:37.2953530Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:40:39.3004805Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:40:40.4958316Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:40:42.5017194Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:40:43.7536410Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:40:45.7727114Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:40:46.8071629Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:40:48.8178755Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:40:50.0026134Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:40:52.0122601Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:40:53.1988669Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:40:55.2278013Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:40:56.4419843Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:40:58.4460633Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:40:59.5789497Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:41:01.5820075Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:41:03.1082682Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:41:05.1129618Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:41:06.5927006Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:41:08.6063450Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:41:09.7102779Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:41:11.7135592Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:41:12.8173333Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:41:14.8357586Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:41:15.9950798Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:41:18.0149807Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:41:19.2299614Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:41:21.2464604Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:41:22.4065839Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:41:24.4188044Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:41:25.5306505Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:41:27.5360061Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:41:28.7638747Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:41:30.7718466Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:41:31.8674710Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:41:33.8790068Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:41:34.9329572Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:41:36.9440949Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:41:38.1346306Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:41:40.1380488Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:41:41.2946054Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:41:43.3053445Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:41:44.0303629Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:41:46.0343786Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:41:46.6984816Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:41:48.7052841Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:41:49.5674059Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:41:51.5846326Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:41:52.6748362Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:41:54.6788253Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:41:55.8179699Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:41:57.8207294Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:41:59.2450125Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:42:01.2657601Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:42:02.2203738Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:42:04.2315996Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:42:05.0804728Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:42:07.0890387Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:42:08.4374835Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:42:10.4413458Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:42:11.6409130Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:42:13.6456314Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:42:14.8858603Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:42:16.8897174Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:42:18.1263101Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:42:20.1406699Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:42:21.3477758Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:42:23.3503716Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:42:24.5490249Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:42:26.5621186Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:42:28.4378372Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:42:30.4466183Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:42:31.7829295Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:42:33.7930891Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:42:35.0796580Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:42:37.0997538Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:42:38.4167107Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:42:40.4212160Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:42:41.5302329Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:42:43.5342376Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:42:44.3881768Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:42:46.4010229Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:42:47.2563091Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:42:49.2747831Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:42:50.1657837Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:42:52.1755767Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:42:53.3354771Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:42:55.3383301Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:42:56.1645534Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:42:58.1799883Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:42:59.1042658Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:43:01.1269047Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:43:01.9165915Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:43:03.9266658Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:43:05.0007033Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:43:07.0069789Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:43:08.1470831Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:43:10.1556473Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:43:11.3090173Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:43:13.3170043Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:43:14.4860093Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:43:16.4963646Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:43:17.6440954Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:43:19.6518480Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:43:20.6673685Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:43:22.6740047Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:43:23.7382269Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:43:25.7419330Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:43:26.8779475Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:43:28.8897757Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:43:30.0061738Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:43:32.0116004Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:43:33.2251107Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:43:35.2339191Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:43:36.0078183Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:43:38.0318141Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:43:39.0050405Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:43:41.0088851Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:43:41.9883112Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:43:43.9994468Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:43:45.2800557Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:43:47.2858542Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:43:48.3739149Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:43:50.3770948Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:43:51.4416598Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:43:53.4600719Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:43:54.6414001Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:43:56.6486660Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:43:57.7381887Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:43:59.7518298Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:44:00.9286073Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:44:02.9326822Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:44:04.1718146Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:44:06.1996475Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:44:07.2362730Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:44:09.2581355Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:44:10.5875453Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:44:12.6136653Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:44:13.7958941Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:44:15.7998910Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:44:16.8706493Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:44:18.8776475Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:44:19.9947627Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:44:22.0036547Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:44:22.9173887Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:44:24.9234268Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:44:25.8827772Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:44:27.8983378Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:44:29.1347975Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:44:31.1480775Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:44:32.1036676Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:44:34.1373269Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:44:35.2723597Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:44:37.2780056Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:44:38.1809698Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:44:40.2039274Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:44:40.8038662Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:44:42.8088005Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:44:43.4039262Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:44:45.4162581Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:44:46.2746651Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:44:48.2790809Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:44:49.0878895Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:44:51.1047834Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:44:52.0075221Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:44:54.0121352Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:44:54.5972750Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:44:56.6068725Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:44:57.2325266Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:44:59.2363599Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:45:00.1834903Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:45:02.1881090Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:45:02.7537869Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:45:04.7671553Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:45:05.8034435Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:45:07.8082472Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:45:08.4531276Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:45:10.4575557Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:45:11.2063672Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:45:13.2099832Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:45:13.9658490Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:45:15.9737777Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:45:17.0171049Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:45:19.0645247Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:45:19.7980541Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:45:21.8018225Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:45:22.7061716Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:45:24.7199948Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:45:25.3705015Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:45:27.3778881Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:45:28.1436287Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:45:30.1648678Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:45:30.7793226Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:45:32.7840427Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:45:33.6374957Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:45:35.6422803Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:45:36.2519996Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:45:38.2607855Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:45:39.0520280Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:45:41.0681309Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:45:41.7938371Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:45:43.8077331Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:45:44.4881467Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:45:46.4929325Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:45:47.1798746Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:45:49.2011212Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:45:50.0468052Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:45:52.0583014Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:45:52.9064824Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:45:54.9112740Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:45:55.4661034Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:45:57.4816693Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:45:58.2272802Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:46:00.2375699Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:46:00.9162543Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:46:02.9198090Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:46:03.7911304Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:46:05.8516021Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:46:06.5283834Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:46:08.5415888Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:46:09.4021969Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:46:11.4143265Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:46:12.2905221Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:46:14.3114189Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:46:15.0457794Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:46:17.0549469Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:46:18.2472448Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:46:20.2595182Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:46:21.3356647Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:46:23.3397377Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:46:24.3332032Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:46:26.3517879Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:46:27.5599852Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:46:29.5641302Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:46:30.2839827Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:46:32.2875504Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:46:33.4151971Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:46:35.4261543Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:46:36.6372149Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:46:38.6642321Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:46:39.9733203Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:46:41.9914415Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:46:42.6819286Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:46:44.6912602Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:46:45.5762957Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:46:47.5922290Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:46:48.7858418Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:46:50.7988043Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:46:51.4882863Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:46:53.5273590Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:46:54.4905516Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:46:56.5031248Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:46:57.2774728Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:46:59.3340106Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell getprop sys.boot_completed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:47:00.9465171Z 1
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:47:00.9533264Z Emulator booted.
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:47:00.9551419Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell input keyevent 82
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:47:05.4984023Z Disabling animations.
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:47:05.4999804Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell settings put global window_animation_scale 0.0
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:47:07.1089691Z INFO         | Boot completed in 774635 ms
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:47:07.1090695Z INFO         | Increasing screen off timeout, logcat buffer size to 2M.
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:47:09.5872564Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell settings put global transition_animation_scale 0.0
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:47:13.4568306Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 shell settings put global animator_duration_scale 0.0
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:47:17.1574645Z ##[endgroup]
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:47:17.1593747Z [command]/usr/bin/sh -c adb wait-for-device
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:47:17.1654425Z [command]/usr/bin/sh -c until [ "$(adb shell getprop sys.boot_completed | tr -d '\r')" = "1" ]; do echo "Waiting for sys.boot_completed..."; sleep 5; done
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:47:19.4601205Z [command]/usr/bin/sh -c until [ "$(adb shell getprop dev.bootcomplete | tr -d '\r')" = "1" ]; do echo "Waiting for dev.bootcomplete..."; sleep 5; done
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:47:21.4762169Z [command]/usr/bin/sh -c until adb shell pm path android >/dev/null 2>&1; do echo "Waiting for Package Manager service..."; sleep 5; done
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:47:25.5509930Z [command]/usr/bin/sh -c adb shell input keyevent KEYCODE_WAKEUP || true
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:47:28.0090460Z [command]/usr/bin/sh -c adb shell locksettings set-disabled true || true
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:47:43.7596939Z Lock screen disabled set to true
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:47:46.8215253Z [command]/usr/bin/sh -c adb shell wm dismiss-keyguard || true
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:47:49.2609604Z [command]/usr/bin/sh -c adb shell input keyevent KEYCODE_HOME || true
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:47:51.4004871Z [command]/usr/bin/sh -c adb shell input keyevent 111 || true
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:48:02.1394838Z [command]/usr/bin/sh -c adb shell input keyevent 111 || true
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:48:15.0904164Z [command]/usr/bin/sh -c adb shell svc power stayon true || true
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:48:29.9864496Z [command]/usr/bin/sh -c adb shell settings put system screen_off_timeout 2147483647 || true
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:48:31.4817050Z [command]/usr/bin/sh -c adb shell settings put global window_animation_scale 0.0 || true
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:48:33.2985182Z [command]/usr/bin/sh -c adb shell settings put global transition_animation_scale 0.0 || true
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:48:35.3590156Z [command]/usr/bin/sh -c adb shell settings put global animator_duration_scale 0.0 || true
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:48:38.3531828Z [command]/usr/bin/sh -c adb shell settings put global verifier_verify_adb_installs 0 || true
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:48:41.9758491Z [command]/usr/bin/sh -c adb shell settings put global package_verifier_enable 0 || true
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:48:44.5748723Z [command]/usr/bin/sh -c adb shell settings put secure show_ime_with_hard_keyboard 0 || true
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:48:46.7977263Z [command]/usr/bin/sh -c sleep 2
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:48:48.8040425Z [command]/usr/bin/sh -c ./gradlew connectedDebugAndroidTest --no-daemon
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:48:49.4876677Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:48:49.4885024Z Welcome to Gradle 8.13!
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:48:49.4885462Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:48:49.4885808Z Here are the highlights of this release:
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:48:49.4886775Z  - Daemon JVM auto-provisioning
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:48:49.4887611Z  - Enhancements for Scala plugin and JUnit testing
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:48:49.4888345Z  - Improvements for build authors and plugin developers
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:48:49.4888879Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:48:49.4889321Z For more details see https://docs.gradle.org/8.13/release-notes.html
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:48:49.4889920Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:48:49.5888298Z To honour the JVM settings for this build a single-use Daemon process will be forked. For more on this, please refer to https://docs.gradle.org/8.13/userguide/gradle_daemon.html#sec:disabling_the_daemon in the Gradle documentation.
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:48:50.9854381Z Daemon will be stopped at the end of the build 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:49:00.7859022Z > Task :app:checkKotlinGradlePluginConfigurationErrors SKIPPED
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:49:00.7889401Z > Task :app:preBuild UP-TO-DATE
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:49:00.7936497Z > Task :app:preDebugBuild UP-TO-DATE
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:49:01.4851034Z > Task :app:dataBindingMergeDependencyArtifactsDebug
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:49:01.4857121Z > Task :app:generateDebugResValues
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:49:01.4859643Z > Task :app:generateDebugResources
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:49:04.8866997Z > Task :app:packageDebugResources
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:49:04.9871969Z > Task :app:processDebugNavigationResources
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:49:05.2884862Z > Task :app:generateDebugBuildConfig
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:49:05.3856933Z > Task :app:mergeDebugResources
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:49:05.4860430Z > Task :app:generateSafeArgsDebug
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:49:05.4866973Z > Task :app:parseDebugLocalResources
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:49:05.5856740Z > Task :app:checkDebugAarMetadata
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:49:05.9869671Z > Task :app:dataBindingGenBaseClassesDebug
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:49:06.0867046Z > Task :app:compileDebugNavigationResources
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:49:06.0887028Z > Task :app:mapDebugSourceSetPaths
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:49:06.0896709Z > Task :app:createDebugCompatibleScreenManifests
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:49:06.0920492Z > Task :app:extractDeepLinksDebug
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:49:06.2863818Z > Task :app:processDebugMainManifest
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:49:06.3849923Z > Task :app:processDebugManifest
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:49:06.4867524Z > Task :app:preDebugAndroidTestBuild SKIPPED
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:49:06.9851868Z > Task :app:javaPreCompileDebug
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:49:08.5865380Z > Task :app:dataBindingMergeDependencyArtifactsDebugAndroidTest
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:49:08.5869851Z > Task :app:generateDebugAndroidTestResValues
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:49:08.5870650Z > Task :app:generateDebugAndroidTestResources
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:49:09.5872294Z > Task :app:processDebugAndroidTestManifest
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:49:09.5896880Z > Task :app:generateDebugAndroidTestBuildConfig
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:49:09.6881378Z > Task :app:checkDebugAndroidTestAarMetadata
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:49:09.6919605Z > Task :app:processDebugAndroidTestNavigationResources
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:49:09.6926656Z > Task :app:compileDebugAndroidTestNavigationResources
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:49:09.6956731Z > Task :app:mapDebugAndroidTestSourceSetPaths
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:49:09.6986437Z > Task :app:javaPreCompileDebugAndroidTest
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:49:09.7005125Z > Task :app:mergeDebugShaders
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:49:09.7017185Z > Task :app:processDebugManifestForPackage
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:49:09.9867644Z > Task :app:mergeDebugAndroidTestResources
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:49:10.0876873Z > Task :app:dataBindingGenBaseClassesDebugAndroidTest
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:49:10.1871075Z > Task :app:compileDebugShaders NO-SOURCE
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:49:10.1913097Z > Task :app:generateDebugAssets UP-TO-DATE
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:49:10.4877048Z > Task :app:mergeDebugAssets
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:49:10.5868295Z > Task :app:compressDebugAssets
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:49:11.3850209Z > Task :app:processDebugAndroidTestResources
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:49:11.5850168Z > Task :app:processDebugResources
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:49:12.5868171Z > Task :app:desugarDebugFileDependencies
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:49:14.3859154Z > Task :app:mergeDebugJniLibFolders
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:49:14.5871025Z > Task :app:checkDebugDuplicateClasses
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:49:14.5876718Z > Task :app:mergeDebugNativeLibs NO-SOURCE
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:49:42.4852600Z > Task :app:kspDebugKotlin
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:49:44.5874442Z > Task :app:mergeExtDexDebug
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:50:05.3858622Z > Task :app:stripDebugDebugSymbols NO-SOURCE
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:50:05.3865535Z > Task :app:mergeLibDexDebug
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:50:07.7856889Z > Task :app:validateSigningDebug
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:50:07.7887095Z > Task :app:writeDebugAppMetadata
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:50:07.8001122Z > Task :app:writeDebugSigningConfigVersions
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:50:07.8097002Z > Task :app:mergeDebugAndroidTestShaders
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:50:07.8895237Z > Task :app:compileDebugAndroidTestShaders NO-SOURCE
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:50:07.8935503Z > Task :app:generateDebugAndroidTestAssets UP-TO-DATE
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:50:08.0923763Z > Task :app:mergeDebugAndroidTestAssets
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:50:08.0976637Z > Task :app:compressDebugAndroidTestAssets
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:50:09.2856878Z > Task :app:desugarDebugAndroidTestFileDependencies
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:50:09.8862954Z > Task :app:mergeDebugAndroidTestJniLibFolders
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:50:09.8902172Z > Task :app:checkDebugAndroidTestDuplicateClasses
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:50:09.9891620Z > Task :app:mergeDebugAndroidTestNativeLibs NO-SOURCE
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:50:33.7849609Z > Task :app:compileDebugKotlin
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:50:39.9850874Z > Task :app:mergeExtDexDebugAndroidTest
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:50:46.3851147Z > Task :app:compileDebugJavaWithJavac
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:50:46.3866716Z > Task :app:bundleDebugClassesToCompileJar
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:50:47.2848128Z > Task :app:dexBuilderDebug
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:50:48.8874941Z > Task :app:mergeDebugGlobalSynthetics
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:50:48.9850598Z > Task :app:processDebugJavaRes
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:50:49.1872162Z > Task :app:mergeLibDexDebugAndroidTest
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:50:49.1873033Z > Task :app:stripDebugAndroidTestDebugSymbols NO-SOURCE
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:50:49.1956903Z > Task :app:validateSigningDebugAndroidTest
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:50:49.2016926Z > Task :app:writeDebugAndroidTestSigningConfigVersions
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:50:49.4885882Z > Task :app:kspDebugAndroidTestKotlin
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:50:49.4887579Z > Task :app:mergeProjectDexDebug
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:50:50.5866965Z > Task :app:mergeDebugJavaResource
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:50:50.7854286Z > Task :app:compileDebugAndroidTestKotlin
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:50:52.0849341Z > Task :app:compileDebugAndroidTestJavaWithJavac
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:50:52.6848244Z > Task :app:dexBuilderDebugAndroidTest
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:50:52.7854906Z > Task :app:mergeDebugAndroidTestGlobalSynthetics
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:50:52.8863193Z > Task :app:packageDebug
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:50:52.8864044Z > Task :app:createDebugApkListingFileRedirect
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:50:52.8864833Z > Task :app:processDebugAndroidTestJavaRes
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:50:53.1850412Z > Task :app:mergeProjectDexDebugAndroidTest
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:50:53.2850827Z > Task :app:mergeDebugAndroidTestJavaResource
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:50:53.6848619Z > Task :app:packageDebugAndroidTest
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:50:53.6851012Z > Task :app:createDebugAndroidTestApkListingFileRedirect
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:51:00.4855676Z [EmulatorConsole]: Failed to start Emulator console for 5554
+Run connected Android tests	Run connected tests on emulator	2026-05-13T13:51:23.6849566Z > Task :app:connectedDebugAndroidTest
+Run connected Android tests	Run connected tests on emulator	2026-05-13T14:00:26.7856224Z Starting 2 tests on emulator-5554 - 14
+Run connected Android tests	Run connected tests on emulator	2026-05-13T14:00:36.7848362Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T14:00:36.7851870Z emulator-5554 - 14 Tests 0/2 completed. (0 skipped) (0 failed)
+Run connected Android tests	Run connected tests on emulator	2026-05-13T14:03:56.7850700Z emulator-5554 - 14 Tests 1/2 completed. (0 skipped) (1 failed)
+Run connected Android tests	Run connected tests on emulator	2026-05-13T14:03:56.7852142Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T14:03:56.7852410Z > Task :app:connectedDebugAndroidTest
+Run connected Android tests	Run connected tests on emulator	2026-05-13T14:03:56.7852802Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T14:03:56.7853818Z com.johanpy.drivesoberly.HappyPathUITest > testHappyPathAddDrink[emulator-5554 - 14] [31mFAILED [0m
+Run connected Android tests	Run connected tests on emulator	2026-05-13T14:03:56.7856763Z 	androidx.test.espresso.base.RootViewPicker$RootViewWithoutFocusException: Waited for the root of the view hierarchy to have window focus and not request layout for 10 seconds. If you specified a non default root matcher, it may be picking a root that never takes focus. Root:
+Run connected Android tests	Run connected tests on emulator	2026-05-13T14:03:56.7860236Z 	Root{application-window-token=android.view.ViewRootImpl$W@bdb19b0, window-token=android.view.ViewRootImpl$W@bdb19b0, has-window-focus=false, layout-params-type=1, layout-params-string={(0,0)(fillxfill) sim={adjust=resize} layoutInDisplayCutoutMode=shortEdges ty=BASE_APPLICATION wanim=0x10302fe
+Run connected Android tests	Run connected tests on emulator	2026-05-13T14:06:19.4847627Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T14:06:19.4851366Z com.johanpy.drivesoberly.HappyPathUITest > testCustomCountryLimitAndDriveStatusFlow[emulator-5554 - 14] [31mFAILED [0m
+Run connected Android tests	Run connected tests on emulator	2026-05-13T14:06:19.4854412Z 	androidx.test.espresso.base.RootViewPicker$RootViewWithoutFocusException: Waited for the root of the view hierarchy to have window focus and not request layout for 10 seconds. If you specified a non default root matcher, it may be picking a root that never takes focus. Root:
+Run connected Android tests	Run connected tests on emulator	2026-05-13T14:06:19.4858947Z 	Root{application-window-token=android.view.ViewRootImpl$W@c6eb1b4, window-token=android.view.ViewRootImpl$W@c6eb1b4, has-window-focus=false, layout-params-type=1, layout-params-string={(0,0)(fillxfill) sim={adjust=resize forwardNavigation} layoutInDisplayCutoutMode=shortEdges ty=BASE_APPLICATION wanim=0x10302fe
+Run connected Android tests	Run connected tests on emulator	2026-05-13T14:06:26.7848144Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T14:06:26.7848966Z emulator-5554 - 14 Tests 2/2 completed. (0 skipped) (2 failed)
+Run connected Android tests	Run connected tests on emulator	2026-05-13T14:07:05.6850435Z Finished 2 tests on emulator-5554 - 14
+Run connected Android tests	Run connected tests on emulator	2026-05-13T14:07:05.6851079Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T14:07:05.6851363Z > Task :app:connectedDebugAndroidTest
+Run connected Android tests	Run connected tests on emulator	2026-05-13T14:07:05.6851952Z Tests on emulator-5554 - 14 failed: There was 2 failure(s).
+Run connected Android tests	Run connected tests on emulator	2026-05-13T14:07:06.5869413Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T14:07:06.5870432Z > Task :app:connectedDebugAndroidTest FAILED
+Run connected Android tests	Run connected tests on emulator	2026-05-13T14:07:06.5871364Z 76 actionable tasks: 76 executed
+Run connected Android tests	Run connected tests on emulator	2026-05-13T14:07:06.5871855Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T14:07:06.5872177Z FAILURE: Build failed with an exception.
+Run connected Android tests	Run connected tests on emulator	2026-05-13T14:07:06.5872649Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T14:07:06.5872920Z * What went wrong:
+Run connected Android tests	Run connected tests on emulator	2026-05-13T14:07:06.5873538Z Execution failed for task ':app:connectedDebugAndroidTest'.
+Run connected Android tests	Run connected tests on emulator	2026-05-13T14:07:06.5875009Z > There were failing tests. See the report at: file:///home/runner/work/DriveSoberly/DriveSoberly/app/build/reports/androidTests/connected/debug/index.html
+Run connected Android tests	Run connected tests on emulator	2026-05-13T14:07:06.5876828Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T14:07:06.5877109Z * Try:
+Run connected Android tests	Run connected tests on emulator	2026-05-13T14:07:06.5877656Z > Run with --stacktrace option to get the stack trace.
+Run connected Android tests	Run connected tests on emulator	2026-05-13T14:07:06.5878465Z > Run with --info or --debug option to get more log output.
+Run connected Android tests	Run connected tests on emulator	2026-05-13T14:07:06.5879415Z > Run with --scan to get full insights.
+Run connected Android tests	Run connected tests on emulator	2026-05-13T14:07:06.5880073Z > Get more help at https://help.gradle.org.
+Run connected Android tests	Run connected tests on emulator	2026-05-13T14:07:06.5889146Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T14:07:06.5889848Z BUILD FAILED in 18m 17s
+Run connected Android tests	Run connected tests on emulator	2026-05-13T14:07:07.1216650Z ##[error]The process '/usr/bin/sh' failed with exit code 1
+Run connected Android tests	Run connected tests on emulator	2026-05-13T14:07:07.1226733Z ##[group]Terminate Emulator
+Run connected Android tests	Run connected tests on emulator	2026-05-13T14:07:07.1227295Z [command]/usr/local/lib/android/sdk/platform-tools/adb -s emulator-5554 emu kill
+Run connected Android tests	Run connected tests on emulator	2026-05-13T14:07:07.1255630Z OK: killing emulator, bye bye
+Run connected Android tests	Run connected tests on emulator	2026-05-13T14:07:07.1256524Z OK
+Run connected Android tests	Run connected tests on emulator	2026-05-13T14:07:07.1257863Z INFO         | Wait for emulator (pid 2628) 20 seconds to shutdown gracefully before kill;you can set environment variable ANDROID_EMULATOR_WAIT_TIME_BEFORE_KILL(in seconds) to change the default value (20 seconds)
+Run connected Android tests	Run connected tests on emulator	2026-05-13T14:07:07.1258798Z 
+Run connected Android tests	Run connected tests on emulator	2026-05-13T14:07:07.1259213Z ##[endgroup]
+Run connected Android tests	Run connected tests on emulator	2026-05-13T14:07:11.2810636Z INFO         | Saving with gfxstream=1
+Run connected Android tests	Run connected tests on emulator	2026-05-13T14:07:11.4409709Z INFO         | Saving snapshot 'default_boot' using 4306 ms
+Run connected Android tests	Run connected tests on emulator	2026-05-13T14:07:12.1894946Z ERROR        | stop: Not implemented
+Run connected Android tests	Run connected tests on emulator	2026-05-13T14:07:12.1895738Z WARNING      | Emulator client has not yet been configured.. Call configure me first!
+Run connected Android tests	Run connected tests on emulator	2026-05-13T14:07:12.2554859Z WARNING      | Netsim Wifi localhost:38237 is gone due to CANCELLED
