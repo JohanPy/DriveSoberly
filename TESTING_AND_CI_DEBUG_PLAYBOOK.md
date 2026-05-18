@@ -147,6 +147,9 @@ Fix applied:
 - avoid coupling two unstable interactions in one test when one assertion can validate the target behavior
 - do not depend on previous test state or selected preset persistence
 - prefer resource-based matching over literal text when localization is involved
+- when CI is unstable, keep only the lowest-variance smoke path in instrumented tests first
+- for this repo, spinner selection + localized AdapterView matching + return navigation is the first interaction bundle to remove
+- validate country-limit logic in JVM tests before reintroducing any UI coverage for that path
 
 ## 6) Debug Procedure When Android instrumented CI Fails
 
