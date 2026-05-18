@@ -92,6 +92,7 @@ Stabilization settings used successfully:
 Important script compatibility note:
 
 - in `android-emulator-runner` script blocks, prefer one-line `until ...; do ...; done` loops; multiline loops can be split by the runner and cause `/usr/bin/sh` syntax errors
+- keep pre-test emulator input minimal; avoid unnecessary `HOME/BACK/tap` keyevent sequences that can leave the app without a focused root window
 
 ### C) Espresso interaction flakes
 
