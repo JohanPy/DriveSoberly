@@ -1,8 +1,21 @@
 # Changelog
 
+<!-- markdownlint-disable MD024 -->
+
 All notable changes to this project will be documented in this file.
 
 The format is based on Keep a Changelog and this project follows Semantic Versioning.
+
+## [1.2.1] - 2026-05-19
+
+### Fixed
+
+- Stabilized GitHub Actions validation by reducing instrumented coverage to a low-variance smoke test.
+- Hardened Android CI and emulator validation flow after repeated instrumentation failures.
+
+### Changed
+
+- Version bump to 1.2.1 (versionCode 34).
 
 ## [1.2.0] - 2026-05-12
 
