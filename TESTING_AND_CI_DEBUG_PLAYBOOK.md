@@ -88,6 +88,8 @@ Stabilization settings used successfully:
 - emulator boot timeout: 900
 - wait explicitly for `sys.boot_completed`, `dev.bootcomplete`, and Package Manager readiness (`adb shell pm path android`) before running Gradle tests
 - disable animations and package verification before running tests
+- skip instrumented CI entirely for docs-only commits (`**/*.md`, `LICENSE`) to avoid wasting emulator cycles on non-code changes
+- when logs contain `INSTRUMENTATION_ABORTED: System has crashed` or `DeadSystemException`, reboot the emulator and retry the Gradle connected tests once before failing the job
 
 Important script compatibility note:
 
