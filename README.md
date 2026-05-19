@@ -2,18 +2,36 @@
 
 Alcohol blood rate computer for driving.
 
-> Fork notice: this project is a fork of [VincentAudibert/DriveSoberly](https://github.com/VincentAudibert/DriveSoberly), originally created by Vincent Audibert. This fork modernizes dependencies, architecture, and BAC modeling while preserving license attribution.
+> This project was a fork of [VincentAudibert/DriveSoberly](https://github.com/VincentAudibert/DriveSoberly), originally created by Vincent Audibert. It's now an independent project that modernizes dependencies, architecture, and BAC modeling while preserving license attribution.
 
 ## Get The App
 
 - GitHub Releases (current distribution): <https://github.com/JohanPy/DriveSoberly/releases>
 - F-Droid (planned for this fork package): `com.johanpy.drivesoberly`
 
+Current release assets include:
+
+- a signed APK
+- a SHA256 checksum file
+
 See [docs/fdroid-submission.md](docs/fdroid-submission.md) for submission and release checklist details.
 
 ## About
 
 DriveSoberly estimates whether you are fit to drive based on profile settings, consumed drinks, and legal limits.
+
+Supported app languages:
+
+- English
+- French
+- German
+- Spanish
+- Italian
+
+Legal BAC coverage:
+
+- 67 country profiles are bundled in the app
+- if your country is not listed, `OTHER` lets you define a custom legal BAC limit
 
 ## Features
 
@@ -132,11 +150,15 @@ Release signing is performed in CI for tagged releases.
 ## Release Process
 
 1. Merge only when CI is fully green.
-2. Update [CHANGELOG.md](CHANGELOG.md) and version metadata.
-3. Push a SemVer tag to trigger signed release build.
-4. Publish APK and SHA256 checksum in GitHub Release.
-5. Submit the same tagged source to F-Droid.
+2. Update version metadata and changelog.
+3. Push a SemVer tag to trigger the signed release workflow.
+4. Publish APK, SHA256 checksum, and release metadata on GitHub Releases.
+5. Reuse the same tagged source for F-Droid submission.
 
 ## Changelog
 
 Release notes are tracked in [CHANGELOG.md](CHANGELOG.md).
+
+## Disclaimer AI-assisted Development
+
+Some parts of this project have been generated using AI tools for debugging, code completion, refactoring, or test generation.
