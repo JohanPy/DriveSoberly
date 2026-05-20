@@ -90,10 +90,12 @@ Stabilization settings used successfully:
 - disable animations and package verification before running tests
 - skip instrumented CI entirely for docs-only commits (`**/*.md`, `LICENSE`) to avoid wasting emulator cycles on non-code changes
 - when logs contain `INSTRUMENTATION_ABORTED: System has crashed` or `DeadSystemException`, reboot the emulator and retry the Gradle connected tests once before failing the job
+- run instrumented CI as non-blocking quality signal (`workflow_dispatch` + nightly schedule), not as a per-commit gate
 
 Important script compatibility note:
 
 - in `android-emulator-runner` script blocks, prefer one-line `until ...; do ...; done` loops; multiline loops can be split by the runner and cause `/usr/bin/sh` syntax errors
+- for complex instrumentation setup/retry logic, prefer a dedicated versioned shell script (for example `scripts/run_instrumented_ci.sh`) and invoke it from the workflow with a single command
 - keep pre-test emulator input minimal; avoid unnecessary `HOME/BACK/tap` keyevent sequences that can leave the app without a focused root window
 
 ### C) Espresso interaction flakes
