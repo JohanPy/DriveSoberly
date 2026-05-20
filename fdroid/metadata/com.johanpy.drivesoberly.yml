@@ -27,13 +27,13 @@ Description: |-
 RepoType: git
 Repo: https://github.com/JohanPy/DriveSoberly.git
 
-CurrentVersion: 1.0.0
-CurrentVersionCode: 1
+CurrentVersion: 1.2.1
+CurrentVersionCode: 34
 
 Builds:
-  - versionName: 1.0.0
-    versionCode: 1
-    commit: v1.0.0
+  - versionName: 1.2.1
+    versionCode: 34
+    commit: v1.2.1
     subdir: app
     gradle:
       - yes

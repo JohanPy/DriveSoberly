@@ -33,6 +33,24 @@ Legal BAC coverage:
 - 67 country profiles are bundled in the app
 - if your country is not listed, `OTHER` lets you define a custom legal BAC limit
 
+## Screenshots
+
+### Drive status (safe)
+
+![Drive status safe](screenshots/Screenshot_20260520-150846_DriveSoberly.png)
+
+### Drive status (do not drive)
+
+![Drive status do not drive](screenshots/Screenshot_20260520-151127_DriveSoberly.png)
+
+### Profile and legal settings
+
+![Profile and driving law](screenshots/Screenshot_20260520-154807_DriveSoberly.png)
+
+### Food impact and drink history
+
+![Food impact and drinks history](screenshots/Screenshot_20260520-154832_DriveSoberly.png)
+
 ## Features
 
 The app displays:

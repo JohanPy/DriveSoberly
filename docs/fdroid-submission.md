@@ -15,6 +15,8 @@ This fork is published as a separate application package: `com.johanpy.drivesobe
 - no crash reporting SDK
 - release build minifies and shrinks resources
 - automated unit tests and debug builds already pass in CI
+- release `v1.2.1` is published and signed on GitHub Releases
+- local F-Droid metadata file is prepared in `fdroid/metadata/com.johanpy.drivesoberly.yml`
 
 ## What F-Droid needs
 
@@ -32,6 +34,22 @@ This fork is published as a separate application package: `com.johanpy.drivesobe
 - verify `ktlintCheck`, `testDebugUnitTest`, `assembleDebug`, and `connectedDebugAndroidTest` pass
 - verify no proprietary or tracking dependencies are introduced
 - verify screenshots reflect the current UI
+
+## Submission package prepared in this repository
+
+- package id: `com.johanpy.drivesoberly`
+- metadata source: `fdroid/metadata/com.johanpy.drivesoberly.yml`
+- current target version: `1.2.1` (`versionCode` 34)
+- source tag for reproducible build: `v1.2.1`
+- README screenshots are available in `screenshots/`
+
+## Next steps to submit on F-Droid
+
+1. Fork or clone the `fdroiddata` repository.
+2. Copy `fdroid/metadata/com.johanpy.drivesoberly.yml` to `fdroiddata/metadata/com.johanpy.drivesoberly.yml`.
+3. Open a merge request in `fdroiddata` with that metadata file and a short app description in the MR body.
+4. Reply to maintainer feedback (usually around build reproducibility and description wording).
+5. Once merged, monitor the first F-Droid build and indexing cycle.
 
 ## Metadata notes
 
