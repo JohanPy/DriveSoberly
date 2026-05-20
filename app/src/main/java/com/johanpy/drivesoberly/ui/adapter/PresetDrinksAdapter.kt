@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.johanpy.drivesoberly.R
 import com.johanpy.drivesoberly.data.PresetDrinkEntity
 import com.johanpy.drivesoberly.data.repository.DrinkRepository
+import com.johanpy.drivesoberly.domain.drink.BuiltInPresetLocalizer
 import java.text.NumberFormat
 
 class PresetDrinksAdapter(
@@ -99,9 +100,20 @@ class PresetDrinksAdapter(
             }
         } else if (holder is PresetViewHolder) {
             val presetDrink = visiblePresetDrinks[position - 1]
+            val localizedName =
+                if (presetDrink.isBuiltIn) {
+                    BuiltInPresetLocalizer.localizedNameOrNull(
+                        context = context,
+                        volume = presetDrink.volume,
+                        degree = presetDrink.degree,
+                        emoji = presetDrink.emoji,
+                    ) ?: presetDrink.name
+                } else {
+                    presetDrink.name
+                }
 
             holder.propertiesText.text = "${doubleFormat.format(presetDrink.volume / 10.0)} cL - ${presetDrink.degree} %"
-            holder.descriptionText.text = presetDrink.name
+            holder.descriptionText.text = localizedName
             holder.emojiText.text = presetDrink.emoji
             holder.deleteButton.visibility =
                 if (presetDrink == selectedPreset) {

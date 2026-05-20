@@ -29,18 +29,19 @@ import kotlinx.coroutines.launch
  *      - init flag (= user configuration already validated once)
  *  - drinkDao for past consumed drinks.
  */
-class DigestionRepository(context: Context, drinkProvider: IIngestedDrinkProvider) {
+class DigestionRepository(private val context: Context, drinkProvider: IIngestedDrinkProvider) {
     // Main instance to link
     val body = PhysicalBody()
 
     val digestionService = DigestionService(body, drinkProvider)
 
-    val toleranceLevels =
-        listOf(
-            context.getString(R.string.alcohol_tolerance_low),
-            context.getString(R.string.alcohol_tolerance_medium),
-            context.getString(R.string.alcohol_tolerance_high),
-        )
+    val toleranceLevels: List<String>
+        get() =
+            listOf(
+                context.getString(R.string.alcohol_tolerance_low),
+                context.getString(R.string.alcohol_tolerance_medium),
+                context.getString(R.string.alcohol_tolerance_high),
+            )
 
     private val _liveDrinker = MutableLiveData<PhysicalBody>()
     val liveDrinker: LiveData<PhysicalBody>

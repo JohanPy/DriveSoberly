@@ -8,6 +8,7 @@ import com.johanpy.drivesoberly.R
 import com.johanpy.drivesoberly.data.DrinkDatabase
 import com.johanpy.drivesoberly.data.IngestedDrinkEntity
 import com.johanpy.drivesoberly.data.PresetDrinkEntity
+import com.johanpy.drivesoberly.domain.drink.BuiltInPresetLocalizer
 import com.johanpy.drivesoberly.domain.drink.IngestedDrink
 import com.johanpy.drivesoberly.domain.drink.IngestionService
 import com.johanpy.drivesoberly.domain.drink.PresetDrink
@@ -20,6 +21,7 @@ import java.io.Closeable
 import java.util.*
 
 class DrinkRepository(context: Context, drinkDatabase: DrinkDatabase) : Closeable {
+    private val context = context
     private val _livePastDrinks = MutableLiveData<List<IngestedDrinkEntity>>()
     val livePastDrinks: LiveData<List<IngestedDrinkEntity>>
         get() = _livePastDrinks
@@ -143,7 +145,7 @@ class DrinkRepository(context: Context, drinkDatabase: DrinkDatabase) : Closeabl
                 presetDrinkDao.insertAll(defaultPresetDrink)
                 Log.d("DrinkRepo", "preset count was 0")
             }
-            presetService.populate(presetDrinkDao.getAll())
+            presetService.populate(relocalizeBuiltInPresets(presetDrinkDao.getAll()))
         }
 
         uiScope.launch {
@@ -189,5 +191,41 @@ class DrinkRepository(context: Context, drinkDatabase: DrinkDatabase) : Closeabl
         uiScope.launch {
             ingestedDrinkDao.deleteAll()
         }
+    }
+
+    fun refreshLocalizedBuiltInPresets() {
+        uiScope.launch {
+            presetService.populate(relocalizeBuiltInPresets(presetDrinkDao.getAll()))
+        }
+    }
+
+    private suspend fun relocalizeBuiltInPresets(presets: List<PresetDrinkEntity>): List<PresetDrinkEntity> {
+        presets.forEach { preset ->
+            if (!preset.isBuiltIn) return@forEach
+
+            val localizedName =
+                BuiltInPresetLocalizer.localizedNameOrNull(
+                    context = context,
+                    volume = preset.volume,
+                    degree = preset.degree,
+                    emoji = preset.emoji,
+                ) ?: return@forEach
+
+            val shouldRelocalize =
+                BuiltInPresetLocalizer.shouldRelocalizeStoredName(
+                    context = context,
+                    currentName = preset.name,
+                    volume = preset.volume,
+                    degree = preset.degree,
+                    emoji = preset.emoji,
+                )
+
+            if (shouldRelocalize && preset.name != localizedName) {
+                preset.name = localizedName
+                presetDrinkDao.update(preset)
+            }
+        }
+
+        return presets
     }
 }

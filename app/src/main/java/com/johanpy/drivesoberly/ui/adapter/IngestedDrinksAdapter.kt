@@ -9,6 +9,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.johanpy.drivesoberly.R
 import com.johanpy.drivesoberly.data.IngestedDrinkEntity
+import com.johanpy.drivesoberly.domain.drink.BuiltInPresetLocalizer
 import com.johanpy.drivesoberly.domain.drink.IngestedDrink
 import com.johanpy.drivesoberly.domain.drink.IngestionService
 import java.text.DateFormat
@@ -52,9 +53,25 @@ class IngestedDrinksAdapter(
         position: Int,
     ) {
         val drink = ingestedDrinkList[position]
+        val localizedName =
+            BuiltInPresetLocalizer.localizedNameOrNull(
+                context = context,
+                volume = drink.volume,
+                degree = drink.degree,
+                emoji = drink.emoji,
+            ).takeIf {
+                it != null &&
+                    BuiltInPresetLocalizer.shouldRelocalizeStoredName(
+                        context = context,
+                        currentName = drink.name,
+                        volume = drink.volume,
+                        degree = drink.degree,
+                        emoji = drink.emoji,
+                    )
+            } ?: drink.name
 
         holder.propertiesText.text = "${doubleFormat.format(drink.volume / 10.0)} cL - ${drink.degree} %"
-        holder.descriptionText.text = drink.name
+        holder.descriptionText.text = localizedName
         holder.emojiText.text = drink.emoji
 
         val days: Long = (drink.ingestionTime.time / DAY_IN_MILLIS) - (Date().time / DAY_IN_MILLIS)
@@ -71,7 +88,7 @@ class IngestedDrinksAdapter(
             val newDrink =
                 IngestedDrinkEntity(
                     -1,
-                    IngestedDrink(drink.name, drink.volume, drink.degree, Date(), drink.emoji),
+                    IngestedDrink(localizedName, drink.volume, drink.degree, Date(), drink.emoji),
                 )
             ingestionService.add(newDrink)
             com.google.android.material.snackbar.Snackbar.make(

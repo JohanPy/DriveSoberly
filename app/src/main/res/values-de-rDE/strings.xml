@@ -33,22 +33,22 @@
     <string name="professional_driver">Berufskraftfahrer</string>
     <string name="country">Land</string>
     <string name="user_health">Alkoholtoleranz</string>
-    <string name="alcohol_tolerance_low">schlecht</string>
-    <string name="alcohol_tolerance_medium">durchschnittlich</string>
-    <string name="alcohol_tolerance_high">gut</string>
+    <string name="alcohol_tolerance_low">Niedrig</string>
+    <string name="alcohol_tolerance_medium">Mittel</string>
+    <string name="alcohol_tolerance_high">Hoch</string>
     <string name="customCountryLabel">Anderes</string>
     <string name="day_unit">T</string>
     <string name="drink_history">Letzte Getränke</string>
     <string name="drive_law">Rechtliches</string>
     <string name="drive_status">Fahrerstatus</string>
     <string name="body_data">Physiologie</string>
-    <string name="presets">Getränke</string>
+    <string name="presets">Voreinstellungen</string>
     <string name="add_preset_description">Erstelle neues Getränk</string>
     <string name="preset_name_title">Name des Getränks</string>
     <string name="preset_red_wine">Rotwein</string>
-    <string name="preset_light_beer">Bier</string>
-    <string name="preset_triple_beer">Schankbier</string>
-    <string name="preset_soft_cider">Leichter Apfelwein</string>
+    <string name="preset_light_beer">Leichtbier</string>
+    <string name="preset_triple_beer">Starkbier</string>
+    <string name="preset_soft_cider">Leichter Cider</string>
     <string name="preset_martini">Martini</string>
     <string name="preset_whisky">Whisky</string>
 
@@ -93,5 +93,5 @@
     <string name="drive_below_limit_at">Unter dem gesetzlichen Grenzwert um %1$s</string>
     <string name="drive_zero_at">0 g/L um %1$s</string>
     <string name="profile_explanations_title">Erklarungen</string>
-    <string name="profile_explanations_body">Diese Profilwerte beeinflussen die in der App angezeigte Schätzung:\n\n- Gewicht: wird verwendet, um das Verteilungsvolumen des Alkohols zu schätzen. Bei gleichem Drink führt ein geringeres Gewicht meist zu einer höheren BAK.\n- Geschlecht: wählt Verteilungskoeffizienten des Modells und verändert damit die BAK bei gleicher Aufnahme.\n- Alkoholtoleranz (niedrig / durchschnittlich / gut): passt die im Modell verwendete Eliminationsgeschwindigkeit an. Eine höhere Toleranz bedeutet eine schnellere modellierte Elimination, daher kann die BAK früher sinken.\n- Land und rechtliche Optionen (junger Fahrer / Berufskraftfahrer): ändern nicht die BAK selbst. Sie ändern den gesetzlichen Grenzwert fur die Fahrfreigabe.\n- Benutzerdefinierter Grenzwert: wenn Sie "Anderes" wahlen, wird dieser Wert als Grenzwert fur den Fahrstatus verwendet.\n\nWichtig: Das bleibt eine Schätzung auf Basis vereinfachter Formeln und ersetzt kein zertifiziertes Atemalkoholmessgerät.</string>
+    <string name="profile_explanations_body">Diese Profilwerte beeinflussen die in der App angezeigte Schätzung:\n\n- Gewicht: wird verwendet, um das Verteilungsvolumen des Alkohols zu schätzen. Bei gleichem Drink führt ein geringeres Gewicht meist zu einer höheren BAK.\n- Geschlecht: wählt Verteilungskoeffizienten des Modells und verändert damit die BAK bei gleicher Aufnahme.\n- Alkoholtoleranz (niedrig / mittel / hoch): passt die im Modell verwendete Eliminationsgeschwindigkeit an. Eine höhere Toleranz bedeutet eine schnellere modellierte Elimination, daher kann die BAK früher sinken.\n- Land und rechtliche Optionen (junger Fahrer / Berufskraftfahrer): ändern nicht die BAK selbst. Sie ändern den gesetzlichen Grenzwert fur die Fahrfreigabe.\n- Benutzerdefinierter Grenzwert: wenn Sie "Anderes" wahlen, wird dieser Wert als Grenzwert fur den Fahrstatus verwendet.\n\nWichtig: Das bleibt eine Schätzung auf Basis vereinfachter Formeln und ersetzt kein zertifiziertes Atemalkoholmessgerät.</string>
 </resources>

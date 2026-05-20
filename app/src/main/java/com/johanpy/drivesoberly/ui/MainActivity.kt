@@ -17,10 +17,13 @@ import androidx.preference.PreferenceManager
 import com.google.android.material.appbar.AppBarLayout
 import com.johanpy.drivesoberly.R
 import com.johanpy.drivesoberly.databinding.ActivityMainBinding
+import com.johanpy.drivesoberly.data.repository.DrinkRepository
+import org.koin.android.ext.android.inject
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var appBarConfiguration: AppBarConfiguration
+    private val drinkRepository: DrinkRepository by inject()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         // Skip splash screen during instrumented tests to avoid focus issues
@@ -41,6 +44,7 @@ class MainActivity : AppCompatActivity() {
         val currentLocales = AppCompatDelegate.getApplicationLocales()
         if (currentLocales != locales) {
             AppCompatDelegate.setApplicationLocales(locales)
+            drinkRepository.refreshLocalizedBuiltInPresets()
         }
 
         val themeMode =
