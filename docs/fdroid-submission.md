@@ -15,7 +15,7 @@ This fork is published as a separate application package: `com.johanpy.drivesobe
 - no crash reporting SDK
 - release build minifies and shrinks resources
 - automated unit tests and debug builds already pass in CI
-- release `v1.2.1` is published and signed on GitHub Releases
+- release `v1.2.2` is published and signed on GitHub Releases
 - local F-Droid metadata file is prepared in `fdroid/metadata/com.johanpy.drivesoberly.yml`
 
 ## What F-Droid needs
@@ -39,8 +39,8 @@ This fork is published as a separate application package: `com.johanpy.drivesobe
 
 - package id: `com.johanpy.drivesoberly`
 - metadata source: `fdroid/metadata/com.johanpy.drivesoberly.yml`
-- current target version: `1.2.1` (`versionCode` 34)
-- source tag for reproducible build: `v1.2.1`
+- current target version: `1.2.2` (`versionCode` 35)
+- source tag for reproducible build: `v1.2.2`
 - README screenshots are available in `screenshots/`
 
 ## Next steps to submit on F-Droid

@@ -41,7 +41,7 @@
     <string name="theme_light">Light</string>
     <string name="theme_dark">Dark</string>
     <string name="theme_system">System Default</string>
-    <string name="can_i_drive_question">Can I Drive ?</string>
+    <string name="can_i_drive_question">Can I drive?</string>
     <string name="version" translatable="false">version</string>
     <string name="select_a_drink">Select a drink</string>
     <string name="now">now</string>

@@ -1,4 +1,4 @@
-Can I Drive vous invite à suivre vos consommations d'alcool pour savoir si vous pouvez reprendre le volant ou non après avoir bu.
+DriveSoberly vous invite à suivre vos consommations d'alcool pour savoir si vous pouvez reprendre le volant ou non après avoir bu.
 
 Il vous est indiqué :
 - un status clair (OK, OK mais pas sobre, NON)

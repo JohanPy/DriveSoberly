@@ -16,8 +16,8 @@ import androidx.navigation.ui.setupWithNavController
 import androidx.preference.PreferenceManager
 import com.google.android.material.appbar.AppBarLayout
 import com.johanpy.drivesoberly.R
-import com.johanpy.drivesoberly.databinding.ActivityMainBinding
 import com.johanpy.drivesoberly.data.repository.DrinkRepository
+import com.johanpy.drivesoberly.databinding.ActivityMainBinding
 import org.koin.android.ext.android.inject
 
 class MainActivity : AppCompatActivity() {

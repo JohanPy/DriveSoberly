@@ -1,4 +1,4 @@
-Can I Drive allows you to track your recent alcohol consumption, to assess if you can drive or not.
+DriveSoberly allows you to track your recent alcohol consumption, to assess if you can drive or not.
 
 What is shown to you :
 - a clear status (OK, OK but not sober, NO GO)

@@ -35,7 +35,7 @@ Use the existing localized screenshot directories:
 
 ## Submission notes
 
-- Keep this package as a separate fork from `com.vaudibert.drivesoberly`.
+- Keep this package as a separate application ID: `com.johanpy.drivesoberly`.
 - Submit from a signed and tagged source release (`vX.Y.Z`).
 - Keep `CurrentVersion` and `CurrentVersionCode` synchronized with `app/build.gradle.kts`.
 - Update this listing whenever screenshots or release notes change.

@@ -6,6 +6,15 @@ All notable changes to this project will be documented in this file.
 
 The format is based on Keep a Changelog and this project follows Semantic Versioning.
 
+## [1.2.2] - 2026-05-21
+
+### Changed
+
+- Updated Fastlane metadata naming from legacy "Can I Drive" to "DriveSoberly" in EN/FR store content.
+- Cleaned remaining old-project references in F-Droid listing notes and in-app wording.
+- Aligned local F-Droid metadata structure with fdroiddata formatting conventions (localized summary file).
+- Version bump to 1.2.2 (versionCode 35).
+
 ## [1.2.1] - 2026-05-19
 
 ### Fixed

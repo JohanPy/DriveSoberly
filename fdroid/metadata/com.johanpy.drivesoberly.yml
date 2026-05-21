@@ -1,5 +1,5 @@
 Categories:
-  - Health
+  - Sports & Health
 License: Apache-2.0
 AuthorName: Johan Py
 WebSite: https://github.com/JohanPy/DriveSoberly
@@ -8,8 +8,6 @@ IssueTracker: https://github.com/JohanPy/DriveSoberly/issues
 Changelog: https://github.com/JohanPy/DriveSoberly/blob/master/CHANGELOG.md
 
 AutoName: DriveSoberly
-Summary: Offline blood alcohol estimation for driving decisions
-
 Description: |-
   DriveSoberly helps estimate blood alcohol concentration (BAC) and whether it is safe to drive.
 
@@ -27,16 +25,15 @@ Description: |-
 RepoType: git
 Repo: https://github.com/JohanPy/DriveSoberly.git
 
-CurrentVersion: 1.2.1
-CurrentVersionCode: 34
-
 Builds:
-  - versionName: 1.2.1
-    versionCode: 34
-    commit: v1.2.1
+  - versionName: 1.2.2
+    versionCode: 35
+    commit: v1.2.2
     subdir: app
     gradle:
       - yes
 
 AutoUpdateMode: Version
 UpdateCheckMode: Tags
+CurrentVersion: 1.2.2
+CurrentVersionCode: 35
