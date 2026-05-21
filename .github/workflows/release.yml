@@ -9,6 +9,10 @@ jobs:
   release:
     name: Build and publish signed APK
     runs-on: ubuntu-latest
+    env:
+      TZ: UTC
+      LANG: C.UTF-8
+      LC_ALL: C.UTF-8
     permissions:
       contents: write
 
@@ -16,10 +20,10 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v5
 
-      - name: Set up JDK 17
+      - name: Set up JDK 21
         uses: actions/setup-java@v5
         with:
-          java-version: '17'
+          java-version: '21'
           distribution: 'temurin'
           cache: gradle
 
@@ -48,28 +52,23 @@ jobs:
           
           # Find the unsigned APK
           UNSIGNED_APK=$(find app/build/outputs/apk/release -name "*.apk" | head -1)
-          ALIGNED_APK="${UNSIGNED_APK%.apk}-aligned.apk"
           SIGNED_APK="${UNSIGNED_APK%.apk}-signed.apk"
           SDK_ROOT="${ANDROID_HOME:-/usr/local/lib/android/sdk}"
-          ZIPALIGN_BIN=$(find "$SDK_ROOT/build-tools" -name zipalign | sort -V | tail -1)
           APKSIGNER_BIN=$(find "$SDK_ROOT/build-tools" -name apksigner | sort -V | tail -1)
 
-          if [[ -z "$ZIPALIGN_BIN" || -z "$APKSIGNER_BIN" ]]; then
-            echo "zipalign/apksigner not found in $SDK_ROOT/build-tools"
+          if [[ -z "$APKSIGNER_BIN" ]]; then
+            echo "apksigner not found in $SDK_ROOT/build-tools"
             exit 1
           fi
-
-          # Android R+ requires resources.arsc uncompressed and 4-byte aligned.
-          "$ZIPALIGN_BIN" -f -p 4 "$UNSIGNED_APK" "$ALIGNED_APK"
           
-          # Sign aligned APK with apksigner (Android signature scheme v2/v3).
+          # Sign the Gradle-produced unsigned APK directly to minimize output drift.
           "$APKSIGNER_BIN" sign \
             --ks /tmp/release.keystore \
             --ks-key-alias "$KEY_ALIAS" \
             --ks-pass pass:"$KEYSTORE_PASSWORD" \
             --key-pass pass:"$KEY_PASSWORD" \
             --out "$SIGNED_APK" \
-            "$ALIGNED_APK"
+            "$UNSIGNED_APK"
           
           # Verify signature
           "$APKSIGNER_BIN" verify --verbose "$SIGNED_APK"

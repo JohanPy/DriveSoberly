@@ -6,6 +6,14 @@ All notable changes to this project will be documented in this file.
 
 The format is based on Keep a Changelog and this project follows Semantic Versioning.
 
+## [1.2.3] - 2026-05-21
+
+### Changed
+
+- Release workflow updated for better reproducibility (JDK 21, deterministic env, direct signing of Gradle unsigned APK).
+- F-Droid metadata prepared for reproducible-build follow-up with upstream binary + signing key fields.
+- Version bump to 1.2.3 (versionCode 36).
+
 ## [1.2.2] - 2026-05-21
 
 ### Changed
