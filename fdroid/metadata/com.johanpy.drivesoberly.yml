@@ -8,22 +8,12 @@ IssueTracker: https://github.com/JohanPy/DriveSoberly/issues
 Changelog: https://github.com/JohanPy/DriveSoberly/blob/master/CHANGELOG.md
 
 AutoName: DriveSoberly
-Description: |-
-  DriveSoberly helps estimate blood alcohol concentration (BAC) and whether it is safe to drive.
-
-  Key points:
-  * Offline-first app (no tracking, no analytics)
-  * No runtime permissions required
-  * Country-based legal BAC limits
-  * Custom legal limit support via OTHER mode
-  * Time projections for legal threshold and sobriety
-  * Food-state aware two-compartment absorption model
-
-  Disclaimer:
-  This app provides estimates only and must not be used as a legal or medical device.
 
 RepoType: git
 Repo: https://github.com/JohanPy/DriveSoberly.git
+Binaries: https://github.com/JohanPy/DriveSoberly/releases/download/v%v/DriveSoberly-v%v.apk
+AllowedAPKSigningKeys:
+  - b82e442ef065c2cc041359b8aa838ed94b230ccd2a38cdd141c0e753772fc357
 
 Builds:
   - versionName: 1.2.2

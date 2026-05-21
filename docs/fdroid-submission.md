@@ -66,3 +66,4 @@ Suggested F-Droid metadata entries should highlight:
 - keep F-Droid-facing release notes short and user-oriented
 - bump `versionCode` and `versionName` for every public release
 - avoid depending on Google Play-only publishing steps for the F-Droid source tag
+- keep the APK signing key backed up safely (required for reproducible build continuity)
