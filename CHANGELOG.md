@@ -6,6 +6,16 @@ All notable changes to this project will be documented in this file.
 
 The format is based on Keep a Changelog and this project follows Semantic Versioning.
 
+## [1.2.4] - 2026-05-26
+
+### Fixed
+
+- Release workflow: add `--alignment-preserved` to `apksigner sign` and explicit `zipalign` pre-pass to ensure zero-padding compatible with F-Droid's `apksigcopier` (build-tools >= 35.0.0-rc1 broke reproducible binary verification).
+
+### Changed
+
+- Version bump to 1.2.4 (versionCode 37).
+
 ## [1.2.3] - 2026-05-21
 
 ### Changed

@@ -31,7 +31,7 @@ jobs:
         uses: android-actions/setup-android@v3
 
       - name: Install Android build tools
-        run: sdkmanager "build-tools;35.0.0" "platform-tools"
+        run: sdkmanager "build-tools;35.0.0" "platform-tools" "build-tools;34.0.0"
 
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
@@ -52,23 +52,37 @@ jobs:
           
           # Find the unsigned APK
           UNSIGNED_APK=$(find app/build/outputs/apk/release -name "*.apk" | head -1)
+          ALIGNED_APK="${UNSIGNED_APK%.apk}-aligned.apk"
           SIGNED_APK="${UNSIGNED_APK%.apk}-signed.apk"
           SDK_ROOT="${ANDROID_HOME:-/usr/local/lib/android/sdk}"
+          # Use apksigner from build-tools 35 but zipalign from 34 for zero-padding compatibility.
           APKSIGNER_BIN=$(find "$SDK_ROOT/build-tools" -name apksigner | sort -V | tail -1)
+          ZIPALIGN_BIN=$(find "$SDK_ROOT/build-tools" -name zipalign | sort -V | tail -1)
 
           if [[ -z "$APKSIGNER_BIN" ]]; then
             echo "apksigner not found in $SDK_ROOT/build-tools"
             exit 1
           fi
-          
-          # Sign the Gradle-produced unsigned APK directly to minimize output drift.
+          if [[ -z "$ZIPALIGN_BIN" ]]; then
+            echo "zipalign not found in $SDK_ROOT/build-tools"
+            exit 1
+          fi
+
+          # Re-zipalign with 4-byte page alignment (zero padding) before signing.
+          # This ensures the padding matches what F-Droid's reproducible build produces.
+          "$ZIPALIGN_BIN" -v -f -p 4 "$UNSIGNED_APK" "$ALIGNED_APK"
+
+          # Sign with --alignment-preserved so apksigner keeps the zipalign zero-padding
+          # instead of replacing it with "Android ZIP Alignment Extra Field" padding
+          # (introduced in build-tools >= 35.0.0-rc1), which breaks apksigcopier.
           "$APKSIGNER_BIN" sign \
+            --alignment-preserved \
             --ks /tmp/release.keystore \
             --ks-key-alias "$KEY_ALIAS" \
             --ks-pass pass:"$KEYSTORE_PASSWORD" \
             --key-pass pass:"$KEY_PASSWORD" \
             --out "$SIGNED_APK" \
-            "$UNSIGNED_APK"
+            "$ALIGNED_APK"
           
           # Verify signature
           "$APKSIGNER_BIN" verify --verbose "$SIGNED_APK"
