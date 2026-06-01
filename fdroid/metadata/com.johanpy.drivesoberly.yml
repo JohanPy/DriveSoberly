@@ -15,7 +15,10 @@ Repo: https://github.com/JohanPy/DriveSoberly.git
 Binaries: 
   https://github.com/JohanPy/DriveSoberly/releases/download/v%v/DriveSoberly-v%v.apk
 
-ed02e8d97793f98583bb9a1ad9a363aec7322f6
+Builds:
+  - versionName: 1.2.4
+    versionCode: 37
+    commit: 27577d0063159ec05c63392a15151759f3a8fc20
     subdir: app
     gradle:
       - yes
