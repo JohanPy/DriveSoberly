@@ -41,14 +41,14 @@ class PresetDrinkService<Preset : IPresetDrink>(
         presetDrinks.clear()
         presetDrinks.addAll(presets)
         if (currentSelected != null) {
-            selectedPreset = presetDrinks.find { it == currentSelected }
-                ?: presetDrinks.find {
-                    it.volume == currentSelected.volume &&
+            val found = presetDrinks.find { it == currentSelected }
+            selectedPreset = found ?: presetDrinks.find {
+                it.volume == currentSelected.volume &&
                     it.degree == currentSelected.degree &&
                     it.emoji == currentSelected.emoji &&
                     it.isBuiltIn &&
                     currentSelected.isBuiltIn
-                }
+            }
         }
         sortAndCallbackPresets()
     }
