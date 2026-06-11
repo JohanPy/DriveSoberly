@@ -6,6 +6,17 @@ All notable changes to this project will be documented in this file.
 
 The format is based on Keep a Changelog and this project follows Semantic Versioning.
 
+## [1.2.5] - 2026-06-11
+
+### Fixed
+
+- Fix drink presets list doubling/tripling on language changes.
+- Fix ktlint indentation warnings in `PresetDrinkService`.
+
+### Changed
+
+- Version bump to 1.2.5 (versionCode 38).
+
 ## [1.2.4] - 2026-05-26
 
 ### Fixed
