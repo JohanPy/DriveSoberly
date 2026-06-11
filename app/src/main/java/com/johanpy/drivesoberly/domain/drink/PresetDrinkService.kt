@@ -37,7 +37,19 @@ class PresetDrinkService<Preset : IPresetDrink>(
     private var presetDrinks: MutableList<Preset> = mutableListOf()
 
     fun populate(presets: List<Preset>) {
+        val currentSelected = selectedPreset
+        presetDrinks.clear()
         presetDrinks.addAll(presets)
+        if (currentSelected != null) {
+            selectedPreset = presetDrinks.find { it == currentSelected }
+                ?: presetDrinks.find {
+                    it.volume == currentSelected.volume &&
+                    it.degree == currentSelected.degree &&
+                    it.emoji == currentSelected.emoji &&
+                    it.isBuiltIn &&
+                    currentSelected.isBuiltIn
+                }
+        }
         sortAndCallbackPresets()
     }
 
